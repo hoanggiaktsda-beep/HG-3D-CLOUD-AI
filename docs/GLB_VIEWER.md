@@ -33,9 +33,12 @@ Sau khi start server, từ root:
 
 ```sh
 python3 -m unittest discover -s tests -v
+cd viewer && npm run build && cd ..
 python3 -m unittest discover -s viewer/tests -v
 ```
 
 Browser suite cần Python Playwright và Chromium. Trong môi trường hiện tại có sẵn; test dùng /usr/bin/chromium và software WebGL. Kiểm tra desktop, kích thước iPhone 390×844, iPad 820×1180 và ngang 1180×820, touch orbit/pinch thật qua CDP, camera, zoom, kích thước GLB, lỗi tải, báo cáo không hợp lệ, chèn HTML và không có runtime request bên ngoài.
 
 Mô phỏng Chromium không chứng minh Safari hoặc thiết bị iPhone/iPad thật đã chạy. WebKit Playwright chưa có binary trong môi trường này. Chưa kiểm chứng hiệu năng trên thiết bị thật hoặc GLB lớn. Giao diện không Publish.
+
+Bản đóng gói tại đường dẫn project Pages: xem [GITHUB_PAGES_PREPARATION.md](GITHUB_PAGES_PREPARATION.md). Đây là chuẩn bị, chưa kích hoạt Pages.

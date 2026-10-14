@@ -1,9 +1,9 @@
 """Browser smoke tests; Chromium emulation is not physical iOS/Safari validation."""
-import json,unittest
+import json,unittest,os
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[2]
-URL='http://127.0.0.1:8765'
+URL=os.environ.get('HG_VIEWER_URL','http://127.0.0.1:8765')
 
 class ViewerTests(unittest.TestCase):
     @classmethod

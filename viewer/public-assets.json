@@ -1,0 +1,13 @@
+{
+  "release_scope": "synthetic_public_sample_only",
+  "assets": [
+    {
+      "path": "assets/sample.glb",
+      "sha256": "67f0f3a96927570782d8fcb596e32a904dcfd0ca9cce70f39e99cb2121368ff3"
+    },
+    {
+      "path": "assets/sample-qa.json",
+      "sha256": "c020431b5fc2cd4a7121ae277bf39305175a0994790717238e07b762e86724ae"
+    }
+  ]
+}

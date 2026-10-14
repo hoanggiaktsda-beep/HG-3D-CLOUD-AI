@@ -1,0 +1,39 @@
+# Inactive template. This file is NOT in .github/workflows and cannot deploy.
+# Enable only after the user authorizes GitHub Pages activation and checks free eligibility.
+name: Deploy HG sample viewer to Pages
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: viewer/package-lock.json
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: viewer
+      - run: npm run build
+        working-directory: viewer
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: viewer/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
