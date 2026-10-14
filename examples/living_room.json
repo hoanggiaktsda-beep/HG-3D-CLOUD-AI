@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "project": "HG Demo - Phong khach 5x4m (mau gia dinh)",
+  "units": "mm",
+  "source_images": [],
+  "objects": [
+    {"id":"floor_01","kind":"floor","center_mm":[0,0,-75],"size_mm":[5000,4000,150],"material":"stone","confidence":"confirmed","source_note":"Kich thuoc mau do nguoi lap demo chi dinh"},
+    {"id":"wall_back","kind":"wall","center_mm":[0,1950,1500],"size_mm":[5000,100,3000],"material":"paint","confidence":"confirmed","source_note":"Kich thuoc demo, khong lay tu anh"},
+    {"id":"sofa_01","kind":"sofa","center_mm":[0,1050,430],"size_mm":[2800,950,860],"material":"fabric","confidence":"inferred","source_note":"Minh hoa tham so; can anh nhieu goc va so do"},
+    {"id":"coffee_table_01","kind":"coffee_table","center_mm":[0,-200,210],"size_mm":[1200,650,420],"material":"wood","confidence":"confirmed","source_note":"Kich thuoc minh hoa duoc quy dinh trong file demo"},
+    {"id":"rug_01","kind":"rug","center_mm":[0,-200,8],"size_mm":[2600,2000,16],"material":"carpet","confidence":"inferred","source_note":"Chua co thong so san pham"},
+    {"id":"cabinet_01","kind":"cabinet","center_mm":[1700,-1250,400],"size_mm":[1000,450,800],"material":"wood","confidence":"inferred","source_note":"Mo hinh cabinet tham so; khong phai chi tiet san xuat"}
+  ],
+  "lights": [{"id":"general_softbox_01","position_mm":[0,0,2900],"power_w":320,"diameter_mm":1700}],
+  "cameras": [{"id":"camera_main","position_mm":[-3700,-3600,1800],"target_mm":[0,250,1050],"lens_mm":35}]
+}

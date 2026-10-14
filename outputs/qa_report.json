@@ -1,0 +1,55 @@
+{
+  "project": "HG Demo - Phong khach 5x4m (mau gia dinh)",
+  "status": "NEEDS_REVIEW",
+  "objects": 6,
+  "confirmed": 3,
+  "inferred": 3,
+  "needs_confirmation": 0,
+  "review_items": [
+    {
+      "id": "sofa_01",
+      "status": "inferred",
+      "reason": "Minh hoa tham so; can anh nhieu goc va so do"
+    },
+    {
+      "id": "rug_01",
+      "status": "inferred",
+      "reason": "Chua co thong so san pham"
+    },
+    {
+      "id": "cabinet_01",
+      "status": "inferred",
+      "reason": "Mo hinh cabinet tham so; khong phai chi tiet san xuat"
+    }
+  ],
+  "warnings": [],
+  "checks": [
+    {
+      "object_id": "sofa_01",
+      "geometry": "bounding-box + basic parametric parts",
+      "manufacturing_ready": false
+    },
+    {
+      "object_id": "coffee_table_01",
+      "geometry": "bounding-box + basic parametric parts",
+      "manufacturing_ready": false
+    },
+    {
+      "object_id": "cabinet_01",
+      "geometry": "bounding-box + basic parametric parts",
+      "manufacturing_ready": false
+    }
+  ],
+  "evidence": {
+    "measured_dimensions_from_blender": false,
+    "image_similarity_verified": false,
+    "actual_geometry_export_tested": false
+  },
+  "limits": [
+    "Kiểm tra JSON không xác nhận kích thước hình học trong file BLEND.",
+    "Ảnh đơn lẻ không cho phép xác minh chi tiết khuất hoặc đạt độ giống 100%.",
+    "Scene tham số chỉ là điểm xuất phát; không phải hồ sơ CNC / shop drawing.",
+    "Chỉ được nghiệm thu kỹ thuật sau khi đo lại file xuất và so với dữ liệu gốc."
+  ],
+  "generated_utc": "2026-10-14T15:24:57.078923+00:00"
+}

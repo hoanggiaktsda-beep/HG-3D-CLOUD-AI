@@ -1,0 +1,11 @@
+CHONG YEU - CACH DUA BO NAO VAO CODEX
+
+1. Giai nen file ZIP nay.
+2. Copy TOAN BO NOI DUNG ben trong (AGENTS.md, README.md, hgcloud, scripts, docs, ...) vao thu muc Documents\HG-3D-CLOUD-AI dang duoc Codex su dung.
+3. Quay ve Codex > du an HG 3D CLOUD AI, gui lenh:
+   Hay doc AGENTS.md, README.md va docs/CODEX_FIRST_RUN.md. Chay cac bai kiem thu, kiem tra Blender va tiep tuc trien khai he thong theo AGENTS.md. Khong ket noi GitHub va khong render.
+
+LUU Y: Upload ZIP vao o chat khong dong nghia noi dung tu dong duoc giai nen vao thu muc du an. Can giai nen va dat dung duong dan neu Codex khong co chuc nang tu nhap ZIP.
+
+DA CO: bo nao + ma nguon scene tham so + QA schema + HTML offline.
+CHUA CO: tai dung chi tiet tu anh tu dong; Blender da duoc test thuc te; cloud 24/7; dashboard iPhone truc tuyen.

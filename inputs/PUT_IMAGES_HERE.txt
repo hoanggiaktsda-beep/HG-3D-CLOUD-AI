@@ -1,0 +1,2 @@
+Dat anh san pham / phoi canh / anh chup ban ve / layout o day.
+Can Codex doc anh va tao JSON theo docs/IMAGE_TO_3D.md. Khong co bo xu ly anh tu dong trong ma nguon demo.

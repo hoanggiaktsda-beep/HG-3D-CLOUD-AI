@@ -1,0 +1,6 @@
+{
+  "schema_version":"1.0","project":"Console sample", "units":"mm",
+  "source_images":[],
+  "objects":[{"id":"console_model","kind":"cabinet","center_mm":[0,0,450],"size_mm":[1800,450,900],"material":"wood","confidence":"needs_confirmation","source_note":"Anh mot goc chua cho thay chieu sau va cau tao mat sau"}],
+  "lights":[],"cameras":[]
+}

@@ -1,0 +1,11 @@
+{
+  "task_id": "HG3D-REFERENCE-001",
+  "input_type": "product_photo",
+  "source_files": ["inputs/ADD_YOUR_IMAGE.jpg"],
+  "target_scene": "outputs/reference_scene.json",
+  "user_instruction": "Tai dung mo hinh voi kich thuoc da xac minh, khong tu suy doan thanh su that",
+  "confirmed_dimensions_mm": {},
+  "missing_information": ["chieu sau", "mat sau", "ket cau phan khuat"],
+  "image_interpretation_status": "NOT_IMPLEMENTED_AUTOMATICALLY",
+  "approval_required_for_inferred_geometry": true
+}
