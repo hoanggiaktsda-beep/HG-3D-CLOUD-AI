@@ -87,9 +87,10 @@ def build(o):
         x,y,z=s
         # All parts stay within the overall bounding box; back at positive Y.
         seat_h=min(z*0.48,470); base_h=seat_h*0.65;back_h=z-seat_h
-        add_box('seat',[c[0],c[1]-y*0.08,c[2]-z/2+seat_h*0.85],[x*.91,y*.78,seat_h*.34])
+        # Seat front and backrest rear anchor the design depth at +/- y/2.
+        add_box('seat',[c[0],c[1]-y*0.11,c[2]-z/2+seat_h*0.85],[x*.91,y*.78,seat_h*.34])
         add_box('base',[c[0],c[1],c[2]-z/2+base_h/2],[x*.92,y*.88,base_h])
-        add_box('back',[c[0],c[1]+y*.39,c[2]+z/2-back_h/2],[x,y*.20,back_h])
+        add_box('back',[c[0],c[1]+y*.40,c[2]+z/2-back_h/2],[x,y*.20,back_h])
         arm_w=min(150,x*.12); arm_h=min(300,z*.50)
         for side,sign in [('left',-1),('right',1)]:
             add_box('arm_'+side,[c[0]+sign*(x/2-arm_w/2),c[1],c[2]-z/2+seat_h+arm_h/2],[arm_w,y*.76,arm_h])
