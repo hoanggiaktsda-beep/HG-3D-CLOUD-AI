@@ -40,3 +40,9 @@
 ## Hạn chế
 
 Một ảnh 2D không chứa đủ mọi mặt và dữ kiện để tự dựng đúng 100%. Gói này là nền tảng có mã nguồn, bộ não và kiểm thử, **chưa phải hệ thống nhận ảnh và dựng chi tiết không cần giám sát**. Với dự án CLOUD, đầu ra native `.max` cần môi trường 3ds Max hợp lệ; nên xuất BLEND/GLB/FBX rồi chuyển nếu cần.
+
+## Nhập ảnh có chứng cứ (cục bộ)
+
+Xem [IMAGE_PIPELINE.md](docs/IMAGE_PIPELINE.md) cho CLI nhận ảnh/OCR, observations theo từng trục và kiểm định mesh Blender. Nhận diện hình học tự động từ ảnh chưa được kết nối; output hiện là envelope có chứng cứ, không tự tạo chi tiết khuất.
+
+Giao diện AI thị giác và pipeline replay: `scripts/vision_pipeline.py`; chưa kết nối model thật, mọi gọi live bị chặn. Xem tài liệu IMAGE_PIPELINE để chạy mẫu end-to-end không chi phí.

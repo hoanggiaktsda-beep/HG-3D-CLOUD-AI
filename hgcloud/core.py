@@ -73,6 +73,8 @@ def audit(scene):
     for o in objs:
         if o['confidence']!='confirmed':
             review.append({'id':o['id'],'status':o['confidence'],'reason':o.get('source_note','Không có nguồn đo trực tiếp')})
+        if o.get('unknown_details'):
+            review.append({'id':o['id'],'status':'needs_confirmation','reason':'Unknown construction: ' + '; '.join(o['unknown_details'])})
         sx,sy,sz=o['size_mm']
         if max(sx,sy,sz)/min(sx,sy,sz)>1000:
             warnings.append(f'{o["id"]}: tỷ lệ rất lớn; kiểm tra đơn vị hoặc chiều dày')

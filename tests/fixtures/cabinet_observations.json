@@ -1,0 +1,64 @@
+{
+  "project": "Synthetic dimensioned cabinet - envelope DRAFT",
+  "objects": [
+    {
+      "id": "cabinet_01",
+      "kind": "cabinet",
+      "center_mm": [
+        0,
+        0,
+        450
+      ],
+      "placement_evidence": {
+        "confidence": "inferred",
+        "source_note": "Origin chosen for standalone test object; floor z=0"
+      },
+      "unknown_details": [
+        "Rear construction",
+        "Panel thickness",
+        "Door count and hinges"
+      ],
+      "dimensions": {
+        "x": {
+          "value_mm": 1800,
+          "confidence": "confirmed",
+          "basis": "drawing",
+          "bbox_px": [
+            70,
+            140,
+            430,
+            185
+          ],
+          "verified_by": "Codex visual inspection of synthetic fixture",
+          "source_note": "Explicit dimension label on synthetic drawing"
+        },
+        "y": {
+          "value_mm": 450,
+          "confidence": "confirmed",
+          "basis": "drawing",
+          "bbox_px": [
+            70,
+            230,
+            400,
+            275
+          ],
+          "verified_by": "Codex visual inspection of synthetic fixture",
+          "source_note": "Explicit dimension label on synthetic drawing"
+        },
+        "z": {
+          "value_mm": 900,
+          "confidence": "confirmed",
+          "basis": "drawing",
+          "bbox_px": [
+            70,
+            320,
+            420,
+            365
+          ],
+          "verified_by": "Codex visual inspection of synthetic fixture",
+          "source_note": "Explicit dimension label on synthetic drawing"
+        }
+      }
+    }
+  ]
+}
