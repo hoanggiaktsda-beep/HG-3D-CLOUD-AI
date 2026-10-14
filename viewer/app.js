@@ -1,0 +1,134 @@
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const viewport = document.querySelector('#viewport');
+const text = (id, value) => { document.getElementById(id).textContent = value; };
+const format = value => Number(value.toFixed(2)).toLocaleString('vi-VN');
+const labels = { perspective: 'Phối cảnh', front: 'Mặt đứng', right: 'Mặt cạnh', top: 'Mặt bằng', back: 'Mặt sau' };
+let renderer, camera, controls, center, boxSize, resizeObserver;
+const state = { ready: false, currentView: null, camera: null, controls: null, error: null };
+window.hgViewer = state;
+
+function setView(name) {
+  if (!state.ready) return;
+  const directions = { perspective: [1.4, -2, 1.1], front: [0, -1, 0], right: [1, 0, 0], top: [0, -0.001, 1], back: [0, 1, 0] };
+  const direction = new THREE.Vector3(...directions[name]).normalize();
+  const fov = THREE.MathUtils.degToRad(camera.fov);
+  const distance = Math.max(boxSize.x, boxSize.y, boxSize.z) / (2 * Math.tan(fov / 2)) * Math.max(1, 1 / camera.aspect) * 1.45;
+  controls.target.copy(center);
+  camera.position.copy(center).addScaledVector(direction, distance);
+  camera.lookAt(center);
+  controls.update();
+  state.currentView = name;
+  text('active-view', labels[name]);
+  document.querySelectorAll('[data-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.view === name)));
+}
+
+function zoom(factor) {
+  if (!state.ready) return;
+  const offset = camera.position.clone().sub(controls.target);
+  const distance = THREE.MathUtils.clamp(offset.length() * factor, controls.minDistance, controls.maxDistance);
+  camera.position.copy(controls.target).add(offset.setLength(distance));
+  controls.update();
+}
+
+function validateReport(report) {
+  if (!Array.isArray(report.design_mm) || report.design_mm.length !== 3 || !report.design_mm.every(v => typeof v === 'number' && Number.isFinite(v) && v > 0)) throw new Error('Báo cáo thiếu kích thước hợp lệ.');
+  if (!Number.isFinite(report.tolerance_mm) || report.tolerance_mm < 0) throw new Error('Dung sai không hợp lệ.');
+  if (!Array.isArray(report.objects) || !report.objects.length || !Array.isArray(report.unknown_details) || !report.unknown_details.every(v => typeof v === 'string')) throw new Error('Báo cáo thiếu dữ liệu kiểm định.');
+  for (const object of report.objects) {
+    if (typeof object.id !== 'string' || !Array.isArray(object.dimensions_mm) || object.dimensions_mm.length !== 3 || !object.dimensions_mm.every(v => Number.isFinite(v) && v > 0)) throw new Error('Báo cáo bộ phận không hợp lệ.');
+  }
+}
+
+async function start() {
+  const scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(38, 1, 0.01, 100);
+  camera.up.set(0, 0, 1);
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  viewport.appendChild(renderer.domElement);
+  renderer.domElement.setAttribute('aria-label', 'Mô hình GLB tương tác: kéo để xoay, hai ngón hoặc con lăn để zoom');
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.minDistance = 0.3;
+  controls.maxDistance = 20;
+  scene.add(new THREE.HemisphereLight(0xf7f0dc, 0x4b5145, 3));
+  const light = new THREE.DirectionalLight(0xffffff, 3);
+  light.position.set(3, -4, 5); scene.add(light);
+  const reportResponse = await fetch('./assets/sample-qa.json');
+  if (!reportResponse.ok) throw new Error('Không tải được báo cáo kiểm định.');
+  const report = await reportResponse.json();
+  validateReport(report);
+  const gltf = await new GLTFLoader().loadAsync('./assets/sample.glb');
+  // glTF is Y-up; the HG design/QA contract uses X width, Y depth, Z height.
+  gltf.scene.rotation.x = Math.PI / 2;
+  scene.add(gltf.scene);
+  gltf.scene.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(gltf.scene);
+  if (box.isEmpty()) throw new Error('GLB không có hình học để kiểm tra.');
+  center = box.getCenter(new THREE.Vector3());
+  boxSize = box.getSize(new THREE.Vector3());
+  const measured = boxSize.toArray().map(v => v * 1000);
+  if (!measured.every(v => Number.isFinite(v) && v > 0)) throw new Error('Kích thước GLB không hợp lệ.');
+  const errors = measured.map((v, i) => Math.abs(v - report.design_mm[i]));
+  ['width', 'depth', 'height'].forEach((id, i) => text(id, format(measured[i])));
+  text('measurement-note', 'Đo bounding box GLB trực tiếp, đơn vị mm. Dữ liệu mẫu tổng hợp.');
+  text('max-error', `${format(Math.max(...errors))} mm`);
+  text('tolerance', `${format(report.tolerance_mm)} mm`);
+  text('qa-result', Math.max(...errors) <= report.tolerance_mm ? 'Kích thước khớp' : 'SAI LỆCH');
+  const meshes = [];
+  gltf.scene.traverse(object => { if (object.isMesh) meshes.push(object); });
+  text('mesh-count', String(meshes.length));
+  text('object-count', `${report.objects.length} bộ phận · ${meshes.length} mesh`);
+  const unknownList = document.querySelector('#unknown-list'); unknownList.replaceChildren();
+  for (const value of report.unknown_details.length ? report.unknown_details : ['Chưa có đủ chứng cứ nghiệm thu hình học.']) {
+    const item = document.createElement('li'); item.textContent = value; unknownList.appendChild(item);
+  }
+  const rows = document.querySelector('#object-rows'); rows.replaceChildren();
+  for (const object of report.objects) {
+    const partMeshes = meshes.filter(mesh => mesh.name === `${object.id}_body` || mesh.name === object.id);
+    const partBox = new THREE.Box3();
+    partMeshes.forEach(mesh => partBox.union(new THREE.Box3().setFromObject(mesh)));
+    const actual = partBox.isEmpty() ? null : partBox.getSize(new THREE.Vector3()).toArray().map(v => v * 1000);
+    const mismatch = !actual || actual.some((v, i) => Math.abs(v - object.dimensions_mm[i]) > report.tolerance_mm);
+    const row = document.createElement('tr');
+    const dataState = object.confidence === 'confirmed' ? 'Số đo xác nhận' : object.confidence === 'inferred' ? 'Suy luận' : 'CẦN XÁC NHẬN';
+    for (const value of [object.label || object.id, actual ? actual.map(format).join(' × ') : 'Không tìm thấy mesh', dataState, mismatch ? 'SAI LỆCH · CẦN XÁC NHẬN' : 'CẦN XÁC NHẬN']) {
+      const cell = document.createElement('td'); cell.textContent = value; row.appendChild(cell);
+    }
+    row.lastElementChild.className = 'pending'; rows.appendChild(row);
+  }
+  const grid = new THREE.GridHelper(5, 20, 0x64705c, 0x3e493b);
+  grid.rotation.x = Math.PI / 2; grid.position.z = box.min.z - 0.003; scene.add(grid);
+  const resize = () => {
+    const { width, height } = viewport.getBoundingClientRect();
+    camera.aspect = width / height; camera.updateProjectionMatrix(); renderer.setSize(width, height);
+  };
+  resizeObserver = new ResizeObserver(resize); resizeObserver.observe(viewport); resize();
+  state.ready = true; state.camera = camera; state.controls = controls; state.measured_mm = measured;
+  setView('perspective'); document.querySelector('#loading').hidden = true;
+  renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+  controls.addEventListener('start', () => {
+    state.currentView = 'free'; text('active-view', 'Góc nhìn tự do');
+    document.querySelectorAll('[data-view]').forEach(button => button.setAttribute('aria-pressed', 'false'));
+  });
+  renderer.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); fail(new Error('Mất kết nối đồ họa. Hãy tải lại trang.')); });
+}
+
+function fail(error) {
+  state.ready = false; state.error = error.message;
+  renderer?.setAnimationLoop(null); resizeObserver?.disconnect();
+  document.querySelector('#loading').hidden = true;
+  const alert = document.querySelector('#error'); alert.hidden = false;
+  alert.textContent = `Không thể xem mô hình. ${error.message}`;
+  text('qa-result', 'CHƯA KIỂM CHỨNG');
+}
+
+document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
+document.querySelector('#zoom-in').addEventListener('click', () => zoom(0.8));
+document.querySelector('#zoom-out').addEventListener('click', () => zoom(1.25));
+document.querySelector('#reset').addEventListener('click', () => setView('perspective'));
+start().catch(fail);

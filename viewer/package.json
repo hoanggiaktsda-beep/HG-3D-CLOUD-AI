@@ -1,0 +1,1 @@
+{"name":"hg3d-review-viewer","private":true,"version":"0.1.0","type":"module","scripts":{"start":"python3 ../scripts/serve_viewer.py"},"dependencies":{"three":"0.180.0"}}

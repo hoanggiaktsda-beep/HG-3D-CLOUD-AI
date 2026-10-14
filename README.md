@@ -46,3 +46,7 @@ Một ảnh 2D không chứa đủ mọi mặt và dữ kiện để tự dựng
 Xem [IMAGE_PIPELINE.md](docs/IMAGE_PIPELINE.md) cho CLI nhận ảnh/OCR, observations theo từng trục và kiểm định mesh Blender. Nhận diện hình học tự động từ ảnh chưa được kết nối; output hiện là envelope có chứng cứ, không tự tạo chi tiết khuất.
 
 Giao diện AI thị giác và pipeline replay: `scripts/vision_pipeline.py`; chưa kết nối model thật, mọi gọi live bị chặn. Xem tài liệu IMAGE_PIPELINE để chạy mẫu end-to-end không chi phí.
+
+## Xem GLB trong trình duyệt (thử nghiệm)
+
+Giao diện mẫu tại `viewer/`: xoay/zoom cảm ứng, góc camera, kích thước mesh và QA. Xem [hướng dẫn chạy và giới hạn kiểm thử](docs/GLB_VIEWER.md). Chỉ chạy loopback, chưa Publish; trạng thái cấu tạo luôn CẦN XÁC NHẬN.
