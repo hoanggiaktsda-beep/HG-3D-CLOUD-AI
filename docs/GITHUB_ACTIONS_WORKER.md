@@ -46,3 +46,25 @@ công khai dưới runner.temp, không upload toàn bộ checkout, outputs hoặ
 Không nhận URL/file khách hàng, không khóa API, quyền GITHUB_TOKEN chỉ contents:read,
 không public API, không cập nhật Pages và không thay đổi bộ não 18 vai trò.
 Đây là worker batch thử nghiệm, chưa là backend nhận ảnh riêng tư từ website.
+
+## Bằng chứng chạy GitHub Actions ngày 15/10/2026
+
+- Commit worker đã kiểm chứng: `bfe268c`.
+- Run thành công: https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/actions/runs/38676614278
+- Trạng thái GitHub: Success, thời gian toàn run 1 phút 9 giây.
+- Cài đặt, 8 kiểm thử worker/profile, dựng thật và upload artifact đều success.
+- Artifact: `hg-public-blender-38676614278-1`, 2,17 MB, lưu 1 ngày.
+- SHA-256 gói artifact do GitHub công bố:
+  `8ff1b4c25792a8beefb15c49b892ecf97d30e324cb0e94097e6e3c97d92162db`.
+- Số đo runner: `[241.3000464439392, 241.30001664161682, 380.99998235702515]` mm;
+  sai số dựng lớn nhất so với OCR khoảng `0.000046444` mm.
+- Đã kiểm tra trạng thái từng bước, annotation đo đạc do chính runner tạo và mục
+  Artifacts thực trên GitHub. Không tuyên bố đã tải gói artifact về Codex: API đọc
+  log/download bị môi trường chặn; người dùng đăng nhập GitHub để tải ở trang run.
+- Cục bộ: 49/49 kiểm thử Python và 5/5 kiểm thử static build/Pages workflow đạt;
+  bài dựng từ PDF công khai, mở lại BLEND và nhập lại GLB cũng đạt.
+
+Các lượt đầu dừng đúng ở kiểm thử do addon GLB của Blender Ubuntu thiếu NumPy.
+Đã bổ sung `python3-numpy` và chạy lại thành công, không bỏ qua assertion.
+GitHub có cảnh báo Node 20 cho checkout/upload-artifact v4, đã tự chạy trên Node 24;
+cảnh báo này không ngăn xuất hoặc lưu artifact. Không có render hay triển khai Pages.
