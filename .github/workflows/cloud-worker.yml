@@ -36,9 +36,21 @@ jobs:
           tesseract --version
       - name: Regression tests with real Blender
         run: |
-          /usr/bin/python3 -m unittest discover -s tests -p test_cloud_worker.py -v
-          /usr/bin/python3 -m unittest discover -s tests -p test_raster_profile.py -v
-          /usr/bin/python3 -m unittest discover -s tests -p test_blender_profile.py -v
+          failures=0
+          for pattern in test_cloud_worker.py test_raster_profile.py test_blender_profile.py; do
+            if /usr/bin/python3 -m unittest discover -s tests -p "$pattern" -v > "$RUNNER_TEMP/worker-tests.log" 2>&1; then
+              result=0
+            else
+              result=1
+              failures=1
+            fi
+            cat "$RUNNER_TEMP/worker-tests.log"
+            echo "### $pattern (exit $result)" >> "$GITHUB_STEP_SUMMARY"
+            echo '```text' >> "$GITHUB_STEP_SUMMARY"
+            cat "$RUNNER_TEMP/worker-tests.log" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          done
+          exit "$failures"
       - name: Public drawing to real BLEND GLB and QA (no rendering)
         run: /usr/bin/python3 scripts/cloud_worker_sample.py --output "${{ runner.temp }}/hg-public-worker"
       - name: Upload only this public sample run
