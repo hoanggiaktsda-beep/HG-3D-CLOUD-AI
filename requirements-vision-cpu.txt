@@ -1,0 +1,5 @@
+# torch/torchvision CPU wheels are installed separately from the official CPU index.
+transformers==4.51.3
+huggingface-hub==0.30.2
+safetensors==0.5.3
+Pillow==11.2.1
