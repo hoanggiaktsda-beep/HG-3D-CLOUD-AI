@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -11,7 +12,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from hgcloud.assembly_constraints import assembly_gate, instruction_relations, labelled_parts
+from hgcloud.assembly_constraints import assembly_gate, instruction_relations, labelled_parts, require_complete_pages, metric_label
 from hgcloud.assembly_evidence import parse_sheet, parse_thickness, parse_total, parse_legend
 from hgcloud.cut_layout import extract_layout
 from hgcloud.cut_layout_qa import verify_projection
@@ -19,7 +20,7 @@ from scripts.public_vision_trial import download, notice
 
 SOURCES = [
     dict(id='atfab-chair', folder='OD-51381-5-To-30-Minute-Chair-1.0.0', code='OD-51381',
-         sha256='e295e6496d2b5dc314175afc678bf7b0aa61d984dc52b7d53e50c4d602441445', pages=[4, 5, 6, 7],
+         sha256='e295e6496d2b5dc314175afc678bf7b0aa61d984dc52b7d53e50c4d602441445', pages=[1, 2, 3, 4, 5, 6, 7],
          author='AtFAB / Filson and Rohrbacher 2013', license='CC BY-NC-SA 3.0 (PDF page 7)'),
     dict(id='slim-chair-independent', folder='OD-55134-Slim-Chair-1.1.0', code='OD-55134',
          sha256='9930aaaac970f386fb516d48f0a190b069ef65c4fd36b091765d4d38800f54b0', pages=[1, 2],
@@ -34,10 +35,13 @@ def command(args, log, timeout=180):
     return result.stdout
 
 
-def ocr_crop(page, box, dest):
+def ocr_crop(page, box, dest, rotate=0):
     with Image.open(page) as image:
         factor = image.height / 1800
-        image.crop(tuple(round(v * factor) for v in box)).save(dest)
+        crop = image.crop(tuple(round(v * factor) for v in box))
+        if rotate:
+            crop = crop.rotate(rotate, expand=True)
+        crop.save(dest)
     return command(['tesseract', dest, 'stdout', '--psm', '6'], dest.with_suffix('.txt'), 60)
 
 
@@ -67,6 +71,9 @@ def main():
             if hashlib.sha256(data).hexdigest() != source['sha256']:
                 raise ValueError('Public PDF changed; source review must be repeated')
             pdf.write_bytes(data)
+            info = command(['pdfinfo', pdf], job / 'pdfinfo.txt', 30)
+            count = int(re.search(r'^Pages:\s*(\d+)', info, re.M).group(1))
+            require_complete_pages(count, source['pages'])
             (job / 'LICENSE-source.txt').write_bytes(download(base + 'LICENSE.txt'))
             provenance = dict(source, url=base + source['code'] + '-Assembly-Guide.pdf',
                               input='raster PNG only; no CAD/vector/geometry JSON input',
@@ -78,9 +85,23 @@ def main():
                 command(['pdftoppm', '-scale-to', '4800', '-f', page, '-l', page, '-singlefile', '-png', pdf, prefix], job / ('raster-' + str(page) + '.log'), 60)
                 pages[page] = prefix.with_suffix('.png')
             plan = dict(placements={}, view_inventory=dict(top=None, front=None, side=None),
-                        reason='No reviewed metric 3D anchors/part mapping or dimensioned orthographic assembly views',
+                        reason='No reviewed metric 3D anchors and part-to-contour mapping; view availability is recorded separately',
                         physical_hardware_allowed=False)
             if source['id'] == 'atfab-chair':
+                page_digest = hashlib.sha256(pages[3].read_bytes()).hexdigest()
+                plan['view_inventory'] = {name: dict(page=3, image_sha256=page_digest, roi_at_1800=roi,
+                                                    status='SOURCE_VIEW_PRESENT_NOT_YET_REGISTERED_PER_PART')
+                                          for name, roi in [('top', [520, 545, 800, 790]),
+                                                            ('front', [920, 900, 1140, 1260]),
+                                                            ('side', [510, 890, 780, 1260])]}
+                plan['dimension_ocr'] = {}
+                for label, box, rotation in [('width_range', [475, 555, 515, 740], 270),
+                                             ('overall_height', [840, 1020, 875, 1255], 270),
+                                             ('seat_height', [795, 1040, 835, 1255], 270),
+                                             ('depth', [585, 748, 685, 798], 0)]:
+                    text = ocr_crop(pages[3], box, job / (label + '.png'), rotation)
+                    plan['dimension_ocr'][label] = dict(metric_label(text), page=3, roi_at_1800=box,
+                                                        rotation_degrees=rotation)
                 cut_text = ocr_crop(pages[4], [30, 400, 520, 740], job / 'cut-context.png')
                 material_text = ocr_crop(pages[6], [30, 600, 445, 1020], job / 'material.png')
                 table_text = ocr_crop(pages[5], [30, 1110, 445, 1340], job / 'parts-table.png')
@@ -126,6 +147,7 @@ def main():
                               source_uncertainty_mm=layout['source_uncertainty_mm'],
                               max_part_error_mm=max(abs(v) for p in qa['parts'] for v in p['dimension_errors_mm'] + p['position_errors_mm']),
                               relationships=plan['relations'], part_label_observations=plan['part_label_observations'],
+                              view_inventory=plan['view_inventory'], orthographic_ocr=plan['dimension_ocr'],
                               captures=captures, render=False,
                               outputs=['review-build/source_parts_review.blend', 'review-build/source_parts_review.glb'],
                               blend_reopen=qa['blend_reopen'], glb_reimport=qa['glb_reimport'],
@@ -156,8 +178,10 @@ def main():
                   'không phải mô hình ghế đã lắp. Kiểm va chạm/khe hở trong sơ đồ cắt không '
                   'chứng minh khả năng lắp ráp. Khoảng cách là cận dưới/cận trên, chưa có '
                   'khe hở thiết kế được xác nhận. Không tự thêm lỗ khoan hay liên kết.\n\n'
-                  'CẦN XÁC NHẬN: ánh xạ contour sang A–F; điểm đối ứng 3D; hướng/góc/vị trí '
-                  'lắp; hình chiếu mặt bằng/đứng/cạnh có kích thước; khe lắp; đường kính và '
+                  'AtFAB có mặt bằng/đứng/cạnh và kích thước ở trang 3; đã OCR nhãn d, h, H và '
+                  'khoảng w. Khoảng w không được chọn tùy ý thành kích thước cố định. '
+                  'CẦN XÁC NHẬN: ánh xạ contour sang A–F; điểm đối ứng 3D giữa các hình chiếu; '
+                  'hướng/góc/vị trí lắp; khe lắp; đường kính và '
                   'chiều sâu khoan; bán kính dao và chi tiết khuất. Thứ tự B→D, C→E không '
                   'xác định được các thông số này. Không dùng gợi ý chế tạo chung làm kích '
                   'thước liên kết riêng của ghế.\n\n```json\n' + json.dumps(state, ensure_ascii=False, indent=2) + '\n```\n')

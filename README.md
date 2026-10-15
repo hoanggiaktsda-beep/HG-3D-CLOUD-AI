@@ -66,7 +66,7 @@ Giao diện backend loopback `/local/`, xác thực trong bộ nhớ và kết q
 ## TEST 30 — kiểm chứng lắp ráp
 
 [Báo cáo TEST 30](docs/TEST30_ASSEMBLY_VI.md): bộ giải vị trí theo bằng chứng,
-kiểm định Blender và viewport GUI thật. Tài liệu ghế hiện thiếu tọa độ/hình
-chiếu có kích thước nên **chưa xác minh mô hình lắp ráp hoàn chỉnh**, chưa
+kiểm định Blender và viewport GUI thật. Trang 3 có hình chiếu và kích thước;
+chương trình chưa hợp nhất chúng thành pose từng tấm nên **chưa xác minh mô hình lắp ráp hoàn chỉnh**, chưa
 chuyển TEST 31. [BLEND/GLB và ảnh đã kiểm tra](docs/test30-evidence/README.md)
 chỉ chứa tấm rời công khai; không phải dữ liệu khách hàng, không render.

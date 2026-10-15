@@ -5,20 +5,28 @@
 được ánh xạ contour sang cấu kiện, tọa độ, hướng/góc lắp và khe lắp. Không tự
 bịa các giá trị này để tạo một ghế có vẻ hoàn chỉnh.
 
+**Đính chính kiểm tra nguồn:** lượt đầu ở commit `c5aa1bb` chỉ xét trang 4–7
+và kết luận thiếu hình chiếu quá sớm. **Trang 3 có mặt bằng, đứng/trước/sau,
+mặt cạnh và kích thước.** Bản sửa kiểm tra đủ 7 trang, OCR riêng nhãn xoay và
+ghi nhận các hình chiếu có sẵn. Lỗi chương trình chưa hợp nhất/đăng ký được
+hình chiếu không được báo thành lỗi thiếu bản vẽ của người dùng.
+
 ## Kết quả tại Codex
 
-**72/72 kiểm thử đạt, không bỏ qua kiểm thử.** Sáu kiểm thử mới bao gồm:
+**73/73 kiểm thử đạt, không bỏ qua kiểm thử.** Bảy kiểm thử mới bao gồm:
 giải chuyển động cứng từ điểm đối ứng; chặn điểm thẳng hàng, đổi tỷ lệ/phản
 chiếu; chặn sai ảnh, thiếu/mâu thuẫn hình chiếu; không coi thứ tự lắp là tọa
 độ; Blender thật bắt giao khối nằm lọt; khoảng cách 5 mm trên fixture; xoay
 tấm 90° và kiểm lại chiều dày/hướng sau xuất. Fixture tổng hợp chỉ kiểm tra
 thuật toán/worker, không chứng minh nhận diện hoặc lắp ghế từ ảnh thành công.
+Kiểm thử chống tái phát bắt việc bỏ trang tài liệu, và không biến khoảng kích
+thước OCR thành một giá trị cố định tùy ý.
 
 Hai nguồn PDF công khai được kiểm tra trực tiếp bằng ảnh và OCR thật:
 
 | Nguồn | Dữ liệu có | Kết quả |
 |---|---|---|
-| AtFAB Five To Thirty Minute Chair — nguồn đã dùng ở lượt trước | Sơ đồ cắt, nhãn A–F, bảng số lượng, hướng dẫn lắp, chiều dày danh nghĩa | 20 tấm được xuất; 0 tấm được phép chuyển sang tọa độ lắp |
+| AtFAB Five To Thirty Minute Chair — nguồn đã dùng ở lượt trước | Đủ 7 trang; mặt bằng/đứng/cạnh ở trang 3; sơ đồ cắt, nhãn A–F, bảng số lượng, hướng dẫn lắp | 20 tấm được xuất; chưa đăng ký/ánh xạ được pose từng tấm đủ kiểm chứng |
 | Jose Pacheco Slim Chair — nguồn độc lập mới cho TEST 30 | Hai trang hình tháo lắp | Không có kích thước/chiều dày xác minh; không tạo mesh tùy ý |
 
 Nguồn Slim Chair: [PDF](https://raw.githubusercontent.com/opendesk/design-playground/gh-pages/OD-55134-Slim-Chair-1.1.0/OD-55134-Assembly-Guide.pdf),
@@ -35,8 +43,14 @@ OCR đọc bảng A Seat Back ×1, B Seat ×1, C Sides ×2, D Front Legs ×1,
 E Back Legs ×1, F Feet ×4. Đọc được “Slot part B into part D”, “Fit side parts
 C, then part E”, “Add parts A & F”. Đây là quan hệ/thứ tự phi số đo; các vị
 trí và hướng vẫn null. Không coi tổng số chi tiết đúng là ánh xạ từng contour
-đúng. Không dùng gợi ý chế tạo chung về chốt để tự tạo đường kính/chều sâu
+đúng. Không dùng gợi ý chế tạo chung về chốt để tự tạo đường kính/chiều sâu
 khoan cho chiếc ghế này.
+
+OCR nhãn trang 3 sau xoay crop 270° đọc chiều sâu **50 cm → 500 mm**, cao tổng
+**79,3 cm → 793 mm**, cao mặt ngồi ghi **48,6 cm → 486 mm**. Nhãn rộng là
+**50–180 cm → khoảng 500–1800 mm**, không phải một chiều rộng cố định. Đây là
+số đo nguồn để đối chiếu, chưa phải sai số một ghế đã lắp. Chưa xác định bản
+biến thể chiều rộng nào tương ứng chính xác từng contour trong sơ đồ cắt.
 
 ## Kiểm định thực tế và file đã lưu
 
@@ -58,7 +72,8 @@ Mở lại BLEND và nhập lại GLB: PASS. Ngoài bbox, so khoảng cách hai 
 tập đỉnh world-space để bắt thay đổi hình học có thể giữ nguyên bbox.
 Đã chụp và xem trực tiếp bốn góc GUI trên
 X11, không dùng render hoặc OpenGL render. Góc trước/cạnh cho thấy cạnh của
-tấm nằm phẳng; không được gọi là mặt đứng/cạnh ghế đã lắp.
+tấm nằm phẳng; không được gọi là mặt đứng/cạnh ghế đã lắp hoặc coi đã đối
+chiếu hình học từng tấm với hình chiếu nguồn ở trang 3.
 
 [Tải BLEND/GLB, ảnh viewport và JSON kiểm định đã lưu](test30-evidence/README.md).
 Marker khoan giữ trong nguồn dựng và dữ liệu contour; bản review bỏ các
@@ -101,9 +116,9 @@ nghiệm thu. Các trách nhiệm được áp dụng trong TEST 30 như sau:
 | Hình học | Phép chuyển động cứng, mesh kín, không đổi tỷ lệ |
 | Cấu tạo | Chưa xác minh mộng, khoan và khe lắp |
 | Đo lường | Phân biệt nhãn mm danh nghĩa, tỷ lệ raster và sai số tính toán |
-| Giải mã bản vẽ | Hình tháo lắp/sơ đồ cắt khác hình chiếu có kích thước |
+| Giải mã bản vẽ | Kiểm đủ trang, phát hiện hình chiếu trang 3 và OCR nhãn xoay |
 | Thị giác tái dựng | Kiểm ảnh có giám sát; chưa có pose AI tự động |
-| Đa ảnh | Ba hình chiếu metric còn thiếu |
+| Đa ảnh | Hình chiếu đã có; chương trình chưa hợp nhất được thành pose từng cấu kiện |
 | Vật liệu | Không tự gán thương hiệu hoặc đoán độ dày thực |
 | Ánh sáng | Không render |
 | Môi trường | Không tạo bối cảnh ngoài bằng chứng |
@@ -133,7 +148,7 @@ quyền contents:read, không dùng secret/API trả phí; chỉ upload thư m�
 công khai trong runner.temp, giữ artifact một ngày. Không publish website,
 không render, không đưa bản vẽ khách hàng lên GitHub/Actions.
 
-Trước TEST 31 cần bổ sung/kiểm tra: bản vẽ ba mặt có kích thước hoặc ràng buộc
-lắp đầy đủ; ánh xạ mỗi tấm với nhãn/phiên bản/số lượng; tọa độ và hướng lắp;
+Trước TEST 31 cần hoàn thiện/kiểm tra: hợp nhất các hình chiếu đã có và đọc ràng buộc
+lắp; ánh xạ mỗi tấm với nhãn/phiên bản/số lượng/biến thể chiều rộng; tọa độ và hướng lắp;
 thông số khe hở, liên kết và lỗ có chứng cứ. Nếu chưa có, TEST 30 tiếp tục
 ở trạng thái **CẦN XÁC NHẬN**, không gọi là đã hoàn thành lắp ráp.

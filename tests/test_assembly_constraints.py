@@ -9,13 +9,24 @@ import tempfile
 import unittest
 import numpy as np
 from PIL import Image, ImageDraw
-from hgcloud.assembly_constraints import rigid_transform, assembly_gate, instruction_relations, labelled_parts
+from hgcloud.assembly_constraints import rigid_transform, assembly_gate, instruction_relations, labelled_parts, require_complete_pages, metric_label
 from hgcloud.core import SceneError
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class AssemblyConstraintTests(unittest.TestCase):
+    def test_full_document_coverage_and_rotated_metric_label_ranges(self):
+        require_complete_pages(7, [1, 2, 3, 4, 5, 6, 7])
+        with self.assertRaises(SceneError):
+            require_complete_pages(7, [4, 5, 6, 7])
+        self.assertEqual(metric_label('d = 37.2 CM')['value_mm'], 372)
+        label = metric_label('w=60—160CM')
+        self.assertIsNone(label['value_mm'])
+        self.assertEqual(label['range_mm'], [600, 1600])
+        with self.assertRaises(SceneError):
+            metric_label('use a standard width')
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(dir=ROOT / 'outputs', prefix='test30-fixture-')
         self.addCleanup(self.temp.cleanup)

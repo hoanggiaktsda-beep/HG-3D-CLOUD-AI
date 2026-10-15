@@ -7,6 +7,10 @@ Không dùng bộ file này để nghiệm thu lắp ráp hoặc gia công. Tấ
 - [BLEND](source_parts_review.blend) và [GLB](source_parts_review.glb).
 - [Kiểm định từng bộ phận và từng cặp](assembly-qa-local.json).
 - [Kết quả hai nguồn công khai](test30-local.json).
+- [Trang 3 có các hình chiếu nguồn](orthographic_source.png) và
+  [bảng quan sát/nhãn OCR](assembly-plan-observations.json). Nhãn rộng là
+  khoảng giá trị, chưa xác định biến thể; chương trình chưa đăng ký được
+  các hình chiếu này vào từng contour. Không nói tài liệu AtFAB thiếu hình chiếu.
 - Viewport GUI thực, không render: [mặt bằng](viewport_top.png),
   [mặt trước](viewport_front.png), [mặt cạnh](viewport_side.png),
   [phối cảnh](viewport_perspective.png). Các góc này xem **tấm rời**, không phải

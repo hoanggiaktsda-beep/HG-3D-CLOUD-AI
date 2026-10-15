@@ -9,6 +9,26 @@ from .vision import ROLES
 VIEW_AXES = {'top': (0, 1), 'front': (0, 2), 'side': (1, 2)}
 
 
+def require_complete_pages(page_count, pages):
+    if type(page_count) is not int or page_count < 1 or sorted(pages) != list(range(1, page_count + 1)):
+        raise SceneError('Incomplete document coverage; do not conclude that drawing views are absent')
+
+
+def metric_label(text):
+    """Read a cm/mm label or range; a width range is NOT a fixed dimension."""
+    matches = re.findall(r'(?<![\w.,+−-])(\d+(?:[.,]\d+)?)\s*(?:[–—-]\s*(\d+(?:[.,]\d+)?)\s*)?(CM|MM)\b', text, re.I)
+    if len(matches) != 1:
+        raise SceneError('Missing/ambiguous OCR metric label')
+    a, b, unit = matches[0]
+    factor = 10 if unit.upper() == 'CM' else 1
+    values = [float(v.replace(',', '.')) * factor for v in [a, b] if v]
+    if not all(0 < v <= 10000 for v in values) or len(values) == 2 and values[0] >= values[1]:
+        raise SceneError('Invalid OCR metric range')
+    return dict(value_mm=values[0] if len(values) == 1 else None,
+                range_mm=values if len(values) == 2 else None, quote=text.strip(),
+                confidence='observed_OCR_requires_review')
+
+
 def instruction_relations(text):
     """Only explicit text relations; no numeric positions, angles or hardware sizes."""
     relations = []
@@ -116,7 +136,7 @@ def assembly_gate(layout, plan):
     for part in parts:
         try:
             if part['id'] not in proposals:
-                raise SceneError('Missing label mapping, metric anchors and dimensioned top/front/side views')
+                raise SceneError('Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient')
             approved[part['id']] = verify_placement(part, proposals[part['id']], layout['source_sha256'],
                                                    layout.get('document_sha256', layout['source_sha256']))
         except (SceneError, KeyError, TypeError, ValueError, OSError) as exc:
@@ -126,9 +146,10 @@ def assembly_gate(layout, plan):
                         được_thay_đổi=['bộ giải vị trí', 'kiểm định mesh và ảnh viewport'],
                         kích_thước_chắc_chắn='Chỉ nhãn/annotation đã đối chứng; không tự nâng raster lên confirmed',
                         kích_thước_chưa_chắc_chắn=['Tọa độ lắp', 'góc lắp', 'khe hở', 'đường kính khoan', 'chi tiết khuất'],
-                        yêu_cầu_thêm_dữ_liệu='Hình chiếu có kích thước và ánh xạ mỗi contour sang nhãn cấu kiện')
+                        yêu_cầu_thêm_dữ_liệu='Ánh xạ contour sang nhãn, điểm đối ứng metric 3D và đối chiếu từng hình chiếu; không kết luận thiếu hình chiếu nếu chưa kiểm đủ tài liệu')
     return dict(status='ASSEMBLY_CANDIDATE_NEEDS_REVIEW' if complete else 'BLOCKED_COMPLETE_ASSEMBLY',
                 approved_placements=approved, blocked_parts=blocked, complete_placement_evidence=complete,
                 final_approved=False, next_test_allowed=False, roles=ROLES, director_requirements=requirements,
+                source_view_inventory=plan.get('view_inventory', {}),
                 role_reviews=[dict(role=role, status='NEEDS_REVIEW',
                                    basis='Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt') for role in ROLES])

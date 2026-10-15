@@ -12,6 +12,9 @@
         "code": "OD-51381",
         "sha256": "e295e6496d2b5dc314175afc678bf7b0aa61d984dc52b7d53e50c4d602441445",
         "pages": [
+          1,
+          2,
+          3,
           4,
           5,
           6,
@@ -131,6 +134,102 @@
           "status": "CẦN XÁC NHẬN"
         }
       ],
+      "view_inventory": {
+        "top": {
+          "page": 3,
+          "image_sha256": "9d7543859af566aa2ef2633bc63d36b3f6c2ace3ad2169266f98cc0abd7625f6",
+          "roi_at_1800": [
+            520,
+            545,
+            800,
+            790
+          ],
+          "status": "SOURCE_VIEW_PRESENT_NOT_YET_REGISTERED_PER_PART"
+        },
+        "front": {
+          "page": 3,
+          "image_sha256": "9d7543859af566aa2ef2633bc63d36b3f6c2ace3ad2169266f98cc0abd7625f6",
+          "roi_at_1800": [
+            920,
+            900,
+            1140,
+            1260
+          ],
+          "status": "SOURCE_VIEW_PRESENT_NOT_YET_REGISTERED_PER_PART"
+        },
+        "side": {
+          "page": 3,
+          "image_sha256": "9d7543859af566aa2ef2633bc63d36b3f6c2ace3ad2169266f98cc0abd7625f6",
+          "roi_at_1800": [
+            510,
+            890,
+            780,
+            1260
+          ],
+          "status": "SOURCE_VIEW_PRESENT_NOT_YET_REGISTERED_PER_PART"
+        }
+      },
+      "orthographic_ocr": {
+        "width_range": {
+          "value_mm": null,
+          "range_mm": [
+            500.0,
+            1800.0
+          ],
+          "quote": "w= 50—180CM",
+          "confidence": "observed_OCR_requires_review",
+          "page": 3,
+          "roi_at_1800": [
+            475,
+            555,
+            515,
+            740
+          ],
+          "rotation_degrees": 270
+        },
+        "overall_height": {
+          "value_mm": 793.0,
+          "range_mm": null,
+          "quote": "h = 79.3 CM",
+          "confidence": "observed_OCR_requires_review",
+          "page": 3,
+          "roi_at_1800": [
+            840,
+            1020,
+            875,
+            1255
+          ],
+          "rotation_degrees": 270
+        },
+        "seat_height": {
+          "value_mm": 486.0,
+          "range_mm": null,
+          "quote": "h = 48.6 CM",
+          "confidence": "observed_OCR_requires_review",
+          "page": 3,
+          "roi_at_1800": [
+            795,
+            1040,
+            835,
+            1255
+          ],
+          "rotation_degrees": 270
+        },
+        "depth": {
+          "value_mm": 500.0,
+          "range_mm": null,
+          "quote": "d =50CM",
+          "confidence": "observed_OCR_requires_review",
+          "page": 3,
+          "roi_at_1800": [
+            585,
+            748,
+            685,
+            798
+          ],
+          "rotation_degrees": 0
+        }
+      },
       "captures": [
         {
           "view": "front",

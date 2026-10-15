@@ -1,0 +1,202 @@
+{
+  "placements": {},
+  "view_inventory": {
+    "top": {
+      "page": 3,
+      "image_sha256": "9d7543859af566aa2ef2633bc63d36b3f6c2ace3ad2169266f98cc0abd7625f6",
+      "roi_at_1800": [
+        520,
+        545,
+        800,
+        790
+      ],
+      "status": "SOURCE_VIEW_PRESENT_NOT_YET_REGISTERED_PER_PART"
+    },
+    "front": {
+      "page": 3,
+      "image_sha256": "9d7543859af566aa2ef2633bc63d36b3f6c2ace3ad2169266f98cc0abd7625f6",
+      "roi_at_1800": [
+        920,
+        900,
+        1140,
+        1260
+      ],
+      "status": "SOURCE_VIEW_PRESENT_NOT_YET_REGISTERED_PER_PART"
+    },
+    "side": {
+      "page": 3,
+      "image_sha256": "9d7543859af566aa2ef2633bc63d36b3f6c2ace3ad2169266f98cc0abd7625f6",
+      "roi_at_1800": [
+        510,
+        890,
+        780,
+        1260
+      ],
+      "status": "SOURCE_VIEW_PRESENT_NOT_YET_REGISTERED_PER_PART"
+    }
+  },
+  "reason": "No reviewed metric 3D anchors and part-to-contour mapping; view availability is recorded separately",
+  "physical_hardware_allowed": false,
+  "dimension_ocr": {
+    "width_range": {
+      "value_mm": null,
+      "range_mm": [
+        500.0,
+        1800.0
+      ],
+      "quote": "w= 50—180CM",
+      "confidence": "observed_OCR_requires_review",
+      "page": 3,
+      "roi_at_1800": [
+        475,
+        555,
+        515,
+        740
+      ],
+      "rotation_degrees": 270
+    },
+    "overall_height": {
+      "value_mm": 793.0,
+      "range_mm": null,
+      "quote": "h = 79.3 CM",
+      "confidence": "observed_OCR_requires_review",
+      "page": 3,
+      "roi_at_1800": [
+        840,
+        1020,
+        875,
+        1255
+      ],
+      "rotation_degrees": 270
+    },
+    "seat_height": {
+      "value_mm": 486.0,
+      "range_mm": null,
+      "quote": "h = 48.6 CM",
+      "confidence": "observed_OCR_requires_review",
+      "page": 3,
+      "roi_at_1800": [
+        795,
+        1040,
+        835,
+        1255
+      ],
+      "rotation_degrees": 270
+    },
+    "depth": {
+      "value_mm": 500.0,
+      "range_mm": null,
+      "quote": "d =50CM",
+      "confidence": "observed_OCR_requires_review",
+      "page": 3,
+      "roi_at_1800": [
+        585,
+        748,
+        685,
+        798
+      ],
+      "rotation_degrees": 0
+    }
+  },
+  "relations": [
+    {
+      "parts": [
+        "B",
+        "D"
+      ],
+      "relation": "slot_into",
+      "source_quote": "Slot part B into part D",
+      "metric_transform": null,
+      "status": "CẦN XÁC NHẬN"
+    },
+    {
+      "parts": [
+        "C",
+        "E"
+      ],
+      "relation": "assembly_order",
+      "source_quote": "Fit side parts C,\nthen part E",
+      "metric_transform": null,
+      "status": "CẦN XÁC NHẬN"
+    },
+    {
+      "parts": [
+        "A",
+        "F"
+      ],
+      "relation": "add_after_previous_steps",
+      "source_quote": "Add parts A & F",
+      "metric_transform": null,
+      "status": "CẦN XÁC NHẬN"
+    }
+  ],
+  "part_label_observations": [
+    {
+      "label": "A",
+      "name": "Seat Back",
+      "quantity": 1,
+      "source_quote": "A Seat Back 1 64",
+      "basis": "OCR printed bill of materials",
+      "contour_assignment": null,
+      "orientation": null,
+      "position_mm": null,
+      "status": "CẦN XÁC NHẬN"
+    },
+    {
+      "label": "B",
+      "name": "Seat",
+      "quantity": 1,
+      "source_quote": "B Seat 1 98",
+      "basis": "OCR printed bill of materials",
+      "contour_assignment": null,
+      "orientation": null,
+      "position_mm": null,
+      "status": "CẦN XÁC NHẬN"
+    },
+    {
+      "label": "C",
+      "name": "Sides",
+      "quantity": 2,
+      "source_quote": "Cc Sides 2 249",
+      "basis": "OCR printed bill of materials",
+      "contour_assignment": null,
+      "orientation": null,
+      "position_mm": null,
+      "status": "CẦN XÁC NHẬN"
+    },
+    {
+      "label": "D",
+      "name": "Front Legs",
+      "quantity": 1,
+      "source_quote": "D Front Legs 1 78",
+      "basis": "OCR printed bill of materials",
+      "contour_assignment": null,
+      "orientation": null,
+      "position_mm": null,
+      "status": "CẦN XÁC NHẬN"
+    },
+    {
+      "label": "E",
+      "name": "Back Legs",
+      "quantity": 1,
+      "source_quote": "E Back Legs 1 83",
+      "basis": "OCR printed bill of materials",
+      "contour_assignment": null,
+      "orientation": null,
+      "position_mm": null,
+      "status": "CẦN XÁC NHẬN"
+    },
+    {
+      "label": "F",
+      "name": "Feet",
+      "quantity": 4,
+      "source_quote": "F Feet 4 47",
+      "basis": "OCR printed bill of materials",
+      "contour_assignment": null,
+      "orientation": null,
+      "position_mm": null,
+      "status": "CẦN XÁC NHẬN"
+    }
+  ],
+  "instruction_source_sha256": "26dcb66f93011c3e39c1ac16b8885ebc009994cc4abc74bc5e2e4ff16ccff4b4"
+}

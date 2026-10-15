@@ -9,83 +9,83 @@
     "blocked_parts": {
       "observed_panel_01": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_02": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_03": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_04": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_05": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_06": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_07": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_08": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_09": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_10": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_11": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_12": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_13": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_14": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_15": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_16": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_17": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_18": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_19": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       },
       "observed_panel_20": {
         "status": "CẦN XÁC NHẬN",
-        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+        "reason": "Missing per-part contour/label mapping, metric 3D anchors and measured view correspondences; view existence alone is insufficient"
       }
     },
     "complete_placement_evidence": false,
@@ -4023,7 +4023,7 @@
   "next_test_allowed": false,
   "render_executed": false,
   "collision_volume_noise_threshold_mm3": 0.01,
-  "source_blend_sha256": "fa9da39b3f96ed670d4e4d7a3316f3ff165450f0adfb6cb00a8b553610409e59",
+  "source_blend_sha256": "019b1f1eb245ef043ae42c66120af6e6a7de313773657117b5d79f909eb451d6",
   "blend_reopen": "PASS",
   "glb_reimport": "PASS"
 }

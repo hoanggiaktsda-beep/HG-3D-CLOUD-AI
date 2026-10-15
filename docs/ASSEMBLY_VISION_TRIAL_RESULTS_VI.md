@@ -79,7 +79,7 @@ tam giác mesh thực về ảnh nguồn: IoU nhỏ nhất **0,9978925343**. Sai
 nhất giữa mesh và JSON **0,00012015 mm**; đây là sai số tính toán, không phải
 dung sai thiết kế. Ước lượng hai pixel nguồn khoảng **1,52162 mm**, chưa tính
 sai lệch in/scan hoặc đường nét. Không có kích thước dài/rộng độc lập từng tấm
-hay hình chiếu đứng/cạnh sản phẩm hoàn chỉnh để nghiệm thu.
+và lượt này chưa xử lý hình chiếu đứng/cạnh sản phẩm để nghiệm thu.
 
 BLEND được mở lại và GLB được nhập lại bằng Blender: **PASS**. Đầu ra trong
 artifact: `chair/build/cut_layout.blend`, `chair/build/cut_layout.glb`,
@@ -99,6 +99,12 @@ Artifact **hg-public-assembly-38694666996-1**, **16.9 MB**, SHA-256
 giữ một ngày theo workflow. Đã kiểm tra trạng thái, annotations kết quả thật
 do worker tính và thông tin artifact trên GitHub. Chưa tải artifact về Codex
 để mở kiểm tra thủ công lần nữa; không tuyên bố đã thực hiện bước đó.
+
+**Đính chính phạm vi nguồn sau TEST 30:** PDF ghế có hình chiếu mặt bằng,
+đứng/cạnh và số đo ở trang 3. Các lượt trên chỉ dùng trang 4–7, nên
+`NOT_PROVIDED` là chưa đưa hình chiếu vào pipeline, không phải tài liệu gốc
+không có. [TEST 30](TEST30_ASSEMBLY_VI.md) đã kiểm đủ trang và OCR nhãn xoay;
+chưa hợp nhất thành pose từng cấu kiện và chưa nghiệm thu ghế lắp ráp.
 
 Không render, không thay đổi website hoặc 18 vai trò, không dùng dữ liệu khách
 hàng, không gọi API trả phí. Chưa nghiệm thu sản phẩm lắp ráp hoặc độ chính xác
