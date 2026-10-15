@@ -13,10 +13,12 @@ sys.path.insert(0, str(ROOT))
 from hgcloud.intake import receive, compile_scene
 from hgcloud.core import SceneError
 from hgcloud.quantized_vision import QuantizedCPUVision
+from hgcloud.model_dimensions import candidates_from_model_text, compare_candidates
 from scripts.cloud_worker_sample import SOURCE_URL, verified_source
 from scripts.public_vision_trial import download, notice, drawing_reference, compare_dimensions
 
 MODEL_ID = 'Qwen/Qwen2-VL-2B-Instruct'
+MODEL_REVISION = '895c3a49bc3fa70a340399125c650a463535e71c'
 
 
 def main():
@@ -36,7 +38,7 @@ def main():
             subprocess.run(['pdftoppm', '-scale-to', '1800', '-f', str(page), '-l', str(page), '-singlefile', '-png', str(pdf), str(out / f'atfab-{page}')], check=True, timeout=60)
         with Image.open(out / 'atfab-3.png') as image:
             image.crop((25, 360, 610, 740)).save(out / 'printed-dimensions.png')
-        info = HfApi().model_info(MODEL_ID, files_metadata=True)
+        info = HfApi().model_info(MODEL_ID, revision=MODEL_REVISION, files_metadata=True)
         license_name = (info.card_data.to_dict() if info.card_data else {}).get('license')
         if info.private or info.gated or license_name != 'apache-2.0':
             raise ValueError('Expected public ungated Apache-2.0 model')
@@ -55,7 +57,19 @@ def main():
             job = out / name
             receive(source, 'technical_drawing', job)
             result = provider.analyze(job / 'intake.json')
-            result['dimension_comparison'] = compare_dimensions(result['observations'], drawing_reference(out / 'atfab-3.png', job))
+            result['model_geometry_status'] = result['status']
+            # Parse only actual model output BEFORE computing independent OCR reference.
+            try:
+                candidates = candidates_from_model_text(result['caption'] + '\n' + result['raw_geometry_response'], result['execution']['source_sha256'])
+                (job / 'dimension_candidates.json').write_text(json.dumps(candidates, ensure_ascii=False, indent=2))
+                result['dimension_candidates'] = candidates
+                result['status'] = 'DIMENSION_CANDIDATES_NEEDS_REVIEW'
+            except SceneError as exc:
+                candidates = None
+                result['dimension_candidates'] = dict(status='UNSUPPORTED_OR_CONFLICTING_MODEL_TEXT', reason=str(exc), build_allowed=False)
+            reference = drawing_reference(out / 'atfab-3.png', job)
+            result['dimension_comparison'] = compare_dimensions(result['observations'], reference)
+            result['model_text_dimension_comparison'] = compare_candidates(candidates, reference)
             if result['observations']:
                 op = job / 'observations.json'
                 op.write_text(json.dumps(result['observations'], ensure_ascii=False, indent=2))
@@ -72,6 +86,8 @@ def main():
                                          supervised_crop=name == 'dimension-crop', reference_supplied_to_model=False)
             (job / 'analysis.json').write_text(json.dumps(result, ensure_ascii=False, indent=2))
             summary = {key: result[key] for key in ['status', 'caption', 'raw_geometry_response', 'dimension_comparison', 'build_gate', 'build_allowed']}
+            summary.update(dimension_candidates=result['dimension_candidates'], model_text_dimension_comparison=result['model_text_dimension_comparison'])
+            summary['model_geometry_status'] = result['model_geometry_status']
             summary.update(name=name, reason=result.get('reason'), inference_seconds=result['execution']['inference_seconds'])
             state['results'].append(summary)
             state['live_model_executed'] = True

@@ -8,6 +8,8 @@ on:
       - 'hgcloud/quantized_vision.py'
       - 'scripts/public_large_vision_trial.py'
       - 'requirements-vision-large-cpu.txt'
+      - 'hgcloud/model_dimensions.py'
+      - 'tests/test_model_dimensions.py'
 permissions:
   contents: read
 concurrency:
@@ -38,7 +40,9 @@ jobs:
           python -m pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cpu
           python -m pip install -r requirements-vision-large-cpu.txt
       - name: Geometry gate regression tests (not inference evidence)
-        run: python -m unittest discover -s tests -p test_local_vision.py -v
+        run: |
+          python -m unittest discover -s tests -p test_local_vision.py -v
+          python -m unittest discover -s tests -p test_model_dimensions.py -v
       - name: Actual larger-model inference
         run: python scripts/public_large_vision_trial.py --output "$RUNNER_TEMP/hg-public-large-vision" --model-cache "$RUNNER_TEMP/hg-large-model-cache"
       - name: Upload only public experiment evidence (never model cache)
