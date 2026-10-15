@@ -21,3 +21,15 @@ class PagesWorkflowTests(unittest.TestCase):
         self.assertEqual(workflow['permissions'],{'contents':'read','pages':'write','id-token':'write'})
         self.assertTrue(any(s.get('uses','').startswith('actions/deploy-pages@') for s in deploy['steps']))
         self.assertFalse((ROOT/'viewer/pages-workflow.example.yml').exists())
+
+    def test_test32_checks_gate_deployment_and_verify_actual_site(self):
+        workflow=yaml.load((ROOT/'.github/workflows/deploy-pages.yml').read_text(),Loader=yaml.BaseLoader)
+        steps=workflow['jobs']['build']['steps']
+        test_index=next(i for i,s in enumerate(steps) if 'unittest discover' in s.get('run',''))
+        upload_index=next(i for i,s in enumerate(steps) if s.get('uses','').startswith('actions/upload-pages-artifact@'))
+        self.assertLess(test_index,upload_index)
+        verify=workflow['jobs']['verify'];self.assertEqual(verify['needs'],'deploy')
+        self.assertTrue(any(s.get('run')=='python scripts/verify_pages32.py' for s in verify['steps']))
+        text=(ROOT/'scripts/verify_pages32.py').read_text()
+        for check in ['hashlib.sha256','expect_download','set_offline(True)','hgViewer?.ready']:
+            self.assertIn(check,text)

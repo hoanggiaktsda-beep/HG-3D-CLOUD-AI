@@ -9,7 +9,7 @@ class ViewerTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.p=sync_playwright().start()
-        cls.browser=cls.p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,
+        cls.browser=cls.p.chromium.launch(executable_path=__import__('shutil').which('chromium'),headless=True,
           args=['--no-sandbox','--enable-webgl','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
     @classmethod
     def tearDownClass(cls):cls.browser.close();cls.p.stop()
@@ -17,7 +17,7 @@ class ViewerTests(unittest.TestCase):
         context=self.browser.new_context(**kwargs);self.addCleanup(context.close)
         return context.new_page()
     def ready(self,page):
-        page.goto(URL);page.wait_for_function('window.hgViewer?.ready',timeout=30000)
+        page.goto(URL);page.wait_for_function('() => (window.hgViewer?.ready)',timeout=30000)
     def test_desktop_actual_glb_measurements_and_camera(self):
         page=self.page(viewport={'width':1440,'height':1000});errors=[]
         page.on('pageerror',lambda e:errors.append(str(e)))

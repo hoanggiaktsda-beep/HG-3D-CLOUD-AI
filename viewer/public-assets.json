@@ -8,6 +8,10 @@
     {
       "path": "assets/sample-qa.json",
       "sha256": "c020431b5fc2cd4a7121ae277bf39305175a0994790717238e07b762e86724ae"
+    },
+    {
+      "path": "assets/sample.blend",
+      "sha256": "a09c148f056a69d8dc20e717c6bcd8fa14094242e43aadd38e95bb1e801d1dee"
     }
   ]
 }

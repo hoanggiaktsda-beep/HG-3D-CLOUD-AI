@@ -16,6 +16,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,6 +29,21 @@ jobs:
         working-directory: viewer
       - run: npm run build
         working-directory: viewer
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-test.txt
+        working-directory: viewer
+      - run: python -m playwright install --with-deps chromium
+        working-directory: viewer
+      - name: TEST 32 static, security and responsive browser checks
+        working-directory: viewer
+        run: |
+          mkdir -p ../outputs/test32
+          python ../scripts/serve_pages_preview.py --port 8792 > ../outputs/test32/server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          HG_VIEWER_URL=http://127.0.0.1:8792/HG-3D-CLOUD-AI/ python -m unittest discover -s tests -v
       - uses: actions/upload-pages-artifact@v3
         with:
           path: viewer/dist
@@ -41,3 +57,22 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
+  verify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --ignore-scripts --no-audit --no-fund && npm run build
+        working-directory: viewer
+      - run: python -m pip install -r requirements-test.txt && python -m playwright install --with-deps chromium
+        working-directory: viewer
+      - name: Verify live Pages bytes, GLB/BLEND downloads and offline viewer
+        run: python scripts/verify_pages32.py

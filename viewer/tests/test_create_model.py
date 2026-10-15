@@ -8,18 +8,18 @@ IMAGE=ROOT/'tests/fixtures/dimensioned_cabinet.png'
 class CreateModelTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.p=sync_playwright().start();cls.browser=cls.p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
+        cls.p=sync_playwright().start();cls.browser=cls.p.chromium.launch(executable_path=__import__('shutil').which('chromium'),headless=True,args=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
     @classmethod
     def tearDownClass(cls):cls.browser.close();cls.p.stop()
     def page(self,width=1440,height=1000):
         context=self.browser.new_context(viewport={'width':width,'height':height},has_touch=True)
         self.addCleanup(context.close);page=context.new_page();page.goto(URL)
-        page.wait_for_function('window.hgViewer?.ready');return page
+        page.wait_for_function('() => (window.hgViewer?.ready)');return page
     def test_private_selection_never_uploads_or_creates_fake_job(self):
         page=self.page();requests=[]
         page.on('request',lambda r:requests.append((r.method,r.url)) if r.url.startswith(('http://','https://')) else None)
         page.locator('#source-images').set_input_files(IMAGE)
-        page.wait_for_function('document.querySelectorAll("#image-previews img").length === 1')
+        page.wait_for_function('() => (document.querySelectorAll("#image-previews img").length === 1)')
         self.assertIn('Chưa tải lên máy chủ',page.locator('#image-status').inner_text())
         self.assertEqual(page.locator('#connection-state').inner_text(),'CHƯA KẾT NỐI')
         self.assertTrue(page.locator('#create-job').is_disabled());self.assertTrue(page.locator('#rebuild-job').is_disabled())
@@ -38,7 +38,7 @@ class CreateModelTests(unittest.TestCase):
         for filename,mime,content in [('not-an-image.png','image/png',b'bad'),('private.heic','image/heic',b'heic'),('x.svg','image/svg+xml',b'<svg/>'),('forged.png','image/png',b'<svg xmlns="http://www.w3.org/2000/svg"/>')]:
             with self.subTest(filename=filename):
                 page.locator('#source-images').set_input_files({'name':filename,'mimeType':mime,'buffer':content})
-                page.wait_for_function('document.querySelector("#source-images").value === ""')
+                page.wait_for_function('() => (document.querySelector("#source-images").value === "")')
                 self.assertEqual(page.locator('#image-previews img').count(),0)
         page.locator('#source-images').set_input_files([{'name':str(i)+'.png','mimeType':'image/png','buffer':IMAGE.read_bytes()} for i in range(9)])
         self.assertIn('Tối đa 8 ảnh',page.locator('#image-status').inner_text())
@@ -62,7 +62,7 @@ class CreateModelTests(unittest.TestCase):
                 page.locator('a[href="#create-model"]').click()
                 page.locator('#input-type').select_option('layout')
                 page.locator('#source-images').set_input_files(IMAGE)
-                page.wait_for_function('document.querySelectorAll("#image-previews img").length === 1')
+                page.wait_for_function('() => (document.querySelectorAll("#image-previews img").length === 1)')
                 self.assertEqual(page.locator('#input-type').input_value(),'layout')
                 self.assertTrue(page.locator('#create-job').is_disabled())
                 page.screenshot(path=str(ROOT/f'outputs/create-model-{width}.png'),full_page=True)
