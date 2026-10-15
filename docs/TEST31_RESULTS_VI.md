@@ -46,6 +46,27 @@ artifact công khai trên GitHub. Chưa tải artifact cloud về Codex để m�
 công; phần mở lại BLEND/nhập lại GLB do worker thật thực hiện và là điều kiện
 trước khi công bố model. Cục bộ đã chạy cùng worker và kiểm lại checksum.
 
+## Xác minh bản sửa và phiên bản v0003
+
+[Run 38701897004](https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/actions/runs/38701897004),
+commit `7c171e3`: **Success**, 1 phút 9 giây. Bản sửa biến manifest hỏng/thiếu
+thành `ARTIFACT_INTEGRITY_FAILED`, không cho đọc lại kết quả như đã hợp lệ.
+Kiểm thử chống tái phát đã được bổ sung, bộ TEST 31 vẫn **7/7 đạt**; bước kiểm
+thử và bước chạy thật trên Actions đều hoàn tất.
+
+Push tự nhận duy nhất yêu cầu mới `console-job/v0003`, parent v0002. Worker
+thật xuất version `r0003-7c171e3184ea-38701897004-a1`, **NEEDS_REVIEW 100%**,
+không ghi đè v0001/v0002. Artifact **hg-test31-public-38701897004-1**,
+**116 KB**, SHA-256
+`c4f74a6948ed499d4d585421f37711175158819f98aa11a8ed26bed175b4d619`.
+Đã xác minh trạng thái, từng bước, annotation công việc và digest artifact;
+chưa tải artifact cloud về Codex. Điều kiện mở lại BLEND/nhập lại GLB vẫn do
+worker thực thi trước khi công bố.
+
+Tổng hai run: **5 yêu cầu nhận tự động**, **4 bộ BLEND/GLB hợp lệ về vận hành**,
+**1 công việc FAILED đúng kỳ vọng QA**, không có kết quả giả. Không chạy lại
+TEST 30 hoặc thay đổi trạng thái của TEST 30.
+
 ## Giới hạn còn lại
 
 - Chỉ nhận công việc bằng Git push hoặc workflow_dispatch với mẫu cho phép;

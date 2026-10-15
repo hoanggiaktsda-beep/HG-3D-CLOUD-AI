@@ -4,6 +4,8 @@ TEST 31 kiểm thử vận hành công việc, **không lặp lại TEST 30**. T
 **CẦN XÁC NHẬN**. Không thay đổi 18 vai trò, viewer, backend riêng tư hoặc
 workflow TEST 30. Không render, không nhận ảnh khách hàng hoặc gọi API trả phí.
 
+[Kết quả kiểm thử và hai lượt Actions thực tế](TEST31_RESULTS_VI.md).
+
 ## Cách nhận và chạy công việc
 
 - Thêm yêu cầu mới tại `jobs/public/<job_id>/v0001.json`, commit/push lên main:
