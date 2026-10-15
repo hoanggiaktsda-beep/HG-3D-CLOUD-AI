@@ -1,0 +1,55 @@
+name: HG Qwen OCR Blender - independent public drawings
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/vision-blender-integration.yml'
+      - 'hgcloud/assembly_evidence.py'
+      - 'hgcloud/cut_layout.py'
+      - 'hgcloud/cut_layout_qa.py'
+      - 'scripts/blender_cut_layout.py'
+      - 'scripts/public_assembly_trial.py'
+      - 'tests/test_assembly_integration.py'
+      - 'requirements-assembly-cpu.txt'
+permissions:
+  contents: read
+concurrency:
+  group: public-vision-cpu-experiment
+  cancel-in-progress: false
+jobs:
+  independent-public-drawings:
+    if: github.repository == 'hoanggiaktsda-beep/HG-3D-CLOUD-AI' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      HF_HUB_DISABLE_XET: '1'
+      DO_NOT_TRACK: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '4'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Free CPU tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends blender python3-numpy tesseract-ocr poppler-utils
+          python -m pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -r requirements-assembly-cpu.txt
+      - name: Evidence gate and actual Blender regression
+        run: python -m unittest discover -s tests -p test_assembly_integration.py -v
+      - name: Actual Qwen OCR independent drawings to Blender and QA
+        run: python scripts/public_assembly_trial.py --output "$RUNNER_TEMP/hg-public-assembly" --model-cache "$RUNNER_TEMP/hg-assembly-model-cache"
+      - name: Upload only public test evidence and actual outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hg-public-assembly-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/hg-public-assembly/
+          if-no-files-found: warn
+          retention-days: 1
