@@ -43,6 +43,7 @@ jobs:
             else
               result=1
               failures=1
+              /usr/bin/python3 -c 'import pathlib,os; s=pathlib.Path(os.environ["RUNNER_TEMP"],"worker-tests.log").read_text()[-8000:]; print("::error title=Public worker regression::"+s.replace("%","%25").replace("\r","%0D").replace("\n","%0A"))'
             fi
             cat "$RUNNER_TEMP/worker-tests.log"
             echo "### $pattern (exit $result)" >> "$GITHUB_STEP_SUMMARY"

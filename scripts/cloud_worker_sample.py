@@ -55,6 +55,9 @@ def run(command, log):
     result = subprocess.run(command, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     log.write_text(result.stdout)
     print(result.stdout, flush=True)
+    if result.returncode and os.environ.get('GITHUB_ACTIONS'):
+        message = result.stdout[-8000:].replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+        print('::error title=Public worker command failed::' + message, flush=True)
     result.check_returncode()
 
 
@@ -117,6 +120,8 @@ def main():
              for p in sorted(out.rglob('*')) if p.is_file()}
     (out / 'manifest.json').write_text(json.dumps(dict(status='PASS_TECHNICAL_NEEDS_REVIEW', files=files), indent=2))
     print(report)
+    if os.environ.get('GITHUB_ACTIONS'):
+        print('::notice title=Public Blender measured QA::' + report.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A'))
     if os.environ.get('GITHUB_STEP_SUMMARY'):
         with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
             summary.write(report + '\nArtifact manifest:\n```json\n' + json.dumps(files, indent=2) + '\n```\n')
