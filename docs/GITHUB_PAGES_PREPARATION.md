@@ -1,4 +1,4 @@
-# GitHub Pages — bản chuẩn bị, chưa kích hoạt
+# GitHub Pages — workflow triển khai mẫu
 
 Bản build website nằm ở viewer/dist, root chứa index.html. Khi xuất artifact này vào GitHub Pages của repository HG-3D-CLOUD-AI, nó hoạt động tại `/HG-3D-CLOUD-AI/`. Mọi JS, CSS, GLB, báo cáo và vendor module dùng đường dẫn tương đối; không phụ thuộc root `/` hoặc node_modules. Có .nojekyll và MIT license Three.js. Không CDN/API ngoài ở runtime.
 
@@ -23,17 +23,23 @@ python3 -m unittest discover -s tests -v
 
 Đóng gói allowlist 14 file, có manifest SHA-256, không sao chép repository đệ quy. public-assets.json chỉ định đúng GLB mẫu console tổng hợp và báo cáo mẫu đã công khai trong repository. Build từ chối nếu mẫu bị thay mà chưa cập nhật hash sau kiểm tra quyền công khai. Không có bản vẽ khách hàng, ảnh nguồn, tài liệu AtFAB, dữ liệu upload, secrets, đường dẫn nguồn riêng tư, BLEND hoặc outputs trong website. Giữ nguyên AGENTS.md và 18 vai trò, không thay code dựng hay cấu trúc hiện có.
 
-## Triển khai về sau — CHƯA thực hiện
+## Kích hoạt trong GitHub (không cần trả phí)
 
-`viewer/pages-workflow.example.yml` là template KHÔNG HOẠT ĐỘNG, nằm ngoài .github/workflows. Không có workflow mới chạy khi push mã, không gọi GitHub Pages API, không thay settings, không tạo nhánh gh-pages, không đổi visibility và không Publish.
+Workflow đã đặt tại `.github/workflows/deploy-pages.yml`, chỉ upload `viewer/dist`. Chạy khi viewer/workflow thay đổi trên main hoặc qua workflow_dispatch. Không upload cả repository, không chạy Python/Blender. Bộ 18 vai trò giữ nguyên trong mã nguồn; website chỉ xem GLB mẫu và QA.
 
-Chỉ khi người dùng cho phép kích hoạt: xác nhận repository công khai và tài khoản đủ điều kiện GitHub Pages miễn phí; không nâng gói hoặc bật thanh toán. Nếu repo riêng tư thì không tự đổi sang public hoặc trả phí. Chuyển template vào .github/workflows, đặt Source = GitHub Actions trong Settings → Pages, rồi chạy workflow_dispatch theo quyết định người dùng. Build artifact là viewer/dist; deploy artifact tại root của project Pages, không publish cả viewer hoặc cả repository. Chưa kiểm chứng workflow triển khai vì chưa chạy trên GitHub.
+1. Mở repository HG-3D-CLOUD-AI trên GitHub → Settings → Pages.
+2. Trong Build and deployment, chọn Source = GitHub Actions.
+3. Mở Actions → Deploy HG sample viewer to Pages. Nếu lần chạy do push đã lỗi vì Pages chưa cấu hình, dùng Re-run all jobs hoặc Run workflow với nhánh main.
+4. Chờ cả build và deploy xanh. URL do job deploy/github-pages cung cấp là URL cần kiểm tra, không tự coi việc push workflow là website đã hoạt động.
+5. Mở URL đó, kiểm tra GLB, số đo 1800 × 450 × 850, xoay/zoom, góc camera và trạng thái CẦN XÁC NHẬN. Kiểm tra thêm Safari/iPhone/iPad thật.
 
-GitHub Pages không chạy Python/Blender hay bộ 18 vai trò: website chỉ xem mẫu và QA. Core và bộ não giữ trong repository để phát triển. Website luôn CẦN XÁC NHẬN, không có chức năng tự nghiệm thu.
+Repository đã được quan sát hiển thị Public. Chỉ dùng Pages miễn phí, không bật thanh toán hay nâng gói. Không đổi visibility. Workflow dùng GitHub-hosted runner cho repository công khai; không dùng API AI hoặc hạ tầng trả phí.
+
+Trong phiên triển khai, GitHub API từ môi trường Codex trả Forbidden khi đọc Pages; cấu hình Source và kết quả deployment chưa xác minh được bằng API. Không báo website hoạt động trước khi xác minh workflow thành công và truy cập trang. Giữ ghi nhận này cho tới khi có bằng chứng mới.
 
 ## Tương thích và giới hạn
 
-Đã kiểm tra Chromium desktop và touch ở kích thước iPhone 390×844, iPad 820×1180/1180×820, trên artifact thực ở đường dẫn project. Safari/iOS thật chưa được kiểm chứng. Giao diện dùng ES modules/import maps/WebGL2, cần Safari/iOS hiện đại (import maps từ Safari 16.4); không hứa hỗ trợ các phiên bản cũ. Sau khi được phép kích hoạt cần kiểm tra iPhone/iPad thật qua HTTPS của Pages. Chưa có URL Pages hoạt động.
+Đã kiểm tra Chromium desktop và touch ở kích thước iPhone 390×844, iPad 820×1180/1180×820, trên artifact thực ở đường dẫn project. Safari/iOS thật chưa được kiểm chứng. Giao diện dùng ES modules/import maps/WebGL2, cần Safari/iOS hiện đại (import maps từ Safari 16.4); không hứa hỗ trợ các phiên bản cũ. Sau khi được phép kích hoạt cần kiểm tra iPhone/iPad thật qua HTTPS của Pages. URL Pages hoạt động chưa được xác minh trong phiên này.
 
 Không tạo ảnh render. WebGL hiển thị 3D tương tác là chức năng viewer. Chuẩn bị/build/test cục bộ không dùng API trả phí, không thực hiện deployment.
 

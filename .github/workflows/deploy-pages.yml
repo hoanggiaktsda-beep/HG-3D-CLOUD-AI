@@ -1,7 +1,11 @@
-# Inactive template. This file is NOT in .github/workflows and cannot deploy.
-# Enable only after the user authorizes GitHub Pages activation and checks free eligibility.
+# Deploy only the reviewed static sample. Configure Settings > Pages > GitHub Actions first.
 name: Deploy HG sample viewer to Pages
 on:
+  push:
+    branches: [main]
+    paths:
+      - "viewer/**"
+      - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 permissions:
   contents: read
