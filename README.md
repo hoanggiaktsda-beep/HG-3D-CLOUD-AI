@@ -60,3 +60,5 @@ Có chọn và xem ảnh cục bộ, soạn yêu cầu; chưa upload, phân tíc
 ## Backend riêng tư cục bộ
 
 API Python có xác thực, SQLite queue và worker Blender thử nghiệm: xem [PRIVATE_BACKEND.md](docs/PRIVATE_BACKEND.md). Chỉ loopback; dữ liệu trong .private không đưa lên Pages. AI tự động và kết nối frontend công khai chưa bật.
+
+Giao diện backend loopback `/local/`, xác thực trong bộ nhớ và kết quả riêng: [LOCAL_UI_AND_FREE_CLOUD.md](docs/LOCAL_UI_AND_FREE_CLOUD.md). AI tự hiểu ảnh vẫn CHƯA KẾT NỐI; mã local không được đóng gói vào Pages.

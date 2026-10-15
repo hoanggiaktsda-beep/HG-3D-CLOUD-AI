@@ -36,8 +36,21 @@ def create_app(root,credentials):
             'progress':None,'review_status':'NEEDS_REVIEW','analysis_mode':'supervised','roles':ROLES}
     @app.middleware('http')
     async def safe_response(request:Request,call_next):
+        from fastapi.responses import JSONResponse
+        if request.url.hostname not in {'127.0.0.1','localhost','::1'}:
+            return JSONResponse({'detail':'Loopback host required'},status_code=403)
+        origin=request.headers.get('origin')
+        if request.method=='POST' and origin and origin!=str(request.base_url).rstrip('/'):
+            return JSONResponse({'detail':'Same-origin request required'},status_code=403)
         # Bound whole multipart/JSON body before parsing; no public CORS access.
         from fastapi.responses import JSONResponse
+        # Only reviewed static local UI files are public; private API remains bearer-only.
+        if request.method in {'GET','HEAD'} and request.url.path.startswith('/local/'):
+            response=await call_next(request)
+            response.headers['Cache-Control']='no-store'
+            response.headers['X-Content-Type-Options']='nosniff'
+            response.headers['Referrer-Policy']='no-referrer'
+            return response
         auth=request.headers.get('authorization','').split(' ',1)
         if len(auth)!=2 or auth[0].lower()!='bearer' or not any(hmac.compare_digest(hashlib.sha256(auth[1].encode()).digest(),v) for v in hashed.values()):
             return JSONResponse({'detail':'Authentication required'},status_code=401,headers={'WWW-Authenticate':'Bearer','Cache-Control':'no-store'})
@@ -137,4 +150,20 @@ def create_app(root,credentials):
         if not re.fullmatch(r'run-[0-9a-f]{32}',run):raise HTTPException(500,'Invalid artifact reference')
         filename={'glb':'hg_scene.glb','blend':'hg_scene.blend','qa':'qa_report.json','html':'qa_report.html'}[kind]
         return FileResponse(folder/run/filename,filename=filename,media_type={'glb':'model/gltf-binary','blend':'application/octet-stream','qa':'application/json','html':'text/html'}[kind])
+    @app.get('/local/{file:path}')
+    def local_ui(file:str):
+        from fastapi.responses import HTMLResponse
+        base=Path(__file__).resolve().parents[2]/'viewer'
+        dist=base/'dist'
+        if file in {'local-client.js','local-style.css'}:
+            return FileResponse(base/file,media_type='text/javascript' if file.endswith('.js') else 'text/css')
+        if not (dist/'build-manifest.json').exists():raise HTTPException(503,'Build viewer first')
+        allowed={f['path'] for f in json.loads((dist/'build-manifest.json').read_text())['files']}
+        if file in {'','index.html'}:
+            html=(dist/'index.html').read_text()
+            html=html.replace('</head>','<link rel="stylesheet" href="local-style.css"></head>')
+            html=html.replace('</body>','<script type="module" src="local-client.js"></script></body>')
+            return HTMLResponse(html)
+        if file not in allowed or '..' in Path(file).parts:raise HTTPException(404,'Not found')
+        return FileResponse(dist/file)
     return app

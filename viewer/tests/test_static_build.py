@@ -8,6 +8,7 @@ class StaticBuildTests(unittest.TestCase):
         actual={p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
         listed={f['path'] for f in manifest['files']}|{'build-manifest.json'}
         self.assertEqual(actual,listed);self.assertEqual(len(actual),16)
+        self.assertNotIn('local-client.js',actual);self.assertNotIn('local-style.css',actual)
         self.assertEqual(manifest['base_path'],'/HG-3D-CLOUD-AI/')
         for f in manifest['files']:
             self.assertEqual(hashlib.sha256((dist/f['path']).read_bytes()).hexdigest(),f['sha256'])

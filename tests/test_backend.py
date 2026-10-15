@@ -12,7 +12,7 @@ class BackendTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory(dir=ROOT/'outputs',prefix='private-api-test-');self.addCleanup(self.temp.cleanup)
         self.root=Path(self.temp.name)/'storage'
         self.tokens={'alice':secrets.token_urlsafe(40),'bob':secrets.token_urlsafe(40)}
-        self.app=create_app(self.root,self.tokens);self.client=TestClient(self.app)
+        self.app=create_app(self.root,self.tokens);self.client=TestClient(self.app,base_url="http://127.0.0.1")
         self.auth={'Authorization':'Bearer '+self.tokens['alice']};self.bob={'Authorization':'Bearer '+self.tokens['bob']}
     def upload(self,headers=None):
         return self.client.post('/jobs',headers=headers or self.auth,data={'input_type':'technical_drawing','instruction':'Read printed dimensions, never render'},files={'image':('../../private.py', (ROOT/'tests/fixtures/dimensioned_cabinet.png').read_bytes(),'image/png')})
