@@ -48,6 +48,30 @@ Phân biệt: workflow thực thi thành công không có nghĩa AI đọc đún
 ảnh. Caption sai, thiếu số đo, JSON bị cắt hoặc không đúng schema phải được báo nguyên trạng.
 Không tạo GLB dự phòng từ số liệu cũ để chứng minh model thị giác mới thành công.
 
+## Thử mô hình lớn hơn, riêng biệt
+
+`.github/workflows/vision-large-cpu-trial.yml` chạy Qwen/Qwen2-VL-2B-Instruct, kiểm tra
+public/ungated/Apache-2.0 trước tải, tối đa 6 GB safetensors. Mã ở
+`hgcloud/quantized_vision.py` và `scripts/public_large_vision_trial.py`.
+Tải float32 theo chế độ tiết kiệm RAM rồi lượng tử hóa động int8 các Linear trong
+phần ngôn ngữ; giữ encoder ảnh/embedding float32. Không dùng dữ liệu chuẩn để hiệu chỉnh.
+CPU bốn luồng, ảnh tối đa khoảng 512 visual tokens, tối đa 20 phút, không GPU/API.
+Trọng số nằm ngoài artifact; không commit model vào repository.
+
+Hai trường hợp là ảnh đầy đủ trang bản vẽ AtFAB và crop vùng chữ được chọn có giám sát.
+Không gọi đó là hai bản vẽ độc lập. Không truyền đáp án kích thước hoặc JSON gốc vào AI.
+Vẫn dùng cùng cổng kiểm tra schema, source hash và duyệt độc lập; không tự nâng trạng thái
+chỉ vì model lớn hơn. Kết quả thực tế và giới hạn xem `VISION_CPU_TRIAL_RESULTS_VI.md`.
+
+`hgcloud/model_dimensions.py` chuyển văn bản thực do model đọc thành
+`dimension_candidates.json` khi có cụm rõ “<số + đơn vị> tall × <số + đơn vị> square”.
+Hỗ trợ mm/cm/m/inch, không chứa đáp án kích thước thiết kế. Chiều sâu từ quan hệ square
+được ghi riêng; thiếu đơn vị, thiếu quan hệ chiều sâu hoặc số đọc mâu thuẫn thì chặn.
+JSON này do parser tạo từ câu trả lời AI thật, **không tuyên bố AI tự xuất đúng schema**.
+Chưa có bbox nhãn số đo hay gán đối tượng được xác nhận; tâm 3D vẫn null, build_allowed=false.
+Không dùng OCR tham chiếu làm dữ liệu điền vào candidates. Parser chưa đọc chuỗi kích thước
+CAD hoặc layout tổng quát. Kiểm thử hồi quy: `tests/test_model_dimensions.py`.
+
 Cục bộ, với trọng số đã tải và dependencies CPU:
 
 ```bash
