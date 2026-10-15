@@ -33,6 +33,9 @@ khoan, bán kính dao/thoát dao chưa xác nhận. 16 ký hiệu khoan chỉ l�
 
 Chạy lại cục bộ khi đã có Blender, Tesseract, Poppler và Pillow:
 
+Với Blender gói Ubuntu 24.04, cần thêm `python3-numpy` cho addon xuất GLB.
+Không bỏ qua lỗi thiếu NumPy: BLEND lưu được chưa chứng minh GLB xuất thành công.
+
 ```bash
 python3 -m unittest discover -s tests -p test_cloud_worker.py -v
 python3 scripts/cloud_worker_sample.py --output outputs/public-worker-new-run
