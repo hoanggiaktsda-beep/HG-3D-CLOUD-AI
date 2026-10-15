@@ -59,6 +59,11 @@ class AssemblyIntegrationTests(unittest.TestCase):
         self.assertEqual(parse_sheet("single 3'x6' sheet"), (914.4000000000001, 1828.8000000000002))
         self.assertEqual(parse_thickness('cut files scaled for 12mm'), 12)
         self.assertEqual(parse_total('Total per File 2 123 + 4 holes'), 2)
+        # Regression for actual live run 38693712111, formatting only;
+        # not a substitute for another actual inference/worker run.
+        self.assertEqual(parse_total('| Total per File | 20 | 1238 + 54 holes |'), 20)
+        with self.assertRaises(SceneError):
+            parse_total('| Total per File | -20 | 1238 + 54 holes |')
         for text in ['use a standard sheet', '3x6 material', "3'x6' or 4'x8' sheet"]:
             with self.assertRaises(SceneError):
                 parse_sheet(text)
@@ -84,6 +89,12 @@ class AssemblyIntegrationTests(unittest.TestCase):
         self.assertFalse(result['assembly_allowed'])
         self.assertEqual(result['status'], 'CẦN XÁC NHẬN')
         self.assertEqual(result['scope'], 'unassembled_cut_layout_only')
+        records[2]['ai_text'] = '| Total per File | 2 | 123 + 4 holes |'
+        self.assertEqual(agree_calibration(records, 'f' * 64)['printed_hole_count'], 4)
+        records[2]['ai_text'] = '| Total per File | 3 | 123 + 4 holes |'
+        with self.assertRaisesRegex(SceneError, 'disagree'):
+            agree_calibration(records, 'f' * 64)
+        records = self.records()
         records[1]['ai_text'] = 'Cut files scaled for 13mm'
         with self.assertRaisesRegex(SceneError, 'disagree'):
             agree_calibration(records, 'f' * 64)

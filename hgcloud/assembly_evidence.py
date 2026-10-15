@@ -35,6 +35,8 @@ def parse_thickness(text):
 
 
 def parse_total(text):
+    # Formatting only: preserve words, digits, signs and units from live output.
+    text = re.sub(r'[*|`]', ' ', text)
     value = unique([int(v) for v in re.findall(r'total\s+per\s+file\s*[:=]?\s*(\d+)\b', text, re.I)], 'total parts per file')
     if not 1 <= value <= 500:
         raise SceneError('Implausible part count')
@@ -84,7 +86,7 @@ def agree_calibration(records, document_sha256):
         if a != b:
             raise SceneError('CẦN XÁC NHẬN: AI/OCR disagree on ' + field)
         result[field] = a
-    hole_counts = [re.findall(r'total\s+per\s+file\s+\d+\s+\d+\s*\+\s*(\d+)\s+holes', text, re.I) for text in by_kind['parts_table']]
+    hole_counts = [re.findall(r'total\s+per\s+file\s+\d+\s+\d+\s*\+\s*(\d+)\s+holes', re.sub(r'[*|`]', ' ', text), re.I) for text in by_kind['parts_table']]
     if all(len(values) == 1 for values in hole_counts) and hole_counts[0] == hole_counts[1]:
         result['printed_hole_count'] = int(hole_counts[0][0])
     result.update(scope='unassembled_cut_layout_only', confidence='inferred_calibrated_raster',

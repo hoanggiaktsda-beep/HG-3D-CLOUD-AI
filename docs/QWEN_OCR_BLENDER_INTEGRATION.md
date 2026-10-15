@@ -32,6 +32,9 @@ Blender dựng mesh thật, kiểm từng đối tượng, mở lại BLEND và 
 kích thước, vị trí và mesh kín. Chiếu tam giác từ mesh thực lên nguồn để đối
 chiếu IoU. Sai số nội bộ dựng JSON không thay thế sai số pixel nguồn; IoU hình
 chiếu tấm không chứng minh độ giống sản phẩm lắp ráp hay khả năng gia công.
+Kích thước dài/rộng từng tấm được suy ra bằng tỷ lệ ảnh, không có nhãn kích
+thước độc lập cho từng tấm để chứng minh dung sai thiết kế. Tọa độ XY là sơ đồ
+cắt, không phải vị trí cấu kiện trong sản phẩm hoàn chỉnh.
 
 Artifact có `trial.json`, `REPORT_VI.md`, bản đọc AI/OCR, ảnh nguồn, JSON dựng,
 log Blender và kiểm định từng bộ phận; các file BLEND/GLB chỉ có khi vượt cổng.
