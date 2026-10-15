@@ -1,0 +1,38 @@
+{
+  "test30-local.json": {
+    "bytes": 6493,
+    "sha256": "ffd2cba9383e16842282079e015015742e9fba4cecfd8db2817b9a0dbcc1ba71"
+  },
+  "assembly-qa-local.json": {
+    "bytes": 123067,
+    "sha256": "d984c51f32f7d60965a16374322cd6603be32e6e2002981e6bd191de0eaee5d6"
+  },
+  "source_parts_review.blend": {
+    "bytes": 1145768,
+    "sha256": "9ef036c393c373285ae7d28d2528a211d8cc3aefcccb750d44c6648e7dbe3492"
+  },
+  "source_parts_review.glb": {
+    "bytes": 997612,
+    "sha256": "ad67e6d30ba5ef720a2252d0a83a65f2c53504a5399416bc7f2af102278d9657"
+  },
+  "capture_manifest.json": {
+    "bytes": 516,
+    "sha256": "5d0aa5599b65320cdd284d2c86b591450aff697b201a1845192e652ef1e8b8cf"
+  },
+  "viewport_front.png": {
+    "bytes": 137076,
+    "sha256": "a3a036528c699c68df569064c05dcf9d31a9124ad7922fa1d88e5539d37df923"
+  },
+  "viewport_side.png": {
+    "bytes": 137907,
+    "sha256": "2fdb1feb397cdc55a5384060f3d682d2f2361bf1ae7a4992c164f5bc5d41d290"
+  },
+  "viewport_top.png": {
+    "bytes": 161550,
+    "sha256": "88244d9730539786a5fe5f902d15dc59786513cd39660e679aa1510bede23890"
+  },
+  "viewport_perspective.png": {
+    "bytes": 220207,
+    "sha256": "0087394b7decb3aef2d6ecb892cb16cd0d692c50097c75b6fa6d208569530373"
+  }
+}

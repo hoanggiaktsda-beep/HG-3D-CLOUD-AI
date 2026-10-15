@@ -1,0 +1,4029 @@
+{
+  "test": "TEST 30",
+  "status": "BLOCKED_COMPLETE_ASSEMBLY",
+  "technical_status": "PASS_MESH_CHECKS_ONLY",
+  "scope": "parts_review_NOT_complete_assembly",
+  "gate": {
+    "status": "BLOCKED_COMPLETE_ASSEMBLY",
+    "approved_placements": {},
+    "blocked_parts": {
+      "observed_panel_01": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_02": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_03": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_04": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_05": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_06": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_07": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_08": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_09": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_10": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_11": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_12": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_13": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_14": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_15": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_16": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_17": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_18": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_19": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      },
+      "observed_panel_20": {
+        "status": "CẦN XÁC NHẬN",
+        "reason": "Missing label mapping, metric anchors and dimensioned top/front/side views"
+      }
+    },
+    "complete_placement_evidence": false,
+    "final_approved": false,
+    "next_test_allowed": false,
+    "roles": [
+      "Director",
+      "Kiến trúc sư trưởng",
+      "Kiến trúc sư nội thất",
+      "Họa viên 3D",
+      "Chuyên gia hình học",
+      "Kỹ sư cấu tạo",
+      "Chuyên gia đo lường",
+      "Chuyên gia giải mã bản vẽ",
+      "Chuyên gia thị giác tái dựng",
+      "Chuyên gia đa ảnh",
+      "Chuyên gia vật liệu",
+      "Chuyên gia ánh sáng",
+      "Chuyên gia môi trường",
+      "Chuyên gia camera",
+      "Chuyên gia thư viện tài sản",
+      "Chuyên gia tự động hóa",
+      "Chuyên gia kiểm định hình học",
+      "Chuyên gia nghiệm thu từ xa"
+    ],
+    "director_requirements": {
+      "giữ_nguyên": [
+        "18 vai trò",
+        "hình học có chứng cứ",
+        "không render"
+      ],
+      "được_thay_đổi": [
+        "bộ giải vị trí",
+        "kiểm định mesh và ảnh viewport"
+      ],
+      "kích_thước_chắc_chắn": "Chỉ nhãn/annotation đã đối chứng; không tự nâng raster lên confirmed",
+      "kích_thước_chưa_chắc_chắn": [
+        "Tọa độ lắp",
+        "góc lắp",
+        "khe hở",
+        "đường kính khoan",
+        "chi tiết khuất"
+      ],
+      "yêu_cầu_thêm_dữ_liệu": "Hình chiếu có kích thước và ánh xạ mỗi contour sang nhãn cấu kiện"
+    },
+    "role_reviews": [
+      {
+        "role": "Director",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Kiến trúc sư trưởng",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Kiến trúc sư nội thất",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Họa viên 3D",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia hình học",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Kỹ sư cấu tạo",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia đo lường",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia giải mã bản vẽ",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia thị giác tái dựng",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia đa ảnh",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia vật liệu",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia ánh sáng",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia môi trường",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia camera",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia thư viện tài sản",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia tự động hóa",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia kiểm định hình học",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      },
+      {
+        "role": "Chuyên gia nghiệm thu từ xa",
+        "status": "NEEDS_REVIEW",
+        "basis": "Trách nhiệm kiểm tra; không tuyên bố 18 model/chuyên gia đã phê duyệt"
+      }
+    ]
+  },
+  "parts": [
+    {
+      "id": "observed_panel_01",
+      "actual_local_mm": [
+        483.8818609714508,
+        432.9015910625458,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        483.88186915887854,
+        432.9015912636505,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        -8.187427738448605e-06,
+        -2.0110473997192457e-07,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          17.471417784690857,
+          1984.9566221237183,
+          0.0
+        ],
+        [
+          501.35326385498047,
+          2417.858123779297,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        1.1821818134194473e-05,
+        0.00013146410856279545,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.25941234827041626
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.2014074325561523
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_02",
+      "actual_local_mm": [
+        432.2272837162018,
+        553.1097650527954,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        432.2272897196261,
+        553.1097659906395,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        -6.003424346090469e-06,
+        -9.378441063745413e-07,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          763.4243965148926,
+          1864.748477935791,
+          0.0
+        ],
+        [
+          1195.651650428772,
+          2417.858123779297,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        7.954659872666525e-05,
+        8.712899489182746e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.9795380234718323
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.141303300857544
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_03",
+      "actual_local_mm": [
+        736.8373870849609,
+        502.896249294281,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        736.8373831775701,
+        502.89622464898594,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        3.90739080557978e-06,
+        2.4645295070513384e-05,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          256.75368309020996,
+          1770.4076766967773,
+          0.0
+        ],
+        [
+          993.5910701751709,
+          2273.303985595703,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        4.0184092313211295e-05,
+        -1.9087769260295318e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.6251723766326904
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.0218558311462402
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_04",
+      "actual_local_mm": [
+        82.79925584793091,
+        82.92842656373978,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        82.7992523364486,
+        82.92842433697342,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        3.511482304929814e-06,
+        2.2267663553066086e-06,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          41.77943617105484,
+          1770.407795906067,
+          0.0
+        ],
+        [
+          124.57869201898575,
+          1853.336215019226,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        -1.3255404525125414e-06,
+        5.538464324672532e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0831790640950203
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.8118720054626465
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_05",
+      "actual_local_mm": [
+        83.55887979269028,
+        82.92842656373978,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        83.55887850467289,
+        82.92842433697342,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        1.2880173869689315e-06,
+        2.2267663553066086e-06,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          146.60784602165222,
+          1770.407795906067,
+          0.0
+        ],
+        [
+          230.1667332649231,
+          1853.336215019226,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        -7.633849463672959e-08,
+        5.538464324672532e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.18838728964328766
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.8118720054626465
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_06",
+      "actual_local_mm": [
+        82.79925584793091,
+        82.92842656373978,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        82.7992523364486,
+        82.92842433697342,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        3.511482304929814e-06,
+        2.2267663553066086e-06,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          41.77943617105484,
+          1665.41588306427,
+          0.0
+        ],
+        [
+          124.57869201898575,
+          1748.3443021774292,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        -1.3255404525125414e-06,
+        9.262084950023564e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0831790640950203
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.7068800926208496
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_07",
+      "actual_local_mm": [
+        83.55887979269028,
+        82.92842656373978,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        83.55887850467289,
+        82.92842433697342,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        1.2880173869689315e-06,
+        2.2267663553066086e-06,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          146.60784602165222,
+          1665.41588306427,
+          0.0
+        ],
+        [
+          230.1667332649231,
+          1748.3443021774292,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        -7.633849463672959e-08,
+        9.262084950023564e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.18838728964328766
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.7068800926208496
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_08",
+      "actual_local_mm": [
+        736.8373870849609,
+        502.896249294281,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        736.8373831775701,
+        502.89622464898594,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        3.90739080557978e-06,
+        2.4645295070513384e-05,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          256.75368309020996,
+          1245.4479932785034,
+          0.0
+        ],
+        [
+          993.5910701751709,
+          1748.3443021774292,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        4.0184092313211295e-05,
+        4.788397245647502e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.6251723766326904
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.4968961477279663
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_09",
+      "actual_local_mm": [
+        432.2272837162018,
+        312.69341707229614,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        432.2272897196261,
+        312.6934165366615,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        -6.003424346090469e-06,
+        5.356346264306922e-07,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          763.4243965148926,
+          1348.1576442718506,
+          0.0
+        ],
+        [
+          1195.651650428772,
+          1660.851001739502,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        7.954659872666525e-05,
+        0.000110837189367885,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.9795380234718323
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.5045043230056763
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_10",
+      "actual_local_mm": [
+        382.85160064697266,
+        432.9015910625458,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        382.8515887850467,
+        432.9015912636505,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        1.1861925941047957e-05,
+        -2.0110473997192457e-07,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          76.72226428985596,
+          1115.349292755127,
+          0.0
+        ],
+        [
+          459.5738649368286,
+          1548.2509136199951,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        2.723016473282769e-05,
+        4.078506481164368e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2681480646133423
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.331800103187561
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_11",
+      "actual_local_mm": [
+        382.85160064697266,
+        432.9015910625458,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        382.8515887850467,
+        432.9015912636505,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        1.1861925941047957e-05,
+        -2.0110473997192457e-07,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          756.5876841545105,
+          887.1059417724609,
+          0.0
+        ],
+        [
+          1139.439344406128,
+          1320.007562637329,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        2.6534071594142006e-05,
+        5.953718823548115e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.9480134844779968
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.103556752204895
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_12",
+      "actual_local_mm": [
+        736.8373870849609,
+        502.13539600372314,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        736.83738317757,
+        502.1354134165367,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        3.907390919266618e-06,
+        -1.741281357681146e-05,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          222.5704789161682,
+          687.0126128196716,
+          0.0
+        ],
+        [
+          959.4078660011292,
+          1189.14794921875,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        1.35801440137584e-05,
+        6.12115486546827e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.5909891724586487
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.9380803108215332
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_13",
+      "actual_local_mm": [
+        432.2272837162018,
+        312.69341707229614,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        432.2272897196261,
+        312.6934165366614,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        -6.003424346090469e-06,
+        5.356347401175299e-07,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          20.509913563728333,
+          774.5058536529541,
+          0.0
+        ],
+        [
+          452.7372121810913,
+          1087.199330329895,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        4.019960073264883e-06,
+        4.9089708454630454e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.23662355542182922
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.9308525919914246
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_14",
+      "actual_local_mm": [
+        83.55887979269028,
+        82.92842656373978,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        83.55887850467298,
+        82.92842433697342,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        1.2880173017038032e-06,
+        2.2267663553066086e-06,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          985.9947562217712,
+          687.0125532150269,
+          0.0
+        ],
+        [
+          1069.5536136627197,
+          769.940972328186,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        9.137091183220036e-06,
+        7.701403546889196e-06,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          1.0277742147445679
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.7284767627716064
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_15",
+      "actual_local_mm": [
+        82.79925584793091,
+        82.92842656373978,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        82.79925233644849,
+        82.92842433697342,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        3.5114824186166516e-06,
+        2.2267663553066086e-06,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          1091.5828943252563,
+          687.0125532150269,
+          0.0
+        ],
+        [
+          1174.3820905685425,
+          769.940972328186,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        6.254035724850837e-05,
+        7.701403546889196e-06,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          1.1329824924468994
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.7284767627716064
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_16",
+      "actual_local_mm": [
+        736.8373870849609,
+        502.896249294281,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        736.83738317757,
+        502.896224648986,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        3.907390919266618e-06,
+        2.4645295013669966e-05,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          222.5704789161682,
+          162.05281019210815,
+          0.0
+        ],
+        [
+          959.4078660011292,
+          664.9490594863892,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        1.35801440137584e-05,
+        3.0003055144334212e-05,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.5909891724586487
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.41350093483924866
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_17",
+      "actual_local_mm": [
+        83.55887979269028,
+        83.68923515081406,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        83.55887850467298,
+        83.68923556942275,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        1.2880173017038032e-06,
+        -4.1860869259835454e-07,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          985.9947562217712,
+          581.2597870826721,
+          0.0
+        ],
+        [
+          1069.5536136627197,
+          664.9489998817444,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        9.137091183220036e-06,
+        -5.89376691095822e-06,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          1.0277742147445679
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.6231043934822083
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_18",
+      "actual_local_mm": [
+        82.79925584793091,
+        83.68923515081406,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        82.79925233644849,
+        83.68923556942275,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        3.5114824186166516e-06,
+        -4.1860869259835454e-07,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          1091.5828943252563,
+          581.2597870826721,
+          0.0
+        ],
+        [
+          1174.3820905685425,
+          664.9489998817444,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        6.254035724850837e-05,
+        -5.89376691095822e-06,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          1.1329824924468994
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.6231043934822083
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_19",
+      "actual_local_mm": [
+        432.2272837162018,
+        552.3489713668823,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        432.2272897196261,
+        552.3489547581904,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        -6.003424346090469e-06,
+        1.6608691908004403e-05,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          20.509913563728333,
+          17.498642206192017,
+          0.0
+        ],
+        [
+          452.7372121810913,
+          569.847583770752,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        4.019960073264883e-06,
+        -7.835795884147956e-06,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.23662355542182922
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.2936731278896332
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    },
+    {
+      "id": "observed_panel_20",
+      "actual_local_mm": [
+        483.8818609714508,
+        432.9015910625458,
+        18.50000023841858
+      ],
+      "expected_local_mm": [
+        483.88186915887854,
+        432.9015912636506,
+        18.5
+      ],
+      "dimension_errors_mm": [
+        -8.187427738448605e-06,
+        -2.0110479681534343e-07,
+        2.384185791015625e-07
+      ],
+      "world_bbox_mm": [
+        [
+          714.8082852363586,
+          17.49865710735321,
+          0.0
+        ],
+        [
+          1198.6901760101318,
+          450.4002332687378,
+          18.50000023841858
+        ]
+      ],
+      "position_errors_mm": [
+        4.194241819277522e-05,
+        -1.3395330427101726e-06,
+        1.1920928955078125e-07
+      ],
+      "orientation_error": 0.0,
+      "world_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.9567492008209229
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.2339494526386261
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.00925000011920929
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "placement_status": "UNPLACED_SOURCE_CUT_LAYOUT",
+      "glb_bbox_error_mm": 0.0,
+      "glb_bidirectional_vertex_error_mm": 0
+    }
+  ],
+  "pair_checks": [
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_02"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 262.0711326599121,
+      "gap_upper_mm": 262.0711326599121,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_03"
+      ],
+      "intersection_volume_mm3": 0.0,
+      "collision": false,
+      "gap_lower_mm": 0.0,
+      "gap_upper_mm": 28.79856340587139,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_04"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 131.6204071044922,
+      "gap_upper_mm": 131.6204071044922,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_05"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 131.6204071044922,
+      "gap_upper_mm": 131.6204071044922,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_06"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 236.61231994628906,
+      "gap_upper_mm": 236.61231994628906,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_07"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 236.61231994628906,
+      "gap_upper_mm": 236.69034242630005,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_08"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 236.61231994628906,
+      "gap_upper_mm": 239.8868203163147,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_09"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 416.80418872449803,
+      "gap_upper_mm": 417.76108741760254,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_10"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 436.70570850372314,
+      "gap_upper_mm": 436.70570850372314,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_11"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 712.2512625594079,
+      "gap_upper_mm": 731.2850952148438,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 795.8086729049683,
+      "gap_upper_mm": 811.0476732254028,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 897.7572917938232,
+      "gap_upper_mm": 897.7572917938232,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1308.1056552784908,
+      "gap_upper_mm": 1324.1533041000366,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1350.7901561431138,
+      "gap_upper_mm": 1351.4546155929565,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1320.007562637329,
+      "gap_upper_mm": 1320.007562637329,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1406.164108097067,
+      "gap_upper_mm": 1406.9510698318481,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1445.9568248955388,
+      "gap_upper_mm": 1472.1447229385376,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1415.1090383529663,
+      "gap_upper_mm": 1415.1090383529663,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_01",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1549.3309384145668,
+      "gap_upper_mm": 1549.5409965515137,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_03"
+      ],
+      "intersection_volume_mm3": 0.0,
+      "collision": false,
+      "gap_lower_mm": 0.0,
+      "gap_upper_mm": 14.523266814649105,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_04"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 638.9476300118409,
+      "gap_upper_mm": 638.9765739440918,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_05"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 533.3797663576063,
+      "gap_upper_mm": 535.9104871749878,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_06"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 649.3641245763852,
+      "gap_upper_mm": 663.3927226066589,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_07"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 545.8146824232575,
+      "gap_upper_mm": 546.4717745780945,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_08"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 116.40417575836182,
+      "gap_upper_mm": 116.40417575836182,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_09"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 203.89747619628906,
+      "gap_upper_mm": 203.89747619628906,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_10"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 438.74349426299574,
+      "gap_upper_mm": 454.2400538921356,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_11"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 544.7409152984619,
+      "gap_upper_mm": 544.7409152984619,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 675.600528717041,
+      "gap_upper_mm": 675.600528717041,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 837.3226399972241,
+      "gap_upper_mm": 838.1708264350891,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1094.807505607605,
+      "gap_upper_mm": 1094.807505607605,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1094.807505607605,
+      "gap_upper_mm": 1094.807505607605,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1199.7994184494019,
+      "gap_upper_mm": 1199.7994184494019,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1199.7994780540466,
+      "gap_upper_mm": 1199.7995376586914,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1199.7994780540466,
+      "gap_upper_mm": 1199.7995376586914,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1331.6511751275868,
+      "gap_upper_mm": 1332.1846723556519,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_02",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1414.3482446670532,
+      "gap_upper_mm": 1414.3482446670532,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_04"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 132.1749910712242,
+      "gap_upper_mm": 133.43027234077454,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_05"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 26.586949825286865,
+      "gap_upper_mm": 26.586949825286865,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_06"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 134.0038087513158,
+      "gap_upper_mm": 156.44198656082153,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_07"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 34.54936173351604,
+      "gap_upper_mm": 35.619914531707764,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_08"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 22.063374519348145,
+      "gap_upper_mm": 22.063374519348145,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_09"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 109.55667495727539,
+      "gap_upper_mm": 109.55667495727539,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_10"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 222.15676307678223,
+      "gap_upper_mm": 222.15676307678223,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_11"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 450.40011405944824,
+      "gap_upper_mm": 450.40011405944824,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 581.2597274780273,
+      "gap_upper_mm": 581.2597274780273,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 683.2083463668823,
+      "gap_upper_mm": 683.2083463668823,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1000.4667043685913,
+      "gap_upper_mm": 1001.2462139129639,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1005.2542087205661,
+      "gap_upper_mm": 1005.9436559677124,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1105.4586172103882,
+      "gap_upper_mm": 1105.4586172103882,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1105.458676815033,
+      "gap_upper_mm": 1105.4587364196777,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1109.7933518209165,
+      "gap_upper_mm": 1117.6810264587402,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1200.5600929260254,
+      "gap_upper_mm": 1200.5600929260254,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_03",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1320.0074434280396,
+      "gap_upper_mm": 1320.0074434280396,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_05"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 22.029154002666473,
+      "gap_upper_mm": 22.029154002666473,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_06"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 22.063493728637695,
+      "gap_upper_mm": 22.063493728637695,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_07"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 31.178219666729387,
+      "gap_upper_mm": 117.1870157122612,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_08"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 134.00382837886326,
+      "gap_upper_mm": 156.44210577011108,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_09"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 648.171678879081,
+      "gap_upper_mm": 661.3828539848328,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_10"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 222.15688228607178,
+      "gap_upper_mm": 242.32405424118042,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_11"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 776.0771458229492,
+      "gap_upper_mm": 825.9867429733276,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 589.4619577803694,
+      "gap_upper_mm": 740.5890822410583,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 683.2084655761719,
+      "gap_upper_mm": 683.2084655761719,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1320.216459807494,
+      "gap_upper_mm": 1375.7128715515137,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1391.4133075251227,
+      "gap_upper_mm": 1434.7351789474487,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1109.793407903423,
+      "gap_upper_mm": 1117.6810264587402,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1401.4552384482931,
+      "gap_upper_mm": 1440.5800104141235,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1468.7192641841161,
+      "gap_upper_mm": 1551.4405965805054,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1200.560212135315,
+      "gap_upper_mm": 1200.560212135315,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_04",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1445.9567552763422,
+      "gap_upper_mm": 1472.1447229385376,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_06"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 31.178219666729387,
+      "gap_upper_mm": 117.72462725639343,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_07"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 22.063493728637695,
+      "gap_upper_mm": 22.063493728637695,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_08"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 34.549437861215,
+      "gap_upper_mm": 35.54050624370575,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_09"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 544.3954689036941,
+      "gap_upper_mm": 544.7037220001221,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_10"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 222.15688228607178,
+      "gap_upper_mm": 222.15688228607178,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_11"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 692.8054471956978,
+      "gap_upper_mm": 706.839919090271,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 581.2598466873169,
+      "gap_upper_mm": 657.4492454528809,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 683.2084655761719,
+      "gap_upper_mm": 683.2084655761719,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1253.877930807809,
+      "gap_upper_mm": 1270.464539527893,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1320.2165230051987,
+      "gap_upper_mm": 1321.2083578109741,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1105.4587364196777,
+      "gap_upper_mm": 1105.4587364196777,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1339.1471726417535,
+      "gap_upper_mm": 1340.4346704483032,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1401.4552979825887,
+      "gap_upper_mm": 1440.0930404663086,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1200.560212135315,
+      "gap_upper_mm": 1200.560212135315,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_05",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1406.1640726874741,
+      "gap_upper_mm": 1406.6884517669678,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_07"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 22.029154002666473,
+      "gap_upper_mm": 22.029154002666473,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_08"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 132.1749910712242,
+      "gap_upper_mm": 133.53650271892548,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_09"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 638.862013500866,
+      "gap_upper_mm": 638.8678550720215,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_10"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 117.1649694442749,
+      "gap_upper_mm": 128.66657972335815,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_11"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 720.2376510293822,
+      "gap_upper_mm": 730.3115129470825,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 486.2443162740141,
+      "gap_upper_mm": 620.0175285339355,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 578.216552734375,
+      "gap_upper_mm": 578.216552734375,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1242.5429374570583,
+      "gap_upper_mm": 1257.361888885498,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1317.942503691183,
+      "gap_upper_mm": 1318.4595108032227,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1005.2543237307251,
+      "gap_upper_mm": 1005.8648586273193,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1320.216504976201,
+      "gap_upper_mm": 1321.2082386016846,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1391.4133503826042,
+      "gap_upper_mm": 1434.1976642608643,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1095.568299293518,
+      "gap_upper_mm": 1095.568299293518,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_06",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1350.7901398654067,
+      "gap_upper_mm": 1351.122260093689,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_08"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 26.586949825286865,
+      "gap_upper_mm": 26.586949825286865,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_09"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 533.2772014218563,
+      "gap_upper_mm": 533.8847041130066,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_10"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 117.1649694442749,
+      "gap_upper_mm": 117.1649694442749,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_11"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 629.6236378628566,
+      "gap_upper_mm": 653.0659794807434,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 476.26793384552,
+      "gap_upper_mm": 580.3658366203308,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 578.216552734375,
+      "gap_upper_mm": 578.216552734375,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1171.815393329792,
+      "gap_upper_mm": 1203.050136566162,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1242.5430046053616,
+      "gap_upper_mm": 1257.8834295272827,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1000.4668235778809,
+      "gap_upper_mm": 1001.2463331222534,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1253.8779783662424,
+      "gap_upper_mm": 1270.9180116653442,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1320.2165681739036,
+      "gap_upper_mm": 1375.7128715515137,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1095.568299293518,
+      "gap_upper_mm": 1095.568299293518,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_07",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 1308.1056773614819,
+      "gap_upper_mm": 1324.1533041000366,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_09"
+      ],
+      "intersection_volume_mm3": 0.0,
+      "collision": false,
+      "gap_lower_mm": 0.0,
+      "gap_upper_mm": 11.061678640544415,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_10"
+      ],
+      "intersection_volume_mm3": 0.0,
+      "collision": false,
+      "gap_lower_mm": 0.0,
+      "gap_upper_mm": 20.29939740896225,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_11"
+      ],
+      "intersection_volume_mm3": 0.0,
+      "collision": false,
+      "gap_lower_mm": 0.0,
+      "gap_upper_mm": 37.221670150756836,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 56.30004405975342,
+      "gap_upper_mm": 75.32024383544922,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 158.2486629486084,
+      "gap_upper_mm": 158.2486629486084,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 475.5070209503174,
+      "gap_upper_mm": 580.365777015686,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 485.4990469334691,
+      "gap_upper_mm": 620.4748153686523,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 580.4989337921143,
+      "gap_upper_mm": 580.4989337921143,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 580.498993396759,
+      "gap_upper_mm": 657.7594876289368,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 588.7117112262264,
+      "gap_upper_mm": 740.5891418457031,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 675.6004095077515,
+      "gap_upper_mm": 675.6004095077515,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_08",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 795.0477600097656,
+      "gap_upper_mm": 810.448169708252,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_10"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 303.85053157806396,
+      "gap_upper_mm": 303.85053157806396,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_11"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 28.150081634521484,
+      "gap_upper_mm": 28.150081634521484,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 159.0096950531006,
+      "gap_upper_mm": 159.0096950531006,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 405.74101114466316,
+      "gap_upper_mm": 406.81201219558716,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 578.2166719436646,
+      "gap_upper_mm": 578.2166719436646,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 578.2166719436646,
+      "gap_upper_mm": 578.2166719436646,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 683.2085847854614,
+      "gap_upper_mm": 683.2085847854614,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 683.2086443901062,
+      "gap_upper_mm": 683.2086443901062,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 683.2086443901062,
+      "gap_upper_mm": 683.2086443901062,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 838.0292815805956,
+      "gap_upper_mm": 838.5937213897705,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_09",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 897.7574110031128,
+      "gap_upper_mm": 897.7574110031128,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_10",
+        "observed_panel_11"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 297.0138192176819,
+      "gap_upper_mm": 299.5375692844391,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_10",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0.0,
+      "collision": false,
+      "gap_lower_mm": 0.0,
+      "gap_upper_mm": 37.221670150756836,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_10",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 28.149962425231934,
+      "gap_upper_mm": 28.149962425231934,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_10",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 629.6235880281121,
+      "gap_upper_mm": 653.2288789749146,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_10",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 720.2376837188282,
+      "gap_upper_mm": 730.6930422782898,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_10",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 450.4002332687378,
+      "gap_upper_mm": 450.4002332687378,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_10",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 692.8054406553562,
+      "gap_upper_mm": 707.3478698730469,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_10",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 776.0772107522107,
+      "gap_upper_mm": 825.9868025779724,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_10",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 545.501708984375,
+      "gap_upper_mm": 545.501708984375,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_10",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 712.2512625594079,
+      "gap_upper_mm": 731.2850952148438,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_11",
+        "observed_panel_12"
+      ],
+      "intersection_volume_mm3": 0.0,
+      "collision": false,
+      "gap_lower_mm": 0.0,
+      "gap_upper_mm": 20.14244720339775,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_11",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 303.8504719734192,
+      "gap_upper_mm": 303.8504719734192,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_11",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 117.1649694442749,
+      "gap_upper_mm": 117.1649694442749,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_11",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 117.1649694442749,
+      "gap_upper_mm": 128.66659462451935,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_11",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 222.15688228607178,
+      "gap_upper_mm": 222.15688228607178,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_11",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 222.15694189071655,
+      "gap_upper_mm": 222.15694189071655,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_11",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 222.15694189071655,
+      "gap_upper_mm": 241.60872399806976,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_11",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 439.29258477740115,
+      "gap_upper_mm": 454.2400538921356,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_11",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 436.70570850372314,
+      "gap_upper_mm": 436.70570850372314,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_12",
+        "observed_panel_13"
+      ],
+      "intersection_volume_mm3": 0.0,
+      "collision": false,
+      "gap_lower_mm": 0.0,
+      "gap_upper_mm": 11.061637662351131,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_12",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 26.58689022064209,
+      "gap_upper_mm": 26.58689022064209,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_12",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 132.1750283241272,
+      "gap_upper_mm": 133.53654742240906,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_12",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 22.06355333328247,
+      "gap_upper_mm": 22.06355333328247,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_12",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 34.54946812150868,
+      "gap_upper_mm": 36.04982793331146,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_12",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 134.00388475099703,
+      "gap_upper_mm": 156.44210577011108,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_12",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 117.16502904891968,
+      "gap_upper_mm": 117.16502904891968,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_12",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 236.61237955093384,
+      "gap_upper_mm": 239.88687992095947,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_13",
+        "observed_panel_14"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 533.2770822169343,
+      "gap_upper_mm": 533.9219570159912,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_13",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 638.8619911496949,
+      "gap_upper_mm": 638.8746500015259,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_13",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 109.55679416656494,
+      "gap_upper_mm": 109.55679416656494,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_13",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 544.3953641284465,
+      "gap_upper_mm": 544.8592901229858,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_13",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 648.1716669235781,
+      "gap_upper_mm": 661.3828539848328,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_13",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 204.65826988220215,
+      "gap_upper_mm": 204.65826988220215,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_13",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 416.8041512472938,
+      "gap_upper_mm": 417.76105761528015,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_14",
+        "observed_panel_15"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 22.02928066253662,
+      "gap_upper_mm": 22.02928066253662,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_14",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 34.54939199346508,
+      "gap_upper_mm": 35.731736570596695,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_14",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 22.06355333328247,
+      "gap_upper_mm": 22.06355333328247,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_14",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 31.1783513386999,
+      "gap_upper_mm": 117.18711256980896,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_14",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 545.9773240173766,
+      "gap_upper_mm": 546.4716553688049,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_14",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 236.61231994628906,
+      "gap_upper_mm": 236.69034242630005,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_15",
+        "observed_panel_16"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 134.0038651233518,
+      "gap_upper_mm": 156.6804200410843,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_15",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 31.1783513386999,
+      "gap_upper_mm": 117.72465705871582,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_15",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 22.06355333328247,
+      "gap_upper_mm": 22.06355333328247,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_15",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 649.5009127469502,
+      "gap_upper_mm": 663.3927226066589,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_15",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 236.61231994628906,
+      "gap_upper_mm": 236.61231994628906,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_16",
+        "observed_panel_17"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 26.58689022064209,
+      "gap_upper_mm": 26.58689022064209,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_16",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 132.1750283241272,
+      "gap_upper_mm": 133.43030214309692,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_16",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0.0,
+      "collision": false,
+      "gap_lower_mm": 0.0,
+      "gap_upper_mm": 14.523142017424107,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_16",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0.0,
+      "collision": false,
+      "gap_lower_mm": 0.0,
+      "gap_upper_mm": 28.968334197998047,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_17",
+        "observed_panel_18"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 22.02928066253662,
+      "gap_upper_mm": 22.02928066253662,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_17",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 533.3796459003008,
+      "gap_upper_mm": 535.9103083610535,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_17",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 130.85955381393433,
+      "gap_upper_mm": 130.85955381393433,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_18",
+        "observed_panel_19"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 638.9476065990671,
+      "gap_upper_mm": 638.9765739440918,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_18",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 130.85955381393433,
+      "gap_upper_mm": 130.85955381393433,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    },
+    {
+      "parts": [
+        "observed_panel_19",
+        "observed_panel_20"
+      ],
+      "intersection_volume_mm3": 0,
+      "collision": false,
+      "gap_lower_mm": 262.07107305526733,
+      "gap_upper_mm": 262.07107305526733,
+      "clearance_status": "CẦN XÁC NHẬN: no verified design clearance",
+      "method": "exact Boolean solid volume; AABB lower / vertex-surface upper distance bounds",
+      "scope": "unplaced_cut_layout_ONLY"
+    }
+  ],
+  "physical_hardware_added": 0,
+  "final_approved": false,
+  "next_test_allowed": false,
+  "render_executed": false,
+  "collision_volume_noise_threshold_mm3": 0.01,
+  "source_blend_sha256": "fa9da39b3f96ed670d4e4d7a3316f3ff165450f0adfb6cb00a8b553610409e59",
+  "blend_reopen": "PASS",
+  "glb_reimport": "PASS"
+}

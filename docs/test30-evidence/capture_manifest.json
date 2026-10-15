@@ -1,0 +1,26 @@
+[
+  {
+    "view": "front",
+    "file": "viewport_front.png",
+    "method": "X11 actual GUI screenshot",
+    "render": false
+  },
+  {
+    "view": "side",
+    "file": "viewport_side.png",
+    "method": "X11 actual GUI screenshot",
+    "render": false
+  },
+  {
+    "view": "top",
+    "file": "viewport_top.png",
+    "method": "X11 actual GUI screenshot",
+    "render": false
+  },
+  {
+    "view": "perspective",
+    "file": "viewport_perspective.png",
+    "method": "X11 actual GUI screenshot",
+    "render": false
+  }
+]

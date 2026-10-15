@@ -62,3 +62,11 @@ Có chọn và xem ảnh cục bộ, soạn yêu cầu; chưa upload, phân tíc
 API Python có xác thực, SQLite queue và worker Blender thử nghiệm: xem [PRIVATE_BACKEND.md](docs/PRIVATE_BACKEND.md). Chỉ loopback; dữ liệu trong .private không đưa lên Pages. AI tự động và kết nối frontend công khai chưa bật.
 
 Giao diện backend loopback `/local/`, xác thực trong bộ nhớ và kết quả riêng: [LOCAL_UI_AND_FREE_CLOUD.md](docs/LOCAL_UI_AND_FREE_CLOUD.md). AI tự hiểu ảnh vẫn CHƯA KẾT NỐI; mã local không được đóng gói vào Pages.
+
+## TEST 30 — kiểm chứng lắp ráp
+
+[Báo cáo TEST 30](docs/TEST30_ASSEMBLY_VI.md): bộ giải vị trí theo bằng chứng,
+kiểm định Blender và viewport GUI thật. Tài liệu ghế hiện thiếu tọa độ/hình
+chiếu có kích thước nên **chưa xác minh mô hình lắp ráp hoàn chỉnh**, chưa
+chuyển TEST 31. [BLEND/GLB và ảnh đã kiểm tra](docs/test30-evidence/README.md)
+chỉ chứa tấm rời công khai; không phải dữ liệu khách hàng, không render.
