@@ -56,3 +56,7 @@ Chuẩn bị website tĩnh cho đường dẫn `/HG-3D-CLOUD-AI/`: [hướng d�
 ## TẠO MÔ HÌNH 3D — CHƯA KẾT NỐI
 
 Có chọn và xem ảnh cục bộ, soạn yêu cầu; chưa upload, phân tích AI hay tạo job. Các nút gửi/dựng lại khóa tới khi có backend thật. Xem [trạng thái và hợp đồng tích hợp](docs/CREATE_MODEL_CONNECTION.md). Viewer mẫu giữ nguyên, không dùng kết quả mẫu để giả nhận diện ảnh người dùng.
+
+## Backend riêng tư cục bộ
+
+API Python có xác thực, SQLite queue và worker Blender thử nghiệm: xem [PRIVATE_BACKEND.md](docs/PRIVATE_BACKEND.md). Chỉ loopback; dữ liệu trong .private không đưa lên Pages. AI tự động và kết nối frontend công khai chưa bật.
