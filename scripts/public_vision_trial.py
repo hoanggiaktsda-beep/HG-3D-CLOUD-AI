@@ -184,6 +184,7 @@ def main():
                     raise RuntimeError('Unreviewed VLM proposal unexpectedly passed build gate')
             else:
                 result['build_gate'] = 'BLOCKED: invalid geometry JSON; no fallback objects'
+            (job / 'analysis.json').write_text(json.dumps(result, ensure_ascii=False, indent=2))
             state['live_model_executed'] = True
             summary = dict(name=source['name'], status=result['status'], caption=result['caption'],
                            raw_geometry_response=result['raw_geometry_response'], reason=result.get('reason'),

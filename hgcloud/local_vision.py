@@ -153,6 +153,7 @@ class LocalCPUVision:
         image.thumbnail((768, 768))
         started = time.monotonic()
         geometry_2d = self.detect(image, original_size)
+        geometry_2d.update(source_sha256=intake['sha256'], source_pixels=original_size)
         caption, caption_tokens = self.generate(image, 'Describe only visible furniture and shapes. Do not guess materials, hidden parts or dimensions.', 96)
         raw, geometry_tokens = self.generate(image, GEOMETRY_PROMPT, 320)
         execution = dict(live_model_executed=True, mode='local_cpu_vlm', model=self.metadata,
@@ -160,7 +161,7 @@ class LocalCPUVision:
                          original_pixels=original_size, model_pixels=list(image.size),
                          inference_seconds=time.monotonic() - started,
                          generated_tokens=caption_tokens + geometry_tokens, roles=ROLES,
-                         role_execution='18 review responsibilities; one actual local model', render_executed=False)
+                         role_execution='18 review responsibilities, not 18 independent model runs', render_executed=False)
         result = dict(status='BLOCKED_INVALID_GEOMETRY', execution=execution, caption=caption,
                       caption_status='UNVERIFIED_MODEL_TEXT', image_geometry=geometry_2d,
                       raw_geometry_response=raw, observations=None, build_allowed=False)
