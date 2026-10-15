@@ -17,11 +17,40 @@ sys.path.insert(0, str(ROOT))
 from hgcloud.intake import receive, compile_scene
 from hgcloud.core import SceneError
 from hgcloud.local_vision import LocalCPUVision
-from cloud_worker_sample import SOURCE_URL, verified_source
+from scripts.cloud_worker_sample import SOURCE_URL, verified_source
 
 MODEL_ID = 'HuggingFaceTB/SmolVLM-256M-Instruct'
 # Resolve to an immutable commit before downloading and record it in every result.
-MODEL_REVISION = 'main'
+MODEL_REVISION = '7e3e67edbbed1bf9888184d9df282b700a323964'
+DETECTOR_ID = 'facebook/detr-resnet-50'
+
+
+def compare_dimensions(observations, reference):
+    """Numerical comparison only, never a substitute for correct object association."""
+    if not observations:
+        return dict(status='NOT_COMPARABLE', reason='No valid model geometry JSON')
+    rows = []
+    for obj in observations['objects']:
+        for axis, target in reference.items():
+            proposed = obj['dimensions'][axis].get('value_mm')
+            rows.append(dict(object_id=obj['id'], axis=axis, reference_mm=target,
+                             proposed_mm=proposed, error_mm=None if proposed is None else proposed - target))
+    return dict(status='UNREVIEWED_NUMERICAL_COMPARISON', rows=rows,
+                limitation='OCR reference; association to the correct object and view requires human review')
+
+
+def drawing_reference(image, out):
+    from PIL import Image
+    with Image.open(image) as original:
+        original.crop((25, 360, 610, 740)).save(out / 'reference-ocr.png')
+    result = subprocess.run(['tesseract', str(out / 'reference-ocr.png'), 'stdout', '--psm', '6'],
+                            capture_output=True, text=True, check=True, timeout=60)
+    (out / 'reference-ocr.txt').write_text(result.stdout)
+    match = re.search(r'\((\d+(?:\.\d+)?)\W+\s*tall x (\d+(?:\.\d+)?)\W+\s*square', result.stdout)
+    if not match:
+        raise ValueError('Independent OCR reference unavailable; do not claim dimension accuracy')
+    height, width = [float(value) * 25.4 for value in match.groups()]
+    return dict(x=width, y=width, z=height)
 
 
 def notice(title, message, error=False):
@@ -91,22 +120,28 @@ def public_sources(out):
     return sources
 
 
-def load_model(cache):
+def download_model(repo_id, revision, cache):
     from huggingface_hub import HfApi, snapshot_download
-    info = HfApi().model_info(MODEL_ID, revision=MODEL_REVISION, files_metadata=True)
+    info = HfApi().model_info(repo_id, revision=revision, files_metadata=True)
     license_name = (info.card_data.to_dict() if info.card_data else {}).get('license')
     if license_name != 'apache-2.0' or info.private or info.gated:
         raise ValueError('Expected public ungated Apache-2.0 model; refuse changed terms')
     files = [entry for entry in info.siblings if entry.rfilename.endswith('.safetensors')]
     if not files or any(entry.size is None for entry in files) or sum(entry.size for entry in files) > 2_000_000_000:
         raise ValueError('Model weights missing or CPU download budget exceeded')
-    metadata = dict(model_id=MODEL_ID, revision=info.sha, license=license_name,
+    metadata = dict(model_id=repo_id, revision=info.sha, license=license_name,
                     weights_bytes=sum(entry.size for entry in files), device='cpu', remote_code=False)
     notice('Real VLM model provenance', json.dumps(metadata))
-    snapshot = Path(snapshot_download(MODEL_ID, revision=info.sha, cache_dir=str(cache),
+    snapshot = Path(snapshot_download(repo_id, revision=info.sha, cache_dir=str(cache),
                                      allow_patterns=['*.json', '*.safetensors', 'tokenizer.model', 'vocab.*', 'merges.txt']))
     metadata['safetensors_sha256'] = {str(p.relative_to(snapshot)): hashlib.sha256(p.read_bytes()).hexdigest() for p in snapshot.rglob('*.safetensors')}
-    return LocalCPUVision(snapshot, metadata), metadata
+    return snapshot, metadata
+
+
+def load_model(cache):
+    snapshot, metadata = download_model(MODEL_ID, MODEL_REVISION, cache)
+    detector, detector_metadata = download_model(DETECTOR_ID, 'main', cache)
+    return LocalCPUVision(snapshot, metadata, detector, detector_metadata), dict(vlm=metadata, detector=detector_metadata)
 
 
 def main():
@@ -119,6 +154,7 @@ def main():
     state = dict(status='STARTED', live_model_executed=False, results=[])
     try:
         sources = public_sources(out)
+        notice('Public sample availability and licenses', json.dumps(sources, ensure_ascii=False))
         model, metadata = load_model(args.model_cache.resolve())
         (out / 'model_provenance.json').write_text(json.dumps(metadata, indent=2))
         for source in sources:
@@ -128,8 +164,15 @@ def main():
             job = out / ('job-' + source['name'])
             receive(out / source['file'], source['input_type'], job)
             result = model.analyze(job / 'intake.json')
+            if source['name'] == 'drawing':
+                # Reference is computed only AFTER inference; never supplied in model prompts.
+                try:
+                    result['dimension_comparison'] = compare_dimensions(result['observations'], drawing_reference(out / source['file'], job))
+                except Exception as exc:
+                    result['dimension_comparison'] = dict(status='REFERENCE_UNAVAILABLE', reason=str(exc))
             result['public_source'] = source
             (job / 'analysis.json').write_text(json.dumps(result, ensure_ascii=False, indent=2))
+            (job / 'image_geometry.json').write_text(json.dumps(result['image_geometry'], ensure_ascii=False, indent=2))
             if result['observations']:
                 observations = job / 'observations.json'
                 observations.write_text(json.dumps(result['observations'], ensure_ascii=False, indent=2))
@@ -146,7 +189,11 @@ def main():
                            raw_geometry_response=result['raw_geometry_response'], reason=result.get('reason'),
                            build_gate=result['build_gate'], inference_seconds=result['execution']['inference_seconds'],
                            generated_tokens=result['execution']['generated_tokens'], build_allowed=False)
+            summary['image_geometry'] = result['image_geometry']
+            if 'dimension_comparison' in result:
+                summary['dimension_comparison'] = result['dimension_comparison']
             state['results'].append(summary)
+            (out / 'experiment.json').write_text(json.dumps(state, ensure_ascii=False, indent=2))
             notice('Actual public VLM result - ' + source['name'], json.dumps(summary, ensure_ascii=False))
         state['status'] = 'EXPERIMENT_COMPLETED_NOT_ACCEPTED'
     except Exception as exc:

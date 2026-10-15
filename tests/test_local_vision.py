@@ -8,8 +8,9 @@ import unittest
 
 from hgcloud.core import SceneError
 from hgcloud.intake import receive, compile_scene
-from hgcloud.local_vision import parse_proposal
+from hgcloud.local_vision import parse_proposal, image_candidates
 from hgcloud.vision import ROLES
+from scripts.public_vision_trial import compare_dimensions
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -64,6 +65,35 @@ class LocalVisionTests(unittest.TestCase):
             with self.assertRaisesRegex(SceneError, 'Build blocked'):
                 compile_scene(job / 'intake.json', observations)
             self.assertFalse((job / 'build').exists())
+
+    def test_missing_prediction_is_not_reported_as_zero_error(self):
+        self.assertEqual(compare_dimensions(None, {'x': 950})['status'], 'NOT_COMPARABLE')
+        obj = self.response['objects'][0]
+        obj['dimensions']['x']['value_mm'] = 912
+        obj['dimensions']['z']['value_mm'] = None
+        comparison = compare_dimensions(self.response, {'x': 950, 'z': 850})
+        self.assertEqual(comparison['rows'][0]['error_mm'], -38)
+        self.assertIsNone(comparison['rows'][1]['error_mm'])
+        self.assertIn('UNREVIEWED', comparison['status'])
+
+    def test_empty_copied_template_cannot_be_claimed_as_geometry(self):
+        for value in self.response['objects'][0]['dimensions'].values():
+            value.update(value_mm=None, bbox_px=None)
+        with self.assertRaisesRegex(SceneError, 'empty/template'):
+            parse_proposal(json.dumps(self.response), 'hash', [2400, 2400])
+
+    def test_detector_pixels_never_become_millimeters_or_buildable_objects(self):
+        result = image_candidates([dict(label='chair', score=.9, bbox_px=[10, 20, 90, 95])], [100, 100])
+        self.assertFalse(result['scene_ready'])
+        self.assertFalse(result['build_allowed'])
+        obj = result['objects'][0]
+        self.assertEqual(obj['dimensions_mm'], dict(x=None, y=None, z=None))
+        self.assertIsNone(obj['center_mm'])
+        self.assertEqual(obj['bbox_px'], [10, 20, 90, 95])
+        for entry in [dict(label='chair', score=float('nan'), bbox_px=[10, 20, 90, 95]),
+                      dict(label='chair', score=.9, bbox_px=[10, 20, 190, 95])]:
+            with self.assertRaises(SceneError):
+                image_candidates([entry], [100, 100])
 
 
 if __name__ == '__main__':

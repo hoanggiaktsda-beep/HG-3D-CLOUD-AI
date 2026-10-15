@@ -1,6 +1,10 @@
 # AI thị giác cục bộ bằng CPU — thử nghiệm, chưa nghiệm thu
 
 Mô hình ứng viên: HuggingFaceTB/SmolVLM-256M-Instruct, Apache-2.0, không cần API key.
+Thêm facebook/detr-resnet-50 (Apache-2.0) để lấy nhãn và bbox từ ảnh thật,
+không lấy tọa độ từ câu mô tả. Trọng số backbone có trong checkpoint, không tải
+thêm checkpoint timm ngầm. SmolVLM khóa commit đã chạy; DETR resolve commit rồi
+ghi revision/hash tương tự. Không mặc định coi xác suất detector là độ đúng thực tế.
 Chạy Transformers/PyTorch CPU, safetensors, `trust_remote_code=False`, tải theo commit
 đã resolve và ghi revision/hash trọng số vào báo cáo. Không gửi ảnh tới API AI.
 Không dùng replay làm chứng cứ nhận diện. Không đổi 18 vai trò; một mô hình thực thi,
@@ -25,6 +29,7 @@ Luồng:
 1. Nhận PNG/JPEG, loại ảnh, SHA-256 và OCR ứng viên theo intake hiện có.
 2. Mô hình thật đọc ảnh, sinh mô tả và đề xuất JSON; lưu nguyên phản hồi, token và thời gian.
 3. Kiểm tra schema, hữu hạn/dương, đủ ba trục hoặc null, bbox trong ảnh và id không trùng.
+   Phản hồi chỉ chép mẫu hộp với số đo null bị loại, không tính là hình học đã nhận diện.
 4. Tất cả kích thước/vị trí AI tự đề xuất thành needs_confirmation. Không tự gán confirmed,
    không tạo kích thước từ pixel nếu không có tỷ lệ, không tự dựng phần khuất.
 5. JSON hợp lệ là ANALYZED_NEEDS_REVIEW; JSON sai là BLOCKED_INVALID_GEOMETRY.
@@ -32,6 +37,12 @@ Luồng:
    sửa observations và ghi bằng chứng trước khi dùng compile_scene/Blender Worker.
 6. Chỉ sau bước duyệt độc lập mới xuất BLEND/GLB và kiểm định bằng worker đã có.
    Chưa nối chế độ này vào API/website; trạng thái backend thị giác cũ vẫn chưa kết nối.
+
+DETR xuất `image_geometry.json`: nhãn ứng viên, bbox pixel theo ảnh gốc, điểm detector;
+kích thước mm và tâm 3D đều null, `scene_ready:false`. Đây là chứng cứ hình học 2D,
+không phải mô hình 3D có tỷ lệ. Caption SmolVLM giữ nguyên với nhãn UNVERIFIED_MODEL_TEXT;
+đặc biệt vật liệu/chi tiết khuất trong caption không được đưa vào scene.
+OCR độc lập chỉ đối chiếu số đo sau suy luận; không được truyền số đo gốc vào model.
 
 Phân biệt: workflow thực thi thành công không có nghĩa AI đọc đúng hoặc mô hình 3D giống
 ảnh. Caption sai, thiếu số đo, JSON bị cắt hoặc không đúng schema phải được báo nguyên trạng.

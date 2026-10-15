@@ -14,10 +14,14 @@ if __name__ == '__main__':
     parser.add_argument('model_dir', type=Path)
     parser.add_argument('model_provenance', type=Path)
     parser.add_argument('output', type=Path)
+    parser.add_argument('--detector-dir', type=Path)
     args = parser.parse_args()
     if args.output.exists():
         parser.error('Output already exists; preserve previous evidence')
-    provider = LocalCPUVision(args.model_dir, json.loads(args.model_provenance.read_text()))
+    metadata = json.loads(args.model_provenance.read_text())
+    if args.detector_dir and 'detector' not in metadata:
+        parser.error('Detector metadata is required')
+    provider = LocalCPUVision(args.model_dir, metadata.get('vlm', metadata), args.detector_dir, metadata.get('detector'))
     result = provider.analyze(args.intake)
     with args.output.open('x') as output:
         json.dump(result, output, ensure_ascii=False, indent=2)

@@ -10,15 +10,12 @@ from .core import SceneError
 from .vision import PROMPT, ROLES, normalize_response
 
 GEOMETRY_PROMPT = PROMPT + '''
-Output exactly one JSON object, no markdown. Example structure (null means unknown):
-{"project":"image proposal","objects":[{"id":"visible_1","kind":"box",
-"center_mm":[0,0,0],"placement_evidence":{"confidence":"needs_confirmation","source_note":"image"},
-"unknown_details":["hidden geometry","absolute dimensions"],
-"dimensions":{"x":{"value_mm":null,"confidence":"needs_confirmation","basis":"image","bbox_px":null,"source_note":"unknown"},
-"y":{"value_mm":null,"confidence":"needs_confirmation","basis":"image","bbox_px":null,"source_note":"unknown"},
-"z":{"value_mm":null,"confidence":"needs_confirmation","basis":"image","bbox_px":null,"source_note":"unknown"}}}],
-"missing_information":["independent measurements and review"]}
-Do not copy example objects if absent. No known scale means null dimensions.
+Output exactly one JSON object, no markdown. Required top-level fields: project
+(string), objects (array), missing_information (array). Required object fields:
+id, kind, center_mm (three numbers), placement_evidence, unknown_details,
+dimensions (x, y, z). Required dimension fields: value_mm (number or null),
+confidence, basis, bbox_px (pixel evidence rectangle or null), source_note.
+No known scale means null dimensions. Do not invent a generic example object.
 '''
 
 
@@ -35,6 +32,7 @@ def parse_proposal(text, source_hash, pixels):
         raise SceneError('Model did not return valid geometry JSON') from exc
     result = normalize_response(response, source_hash, 'local_cpu_vlm')
     seen = set()
+    grounded_metric_evidence = False
     for obj in result['objects']:
         ident = obj.get('id')
         if not isinstance(ident, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,79}', ident) or ident in seen:
@@ -58,28 +56,77 @@ def parse_proposal(text, source_hash, pixels):
             item.pop('verified_by', None)
             if not isinstance(item.get('source_note'), str) or not item['source_note'].strip():
                 raise SceneError('Missing image evidence note')
+            if value is not None and bbox is not None:
+                grounded_metric_evidence = True
         obj['placement_evidence']['confidence'] = 'needs_confirmation'
         if not obj['placement_evidence'].get('source_note'):
             raise SceneError('Missing placement evidence note')
+    if not grounded_metric_evidence:
+        raise SceneError('No grounded metric evidence; empty/template objects are not a 3D proposal')
     # A parsed response alone is NOT proof that model inference occurred.
     result['vision_provenance']['live_model_executed'] = False
     result['vision_provenance']['validation'] = 'schema only; execution must be recorded by provider'
     return result
 
 
+def image_candidates(detections, pixels):
+    """Real detector outputs are unscaled 2D observations, never metric 3D."""
+    result = []
+    for entry in detections:
+        box, score, label = entry['bbox_px'], entry['score'], entry['label']
+        if (not isinstance(label, str) or not label or type(score) not in (int, float)
+                or not math.isfinite(score) or not .7 <= score <= 1
+                or not isinstance(box, list) or len(box) != 4 or not all(type(v) in (int, float) and math.isfinite(v) for v in box)
+                or not 0 <= box[0] < box[2] <= pixels[0] or not 0 <= box[1] < box[3] <= pixels[1]):
+            raise SceneError('Invalid detector evidence')
+        result.append(dict(id='detected_' + str(len(result) + 1), observed_class=label,
+                           bbox_px=box, detector_score=score, geometry_status='UNSCALED_2D_ONLY',
+                           confidence='needs_confirmation', dimensions_mm=dict(x=None, y=None, z=None),
+                           center_mm=None, unknown_details=['Absolute scale', 'Depth', 'Hidden construction']))
+    return dict(coordinate_system='original_image_pixels', objects=result,
+                scene_ready=False, build_allowed=False, render_executed=False)
+
+
 class LocalCPUVision:
     """Loads safetensors locally only; no remote code, API key, or network inference."""
-    def __init__(self, model_dir, model_metadata):
+    def __init__(self, model_dir, model_metadata, detector_dir=None, detector_metadata=None):
         import torch
         from transformers import AutoModelForVision2Seq, AutoProcessor
         self.torch = torch
         self.metadata = model_metadata
+        self.detector_metadata = detector_metadata
+        self.detector = None
         torch.set_num_threads(2)
         torch.manual_seed(0)
         self.processor = AutoProcessor.from_pretrained(str(model_dir), local_files_only=True, trust_remote_code=False)
         self.model = AutoModelForVision2Seq.from_pretrained(
             str(model_dir), local_files_only=True, trust_remote_code=False,
             use_safetensors=True, torch_dtype=torch.float32, attn_implementation='eager').eval()
+        if detector_dir:
+            from transformers import AutoImageProcessor, AutoModelForObjectDetection
+            self.detector_processor = AutoImageProcessor.from_pretrained(str(detector_dir), local_files_only=True, trust_remote_code=False)
+            # The checkpoint contains backbone weights; never fetch a second timm checkpoint.
+            self.detector = AutoModelForObjectDetection.from_pretrained(
+                str(detector_dir), local_files_only=True, trust_remote_code=False,
+                use_safetensors=True, use_pretrained_backbone=False).eval()
+
+    def detect(self, image, original_size):
+        if self.detector is None:
+            return dict(status='NOT_CONNECTED', scene_ready=False, build_allowed=False, objects=[])
+        inputs = self.detector_processor(images=image, return_tensors='pt')
+        with self.torch.inference_mode():
+            output = self.detector(**inputs)
+        detections = self.detector_processor.post_process_object_detection(
+            output, threshold=.7, target_sizes=self.torch.tensor([[original_size[1], original_size[0]]]))[0]
+        rows = []
+        for score, label, box in zip(detections['scores'], detections['labels'], detections['boxes']):
+            coords = [max(0., min(float(value), float(original_size[i % 2]))) for i, value in enumerate(box)]
+            if coords[0] >= coords[2] or coords[1] >= coords[3]:
+                continue
+            rows.append(dict(label=self.detector.config.id2label[int(label)], score=float(score), bbox_px=coords))
+        geometry = image_candidates(rows, original_size)
+        geometry.update(status='DETECTOR_EXECUTED_NOT_ACCEPTED', model=self.detector_metadata)
+        return geometry
 
     def generate(self, image, prompt, max_tokens):
         messages = [{'role': 'user', 'content': [{'type': 'image'}, {'type': 'text', 'text': prompt}]}]
@@ -105,8 +152,9 @@ class LocalCPUVision:
         original_size = list(image.size)
         image.thumbnail((768, 768))
         started = time.monotonic()
-        caption, caption_tokens = self.generate(image, 'Describe the visible furniture, shapes, and arrangement in this image. Do not invent hidden parts or measurements.', 120)
-        raw, geometry_tokens = self.generate(image, GEOMETRY_PROMPT, 512)
+        geometry_2d = self.detect(image, original_size)
+        caption, caption_tokens = self.generate(image, 'Describe only visible furniture and shapes. Do not guess materials, hidden parts or dimensions.', 96)
+        raw, geometry_tokens = self.generate(image, GEOMETRY_PROMPT, 320)
         execution = dict(live_model_executed=True, mode='local_cpu_vlm', model=self.metadata,
                          source_sha256=intake['sha256'], input_type=intake['input_type'],
                          original_pixels=original_size, model_pixels=list(image.size),
@@ -114,6 +162,7 @@ class LocalCPUVision:
                          generated_tokens=caption_tokens + geometry_tokens, roles=ROLES,
                          role_execution='18 review responsibilities; one actual local model', render_executed=False)
         result = dict(status='BLOCKED_INVALID_GEOMETRY', execution=execution, caption=caption,
+                      caption_status='UNVERIFIED_MODEL_TEXT', image_geometry=geometry_2d,
                       raw_geometry_response=raw, observations=None, build_allowed=False)
         try:
             observations = parse_proposal(raw, intake['sha256'], list(image.size))
