@@ -17,6 +17,26 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class AssemblyIntegrationTests(unittest.TestCase):
+    def test_read_retry_is_bounded_and_has_no_ocr_or_answer_input(self):
+        from scripts.public_assembly_trial import read_pixels
+        class ProtocolOnlyFixture:
+            def __init__(self, values):
+                self.values = iter(values)
+                self.calls = []
+            def generate(self, image, prompt, budget):
+                self.calls.append((image, prompt, budget))
+                return next(self.values), 1
+        fixture = ProtocolOnlyFixture(['system', 'Original printed text'])
+        text, attempts = read_pixels(fixture, self.image, 'parts_table')
+        self.assertEqual(text, 'Original printed text')
+        self.assertEqual([a['text'] for a in attempts], ['system', 'Original printed text'])
+        self.assertEqual(len(fixture.calls), 2)
+        self.assertTrue(all(c[0] is self.image for c in fixture.calls))
+        fixture = ProtocolOnlyFixture(['system', 'system'])
+        text, attempts = read_pixels(fixture, self.image, 'parts_table')
+        self.assertEqual(text, 'system')
+        self.assertEqual(len(attempts), 2)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(dir=ROOT / 'outputs', prefix='assembly-regression-')
         self.addCleanup(self.temp.cleanup)

@@ -25,6 +25,21 @@ REVISION = '895c3a49bc3fa70a340399125c650a463535e71c'
 TRANSCRIBE = 'Transcribe all printed text faithfully, including numbers, unit symbols, color legend and table rows. Use original words. Do not add explanations or guess missing words.'
 VIEW = 'Describe the drawing view and the visible or labelled furniture parts. State any explicitly dimensioned positions. Do not guess dimensions, hidden parts or assembled coordinates.'
 
+
+def read_pixels(provider, image, purpose):
+    """Bounded live retry for empty/chat-role output, before any OCR is available."""
+    prompts = [VIEW if purpose == 'view' else TRANSCRIBE,
+               'Read all text in this image. Preserve numbers and units. Do not guess.']
+    attempts = []
+    for prompt in prompts:
+        started = time.monotonic()
+        text, tokens = provider.generate(image, prompt, 128 if purpose == 'view' else 256)
+        attempts.append(dict(prompt=prompt, text=text, generated_tokens=tokens,
+                             inference_seconds=time.monotonic() - started))
+        if len(''.join(c for c in text if c.isalnum())) >= 10 and text.strip().lower() not in {'system', 'assistant', 'user'}:
+            break
+    return attempts[-1]['text'], attempts
+
 # Source selection and supervised crop locations ONLY: no design sizes, answers,
 # part counts, material thickness, colors, contours or geometry JSON are supplied.
 CASES = [
@@ -110,21 +125,21 @@ def main():
                     original.crop(tuple(round(value * scale) for value in box)).convert('RGB').save(image_path)
                 digest = hashlib.sha256(image_path.read_bytes()).hexdigest()
                 with Image.open(image_path) as image:
-                    started = time.monotonic()
                     # Actual model call first. No OCR, answers or geometry passed to it.
-                    ai_text, tokens = provider.generate(image.convert('RGB'), VIEW if purpose == 'view' else TRANSCRIBE, 128 if purpose == 'view' else 256)
-                elapsed = time.monotonic() - started
+                    ai_text, attempts = read_pixels(provider, image.convert('RGB'), purpose)
+                elapsed = sum(a['inference_seconds'] for a in attempts)
+                tokens = sum(a['generated_tokens'] for a in attempts)
                 result = subprocess.run(['tesseract', str(image_path), 'stdout', '--psm', '6'], capture_output=True, text=True, timeout=60, check=True)
                 record = dict(purpose=purpose, page=page, supervised_roi_at_1800=box,
                               image_path=str(image_path), image_sha256=digest, document_sha256=case['sha256'],
-                              ai_text=ai_text, ocr_text=result.stdout, ocr_image_sha256=digest,
+                              ai_text=ai_text, ai_attempts=attempts, ocr_text=result.stdout, ocr_image_sha256=digest,
                               execution=dict(live_model_executed=True, backend='qwen2vl_cpu_live', model_revision=REVISION,
                                              image_sha256=digest, generated_tokens=tokens, inference_seconds=elapsed),
                               observations=view_and_part_candidates(ai_text, result.stdout))
                 records.append(record)
                 (job / 'readings.json').write_text(json.dumps(records, ensure_ascii=False, indent=2))
                 notice('Actual independent reading - ' + case['id'] + '-' + purpose,
-                       json.dumps(dict(ai_text=ai_text, ocr_text=result.stdout, seconds=elapsed, observations=record['observations']), ensure_ascii=False))
+                       json.dumps(dict(ai_text=ai_text, ai_attempts=attempts, ocr_text=result.stdout, seconds=elapsed, observations=record['observations']), ensure_ascii=False))
             summary = dict(case=case['id'], source=source_info, live_model_executed=True, status='CẦN XÁC NHẬN',
                            outputs_created=False, assembly_allowed=False)
             try:

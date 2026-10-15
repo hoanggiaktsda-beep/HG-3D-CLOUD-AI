@@ -13,6 +13,9 @@ từ model. Đầu vào nhận diện là PNG raster từ PDF, không lấy CAD,
 PDF hoặc JSON kích thước. Crop được chọn có giám sát; đây chưa phải tự đọc toàn
 bộ tài liệu. Prompt không chứa kích thước, số lượng hoặc đáp án của thiết kế.
 Tesseract chạy độc lập sau model trên đúng crop có cùng SHA-256.
+Nếu model trả nội dung rỗng hoặc chỉ tên vai trò chat, thử lại tối đa một lần
+trên cùng ảnh với yêu cầu đọc ngắn hơn; lưu nguyên cả hai lần. Không chọn câu
+trả lời theo số mong muốn và không đưa OCR vào prompt thử lại.
 
 Bộ kiểm chứng yêu cầu AI và OCR thống nhất kích thước tấm, chiều dày danh nghĩa,
 số lượng và chú giải màu trước khi hiệu chỉnh tỷ lệ. OpenCV lấy đường bao từ
