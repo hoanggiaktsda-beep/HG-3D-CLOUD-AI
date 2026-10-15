@@ -1,0 +1,53 @@
+name: TEST 31 - public Blender job intake
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'jobs/public/**'
+      - 'hgcloud/cloud_jobs31.py'
+      - 'scripts/cloud_jobs31.py'
+      - 'scripts/blender_job_interchange.py'
+      - 'tests/test_cloud_jobs31.py'
+      - '.github/workflows/test31-cloud-jobs.yml'
+  workflow_dispatch:
+    inputs:
+      request_id:
+        description: 'Existing public request, e.g. console-job/v0002'
+        type: string
+        required: true
+permissions:
+  contents: read
+# No concurrency group: GitHub retains only one pending run per group and
+# would silently cancel older pending requests. Independent attempts never overwrite.
+jobs:
+  public-queue:
+    if: github.repository == 'hoanggiaktsda-beep/HG-3D-CLOUD-AI' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      REQUEST_ID: ${{ inputs.request_id }}
+      PUSH_BASE: ${{ github.event.before }}
+      JOB_COMMIT: ${{ github.sha }}
+      JOB_RUN: ${{ github.run_id }}
+      JOB_ATTEMPT: ${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Free Blender tools only
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends blender python3-numpy
+      - name: TEST 31 regression only - do not repeat TEST 30
+        run: /usr/bin/python3 -m unittest discover -s tests -p test_cloud_jobs31.py -v
+      - name: Accept requests and process independently with real Blender
+        run: /usr/bin/python3 scripts/cloud_jobs31.py --output "$RUNNER_TEMP/hg-test31-public" --work "$RUNNER_TEMP/hg-test31-unverified" --before "$PUSH_BASE" --commit "$JOB_COMMIT" --request-id "$REQUEST_ID" --run-id "$JOB_RUN" --attempt "$JOB_ATTEMPT"
+      - name: Store progress errors versions and validated public results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hg-test31-public-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/hg-test31-public/
+          retention-days: 1
+          if-no-files-found: warn

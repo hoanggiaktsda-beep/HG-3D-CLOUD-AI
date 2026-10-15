@@ -70,3 +70,11 @@ kiểm định Blender và viewport GUI thật. Trang 3 có hình chiếu và k�
 chương trình chưa hợp nhất chúng thành pose từng tấm nên **chưa xác minh mô hình lắp ráp hoàn chỉnh**, chưa
 chuyển TEST 31. [BLEND/GLB và ảnh đã kiểm tra](docs/test30-evidence/README.md)
 chỉ chứa tấm rời công khai; không phải dữ liệu khách hàng, không render.
+
+## TEST 31 — công việc Blender trên Actions
+
+[Hướng dẫn TEST 31](docs/TEST31_CLOUD_JOBS_VI.md): tự nhận yêu cầu mẫu công khai
+qua Git push/dispatch, phiên bản bất biến, tiến độ, lỗi và BLEND/GLB đã kiểm
+định trong Artifacts. TEST 31 chạy riêng theo yêu cầu mới của người dùng;
+TEST 30 vẫn **CẦN XÁC NHẬN** và không được thực thi lại bởi workflow này.
+Chưa mở API hoặc kết nối website nhận ảnh khách hàng.
