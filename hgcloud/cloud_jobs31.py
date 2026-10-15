@@ -125,11 +125,14 @@ def event(folder, state, status, progress, error=None):
 
 def manifest_valid(folder):
     folder = Path(folder)
-    manifest = json.loads((folder / 'manifest.json').read_text())
-    expected = {'hg_scene.blend', 'hg_scene.glb', 'qa_report.json', 'interchange_qa.json', 'scene.json'}
-    return set(manifest) == expected and all((folder / name).is_file() and not (folder / name).is_symlink()
-           and digest(folder / name) == item['sha256'] and (folder / name).stat().st_size == item['bytes']
-           for name, item in manifest.items())
+    try:
+        manifest = json.loads((folder / 'manifest.json').read_text())
+        expected = {'hg_scene.blend', 'hg_scene.glb', 'qa_report.json', 'interchange_qa.json', 'scene.json'}
+        return isinstance(manifest, dict) and set(manifest) == expected and all((folder / name).is_file() and not (folder / name).is_symlink()
+               and digest(folder / name) == item['sha256'] and (folder / name).stat().st_size == item['bytes']
+               for name, item in manifest.items())
+    except (OSError, ValueError, KeyError, TypeError):
+        return False
 
 
 def run_job(request, output, work, commit, run_id, attempt, timeout=120):

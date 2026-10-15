@@ -11,6 +11,9 @@ workflow TEST 30. Không render, không nhận ảnh khách hàng hoặc gọi A
 - Mỗi lần tối đa 5 yêu cầu, xử lý tuần tự, không bỏ công việc sau lỗi Blender/QA.
 - Không sửa/xóa yêu cầu cũ. Phiên bản tiếp theo là file `v0002.json`,
   `parent_revision: 1`; ghi SHA-256 yêu cầu và phiên bản cha.
+- Các batch có thể chạy song song; không cam kết thứ tự hoàn tất giữa các run.
+  Parent là lịch sử yêu cầu, không yêu cầu phiên bản trước phải dựng xong.
+  Revision nhận số nguyên 1–100.
 - Chạy lại: Actions → TEST 31 → Run workflow → `request_id=console-job/v0002`.
   Hoặc Re-run jobs để có `run_attempt` mới. Quyền GitHub của người vận hành
   bảo vệ thao tác; không đặt token trong JavaScript, không mở API mới.

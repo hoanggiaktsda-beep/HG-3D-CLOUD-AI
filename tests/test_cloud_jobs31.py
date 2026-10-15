@@ -96,6 +96,9 @@ class CloudJobs31Tests(unittest.TestCase):
         glb = folder / 'published/hg_scene.glb'
         glb.write_bytes(b'changed-public-test-output')
         with self.assertRaises(WorkerError): self.run_job(path)
+        (folder / 'published/manifest.json').write_text('broken manifest fixture')
+        with self.assertRaises(WorkerError) as corrupt: self.run_job(path)
+        self.assertEqual(corrupt.exception.code, 'ARTIFACT_INTEGRITY_FAILED')
         retry = self.run_job(path, attempt=2)
         self.assertEqual(retry['status'], 'NEEDS_REVIEW')
         self.assertNotEqual(first['version'], retry['version'])
