@@ -14,7 +14,7 @@ const glb=fs.readFileSync(path.join(root,'assets/sample.glb'));
 if(glb.readUInt32LE(0)!==0x46546c67||glb.readUInt32LE(4)!==2||glb.readUInt32LE(8)!==glb.length||glb.readUInt32LE(16)!==0x4e4f534a)throw Error('Invalid GLB');
 const json=JSON.parse(glb.subarray(20,20+glb.readUInt32LE(12)).toString().trim());
 if([...(json.buffers||[]),...(json.images||[])].some(v=>v.uri))throw Error('External GLB resource not allowed');
-const copy={ 'app.js':'app.js','style.css':'style.css','PUBLIC_SAMPLE.md':'PUBLIC_SAMPLE.md','assets/sample.glb':'assets/sample.glb','assets/sample-qa.json':'assets/sample-qa.json',
+const copy={ 'create-model.js':'create-model.js','model-service.js':'model-service.js','app.js':'app.js','style.css':'style.css','PUBLIC_SAMPLE.md':'PUBLIC_SAMPLE.md','assets/sample.glb':'assets/sample.glb','assets/sample-qa.json':'assets/sample-qa.json',
  'node_modules/three/build/three.module.js':'vendor/three/three.module.js','node_modules/three/build/three.core.js':'vendor/three/three.core.js',
  'node_modules/three/examples/jsm/controls/OrbitControls.js':'vendor/three/addons/controls/OrbitControls.js',
  'node_modules/three/examples/jsm/loaders/GLTFLoader.js':'vendor/three/addons/loaders/GLTFLoader.js',

@@ -21,7 +21,7 @@ HG_VIEWER_URL=http://127.0.0.1:8766/HG-3D-CLOUD-AI/ python3 -m unittest discover
 python3 -m unittest discover -s tests -v
 ```
 
-Đóng gói allowlist 14 file, có manifest SHA-256, không sao chép repository đệ quy. public-assets.json chỉ định đúng GLB mẫu console tổng hợp và báo cáo mẫu đã công khai trong repository. Build từ chối nếu mẫu bị thay mà chưa cập nhật hash sau kiểm tra quyền công khai. Không có bản vẽ khách hàng, ảnh nguồn, tài liệu AtFAB, dữ liệu upload, secrets, đường dẫn nguồn riêng tư, BLEND hoặc outputs trong website. Giữ nguyên AGENTS.md và 18 vai trò, không thay code dựng hay cấu trúc hiện có.
+Đóng gói allowlist 16 file, có manifest SHA-256, không sao chép repository đệ quy. public-assets.json chỉ định đúng GLB mẫu console tổng hợp và báo cáo mẫu đã công khai trong repository. Build từ chối nếu mẫu bị thay mà chưa cập nhật hash sau kiểm tra quyền công khai. Không có bản vẽ khách hàng, ảnh nguồn, tài liệu AtFAB, dữ liệu upload, secrets, đường dẫn nguồn riêng tư, BLEND hoặc outputs trong website. Giữ nguyên AGENTS.md và 18 vai trò, không thay code dựng hay cấu trúc hiện có.
 
 ## Kích hoạt trong GitHub (không cần trả phí)
 

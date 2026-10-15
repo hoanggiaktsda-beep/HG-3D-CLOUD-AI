@@ -52,3 +52,7 @@ Giao diện AI thị giác và pipeline replay: `scripts/vision_pipeline.py`; ch
 Giao diện mẫu tại `viewer/`: xoay/zoom cảm ứng, góc camera, kích thước mesh và QA. Xem [hướng dẫn chạy và giới hạn kiểm thử](docs/GLB_VIEWER.md). Chỉ chạy loopback, chưa Publish; trạng thái cấu tạo luôn CẦN XÁC NHẬN.
 
 Chuẩn bị website tĩnh cho đường dẫn `/HG-3D-CLOUD-AI/`: [hướng dẫn GitHub Pages](docs/GITHUB_PAGES_PREPARATION.md). Workflow triển khai tại `.github/workflows/deploy-pages.yml`; cần Source = GitHub Actions. Chỉ báo website hoạt động sau khi kiểm chứng deployment.
+
+## TẠO MÔ HÌNH 3D — CHƯA KẾT NỐI
+
+Có chọn và xem ảnh cục bộ, soạn yêu cầu; chưa upload, phân tích AI hay tạo job. Các nút gửi/dựng lại khóa tới khi có backend thật. Xem [trạng thái và hợp đồng tích hợp](docs/CREATE_MODEL_CONNECTION.md). Viewer mẫu giữ nguyên, không dùng kết quả mẫu để giả nhận diện ảnh người dùng.
