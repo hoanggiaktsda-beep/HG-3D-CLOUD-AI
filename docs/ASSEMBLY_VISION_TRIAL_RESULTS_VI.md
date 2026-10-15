@@ -56,6 +56,50 @@ Artifact `hg-public-assembly-38693712111-1`, 15.9 MB, SHA-256
 `baf6b55ddad8f480f1bab169ce62149e0ba04e59cd766a5def906d95382fa364`.
 Đã xác minh qua annotations/trạng thái GitHub; chưa tải artifact về Codex.
 
+## Lượt ba — đã chạy toàn tuyến tới BLEND/GLB thật
+
+[Actions 38694666996](https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/actions/runs/38694666996),
+commit `2dd6a11`, **Success**, thời gian 4 phút 54 giây. Kiểm thử hồi quy Blender
+và bước Qwen/OCR/worker/kiểm định/upload đều đạt.
+
+| Mẫu | Kết quả thực tế |
+|---|---|
+| Desk | BLOCKED_NEEDS_CONFIRMATION, không xuất mô hình |
+| Chair | BUILT_UNASSEMBLED_PARTS_NEEDS_REVIEW, xuất BLEND/GLB thật |
+| Table | BLOCKED_NEEDS_CONFIRMATION, không xuất mô hình |
+
+Với ghế, Qwen và OCR thống nhất tấm 4’×8’ → 1219,2×2438,4 mm, chiều dày danh
+nghĩa 18,5 mm, tổng 20 chi tiết và chú giải đỏ/cyan/xanh lá. OpenCV lấy contour
+từ pixel sau khi vượt cổng đối chứng; không dùng CAD hoặc kích thước JSON gốc.
+20 tấm tương ứng sơ đồ cắt cho hai ghế, **chưa lắp ráp**.
+
+Worker dựng 20 mesh kín, hai đường cắt trong và 64 marker khoan; không tạo lỗ
+khoan vật lý khi thiếu đường kính. Kiểm kích thước/vị trí từng mesh và chiếu
+tam giác mesh thực về ảnh nguồn: IoU nhỏ nhất **0,9978925343**. Sai số nội bộ lớn
+nhất giữa mesh và JSON **0,00012015 mm**; đây là sai số tính toán, không phải
+dung sai thiết kế. Ước lượng hai pixel nguồn khoảng **1,52162 mm**, chưa tính
+sai lệch in/scan hoặc đường nét. Không có kích thước dài/rộng độc lập từng tấm
+hay hình chiếu đứng/cạnh sản phẩm hoàn chỉnh để nghiệm thu.
+
+BLEND được mở lại và GLB được nhập lại bằng Blender: **PASS**. Đầu ra trong
+artifact: `chair/build/cut_layout.blend`, `chair/build/cut_layout.glb`,
+`chair/build/part_qa.json`; kèm `chair/cut_layout.json`, `chair/readings.json`,
+ảnh nguồn và `REPORT_VI.md`.
+
+Ở lượt này AI đọc được tổng 20 nhưng bỏ cột chiều dài cắt và tổng lỗ. OCR đọc
+54 lỗ trong bảng, trong khi CV thấy 64 ký hiệu: số lỗ chưa được AI đối chứng,
+không dùng để dựng lỗ hay nghiệm thu. Nhãn bộ phận trong hình tháo lắp vẫn bị
+AI đọc sai; ánh xạ tên tấm, vị trí lắp, bán kính bo/dao, đường kính và chiều sâu
+lỗ đều **CẦN XÁC NHẬN**. Chưa kiểm chứng ảnh phối cảnh hoặc sản phẩm nội thất
+bằng quy trình này. Một mẫu dựng tấm rời thành công không chứng minh tự dựng
+hoàn chỉnh nhiều loại đồ nội thất.
+
+Artifact **hg-public-assembly-38694666996-1**, **16.9 MB**, SHA-256
+`8bc05bb8e29d6fac6abdf668717f5d4c717b70a1429c04fd2867dab6a8b612c9`,
+giữ một ngày theo workflow. Đã kiểm tra trạng thái, annotations kết quả thật
+do worker tính và thông tin artifact trên GitHub. Chưa tải artifact về Codex
+để mở kiểm tra thủ công lần nữa; không tuyên bố đã thực hiện bước đó.
+
 Không render, không thay đổi website hoặc 18 vai trò, không dùng dữ liệu khách
 hàng, không gọi API trả phí. Chưa nghiệm thu sản phẩm lắp ráp hoặc độ chính xác
 gia công. Bán kính dao, đường kính khoan, ánh xạ tên tấm và vị trí lắp thiếu dữ
