@@ -1,0 +1,52 @@
+name: HG 3D CLOUD WORKER - public Blender trial
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cloud-worker.yml'
+      - 'scripts/cloud_worker_sample.py'
+      - 'scripts/blender_worker_verify.py'
+      - 'scripts/blender_profile_build.py'
+      - 'hgcloud/raster_profile.py'
+      - 'tests/test_cloud_worker.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-blender-worker
+  cancel-in-progress: false
+
+jobs:
+  public-sample:
+    if: github.repository == 'hoanggiaktsda-beep/HG-3D-CLOUD-AI' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install free CPU tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends blender tesseract-ocr poppler-utils python3-pil
+          blender --version
+          tesseract --version
+      - name: Regression tests with real Blender
+        run: |
+          /usr/bin/python3 -m unittest discover -s tests -p test_cloud_worker.py -v
+          /usr/bin/python3 -m unittest discover -s tests -p test_raster_profile.py -v
+          /usr/bin/python3 -m unittest discover -s tests -p test_blender_profile.py -v
+      - name: Public drawing to real BLEND GLB and QA (no rendering)
+        run: /usr/bin/python3 scripts/cloud_worker_sample.py --output "${{ runner.temp }}/hg-public-worker"
+      - name: Upload only this public sample run
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hg-public-blender-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/hg-public-worker/
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 6
