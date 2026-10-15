@@ -152,3 +152,23 @@ Trước TEST 31 cần hoàn thiện/kiểm tra: hợp nhất các hình chiếu
 lắp; ánh xạ mỗi tấm với nhãn/phiên bản/số lượng/biến thể chiều rộng; tọa độ và hướng lắp;
 thông số khe hở, liên kết và lỗ có chứng cứ. Nếu chưa có, TEST 30 tiếp tục
 ở trạng thái **CẦN XÁC NHẬN**, không gọi là đã hoàn thành lắp ráp.
+
+## Xác nhận GitHub Actions sau đính chính
+
+[Run 38698809411](https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/actions/runs/38698809411),
+commit `66c217a`: **Success**, 1 phút 32 giây. Bảy kiểm thử mới, bước đọc toàn
+bộ PDF/Blender/chụp GUI và upload artifact đều hoàn tất thành công. Toàn bộ
+73 kiểm thử chạy ở Codex; workflow chỉ chạy bảy kiểm thử TEST 30 cùng thử
+nghiệm công khai, không tuyên bố chạy đủ 73 trên Actions.
+
+Annotations thực tế ghi: đọc trang 1–7, phát hiện mặt bằng/đứng/cạnh ở trang 3,
+OCR giữ đúng khoảng rộng; 20 mesh, **0 pose được phép lắp**, 190 cặp chỉ trong
+sơ đồ cắt. Trạng thái **BLOCKED_COMPLETE_ASSEMBLY**, không phải PASS lắp ráp.
+Slim Chair độc lập vẫn bị chặn vì nguồn không có kích thước xác minh.
+
+Artifact `hg-test30-public-38698809411-1`, 10.3 MB, SHA-256
+`0547ffaf2396612e4b0c2d48daea7bdc417d6dd10e7c7ae5e32e033e8d0d4f0e`,
+giữ một ngày. Đã xác minh trạng thái, từng bước và annotations công khai;
+chưa tải artifact cloud về Codex. Các BLEND/GLB/viewport lưu trực tiếp trong
+repository là bằng chứng của lần chạy cục bộ đã kiểm tra, không giả là file
+tải từ Actions. Hai lần chạy dùng cùng nguồn PDF có SHA được khóa.
