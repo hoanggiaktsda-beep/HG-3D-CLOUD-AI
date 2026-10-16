@@ -109,7 +109,7 @@
 <section id="hg-modules" class="card hg-engine" aria-labelledby="hg-engine-title">
   <div class="hg-engine-heading"><div><p class="eyebrow">01 / BỘ MÔ-ĐUN DỰNG HÌNH</p><h3 id="hg-engine-title">DỰNG 3D TỰ ĐỘNG TỪ KÍCH THƯỚC XÁC NHẬN</h3><p class="note">Sau khi ảnh được kiểm tra và chồng xác nhận ba kích thước, hệ thống tự dựng mô hình tham số ngay trên website. Chưa có AI thị giác ChatGPT tự kết nối vào web; ảnh là tham chiếu, không tự suy ra cấu tạo từ ảnh.</p></div><span class="hg-engine-badge">XỬ LÝ TRÊN THIẾT BỊ</span></div>
   <div class="hg-engine-form">
-    <div><label for="hg-template">Loại mô hình</label><select id="hg-template"><option value="box">Khối bao theo kích thước — không đoán cấu tạo</option><option value="console">Console / tủ thấp — MẪU MINH HỌA KHÔNG THEO ẢNH</option><option value="table">Bàn 4 chân — MẪU MINH HỌA KHÔNG THEO ẢNH</option><option value="cabinet">Tủ kệ — MẪU MINH HỌA KHÔNG THEO ẢNH</option></select></div>
+    <div><label for="hg-template">Loại mô hình</label><select id="hg-template"><option value="box">Khối bao theo kích thước — không đoán cấu tạo</option><option value="console">Console / tủ thấp — MẪU MINH HỌA KHÔNG THEO ẢNH</option><option value="table">Bàn 4 chân — MẪU MINH HỌA KHÔNG THEO ẢNH</option><option value="cabinet">Tủ kệ — MẪU MINH HỌA KHÔNG THEO ẢNH</option><option value="open_tray">Hộc mở trên chân — MẪU MINH HỌA KHÔNG THEO ẢNH</option><option value="chair">Ghế tựa — MẪU MINH HỌA KHÔNG THEO ẢNH</option><option value="sofa">Sofa — MẪU MINH HỌA KHÔNG THEO ẢNH</option></select></div>
     <div class="hg-dims"><label for="hg-width">Dài X (mm)<input type="number" min="10" max="100000" step="1" id="hg-width" placeholder="Ví dụ: 1800" inputmode="decimal"></label><label for="hg-depth">Sâu Y (mm)<input type="number" min="10" max="100000" step="1" id="hg-depth" placeholder="Ví dụ: 450" inputmode="decimal"></label><label for="hg-height">Cao Z (mm)<input type="number" min="10" max="100000" step="1" id="hg-height" placeholder="Ví dụ: 850" inputmode="decimal"></label></div>
   </div>
   <label class="hg-affirm"><input type="checkbox" id="hg-confirm-dims"><span>Tôi xác nhận ba kích thước này do người dùng cung cấp, không phải AI tự đo từ ảnh. Mọi cấu tạo mẫu cần kiểm định lại.</span></label>
@@ -161,8 +161,32 @@
       <button type="button" id="hg-ws-change-image">Chọn / thay ảnh nguồn</button>
       <p class="note">Với ảnh chỉ có một góc nhìn, không tự suy đoán kích thước hoặc cấu tạo khuất.</p>
     </div>
+    <div class="cgpt-subcard hg-ws-tool-card hg-ws-create-card" data-ws-panel="model">
+      <div class="hg-ws-create-heading"><strong>01 · TẠO MÔ HÌNH 3D</strong><span>Chạy trên thiết bị</span></div>
+      <p class="note">Dựng hình học tham số thật từ kích thước chồng xác nhận, xem ngay trong viewport và xuất GLB/FBX. <strong>Không phải AI tự nhận dạng ảnh.</strong></p>
+      <label for="hg-ws-create-template">Kiểu hình học</label>
+      <select id="hg-ws-create-template">
+        <option value="box">Khối bao — chỉ kích thước</option>
+        <option value="open_tray">Tủ / hộc mở trên chân — minh họa</option>
+        <option value="console">Console / tủ thấp — minh họa</option>
+        <option value="cabinet">Tủ kệ — minh họa</option>
+        <option value="table">Bàn bốn chân — minh họa</option>
+        <option value="chair">Ghế tựa — minh họa</option>
+        <option value="sofa">Sofa — minh họa</option>
+      </select>
+      <div class="hg-ws-create-dims">
+        <label for="hg-ws-create-width">Dài X (mm)<input id="hg-ws-create-width" type="number" inputmode="decimal" min="10" max="100000" step="1" placeholder="920"></label>
+        <label for="hg-ws-create-depth">Sâu Y (mm)<input id="hg-ws-create-depth" type="number" inputmode="decimal" min="10" max="100000" step="1" placeholder="470"></label>
+        <label for="hg-ws-create-height">Cao Z (mm)<input id="hg-ws-create-height" type="number" inputmode="decimal" min="10" max="100000" step="1" placeholder="750"></label>
+      </div>
+      <label class="hg-ws-create-check"><input id="hg-ws-create-confirm" type="checkbox"> Tôi xác nhận 3 kích thước trên, không phải AI đo từ ảnh.</label>
+      <label class="hg-ws-create-check" id="hg-ws-create-illustration-wrap" hidden><input id="hg-ws-create-illustration" type="checkbox"> Tôi đồng ý tạo <strong>mẫu minh họa KHÔNG THEO ẢNH</strong> đang chọn.</label>
+      <button type="button" class="hg-ws-create-button" id="hg-ws-create-model">◈ TẠO MÔ HÌNH 3D</button>
+      <p id="hg-ws-create-result" class="hg-ws-create-result" role="status" aria-live="polite">Nhập kích thước đã xác nhận để bắt đầu.</p>
+      <p class="hg-ws-honesty">AI tái dựng đúng sản phẩm từ ảnh như Tripo chưa được kết nối. Nút này dựng <strong>mô hình tham số có thể chỉnh sửa</strong>, không giả kết quả AI.</p>
+    </div>
     <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="model">
-      <h4>01 · Tạo yêu cầu cho ChatGPT</h4>
+      <h4>02 · Tạo yêu cầu cho ChatGPT</h4>
       <p class="note">Mô tả yêu cầu và số đo dưới đây được chuyển vào bộ tạo lệnh ChatGPT có sẵn, không kích hoạt API.</p>
       <label for="hg-ws-input-kind">Loại nguồn</label>
       <select id="hg-ws-input-kind">
@@ -181,7 +205,7 @@
       <p class="note">Lưu ý: Lệnh sao chép KHÔNG tự chuyển ảnh. Chồng tự tải ảnh vào ChatGPT, sau đó sao chép JSON mô hình ChatGPT trả về vào ô bên cạnh.</p>
     </div>
     <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="model">
-      <h4>02 · Nhận mô hình ChatGPT trả về</h4>
+      <h4>03 · Nhận mô hình ChatGPT trả về</h4>
       <p class="note">Dán JSON đúng cấu trúc <code>hg-chatgpt-scene-v1</code> để dựng hình khối có kích thước. Mọi kết quả chỉ là bản nháp.</p>
       <label for="cgpt-scene-json">JSON hình học</label>
       <textarea id="cgpt-scene-json" rows="7" spellcheck="false" placeholder='{"schema":"hg-chatgpt-scene-v1","unit":"mm","objects":[...],"unknown_details":[...]}'></textarea>

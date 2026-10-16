@@ -5,7 +5,7 @@ const root=$('chatgpt-studio');
 const core=()=>window.hgChatGPTStudio;
 const modes={
  image:['Ảnh nguồn','Xem và thay đổi ảnh sản phẩm đã được kiểm tra'],
- model:['Dựng mô hình','Tạo yêu cầu cho ChatGPT / mở JSON hoặc GLB có sẵn'],
+ model:['Tạo mô hình 3D','Dựng bản nháp từ số đo xác nhận hoặc nhập JSON / GLB'],
  parts:['Bộ phận','Chọn mesh thật và chỉnh sửa trong Thuộc tính'],
  material:['Vật liệu','Màu đơn sắc, lưới và sàn hiển thị'],
  export:['Xuất file','Tải GLB / FBX nhị phân từ mô hình đang mở']
@@ -129,6 +129,81 @@ $('hg-ws-reset-view').addEventListener('click',()=>{
  $('cgpt-recenter').click();
  for(const b of root.querySelectorAll('[data-ws-view]'))b.setAttribute('aria-pressed',String(b.dataset.wsView==='perspective'));
 });
+// First-class Generate 3D button. It invokes the existing, tested local parametric
+// engine; image pixels are NEVER interpreted as 3D geometry or uploaded to a server.
+const generator={
+ template:$('hg-ws-create-template'),
+ width:$('hg-ws-create-width'),depth:$('hg-ws-create-depth'),height:$('hg-ws-create-height'),
+ confirm:$('hg-ws-create-confirm'),illustration:$('hg-ws-create-illustration'),
+ consentWrap:$('hg-ws-create-illustration-wrap'),result:$('hg-ws-create-result')
+};
+function sourcePhotoReady(){
+ return Boolean($('source-images').files.length&&window.hgPhotoHandoff?.verifiedImages>0);
+}
+function refreshGeneratorSource(){
+ const hasPhoto=sourcePhotoReady();
+ generator.consentWrap.hidden=!hasPhoto;
+ if(!hasPhoto){generator.illustration.checked=false;$('hg-allow-illustration').checked=false;}
+}
+function copyGeneratorToEngine(){
+ for(const [from,to] of [
+  [generator.template,$('hg-template')],
+  [generator.width,$('hg-width')],
+  [generator.depth,$('hg-depth')],
+  [generator.height,$('hg-height')]
+ ]){
+  to.value=from.value;
+  to.dispatchEvent(new Event('change',{bubbles:true}));
+ }
+ for(const [from,to] of [
+  [generator.confirm,$('hg-confirm-dims')],
+  [generator.illustration,$('hg-allow-illustration')]
+ ]){
+  to.checked=from.checked;
+  to.dispatchEvent(new Event('change',{bubbles:true}));
+ }
+}
+function generateDraft(){
+ const values=[generator.width,generator.depth,generator.height].map(x=>Number(x.value));
+ if([generator.width,generator.depth,generator.height].some(x=>!x.value.trim())||
+    !values.every(v=>Number.isFinite(v)&&v>=10&&v<=100000)){
+  generator.result.textContent='Cần nhập đủ Dài, Sâu, Cao hợp lệ (10–100000 mm).';
+  return false;
+ }
+ if(!generator.confirm.checked){
+  generator.result.textContent='Hãy xác nhận 3 số đo trước khi dựng mô hình.';
+  return false;
+ }
+ const files=$('source-images').files;
+ if(files.length&&!sourcePhotoReady()){
+  generator.result.textContent='Ảnh chưa được kiểm tra xong. Hãy chờ xác minh ảnh.';
+  return false;
+ }
+ if(sourcePhotoReady()&&!generator.illustration.checked){
+  generator.result.textContent='Ảnh chưa được AI phân tích. Nếu chỉ cần mẫu KHÔNG THEO ẢNH, hãy xác nhận rõ lựa chọn bên trên; nếu cần giống ảnh, phải kết nối bộ tạo 3D AI thực.';
+  return false;
+ }
+ copyGeneratorToEngine();
+ $('hg-run-modules').click();
+ const engine=window.hgLocalModules;
+ const built=engine?.status==='BUILT_PARAMETRIC_DRAFT'&&core()?.ready;
+ generator.result.textContent=built
+  ?'Đã dựng '+engine.meshes+' bộ phận tham số trong viewport. Đây là mẫu minh họa CẦN XÁC NHẬN, không phải mô hình AI nhận dạng từ ảnh. Có thể chỉnh và xuất GLB/FBX.'
+  :$('hg-engine-result').textContent;
+ if(built){
+  refresh();
+  if(matchMedia('(max-width:600px)').matches)
+   root.querySelector('.cgpt-scene').scrollIntoView({behavior:'smooth',block:'start'});
+ }
+ return built;
+}
+$('hg-ws-create-model').addEventListener('click',generateDraft);
+document.addEventListener('hg3d:imagesvalidated',()=>{
+ generator.illustration.checked=false;
+ $('hg-allow-illustration').checked=false;
+ refreshGeneratorSource();
+});
+refreshGeneratorSource();
 // Reuse the existing evidence-aware ChatGPT job builder rather than implementing another.
 for(const [visibleId,engineId] of [
  ['hg-ws-input-kind','input-type'],
