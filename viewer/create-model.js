@@ -9,13 +9,14 @@ function clear() {
   urls = []; previews.replaceChildren();
 }
 function message(value) { status.textContent = value; }
+function broadcast(count) { document.dispatchEvent(new CustomEvent('hg3d:imagesvalidated', {detail:{count}})); }
 async function selected() {
   const version = ++selectionVersion;
   clear();
   const files = [...input.files];
-  if (!files.length) { message('Chưa chọn ảnh.'); return; }
+  if (!files.length) { message('Chưa chọn ảnh.'); broadcast(0); return; }
   if (files.length > limits.files || files.reduce((n, f) => n + f.size, 0) > limits.total) {
-    input.value = ''; message('Tối đa 8 ảnh, tổng dung lượng tối đa 60 MB.'); return;
+    input.value = ''; message('Tối đa 8 ảnh, tổng dung lượng tối đa 60 MB.'); broadcast(0); return;
   }
   const pending = [];
   try {
@@ -39,17 +40,17 @@ async function selected() {
     }
     urls = pending;
     message(`${files.length} ảnh đang xem trên thiết bị. Chưa tải lên máy chủ, chưa phân tích AI.`);
-    document.dispatchEvent(new CustomEvent('hg3d:imagesvalidated', {detail:{count:files.length}}));
+    broadcast(files.length);
   } catch (error) {
     pending.forEach(URL.revokeObjectURL);
     if (version !== selectionVersion) return;
-    clear(); input.value = ''; message(error.message);
+    clear(); input.value = ''; message(error.message); broadcast(0);
   }
 }
 input.addEventListener('change', selected);
 document.querySelector('#clear-images').addEventListener('click', () => {
   ++selectionVersion; input.value = ''; clear(); message('Đã bỏ ảnh khỏi phiên xem. Chưa gửi dữ liệu đi.');
-  document.dispatchEvent(new CustomEvent('hg3d:imagesvalidated', {detail:{count:0}}));
+  broadcast(0);
 });
 window.addEventListener('pagehide', () => { ++selectionVersion; clear(); });
 document.querySelector('#model-request').addEventListener('submit', event => event.preventDefault());
