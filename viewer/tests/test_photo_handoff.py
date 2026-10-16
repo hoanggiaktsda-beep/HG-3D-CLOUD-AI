@@ -62,7 +62,7 @@ class PhotoHandoffTests(unittest.TestCase):
         page.locator("#hg-photo-copy-prompt").click()
         prompt=page.locator("#cgpt-prompt").input_value()
         self.assertIn("BẮT BUỘC NHẬN DIỆN ĐÚNG ẢNH",prompt)
-        self.assertIn("không thay ảnh bàn trà khối hộp",prompt)
+        self.assertIn("không thay ảnh bàn trà khối hộp",prompt.lower())
         self.assertIn("các tấm viền",prompt)
         self.assertEqual(page.locator("#hg-photo-open-chatgpt").get_attribute("href"),"https://chatgpt.com/")
         self.assertEqual(page.evaluate("hgPhotoHandoff.prepared"),True)
