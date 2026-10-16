@@ -317,5 +317,51 @@ $('cgpt-export-fbx').addEventListener('click',async()=>{
  finally{button.disabled=false;}
 });
 
+
+// Export the actual reviewed viewport geometry and edits as a ChatGPT handoff.
+// This is a review snapshot, NOT an automatic image-to-3D reconstruction.
+function reviewHandoff(){
+ if(!model||!meshes().length)throw Error('Chưa có mô hình 3D để kiểm tra. Hãy nhập JSON hoặc GLB trước.');
+ model.updateMatrixWorld(true);
+ const objects=meshes().filter(m=>m.visible).map((m,i)=>{
+  const bounds=new THREE.Box3().setFromObject(m),size=bounds.getSize(new THREE.Vector3());
+  const center=bounds.getCenter(new THREE.Vector3());
+  return {id:m.userData.hgId||'part_'+(i+1),name:m.name||'Bộ phận '+(i+1),
+   bbox_mm:[size.x,size.z,size.y].map(n=>Math.round(n*100)/100),
+   center_mm:[center.x,-center.z,center.y].map(n=>Math.round(n*100)/100),
+   rotation_deg:[m.rotation.x,m.rotation.y,m.rotation.z].map(n=>Math.round(THREE.MathUtils.radToDeg(n)*100)/100),
+   visible:true,confidence:'needs_confirmation'};
+ });
+ const unknown=(state.reviewItems||[]).map(String);
+ const prompt=[
+ 'HOANGGIA 3D CLOUD AI — BÀN GIAO KIỂM TRA NGOẠI HÌNH 3D SƠ BỘ',
+ 'Đây là bản xem trước 3D tương tác đã được người dùng kiểm tra trên website, KHÔNG phải mô hình được AI xác minh từ ảnh.',
+ 'Nguồn mô hình: '+(state.origin||'Không rõ')+'. Đã chỉnh sửa cục bộ: '+(state.edited?'Có':'Không')+'.',
+ 'Tôi sẽ tự đính kèm ảnh tham chiếu và nếu có, file GLB nháp. Không coi kích thước suy ra từ lưới 3D là số đo xác nhận.',
+ 'Thông tin bộ phận từ hình học hiện tại (đơn vị mm, hộp bao thế giới, KHÔNG phải kích thước gia công):',
+ JSON.stringify(objects,null,2),
+ 'CẦN XÁC NHẬN: '+(unknown.join('; ')||'Độ chính xác hình học, cấu tạo khuất và kích thước thật.'),
+ 'Hãy đối chiếu từng bộ phận với ảnh gốc; phân loại XÁC NHẬN / SUY LUẬN / CẦN XÁC NHẬN.',
+ 'Giữ đúng hình dáng, số lượng, tỷ lệ và các chỉnh sửa được chấp thuận; không sao chép bàn mẫu, không bịa phần khuất.',
+ 'Nếu đủ chứng cứ, tạo mô hình 3D chỉnh sửa được và xuất GLB/OBJ hoặc FBX khi công cụ hỗ trợ. Nếu chưa đủ, hỏi rõ dữ liệu cần bổ sung; không tuyên bố đã hoàn thiện.'
+ ].join('\n\n');
+ return {schema:'hg-3d-review-handoff-v1',unit:'mm',review_status:'NEEDS_REVIEW',origin:state.origin,edited:state.edited,objects,unknown_details:unknown,prompt};
+}
+state.reviewHandoff=reviewHandoff;
+const handoffButton=document.createElement('button');
+handoffButton.type='button';handoffButton.id='cgpt-review-handoff';
+handoffButton.textContent='Sao chép Prompt từ 3D đã kiểm tra';
+handoffButton.className='hg-review-handoff';
+const exportAnchor=$('cgpt-export-glb');
+exportAnchor?.parentElement?.insertBefore(handoffButton,exportAnchor);
+handoffButton.addEventListener('click',async()=>{
+ try{
+  const data=reviewHandoff();
+  $('cgpt-prompt').value=data.prompt;
+  await navigator.clipboard.writeText(data.prompt);
+  say('Đã sao chép dữ liệu hình học 3D đã kiểm tra. Hãy gửi kèm ảnh nguồn và GLB nháp nếu có.');
+ }catch(e){say('Chưa sao chép được: '+e.message,true);}
+});
+
 window.addEventListener('pagehide',()=>{renderer?.setAnimationLoop(null);controls?.dispose();observer?.disconnect();renderer?.dispose();});
 say('Sẵn sàng tạo lệnh cho ChatGPT. Ảnh chưa được gửi đi.');
