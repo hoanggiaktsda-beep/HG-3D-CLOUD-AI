@@ -25,6 +25,7 @@ class LocalModuleTests(unittest.TestCase):
         self.addCleanup(context.close)
         page=context.new_page()
         page.goto(URL)
+        page.evaluate("document.body.classList.remove('hg-minimal-ui')")
         page.wait_for_function("() => window.hgViewer?.ready",timeout=35000)
         return page
     @staticmethod
