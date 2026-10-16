@@ -19,6 +19,7 @@ class ThemeTests(unittest.TestCase):
         self.addCleanup(context.close)
         page=context.new_page()
         page.goto(URL+"#chatgpt-studio")
+        page.evaluate("document.body.classList.remove('hg-minimal-ui')")
         page.wait_for_function("() => !!window.hgViewer?.ready")
         self.assertTrue(page.locator(".hg-side").is_visible())
         self.assertTrue(page.locator(".hg-topbar").is_visible())
@@ -37,6 +38,7 @@ class ThemeTests(unittest.TestCase):
                 self.addCleanup(context.close)
                 page=context.new_page()
                 page.goto(URL+"#create-model")
+                page.evaluate("document.body.classList.remove('hg-minimal-ui')")
                 page.wait_for_function("() => !!window.hgViewer?.ready")
                 self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"),width+1)
                 if width<=390:
