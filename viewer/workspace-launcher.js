@@ -84,7 +84,11 @@ analyze.addEventListener('click',()=>{
  $('hg-photo-copy-prompt').click();
  stageAnalysis.textContent='Lệnh đã chuẩn bị · người dùng gửi ảnh';
  showStatus('Đã chuẩn bị lệnh theo chế độ đã chọn. Mở ChatGPT ở bước 02 và đính kèm ảnh trước khi gửi.');
- const el=$('hg-photo-workflow');el.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});
+ if(document.body.classList.contains('hg-minimal-ui')){
+  document.dispatchEvent(new Event('hg3d:promptprepared'));
+ }else{
+  const el=$('hg-photo-workflow');el.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});
+ }
 });
 document.addEventListener('hg3d:sceneimported',event=>{
  stageModel.textContent=(event.detail?.objectCount||0)+' bộ phận trong mô hình nháp';
