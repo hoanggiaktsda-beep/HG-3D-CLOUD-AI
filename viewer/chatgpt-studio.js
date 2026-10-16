@@ -116,10 +116,19 @@ function listParts(){
  $('cgpt-part-count').textContent=list.length+' bộ phận · BẢN NHÁP';
  part=list[0]||null;fill();state.objects=list.length;
 }
+function syncMainViewer(){
+ try {
+  if(model&&window.hgViewer?.showLocalDraft)window.hgViewer.showLocalDraft(model,{
+   origin:state.origin||'Bản nháp trên thiết bị',
+   unknownDetails:(state.reviewItems||[]).slice(0,30),
+   edited:state.edited
+  });
+ }catch(error){say('Trình xem lớn chưa cập nhật: '+error.message,true);}
+}
 function show(group,origin,missing=[]){
  setup();if(model)scene.remove(model);model=group;scene.add(group);
- state.ready=true;state.origin=origin;state.edited=false;
- listParts();recenter();
+ state.ready=true;state.origin=origin;state.edited=false;state.reviewItems=missing;
+ listParts();recenter();syncMainViewer();
  review.textContent='CẦN XÁC NHẬN: '+(missing.length?missing.map(s=>String(s).slice(0,180)).join('; '):'Mô hình nháp chưa kiểm tra cấu tạo và kích thước.');
  say('Đang xem 3D cục bộ từ '+origin+'. Không gửi dữ liệu lên máy chủ.');
 }
@@ -135,13 +144,13 @@ $('cgpt-apply').addEventListener('click',()=>{
  part.position.set(...world(values.slice(0,3)));part.rotation.y=THREE.MathUtils.degToRad(values[3]);
  if(!part.userData.initialScale)part.userData.initialScale=part.scale.toArray();
  part.scale.fromArray(part.userData.initialScale).multiplyScalar(values[4]/100);
- part.userData.hgScalePercent=values[4];state.edited=true;
+ part.userData.hgScalePercent=values[4];state.edited=true;syncMainViewer();
  review.textContent='ĐÃ CHỈNH CỤC BỘ · CẦN XÁC NHẬN vị trí, va chạm, kích thước thực và cấu tạo.';
  say('Đã chỉnh bộ phận trong trình duyệt; chưa lưu lên server.');
 });
 $('cgpt-remove-part').addEventListener('click',()=>{
  if(!part||!part.parent)return say('Chưa có bộ phận cần bỏ.',true);
- part.parent.remove(part);state.edited=true;listParts();recenter();
+ part.parent.remove(part);state.edited=true;listParts();recenter();syncMainViewer();
  review.textContent='ĐÃ BỎ BỘ PHẬN · CẦN XÁC NHẬN';say('Đã xóa bộ phận khỏi bản nháp cục bộ.');
 });
 $('cgpt-glb-file').addEventListener('change',async e=>{
@@ -170,5 +179,21 @@ $('cgpt-export-glb').addEventListener('click',async()=>{
  }catch(e){say('Không xuất được GLB: '+e.message,true);}
  finally{button.disabled=false;}
 });
+$('cgpt-export-fbx').addEventListener('click',async()=>{
+ if(!model||!meshes().length)return say('Chưa có mô hình để xuất FBX.',true);
+ const button=$('cgpt-export-fbx');button.disabled=true;
+ try {
+  const {FBXExporter}=await import('@comfyorg/fbx-exporter-three');
+  const bytes=await new FBXExporter().parseAsync(model,{preset:'blender',onlyVisible:true,includeAnimations:false,embedTextures:true});
+  if(!(bytes instanceof Uint8Array)||bytes.byteLength<128||
+     !new TextDecoder().decode(bytes.subarray(0,18)).startsWith('Kaydara FBX Binary')){
+   throw Error('Thư viện chưa xuất được FBX nhị phân hợp lệ.');
+  }
+  save(new Blob([bytes],{type:'application/octet-stream'}),'HG-3D-DRAFT-NEEDS-REVIEW.fbx');
+  say('Đã tải FBX nhị phân NHÁP. Chưa được kiểm định trong phần mềm đích.');
+ }catch(error){say('Không xuất được FBX: '+error.message,true);}
+ finally{button.disabled=false;}
+});
+
 window.addEventListener('pagehide',()=>{renderer?.setAnimationLoop(null);controls?.dispose();observer?.disconnect();renderer?.dispose();});
 say('Sẵn sàng tạo lệnh cho ChatGPT. Ảnh chưa được gửi đi.');
