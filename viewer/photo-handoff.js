@@ -38,7 +38,8 @@ function resetForPhoto(count){
   window.hgViewer?.clearForNewSource?.();
  }else{
   tell('Chọn ảnh, sau đó dùng ChatGPT để phân tích hình dáng và mô tả cấu tạo. Trang không tự gửi ảnh đi.');
-  // Clear stale reference/analysis metadata when the user removes a source.
+  window.hgChatGPTStudio?.clearForNewSource?.();
+  window.hgViewer?.restorePublicSample?.();
  }
 }
 source.addEventListener('change',()=>{
