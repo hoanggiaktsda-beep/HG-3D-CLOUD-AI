@@ -14,7 +14,7 @@ class CreateModelTests(unittest.TestCase):
     def page(self,width=1440,height=1000):
         context=self.browser.new_context(viewport={'width':width,'height':height},has_touch=True)
         self.addCleanup(context.close);page=context.new_page();page.goto(URL)
-        page.wait_for_function('() => (window.hgViewer?.ready)');return page
+        page.wait_for_function('() => (window.hgViewer?.ready)');page.evaluate("document.body.classList.remove('hg-minimal-ui')");return page
     def test_private_selection_never_uploads_or_creates_fake_job(self):
         page=self.page();requests=[]
         page.on('request',lambda r:requests.append((r.method,r.url)) if r.url.startswith(('http://','https://')) else None)

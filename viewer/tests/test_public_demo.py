@@ -12,7 +12,7 @@ class PublicDemoBrowserTests(unittest.TestCase):
  def tearDownClass(cls):cls.browser.close();cls.p.stop()
  def page(self,width):
   c=self.browser.new_context(viewport={'width':width,'height':900},accept_downloads=True);self.addCleanup(c.close)
-  p=c.new_page();p.goto(URL);p.wait_for_function('()=>hgViewer.ready');p.wait_for_function('()=>!document.querySelector("#public-demo-status").textContent.startsWith("Đang đọc")');return p
+  p=c.new_page();p.goto(URL);p.evaluate("document.body.classList.remove('hg-minimal-ui')");p.wait_for_function('()=>hgViewer.ready');p.wait_for_function('()=>!document.querySelector("#public-demo-status").textContent.startsWith("Đang đọc")');return p
  def test_public_workflow_link_is_native_auth_without_customer_upload(self):
   p=self.page(390)
   self.assertEqual(p.locator('#run-public-demo').get_attribute('href'),'https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/actions/workflows/public-demo.yml')

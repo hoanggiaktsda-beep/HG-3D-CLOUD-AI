@@ -18,6 +18,7 @@ class ViewerTests(unittest.TestCase):
         return context.new_page()
     def ready(self,page):
         page.goto(URL);page.wait_for_function('() => (window.hgViewer?.ready)',timeout=30000)
+        page.evaluate("document.body.classList.remove('hg-minimal-ui')")
     def test_desktop_actual_glb_measurements_and_camera(self):
         page=self.page(viewport={'width':1440,'height':1000});errors=[]
         page.on('pageerror',lambda e:errors.append(str(e)))
@@ -77,12 +78,12 @@ class ViewerTests(unittest.TestCase):
         self.assertEqual(page.locator('#object-rows td.pending').count(),8)
     def test_missing_glb_shows_error_not_pass(self):
         page=self.page();page.route('**/assets/sample.glb',lambda route:route.fulfill(status=404,body='not found'))
-        page.goto(URL);page.locator('#error').wait_for(state='visible')
+        page.goto(URL);page.evaluate("document.body.classList.remove('hg-minimal-ui')");page.locator('#error').wait_for(state='visible')
         self.assertEqual(page.locator('#qa-result').inner_text(),'CHƯA KIỂM CHỨNG')
         self.assertFalse(page.evaluate('hgViewer.ready'))
     def test_invalid_report_blocks_viewer(self):
         page=self.page();page.route('**/assets/sample-qa.json',lambda route:route.fulfill(json={'status':'APPROVED'}))
-        page.goto(URL);page.locator('#error').wait_for(state='visible')
+        page.goto(URL);page.evaluate("document.body.classList.remove('hg-minimal-ui')");page.locator('#error').wait_for(state='visible')
         self.assertFalse(page.evaluate('hgViewer.ready'))
     def test_no_external_runtime_requests(self):
         page=self.page();external=[]
