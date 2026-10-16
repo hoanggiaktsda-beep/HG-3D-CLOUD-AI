@@ -472,3 +472,17 @@ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .hg-photo-reference{margin:7px 1
  .hg-3d-editor .cgpt-panel-head{padding:10px}
  .hg-3d-editor #hg-photo-reference-image{max-height:85px}
 }
+
+/* Narrow-phone top actions: do not force viewport or legacy diagnostic page beyond 320px. */
+@media(max-width:380px){
+ .hg-3d-editor .hg-ws-bar{gap:4px;padding:0 5px;min-width:0;max-width:100%}
+ .hg-3d-editor .hg-ws-project,.hg-3d-editor .hg-ws-bar-separator{display:none}
+ .hg-3d-editor .hg-ws-brand{min-width:0;flex:none}
+ .hg-3d-editor .hg-ws-brand strong{font-size:14px}
+ .hg-3d-editor .hg-ws-brand span{font-size:7px}
+ .hg-3d-editor .hg-ws-top-actions{gap:3px;margin-left:auto;min-width:0}
+ .hg-3d-editor .hg-ws-top-actions button{min-width:0;max-width:65px;min-height:34px;font-size:10px;padding:5px 5px}
+ .hg-3d-editor .hg-ws-top-actions #hg-ws-import-glb{font-size:0;min-width:32px;max-width:32px;padding:0}
+ .hg-3d-editor #hg-ws-import-glb::before{content:"＋";font-size:19px}
+ .hg-3d-editor .hg-ws-back{width:29px;height:34px}
+}
