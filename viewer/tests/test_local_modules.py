@@ -39,9 +39,9 @@ class LocalModuleTests(unittest.TestCase):
         page.wait_for_function("() => window.hgLocalModules.imageCount === 1",timeout=12000)
         page.locator("#hg-run-modules").click()
         self.assertEqual(page.evaluate("window.hgLocalModules.runs"),0)
-        self.assertEqual(page.evaluate("window.hgLocalModules.status"),"WAITING_MEASUREMENTS")
-        self.assertIn("Nhập Dài, Sâu, Cao",page.locator("#hg-engine-result").inner_text())
-        self.assertEqual(page.locator("#mesh-count").inner_text(),"8")
+        self.assertEqual(page.evaluate("window.hgLocalModules.status"),"WAITING_CHATGPT_IMAGE_ANALYSIS")
+        self.assertIn("chưa được AI phân tích",page.locator("#hg-engine-result").inner_text())
+        self.assertEqual(page.locator("#mesh-count").inner_text(),"—")
         self.assertTrue(page.locator("#hg-download-fbx").is_hidden())
 
     def test_dimensions_enable_real_3d_in_original_main_viewer(self):
@@ -93,8 +93,13 @@ class LocalModuleTests(unittest.TestCase):
         page.wait_for_function("() => window.hgLocalModules.runs >= 1",timeout=12000)
         before=page.evaluate("hgLocalModules.runs")
         page.locator("#source-images").set_input_files(IMAGE)
-        page.wait_for_function("(n) => window.hgLocalModules.imageCount === 1 && window.hgLocalModules.runs > n",arg=before,timeout=15000)
+        page.wait_for_function("() => window.hgLocalModules.imageCount === 1 && window.hgLocalModules.status === 'WAITING_CHATGPT_IMAGE_ANALYSIS'",timeout=15000)
+        self.assertEqual(page.evaluate("hgLocalModules.runs"),before)
+        self.assertEqual(page.evaluate("hgViewer.displayMode"),"awaiting_photo_analysis")
         self.assertIn("Đã xác minh 1 ảnh",page.locator("#hg-mod-source").inner_text())
+        page.locator("#hg-allow-illustration").check()
+        page.wait_for_function("(n) => window.hgLocalModules.runs > n",arg=before,timeout=15000)
+        self.assertEqual(page.evaluate("hgLocalModules.status"),"BUILT_PARAMETRIC_DRAFT")
         self.assertEqual(page.evaluate("localStorage.length"),0)
         self.assertEqual(page.evaluate("sessionStorage.length"),0)
 
