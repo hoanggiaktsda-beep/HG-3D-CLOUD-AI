@@ -18,6 +18,7 @@ class ViewerTests(unittest.TestCase):
         return context.new_page()
     def ready(self,page):
         page.goto(URL);page.wait_for_function('() => (window.hgViewer?.ready)',timeout=30000)
+        page.evaluate("document.body.classList.remove('hg-minimal-ui')")
     def test_desktop_actual_glb_measurements_and_camera(self):
         page=self.page(viewport={'width':1440,'height':1000});errors=[]
         page.on('pageerror',lambda e:errors.append(str(e)))
