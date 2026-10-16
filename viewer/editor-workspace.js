@@ -10,22 +10,25 @@ const modes={
  material:['Vật liệu','Màu đơn sắc, lưới và sàn hiển thị'],
  export:['Xuất file','Tải GLB / FBX nhị phân từ mô hình đang mở']
 };
-const state={tool:'model',inspector:'properties'};
+const state={tool:'model',inspector:'properties',mobilePanel:'settings'};
 window.hgEditorWorkspace=state;
 function setTool(tool){
  if(!Object.hasOwn(modes,tool))return false;
  state.tool=tool;root.dataset.wsTool=tool;
+ state.mobilePanel=tool==='parts'?'inspector':'settings';root.dataset.wsMobilePanel=state.mobilePanel;
  for(const button of root.querySelectorAll('[data-ws-tool]'))button.setAttribute('aria-pressed',String(button.dataset.wsTool===tool));
  $('hg-ws-tool-name').textContent=modes[tool][0];
  $('hg-ws-tool-subtitle').textContent=modes[tool][1];
  if(tool==='parts')setInspector('assets');
- if(tool==='material')setInspector('properties');
+ if(tool==='material')state.mobilePanel='settings';
+ root.dataset.wsMobilePanel=state.mobilePanel;
  refresh();
  return true;
 }
 function setInspector(which){
  if(!['assets','properties'].includes(which))return;
  state.inspector=which;
+ state.mobilePanel='inspector';root.dataset.wsMobilePanel='inspector';
  $('hg-ws-assets-panel').hidden=which!=='assets';
  $('hg-ws-properties-panel').hidden=which!=='properties';
  for(const [mode,id] of [['assets','hg-ws-assets-tab'],['properties','hg-ws-properties-tab']]){
@@ -151,6 +154,6 @@ window.addEventListener('hashchange',()=>{
   window.dispatchEvent(new Event('resize'));refresh();
  });
 });
-setTool('model');
 setInspector('properties');
+setTool('model');
 refresh();
