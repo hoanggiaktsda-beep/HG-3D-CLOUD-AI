@@ -59,7 +59,9 @@ class TripoSRService:
     def __init__(self, repo_dir: Path, python_executable: str = sys.executable,
                  timeout: int = 900, resolution: int = 192):
         self.repo_dir = Path(repo_dir).resolve()
-        self.python_executable = python_executable
+        candidate = Path(python_executable).expanduser()
+        # Subprocess runs with cwd=TripoSR; relative venv paths must be resolved first.
+        self.python_executable = str(candidate.resolve()) if (candidate.is_absolute() or '/' in python_executable or '\\' in python_executable) else python_executable
         self.timeout = timeout
         self.resolution = resolution
         self.lock = threading.Lock()
