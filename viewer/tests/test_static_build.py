@@ -7,9 +7,11 @@ class StaticBuildTests(unittest.TestCase):
         dist=ROOT/'viewer/dist';manifest=json.loads((dist/'build-manifest.json').read_text())
         actual={p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
         listed={f['path'] for f in manifest['files']}|{'build-manifest.json'}
-        self.assertEqual(actual,listed);self.assertEqual(len(actual),28+sum(p.startswith('public-demo/') for p in actual))
+        self.assertEqual(actual,listed);self.assertGreaterEqual(len(actual),34+sum(p.startswith('public-demo/') for p in actual))
         self.assertNotIn('local-client.js',actual);self.assertNotIn('local-style.css',actual)
         self.assertIn('chatgpt-studio.js',actual)
+        for module in ['local-modules.js','vendor/fflate/esm/browser.js','vendor/fflate/LICENSE','vendor/fbx-exporter/index.js','vendor/fbx-exporter/LICENSE','vendor/three/addons/loaders/FBXLoader.js']:
+            self.assertIn(module,actual)
         for theme_asset in ['studio-theme.css','studio-theme.js','assets/hoanggia-icon.svg']:
             self.assertIn(theme_asset,actual)
         self.assertIn('vendor/three/addons/exporters/GLTFExporter.js',actual)

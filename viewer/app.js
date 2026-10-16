@@ -111,6 +111,67 @@ async function start() {
   state.ready = true; state.camera = camera; state.controls = controls; state.measured_mm = measured;
   setView('perspective'); document.querySelector('#loading').hidden = true;
   renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+
+  let localRoot = null;
+  // Display local drafts in the SAME viewer as the sample screenshot, without altering public source assets.
+  // Three.js editors use Y-up; the original QA viewer uses Z-up.
+  state.showLocalDraft = (source, metadata = {}) => {
+    if(!state.ready || !source || !source.isObject3D) return false;
+    const wrapper = new THREE.Group();
+    wrapper.name = 'HG_LOCAL_DRAFT_NEEDS_REVIEW';
+    wrapper.rotation.x = Math.PI / 2;
+    wrapper.add(source.clone(true));
+    wrapper.updateMatrixWorld(true);
+    const measuredBox = new THREE.Box3().setFromObject(wrapper);
+    if(measuredBox.isEmpty())throw Error('Bản nháp không có hình học');
+    const nextSize = measuredBox.getSize(new THREE.Vector3());
+    const nextCenter = measuredBox.getCenter(new THREE.Vector3());
+    if(!nextSize.toArray().every(x=>Number.isFinite(x)&&x>0))throw Error('Kích thước bản nháp không hợp lệ');
+    gltf.scene.visible = false;
+    if(localRoot)scene.remove(localRoot);
+    localRoot=wrapper;
+    scene.add(wrapper);
+    center=nextCenter;boxSize=nextSize;
+    const scale=Math.max(nextSize.x,nextSize.y,nextSize.z);
+    camera.near=Math.max(0.0001,scale/10000);
+    camera.far=Math.max(100,scale*50);
+    camera.updateProjectionMatrix();
+    controls.minDistance=Math.max(.001,scale*.05);
+    controls.maxDistance=Math.max(20,scale*35);
+    const sizes=nextSize.toArray().map(v=>v*1000);
+    ['width','depth','height'].forEach((id,i)=>text(id,format(sizes[i])));
+    const parts=[];
+    wrapper.traverse(mesh=>{if(mesh.isMesh)parts.push(mesh);});
+    text('measurement-note','Đo trực tiếp hình học NHÁP trong trình duyệt, đơn vị mm. Chưa đối chiếu hình dạng với ảnh.');
+    text('max-error','Chưa đối chiếu ảnh');
+    text('tolerance','Chưa xác định');
+    text('qa-result','CẦN XÁC NHẬN');
+    text('mesh-count',String(parts.length));
+    text('object-count',String(parts.length)+' bộ phận · mô hình nháp');
+    const unknownList=document.querySelector('#unknown-list');
+    unknownList.replaceChildren();
+    const unknowns=Array.isArray(metadata.unknownDetails)?metadata.unknownDetails.slice(0,30):[];
+    for(const value of (unknowns.length?unknowns:['Chưa kiểm định cấu tạo và kích thước theo bản vẽ.'])){
+      const li=document.createElement('li');li.textContent=String(value).slice(0,400);unknownList.append(li);
+    }
+    const rows=document.querySelector('#object-rows');rows.replaceChildren();
+    for(const mesh of parts.slice(0,80)){
+      const bounds=new THREE.Box3().setFromObject(mesh);
+      const dimensions=bounds.getSize(new THREE.Vector3()).toArray().map(x=>x*1000);
+      const row=document.createElement('tr');
+      const cells=[mesh.name||'Bộ phận',dimensions.map(format).join(' × '),'Bản nháp tham số','CẦN XÁC NHẬN'];
+      for(const content of cells){const td=document.createElement('td');td.textContent=content;row.append(td);}
+      row.lastElementChild.className='pending';rows.append(row);
+    }
+    document.querySelector('#sample-viewer h1').textContent='MÔ HÌNH 3D · BẢN NHÁP';
+    document.querySelector('#sample-viewer .subtitle').textContent=String(metadata.origin||'Dựng trên thiết bị, chưa nghiệm thu');
+    document.querySelector('#sample-viewer .review-badge').textContent='● CẦN XÁC NHẬN';
+    for(const id of ['hg-download-glb','hg-download-fbx'])document.getElementById(id).hidden=false;
+    state.displayMode='local_draft';
+    state.measured_mm=sizes;state.localMeshes=parts.length;
+    setView('perspective');
+    return true;
+  };
   controls.addEventListener('start', () => {
     state.currentView = 'free'; text('active-view', 'Góc nhìn tự do');
     document.querySelectorAll('[data-view]').forEach(button => button.setAttribute('aria-pressed', 'false'));
@@ -131,4 +192,6 @@ document.querySelectorAll('[data-view]').forEach(button => button.addEventListen
 document.querySelector('#zoom-in').addEventListener('click', () => zoom(0.8));
 document.querySelector('#zoom-out').addEventListener('click', () => zoom(1.25));
 document.querySelector('#reset').addEventListener('click', () => setView('perspective'));
+document.querySelector('#hg-download-glb').addEventListener('click',()=>document.querySelector('#cgpt-export-glb').click());
+document.querySelector('#hg-download-fbx').addEventListener('click',()=>document.querySelector('#cgpt-export-fbx').click());
 start().catch(fail);
