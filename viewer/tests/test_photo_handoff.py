@@ -28,6 +28,7 @@ class PhotoHandoffTests(unittest.TestCase):
         self.addCleanup(ctx.close)
         page=ctx.new_page()
         page.goto(URL)
+        page.evaluate("document.body.classList.remove('hg-minimal-ui')")
         page.wait_for_function("() => window.hgViewer?.ready && !!window.hgPhotoHandoff",timeout=35000)
         return page
 
