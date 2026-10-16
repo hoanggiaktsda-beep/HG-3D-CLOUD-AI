@@ -1,10 +1,22 @@
-# HG 3D CLOUD AI
+# 3D AI | HOANGGIA AI
 
 Dự án thử nghiệm dựng và kiểm định 3D có giám sát. Giữ Director + 17 chuyên gia theo [AGENTS.md](AGENTS.md). **Chưa sẵn sàng sử dụng thực tế như hệ thống tự nhận ảnh và dựng hoàn chỉnh.** Không render.
 
+## Xưởng chỉnh sửa 3D AI — Phiên bản P1
+
+**Tên hiển thị chính thức:** **3D AI | HOANGGIA AI**. Giữ nguyên repository \`HG-3D-CLOUD-AI\` và URL cũ để các liên kết không bị hỏng.
+
+- [Màn hình tải ảnh](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/#create-model) vẫn tối giản như phiên bản đã duyệt.
+- [Xưởng chỉnh sửa 3D](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/#chatgpt-studio) mở không gian nhiều vùng theo luồng Tripo: thanh công cụ, thiết lập, viewport WebGL lớn, Tài sản/Thuộc tính và các nút Xuất file.
+- Nhập JSON/GLB, chọn mesh ngay trên mô hình, chỉnh vị trí X/Y/Z (mm), xoay, tỷ lệ, tên, màu và ẩn/hiện, đổi góc nhìn, bật/tắt wireframe và grid.
+- **Xuất GLB/FBX nhị phân bằng bộ engine cũ**, không tạo trình xuất giả, không thay đổi Python/Blender/Qwen/OCR/18 trách nhiệm chuyên gia.
+- Không có dịch vụ ảnh → mô hình 3D tự động; Tripo là tham khảo về tổ chức giao diện, không sao chép tài sản hay API.
+
+[Chi tiết chức năng, giới hạn và tiêu chí kiểm thử](docs/3D_AI_EDITOR_WORKSPACE_V1_VI.md).
+
 ## Giao diện HOANGGIA STUDIO
 
-Bản website HG 3D CLOUD AI dùng cùng hệ nhận diện với [HOANGGIA STUDIO](https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home): monogram HA, sidebar desktop, thanh điều hướng dưới trên điện thoại, sắc tối/xanh than/vàng champagne, breadcrumb và nút Home. Giao diện độc lập, chỉ thay đổi repository này; toàn bộ viewer, kiểm định và trình chỉnh GLB giữ nguyên logic.
+3D AI sử dụng hệ nhận diện thiết kế với [HOANGGIA STUDIO](https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home): monogram HA, sidebar desktop, thanh điều hướng dưới trên điện thoại, sắc tối/xanh than/vàng champagne, breadcrumb và nút Home. Giao diện độc lập, chỉ thay đổi repository này; toàn bộ viewer, kiểm định và trình chỉnh GLB giữ nguyên logic.
 
 ## Giao diện duy nhất — Màn hình Ảnh của bạn · Mô hình của bạn
 
