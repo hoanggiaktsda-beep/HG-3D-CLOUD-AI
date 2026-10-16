@@ -34,6 +34,17 @@
 <label for="input-type">Loại đầu vào</label><select id="input-type"><option value="interior_photo">Ảnh phối cảnh / không gian nội thất</option><option value="product_photo">Ảnh sản phẩm nội thất</option><option value="technical_drawing">Ảnh bản vẽ kỹ thuật</option><option value="layout">Mặt bằng layout</option></select>
 <label for="source-images" class="file-label">Chọn ảnh trên thiết bị</label><input id="source-images" type="file" accept="image/png,image/jpeg,image/webp" multiple aria-describedby="upload-help image-status">
 <p id="upload-help" class="note">Tối đa 8 ảnh · 20 MB/ảnh · tổng 60 MB · PNG/JPEG/WebP. iPhone dùng HEIC: xuất sang JPEG trước.</p><p id="image-status" role="status" aria-live="polite">Chưa chọn ảnh.</p><div id="image-previews" aria-label="Ảnh xem cục bộ"></div><button id="clear-images" type="button">Bỏ ảnh đã chọn</button>
+<div class="hg-photo-workflow" id="hg-photo-workflow" aria-label="Phân tích ảnh đã chọn bằng ChatGPT">
+ <div class="hg-photo-head"><strong>NHẬN DIỆN HÌNH DÁNG SẢN PHẨM</strong><span id="hg-photo-analysis-state">CHƯA CÓ ẢNH</span></div>
+ <p id="hg-photo-guidance" role="status" aria-live="polite">Sau khi chọn ảnh, hãy đưa chính ảnh đó sang ChatGPT để phân tích. Website không được phép tự gửi ảnh.</p>
+ <div class="hg-photo-steps">
+   <button type="button" id="hg-photo-copy-prompt">01 · Sao chép lệnh phân tích ảnh</button>
+   <button type="button" id="hg-photo-copy-image">02 · Sao chép ảnh đầu tiên</button>
+   <a id="hg-photo-open-chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">03 · Mở ChatGPT ↗</a>
+   <a id="hg-photo-import-result" href="#chatgpt-studio">04 · Dán kết quả → Xem 3D</a>
+ </div>
+ <p class="note">Trong ChatGPT: dán lệnh và đính kèm ảnh (hoặc dán ảnh đã sao chép). Trở lại website dán JSON do ChatGPT trả về. Ảnh chưa được nhận diện chỉ bằng thao tác tải lên. Nếu trình duyệt không cho sao chép ảnh, chồng đính kèm ảnh thủ công.</p>
+</div>
 <label for="model-instruction">Yêu cầu dựng / chỉnh sửa</label><textarea id="model-instruction" rows="4" maxlength="4000" placeholder="Giữ nguyên hình dáng, sửa vị trí bộ phận…"></textarea>
 <label for="confirmed-measurements">Kích thước do bạn xác nhận (mm)</label><textarea id="confirmed-measurements" rows="2" maxlength="2000" placeholder="Chỉ nhập số đo đã biết và nguồn. Phần chưa rõ để trống."></textarea>
 <p class="note">Bản nháp chỉ nằm trong phiên trình duyệt; không lưu tự động. Không đưa dữ liệu khách hàng lên GitHub.</p><div class="request-actions"><button id="create-job" type="submit" disabled>Gửi công việc · CHƯA KẾT NỐI</button><button id="rebuild-job" type="button" disabled>Dựng lại · CHƯA KẾT NỐI</button></div></form>
@@ -43,10 +54,11 @@
 <section id="hg-modules" class="card hg-engine" aria-labelledby="hg-engine-title">
   <div class="hg-engine-heading"><div><p class="eyebrow">01 / BỘ MÔ-ĐUN DỰNG HÌNH</p><h3 id="hg-engine-title">DỰNG 3D TỰ ĐỘNG TỪ KÍCH THƯỚC XÁC NHẬN</h3><p class="note">Sau khi ảnh được kiểm tra và chồng xác nhận ba kích thước, hệ thống tự dựng mô hình tham số ngay trên website. Chưa có AI thị giác ChatGPT tự kết nối vào web; ảnh là tham chiếu, không tự suy ra cấu tạo từ ảnh.</p></div><span class="hg-engine-badge">XỬ LÝ TRÊN THIẾT BỊ</span></div>
   <div class="hg-engine-form">
-    <div><label for="hg-template">Loại mô hình</label><select id="hg-template"><option value="box">Khối bao theo kích thước — không đoán cấu tạo</option><option value="console">Console / tủ thấp — cấu tạo minh họa</option><option value="table">Bàn — cấu tạo minh họa</option><option value="cabinet">Tủ kệ — cấu tạo minh họa</option></select></div>
+    <div><label for="hg-template">Loại mô hình</label><select id="hg-template"><option value="box">Khối bao theo kích thước — không đoán cấu tạo</option><option value="console">Console / tủ thấp — MẪU MINH HỌA KHÔNG THEO ẢNH</option><option value="table">Bàn 4 chân — MẪU MINH HỌA KHÔNG THEO ẢNH</option><option value="cabinet">Tủ kệ — MẪU MINH HỌA KHÔNG THEO ẢNH</option></select></div>
     <div class="hg-dims"><label for="hg-width">Dài X (mm)<input type="number" min="10" max="100000" step="1" id="hg-width" placeholder="Ví dụ: 1800" inputmode="decimal"></label><label for="hg-depth">Sâu Y (mm)<input type="number" min="10" max="100000" step="1" id="hg-depth" placeholder="Ví dụ: 450" inputmode="decimal"></label><label for="hg-height">Cao Z (mm)<input type="number" min="10" max="100000" step="1" id="hg-height" placeholder="Ví dụ: 850" inputmode="decimal"></label></div>
   </div>
   <label class="hg-affirm"><input type="checkbox" id="hg-confirm-dims"><span>Tôi xác nhận ba kích thước này do người dùng cung cấp, không phải AI tự đo từ ảnh. Mọi cấu tạo mẫu cần kiểm định lại.</span></label>
+<label class="hg-affirm hg-photo-override"><input type="checkbox" id="hg-allow-illustration"><span><strong>Chỉ dựng mẫu minh họa, KHÔNG theo ảnh đã tải lên.</strong> Nếu có ảnh, chỉ tích mục này khi chồng chủ động muốn dựng một mẫu hình khối theo số đo thay vì chờ ChatGPT phân tích hình dáng.</span></label>
   <div class="hg-engine-actions"><button type="button" id="hg-run-modules">Dựng mô hình ngay trên web</button><a href="#sample-viewer">Xem ở KHÔNG GIAN 3D ↑</a><span id="hg-engine-result" role="status">Chờ kích thước được xác nhận. Khi ảnh hợp lệ và đủ kích thước, mô-đun tự chạy.</span></div>
   <div class="hg-module-list" aria-label="Tiến độ mô-đun thực tế">
     <div><span>01</span><strong>Nhận ảnh</strong><small id="hg-mod-source">Chờ ảnh hoặc yêu cầu</small></div>
@@ -86,7 +98,13 @@
   <div class="cgpt-editor">
     <div class="cgpt-scene">
       <div class="cgpt-panel-head"><strong>Bản nháp 3D tương tác</strong><span id="cgpt-part-count">Chưa có mô hình</span></div>
-      <div id="cgpt-viewport"><p class="cgpt-empty">Dán JSON từ ChatGPT hoặc nhập GLB để xem mô hình ở đây.</p></div>
+      
+<div id="hg-photo-reference" class="hg-photo-reference" hidden>
+ <div class="hg-photo-reference-title"><strong>Ảnh tham chiếu chồng đã chọn</strong><span id="hg-photo-reference-status">CHƯA PHÂN TÍCH</span></div>
+ <img id="hg-photo-reference-image" alt="Ảnh nguồn đang dùng để so sánh với 3D nháp">
+ <p class="note">Ảnh nguồn chỉ để so sánh. Không khẳng định mô hình 3D đã giống ảnh nếu chưa được kiểm tra.</p>
+</div>
+<div id="cgpt-viewport"><p class="cgpt-empty">Dán JSON từ ChatGPT hoặc nhập GLB để xem mô hình ở đây.</p></div>
       <p id="cgpt-result-note" class="cgpt-warning">CẦN XÁC NHẬN · Mô hình chưa đủ điều kiện sử dụng sản xuất.</p>
     </div>
     <div class="cgpt-inspector">
