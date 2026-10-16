@@ -163,7 +163,17 @@
     </div>
     <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="model">
       <h4>01 · Tạo yêu cầu cho ChatGPT</h4>
-      <p class="note">Chọn ảnh, loại đầu vào và nhập yêu cầu ở biểu mẫu bên dưới; sau đó tạo lệnh và mở ChatGPT.</p>
+      <p class="note">Mô tả yêu cầu và số đo dưới đây được chuyển vào bộ tạo lệnh ChatGPT có sẵn, không kích hoạt API.</p>
+      <label for="hg-ws-input-kind">Loại nguồn</label>
+      <select id="hg-ws-input-kind">
+        <option value="product">Ảnh sản phẩm / nội thất</option>
+        <option value="drawing">Bản vẽ kỹ thuật</option>
+        <option value="floorplan">Mặt bằng / sơ đồ</option>
+      </select>
+      <label for="hg-ws-instruction">Yêu cầu hình dáng / chỉnh sửa</label>
+      <textarea id="hg-ws-instruction" rows="4" maxlength="4000" placeholder="Ví dụ: sofa 2 chỗ có console giữa, 2 gác chân recliner..."></textarea>
+      <label for="hg-ws-measurements">Kích thước được xác nhận (mm)</label>
+      <textarea id="hg-ws-measurements" rows="3" maxlength="2000" placeholder="Ví dụ: dài 2460 × sâu 1100 × cao 770 mm; nguồn: bản vẽ hãng"></textarea>
       <div class="cgpt-buttons"><button type="button" id="cgpt-generate">Tạo lệnh từ yêu cầu</button><button type="button" id="cgpt-copy">Sao chép lệnh</button><button type="button" id="cgpt-download-job">Tải JSON công việc</button></div>
       <label for="cgpt-prompt">Lệnh đã chuẩn bị</label>
       <textarea id="cgpt-prompt" readonly rows="7" placeholder="Nhập yêu cầu ở biểu mẫu bên dưới, sau đó nhấn Tạo lệnh..."></textarea>
