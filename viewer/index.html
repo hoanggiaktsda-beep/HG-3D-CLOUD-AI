@@ -262,6 +262,7 @@
   </div>
   <div class="cgpt-editor">
     <div class="cgpt-scene">
+      <button type="button" id="hg-inspector-open" hidden style="margin:6px 10px;background:#263c30;color:#efcc8c;border:1px solid #9c8655;border-radius:8px;padding:8px 12px">☷ Hiện bảng thuộc tính</button>
       <div class="cgpt-panel-head"><strong>KHÔNG GIAN 3D</strong><span id="cgpt-part-count">Chưa có mô hình</span></div>
       <div class="hg-ws-viewport-tools" role="toolbar" aria-label="Góc nhìn mô hình">
         <button type="button" data-ws-view="perspective" aria-pressed="true">Phối cảnh</button>
@@ -279,7 +280,8 @@
 <div id="cgpt-viewport"><p class="cgpt-empty">Dán JSON từ ChatGPT hoặc nhập GLB để xem mô hình ở đây.</p></div>
       <p id="cgpt-result-note" class="cgpt-warning">CẦN XÁC NHẬN · Mô hình chưa đủ điều kiện sử dụng sản xuất.</p>
     </div>
-    <div class="cgpt-inspector">
+    <div class="cgpt-inspector" id="hg-inspector-collapsible">
+      <button type="button" id="hg-inspector-close" aria-label="Ẩn cột tài sản và thuộc tính" style="margin:8px">Ẩn bảng bên phải ×</button>
       <div class="hg-ws-inspector-tabs" role="tablist" aria-label="Tài sản và thuộc tính">
         <button type="button" id="hg-ws-assets-tab" role="tab" aria-selected="false" aria-controls="hg-ws-assets-panel">Tài sản</button>
         <button type="button" id="hg-ws-properties-tab" role="tab" aria-selected="true" aria-controls="hg-ws-properties-panel">Thuộc tính</button>
@@ -318,4 +320,4 @@
 <a href="#chatgpt-studio" data-hg-route="chatgpt-studio"><span>✳</span><small>Chỉnh sửa</small></a>
 <a href="#sample-viewer" data-hg-route="sample-viewer"><span>▧</span><small>Xem mẫu</small></a>
 <a href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home"><span>⌂</span><small>Trang chủ</small></a>
-</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="ai-export-workflow.js"></script><script type="module" src="workspace-launcher.js"></script><script type="module" src="minimal-shell.js"></script><script type="module" src="editor-workspace.js"></script><script type="module" src="triposr-client.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
+</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="ai-export-workflow.js"></script><script type="module" src="compact-viewport.js"></script><script type="module" src="workspace-launcher.js"></script><script type="module" src="minimal-shell.js"></script><script type="module" src="editor-workspace.js"></script><script type="module" src="triposr-client.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
