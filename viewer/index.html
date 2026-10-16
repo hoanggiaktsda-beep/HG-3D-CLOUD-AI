@@ -88,6 +88,24 @@
 <label for="input-type">Loại đầu vào</label><select id="input-type"><option value="interior_photo">Ảnh phối cảnh / không gian nội thất</option><option value="product_photo">Ảnh sản phẩm nội thất</option><option value="technical_drawing">Ảnh bản vẽ kỹ thuật</option><option value="layout">Mặt bằng layout</option></select>
 <label for="source-images" class="file-label">Chọn ảnh trên thiết bị</label><input id="source-images" type="file" accept="image/png,image/jpeg,image/webp" multiple aria-describedby="upload-help image-status">
 <p id="upload-help" class="note">Tối đa 8 ảnh · 20 MB/ảnh · tổng 60 MB · PNG/JPEG/WebP. iPhone dùng HEIC: xuất sang JPEG trước.</p><p id="image-status" role="status" aria-live="polite">Chưa chọn ảnh.</p><div id="image-previews" aria-label="Ảnh xem cục bộ"></div><button id="clear-images" type="button">Bỏ ảnh đã chọn</button>
+<section id="hg-5step" style="border:1px solid #b89b60;border-radius:12px;padding:14px;margin:14px 0;background:#19251e">
+<h3 style="color:#e8c786">QUY TRÌNH TẠO MODEL 3D TỪ ẢNH</h3>
+<p class="note">01 · Đưa ảnh vào → 02 · Phân tích ảnh → 03 · Chọn kiểu loại → 04 · Điền kích thước → 05 · Chọn định dạng và xuất prompt</p>
+<p id="hg-flow-photo" role="status">Chưa chọn ảnh nguồn.</p>
+<button type="button" id="hg-flow-analyze">02 · Sao chép lệnh phân tích ảnh</button>
+<p class="note">Dán lệnh cùng ảnh vào ChatGPT để nhận diện chi tiết. Website tĩnh chưa có AI thị giác tự động.</p>
+<label for="hg-flow-type">03 · Kiểu loại sản phẩm</label>
+<select id="hg-flow-type"><option value="auto">Tự xác định từ ảnh trong ChatGPT</option><option value="chair">Ghế đơn / armchair</option><option value="sofa">Sofa</option><option value="table">Bàn</option><option value="cabinet">Tủ / kệ</option><option value="open_tray">Hộc mở / tủ đầu giường</option><option value="architecture">Kiến trúc / không gian</option><option value="other">Sản phẩm khác</option></select>
+<p class="note">04 · Dài, sâu, cao (mm): sử dụng ba ô kích thước ngay bên dưới. Chỉ xác nhận các số đo có nguồn.</p>
+<label for="hg-flow-format">05 · Định dạng mô hình mong muốn</label>
+<select id="hg-flow-format"><option value="fbx">FBX — trao đổi với phần mềm 3D</option><option value="obj">OBJ — hình học lưới</option><option value="glb">GLB — xem 3D trên web</option><option value="blend">BLEND — Blender</option><option value="stl">STL — in 3D</option></select>
+<label for="hg-flow-platform">Nền tảng AI / công cụ đích</label>
+<select id="hg-flow-platform"><option value="chatgpt">ChatGPT — phân tích và tạo mã dựng hình</option><option value="meshy">Meshy — tạo 3D từ ảnh</option><option value="tripo">Tripo — tạo 3D từ ảnh</option><option value="hunyuan">Hunyuan3D — tạo 3D từ ảnh</option><option value="blender">Blender — dựng qua mã Python</option><option value="generic">Nền tảng AI 3D khác</option></select>
+<button type="button" id="hg-flow-generate" style="margin-top:12px;background:#c8a568;color:#122016;padding:12px;border-radius:8px;font-weight:700">TỔNG HỢP PROMPT AI</button>
+<textarea id="hg-flow-output" rows="9" readonly aria-label="Prompt xuất sang nền tảng AI" placeholder="Prompt tổng hợp sẽ hiển thị ở đây" style="margin-top:10px"></textarea>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" id="hg-flow-copy">Sao chép prompt</button><button type="button" id="hg-flow-download">Tải prompt .txt</button></div>
+<p id="hg-flow-status" role="status" class="note">Chưa tạo prompt. Kết quả mô hình phụ thuộc nền tảng đích; định dạng chọn là yêu cầu đầu ra, không phải file đã xuất.</p>
+</section>
 <div class="hg-photo-workflow" id="hg-photo-workflow" aria-label="Phân tích ảnh đã chọn bằng ChatGPT">
  <div class="hg-photo-head"><strong>NHẬN DIỆN HÌNH DÁNG SẢN PHẨM</strong><span id="hg-photo-analysis-state">CHƯA CÓ ẢNH</span></div>
  <p id="hg-photo-guidance" role="status" aria-live="polite">Sau khi chọn ảnh, hãy đưa chính ảnh đó sang ChatGPT để phân tích. Website không được phép tự gửi ảnh.</p>
@@ -298,4 +316,4 @@
 <a href="#chatgpt-studio" data-hg-route="chatgpt-studio"><span>✳</span><small>Chỉnh sửa</small></a>
 <a href="#sample-viewer" data-hg-route="sample-viewer"><span>▧</span><small>Xem mẫu</small></a>
 <a href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home"><span>⌂</span><small>Trang chủ</small></a>
-</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="workspace-launcher.js"></script><script type="module" src="minimal-shell.js"></script><script type="module" src="editor-workspace.js"></script><script type="module" src="triposr-client.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
+</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="ai-export-workflow.js"></script><script type="module" src="workspace-launcher.js"></script><script type="module" src="minimal-shell.js"></script><script type="module" src="editor-workspace.js"></script><script type="module" src="triposr-client.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
