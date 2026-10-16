@@ -6,6 +6,7 @@ const open=document.getElementById('hg-inspector-open');
 function toggle(show){
  if(!root||!inspector)return;
  root.classList.toggle('hg-inspector-hidden',!show);
+ if(matchMedia('(max-width:600px)').matches)root.dataset.wsMobilePanel=show?'inspector':'settings';
  inspector.hidden=!show;
  open.hidden=show;
  // Three.js viewport resize follows normal window resize listeners.
