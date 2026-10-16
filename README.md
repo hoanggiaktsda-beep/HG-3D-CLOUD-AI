@@ -2,6 +2,10 @@
 
 Dự án thử nghiệm dựng và kiểm định 3D có giám sát. Giữ Director + 17 chuyên gia theo [AGENTS.md](AGENTS.md). **Chưa sẵn sàng sử dụng thực tế như hệ thống tự nhận ảnh và dựng hoàn chỉnh.** Không render.
 
+## Giao diện HOANGGIA STUDIO
+
+Bản website HG 3D CLOUD AI dùng cùng hệ nhận diện với [HOANGGIA STUDIO](https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home): monogram HA, sidebar desktop, thanh điều hướng dưới trên điện thoại, sắc tối/xanh than/vàng champagne, breadcrumb và nút Home. Giao diện độc lập, chỉ thay đổi repository này; toàn bộ viewer, kiểm định và trình chỉnh GLB giữ nguyên logic.
+
 ## Chỉnh sửa 3D cùng ChatGPT trên website (không cần Codex)
 
 [**Mở công cụ ChatGPT Studio**](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/#create-model): chọn ảnh trên thiết bị → tự tạo lệnh ChatGPT và đính kèm thủ công → dán JSON hình học ChatGPT trả về → xem/chỉnh mô hình cục bộ bằng Three.js → tải GLB **bản nháp**. Có thể nhập GLB có sẵn để chỉnh vị trí, góc xoay và tỷ lệ. Không lưu ảnh khách hàng, không yêu cầu API key, không dùng server riêng, không phát sinh chi phí API tự động. **Không kết nối ChatGPT tự động**, không xuất BLEND từ trình duyệt, không khẳng định tái dựng chính xác từ một ảnh. Xem [hướng dẫn chi tiết](docs/CHATGPT_BROWSER_STUDIO_VI.md).
