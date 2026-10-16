@@ -229,6 +229,8 @@ window.addEventListener('hashchange',()=>{
   window.dispatchEvent(new Event('resize'));refresh();
  });
 });
+// Keep iPhone focused on image→3D; advanced manual ChatGPT tools remain available on demand.
+if(matchMedia('(max-width:600px)').matches)$('hg-ws-manual-tools').open=false;
 setInspector('properties');
 setTool('model');
 refresh();
