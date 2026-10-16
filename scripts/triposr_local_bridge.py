@@ -93,6 +93,9 @@ class TripoSRService:
                 timeout=self.timeout, check=False,
             )
             if completed.returncode:
+                # Diagnostic stays ONLY in the operator's terminal, never in HTTP/Pages.
+                tail = completed.stderr.decode("utf-8", errors="replace")[-1600:]
+                print(f"TripoSR exited {completed.returncode}: {tail}", file=sys.stderr)
                 raise RuntimeError("TripoSR failed. Check the local terminal for GPU, dependencies and model weights.")
             result = output / "0" / "mesh.glb"
             if not result.is_file() or result.stat().st_size > MAX_GLB:
