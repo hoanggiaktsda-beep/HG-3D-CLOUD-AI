@@ -96,15 +96,18 @@ function build(force=false){
  if(input.photos.length&&!input.verified){
   state.status='WAITING_IMAGES';show('hg-engine-result','Ảnh đang được kiểm tra định dạng. Hãy đợi...');return false;
  }
- if(input.verified&&!ui.illustration.checked){
-  state.status='WAITING_CHATGPT_IMAGE_ANALYSIS';
-  show('hg-mod-geometry','Chờ phân tích ảnh trong ChatGPT — chưa dựng');
-  show('hg-mod-preview','Chưa có kết quả từ ảnh nguồn');
-  show('hg-mod-qa','Chưa thể đối chiếu với ảnh');
-  show('hg-mod-export','Chưa có mô hình của ảnh');
-  show('hg-engine-result','Ảnh đã được nhận nhưng chưa được AI phân tích. Chọn “Sao chép lệnh phân tích ảnh” và mở ChatGPT ở phía trên. Nếu chỉ cần mẫu minh họa KHÔNG THEO ẢNH, hãy bật ô xác nhận riêng.');
+ if(input.verified&&!ui.illustration.checked&&!force){
+  state.status='WAITING_PREVIEW_APPROVAL';
+  show('hg-mod-geometry','Ảnh chưa phân tích — chờ tạo 3D sơ bộ');
+  show('hg-mod-preview','Nhấn TẠO MÔ HÌNH 3D để xem khối tham số tạm thời');
+  show('hg-mod-qa','Chưa đối chiếu hình dạng với ảnh');
+  show('hg-mod-export','Chưa có mô hình');
+  show('hg-engine-result','Ảnh chỉ là tham chiếu. Nhấn TẠO MÔ HÌNH 3D để dựng mẫu tham số theo loại và số đo đang chọn (không phải AI tái dựng từ ảnh).');
   return false;
  }
+ // Explicit click on TẠO MÔ HÌNH 3D authorizes a visibly labeled parametric preview.
+ // It does not authorize claiming the geometry matches the uploaded photograph.
+ if(input.verified&&!ui.illustration.checked&&force)ui.illustration.checked=true;
  if(!input.valid||!input.approved){
   state.status='WAITING_MEASUREMENTS';
   const msg=!input.valid?'Nhập Dài, Sâu, Cao bằng mm rồi xác nhận số đo.':'Đánh dấu xác nhận số đo để dựng mô hình.';
@@ -131,7 +134,7 @@ function build(force=false){
   show('hg-mod-preview','Đã hiển thị mô hình cục bộ');
   show('hg-mod-qa','CẦN XÁC NHẬN hình dạng và cấu tạo');
   show('hg-mod-export','Sẵn sàng GLB và FBX nháp');
-  show('hg-engine-result','Đã dựng '+objects.length+' bộ phận từ số đo xác nhận. Xem mô hình ở KHÔNG GIAN 3D phía trên; có thể chỉnh rồi tải GLB/FBX.');
+  show('hg-engine-result','Đã dựng '+objects.length+' bộ phận 3D THAM KHẢO theo mẫu tham số và số đo. KHÔNG phải tái dựng từ ảnh; hãy xoay, kiểm tra và chỉnh trong KHÔNG GIAN 3D.');
   return true;
  }catch(err){
   state.status='BLOCKED';state.errors=[err.message];
