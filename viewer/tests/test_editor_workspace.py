@@ -144,6 +144,15 @@ class EditorWorkspaceTests(unittest.TestCase):
   self.assertEqual(p.evaluate("localStorage.length"),0)
   self.assertEqual(self.errors,[])
 
+ def test_iphone_manual_chatgpt_controls_are_collapsed_but_accessible(self):
+  p=self.page(390,844)
+  self.assertFalse(p.locator("#hg-ws-manual-tools").evaluate("(el)=>el.open"))
+  self.assertTrue(p.locator("#cgpt-generate").is_hidden())
+  p.locator("#hg-ws-manual-tools summary").click()
+  self.assertTrue(p.locator("#cgpt-generate").is_visible())
+  self.assertTrue(p.locator("#hg-ws-instruction").is_visible())
+  self.assertEqual(self.errors,[])
+
  def test_model_brief_reuses_existing_chatgpt_prompt_generator(self):
   p=self.page()
   p.locator("#hg-ws-instruction").fill("Sofa hai chỗ có console giữa và hai tựa lưng độc lập.")
