@@ -35,5 +35,5 @@ class PagesWorkflowTests(unittest.TestCase):
         verify=workflow['jobs']['verify'];self.assertEqual(verify['needs'],'deploy')
         self.assertTrue(any(s.get('run')=='python scripts/verify_pages32.py' for s in verify['steps']))
         text=(ROOT/'scripts/verify_pages32.py').read_text()
-        for check in ['hashlib.sha256','expect_download','set_offline(True)','hgViewer?.ready']:
+        for check in ['hashlib.sha256','context.request.get','set_offline(True)','hgViewer?.ready','hgMinimalWorkspace?.mode','create-model.hg-launch']:
             self.assertIn(check,text)
