@@ -275,19 +275,31 @@ $('cgpt-remove-part').addEventListener('click',()=>{
  part.parent.remove(part);state.edited=true;listParts();recenter();syncMainViewer();notifyChange('remove');
  review.textContent='ĐÃ BỎ BỘ PHẬN · CẦN XÁC NHẬN';say('Đã xóa bộ phận khỏi bản nháp cục bộ.');
 });
+// One verified GLB importer shared by local file upload and real TripoSR output.
+state.importGLBBuffer=async (buffer,origin='GLB người dùng tải lên')=>{
+ const b=buffer instanceof ArrayBuffer?buffer:await buffer.arrayBuffer();
+ if(b.byteLength<20||b.byteLength>30*1024*1024)throw Error('GLB phải từ 20 byte đến 30 MB.');
+ const v=new DataView(b);
+ if(v.getUint32(0,true)!==0x46546c67||v.getUint32(4,true)!==2||v.getUint32(8,true)!==b.byteLength||v.getUint32(16,true)!==0x4e4f534a)
+  throw Error('GLB 2.0 không hợp lệ.');
+ const length=v.getUint32(12,true);
+ if(length<2||20+length>b.byteLength)throw Error('JSON chunk GLB bị hỏng.');
+ const json=JSON.parse(new TextDecoder().decode(b.slice(20,20+length)).trim());
+ if([...(json.images||[]),...(json.buffers||[])].some(x=>x.uri))
+  throw Error('GLB có liên kết tài nguyên ngoài, đã chặn.');
+ if(!json.meshes?.length)throw Error('GLB không có mesh 3D.');
+ const gltf=await new GLTFLoader().parseAsync(b,'');
+ const group=new THREE.Group();group.name='HG_IMPORTED_GLB';group.add(gltf.scene);
+ show(group,String(origin).slice(0,100),[
+  'Mô hình AI một ảnh: kích thước, mặt khuất và cấu tạo chưa được xác nhận; không dùng để sản xuất khi chưa kiểm tra.'
+ ]);
+ if(!state.ready)throw Error('GLB chưa có bộ phận mesh để chỉnh sửa.');
+ return true;
+};
 $('cgpt-glb-file').addEventListener('change',async e=>{
  const f=e.target.files[0];if(!f)return;
- try{
-  if(!f.size||f.size>30*1024*1024)throw Error('GLB phải nhỏ hơn 30 MB.');
-  const b=await f.arrayBuffer(),v=new DataView(b);
-  if(b.byteLength<20||v.getUint32(0,true)!==0x46546c67||v.getUint32(4,true)!==2||v.getUint32(8,true)!==b.byteLength||v.getUint32(16,true)!==0x4e4f534a)throw Error('GLB 2.0 không hợp lệ.');
-  const length=v.getUint32(12,true);if(length<2||20+length>b.byteLength)throw Error('JSON chunk GLB bị hỏng.');
-  const json=JSON.parse(new TextDecoder().decode(b.slice(20,20+length)).trim());
-  if([...(json.images||[]),...(json.buffers||[])].some(x=>x.uri))throw Error('GLB có liên kết tài nguyên ngoài, đã chặn.');
-  const gltf=await new GLTFLoader().parseAsync(b,'');
-  const group=new THREE.Group();group.name='HG_IMPORTED_GLB';group.add(gltf.scene);
-  show(group,'GLB người dùng tải lên',['Chưa kiểm định mô hình nhập']);
- }catch(err){say('Mở GLB không thành công: '+err.message,true);}
+ try{await state.importGLBBuffer(await f.arrayBuffer());}
+ catch(err){say('Mở GLB không thành công: '+err.message,true);}
  e.target.value='';
 });
 $('cgpt-export-glb').addEventListener('click',async()=>{
