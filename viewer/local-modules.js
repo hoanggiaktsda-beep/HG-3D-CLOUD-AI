@@ -45,6 +45,39 @@ function makeParts(width,depth,height,kind){
   put('base','Đáy console minh họa',[width-2*thick,depth-2*thick,thick],[0,0,ground+thick/2],wood);
   for(const sx of [-1,1])for(const sy of [-1,1])
    put('foot_'+(sx<0?'L':'R')+(sy<0?'F':'B'),'Chân minh họa',[leg,leg,ground],[sx*(width-leg)/2,sy*(depth-leg)/2,ground/2],legs);
+ }else if(kind==='open_tray'){
+  if(Math.min(width,depth,height)<180)throw Error('Hộc mở yêu cầu các chiều ít nhất 180 mm.');
+  // Open cavity is real geometry: separate four walls + bottom, NEVER a solid top box.
+  const legH=Math.min(height*.52,Math.max(100,height*.38));
+  const trayH=height-legH;
+  const thick=Math.min(28,Math.max(10,Math.min(width,depth)*.038));
+  const bottom=Math.min(22,Math.max(10,trayH*.1));
+  const leg=Math.min(50,Math.max(18,Math.min(width,depth)*.085));
+  if(width<=2*thick||depth<=2*thick||trayH<=bottom)throw Error('Hộc không đủ không gian cho lòng rỗng.');
+  put('tray_base','Đáy hộc minh họa',[width-2*thick,depth-2*thick,bottom],[0,0,legH+bottom/2],wood);
+  put('tray_front','Thành trước minh họa',[width,thick,trayH],[0,-(depth-thick)/2,legH+trayH/2],wood);
+  put('tray_back','Thành sau minh họa',[width,thick,trayH],[0,(depth-thick)/2,legH+trayH/2],wood);
+  put('tray_left','Thành trái minh họa',[thick,depth-2*thick,trayH],[-(width-thick)/2,0,legH+trayH/2],edge);
+  put('tray_right','Thành phải minh họa',[thick,depth-2*thick,trayH],[(width-thick)/2,0,legH+trayH/2],edge);
+  for(const sx of [-1,1])for(const sy of [-1,1])
+   put('tray_leg_'+(sx<0?'L':'R')+(sy<0?'F':'B'),'Chân hộc minh họa',[leg,leg,legH],[sx*(width-leg)/2,sy*(depth-leg)/2,legH/2],legs);
+ }else if(kind==='chair'){
+  if(Math.min(width,depth,height)<250)throw Error('Ghế tựa yêu cầu các chiều ít nhất 250 mm.');
+  const seatZ=height*.48,seatT=Math.min(95,height*.1);
+  const backT=Math.min(85,depth*.14),leg=Math.min(55,width*.095);
+  put('chair_seat','Mặt ngồi minh họa',[width,depth-backT,seatT],[0,-backT/2,seatZ],wood);
+  put('chair_back','Lưng tựa minh họa',[width,backT,height-seatZ+seatT/2],[0,(depth-backT)/2,(height+seatZ-seatT/2)/2],edge);
+  for(const sx of [-1,1])for(const sy of [-1,1])
+   put('chair_leg_'+(sx<0?'L':'R')+(sy<0?'F':'B'),'Chân ghế minh họa',[leg,leg,seatZ-seatT/2],[sx*(width-leg)/2,sy*(depth-leg)/2,(seatZ-seatT/2)/2],legs);
+ }else if(kind==='sofa'){
+  if(width<600||depth<450||height<400)throw Error('Sofa minh họa cần dài >=600, sâu >=450, cao >=400 mm.');
+  const arm=Math.min(180,Math.max(70,width*.09)),baseZ=height*.22;
+  const seatZ=height*.49,seatH=Math.min(155,height*.17),backT=Math.min(180,depth*.24);
+  put('sofa_base','Bệ sofa minh họa',[width,depth,baseZ],[0,0,baseZ/2],edge);
+  put('sofa_seat','Đệm ngồi minh họa',[width-2*arm,depth-backT,seatH],[0,-backT/2,seatZ],wood);
+  put('sofa_back','Tựa lưng minh họa',[width-2*arm,backT,height-baseZ],[0,(depth-backT)/2,(height+baseZ)/2],wood);
+  for(const sx of [-1,1])
+   put('sofa_arm_'+(sx<0?'L':'R'),'Tay vịn minh họa',[arm,depth,height*.62],[sx*(width-arm)/2,0,height*.31],edge);
  }else if(kind==='cabinet'){
   if(Math.min(width,depth,height)<100)throw Error('Mẫu Tủ kệ yêu cầu mỗi chiều ít nhất 100 mm.');
   const thick=Math.min(25,Math.max(7,Math.min(width,depth,height)*.04));
