@@ -6,6 +6,12 @@ Dự án thử nghiệm dựng và kiểm định 3D có giám sát. Giữ Direc
 
 Bản website HG 3D CLOUD AI dùng cùng hệ nhận diện với [HOANGGIA STUDIO](https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home): monogram HA, sidebar desktop, thanh điều hướng dưới trên điện thoại, sắc tối/xanh than/vàng champagne, breadcrumb và nút Home. Giao diện độc lập, chỉ thay đổi repository này; toàn bộ viewer, kiểm định và trình chỉnh GLB giữ nguyên logic.
 
+## Mục 01 — Bộ mô-đun dựng 3D trực tiếp từ số đo
+
+Tại [Tạo mô hình 3D](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/#create-model), khi người dùng nhập **ba kích thước được xác nhận**, mô-đun tự tạo hình học ở **khung KHÔNG GIAN 3D chính**, cập nhật thống kê mesh/kích thước/điểm chưa biết và cho xuất **GLB/FBX bản nháp** ngay trên thiết bị. Có thể chọn khối bao an toàn hoặc mẫu bàn, console, tủ kệ; các tấm/chân của mẫu là **giả định minh họa do người dùng chủ động chọn**, không nhận diện tự động qua ảnh. Tải ảnh sẽ kích hoạt kiểm tra định dạng và bộ mô-đun, nhưng hệ thống **từ chối bịa kích thước** nếu chưa có số đo xác nhận. Không đăng ảnh hay mô hình lên máy chủ.
+
+FBX nhị phân dùng gói mã nguồn mở MIT \`@comfyorg/fbx-exporter-three\`, GLB dùng Three.js. File có nhãn NEEDS_REVIEW, không phải hồ sơ thi công. Tương thích phụ thuộc phần mềm nhập và phải kiểm chứng với Blender/3ds Max trên thiết bị thật. Mọi giới hạn ChatGPT-only vẫn như cũ: **không có AI tự đọc ảnh khi upload** vì không có API/worker riêng, không có 18 mô hình AI thật chạy trong trình duyệt. [Chi tiết phạm vi](docs/LOCAL_PARAMETRIC_PIPELINE_VI.md).
+
 ## Chỉnh sửa 3D cùng ChatGPT trên website (không cần Codex)
 
 [**Mở công cụ ChatGPT Studio**](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/#create-model): chọn ảnh trên thiết bị → tự tạo lệnh ChatGPT và đính kèm thủ công → dán JSON hình học ChatGPT trả về → xem/chỉnh mô hình cục bộ bằng Three.js → tải GLB **bản nháp**. Có thể nhập GLB có sẵn để chỉnh vị trí, góc xoay và tỷ lệ. Không lưu ảnh khách hàng, không yêu cầu API key, không dùng server riêng, không phát sinh chi phí API tự động. **Không kết nối ChatGPT tự động**, không xuất BLEND từ trình duyệt, không khẳng định tái dựng chính xác từ một ảnh. Xem [hướng dẫn chi tiết](docs/CHATGPT_BROWSER_STUDIO_VI.md).
