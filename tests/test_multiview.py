@@ -22,12 +22,14 @@ class MultiviewTests(unittest.TestCase):
  def test_missing_conflicting_unreviewed_or_modified_views_block(self):
   with tempfile.TemporaryDirectory() as td:
    part,base=self.data(td)
-   for change in ['missing','conflict','unreviewed','mixed_frame','changed_image','wrong_document']:
+   for change in ['missing','conflict','unreviewed','mixed_frame','changed_image','wrong_document','invalid_view','invalid_anchor_ids']:
     p=copy.deepcopy(base)
     if change=='missing':del p['views']['side']
     if change=='conflict':p['views']['front']['anchors_mm']['a'][0]+=10
     if change=='unreviewed':p['views']['top']['status']='inferred'
     if change=='mixed_frame':p['views']['top']['metric_frame_id']='other'
     if change=='changed_image':p['views']['top']['image_sha256']='changed'
+    if change=='invalid_view':p['views']['top']=None
+    if change=='invalid_anchor_ids':p['anchor_ids']=['a',None,'c']
     if change=='wrong_document':p['views']['side']['document_sha256']='other'
     with self.subTest(change=change),self.assertRaises(SceneError):solve_reviewed_placement(part,p,'source','public-doc')

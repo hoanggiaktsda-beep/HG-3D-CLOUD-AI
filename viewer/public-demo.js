@@ -3,17 +3,18 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const status=document.querySelector('#public-demo-status'),cards=document.querySelector('#public-demo-cases');
-let renderer,controls,observer,model,camera,target,size;
+let renderer,controls,observer,model,camera,target,size,generation=0;
 window.hgPublicDemo={ready:false};
-function reset(){renderer?.setAnimationLoop(null);controls?.dispose();observer?.disconnect();model?.traverse(o=>{o.geometry?.dispose();if(o.material){for(const m of [].concat(o.material))m.dispose();}});renderer?.dispose();document.querySelector('#public-demo-viewport').replaceChildren();window.hgPublicDemo.ready=false;camera=null;controls=null;renderer=null;observer=null;model=null;}
+function reset(){generation++;renderer?.setAnimationLoop(null);controls?.dispose();observer?.disconnect();model?.traverse(o=>{o.geometry?.dispose();if(o.material){for(const m of [].concat(o.material))m.dispose();}});renderer?.dispose();document.querySelector('#public-demo-viewport').replaceChildren();window.hgPublicDemo.ready=false;camera=null;controls=null;renderer=null;observer=null;model=null;}
 function cameraView(direction){if(!camera)return;camera.position.copy(target).addScaledVector(new THREE.Vector3(...direction).normalize(),size.length()*Math.max(1,1/camera.aspect)*1.2);controls.target.copy(target);controls.update();}
 async function show(record,release){
- reset();status.textContent='Đang kiểm tra và tải kết quả AI công khai…';
+ reset();const version=generation;status.textContent='Đang kiểm tra và tải kết quả AI công khai…';
  const asset=release.files.find(f=>f.path==='public-demo/chair.glb');
  const response=await fetch('./public-demo/chair.glb?run='+encodeURIComponent(release.run_id),{cache:'no-store',credentials:'omit'});if(!response.ok)throw Error('Không tải được GLB kết quả.');
  const buffer=await response.arrayBuffer();const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',buffer)),b=>b.toString(16).padStart(2,'0')).join('');
  if(digest!==asset.sha256)throw Error('GLB không khớp checksum của lượt chạy.');
- const loaded=await new GLTFLoader().parseAsync(buffer,'');model=loaded.scene;model.rotation.x=Math.PI/2;model.updateMatrixWorld(true);
+ if(version!==generation)return;
+ const loaded=await new GLTFLoader().parseAsync(buffer,'');if(version!==generation)return;model=loaded.scene;model.rotation.x=Math.PI/2;model.updateMatrixWorld(true);
  const scene=new THREE.Scene();scene.background=new THREE.Color('#1b211d');scene.add(model,new THREE.HemisphereLight(0xffffff,0x444444,4));
  const box=new THREE.Box3().setFromObject(model);if(box.isEmpty())throw Error('Kết quả không có mesh.');target=box.getCenter(new THREE.Vector3());size=box.getSize(new THREE.Vector3());
  camera=new THREE.PerspectiveCamera(40,1,.001,100);camera.up.set(0,0,1);
@@ -41,6 +42,7 @@ async function refresh(){
   card.append(title,state,note);
   if(record.id==='chair'&&record.status==='BUILT_UNASSEMBLED_PARTS_NEEDS_REVIEW'){
    const view=document.createElement('button');view.textContent='Xem kết quả AI 3D';view.onclick=()=>show(record,release).catch(e=>{reset();status.textContent=e.message;});card.append(view);
+   const report=document.createElement('p');report.className='note';report.textContent=`IoU đường bao tấm cắt: ${Number(record.min_source_top_iou).toFixed(4)}; bất định nguồn khoảng ${Number(record.source_uncertainty_mm).toFixed(2)} mm. Chưa xác minh lắp ráp, tên tấm, lỗ khoan và bán kính dao.`;card.append(report);
    for(const [label,path] of [['GLB','public-demo/chair.glb'],['BLEND','public-demo/chair.blend'],['QA JSON','public-demo/chair-qa.json']]){const a=document.createElement('a');a.href='./'+path+'?run='+encodeURIComponent(release.run_id);a.download='';a.textContent='Tải '+label;card.append(a);}
   }
   const source=document.createElement('a');const sourceURL=new URL(record.source.url);if(sourceURL.origin!=='https://raw.githubusercontent.com'||!sourceURL.pathname.startsWith('/opendesk/design-playground/'))throw Error('Nguồn không thuộc danh mục công khai.');source.href=sourceURL.href;source.target='_blank';source.rel='noopener noreferrer';source.textContent='Bản vẽ nguồn công khai';card.append(source);cards.append(card);

@@ -21,6 +21,10 @@ class PagesWorkflowTests(unittest.TestCase):
         self.assertEqual(workflow['permissions'],{'contents':'read','pages':'write','id-token':'write'})
         self.assertTrue(any(s.get('uses','').startswith('actions/deploy-pages@') for s in deploy['steps']))
         self.assertFalse((ROOT/'viewer/pages-workflow.example.yml').exists())
+        # Serialized deployments must include the latest verified bot-published release.
+        for job in [build,workflow['jobs']['verify']]:
+            checkout=next(s for s in job['steps'] if s.get('uses','').startswith('actions/checkout@'))
+            self.assertEqual(checkout['with']['ref'],'main')
 
     def test_test32_checks_gate_deployment_and_verify_actual_site(self):
         workflow=yaml.load((ROOT/'.github/workflows/deploy-pages.yml').read_text(),Loader=yaml.BaseLoader)

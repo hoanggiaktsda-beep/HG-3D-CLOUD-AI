@@ -22,7 +22,7 @@ CLI: `python scripts/review_assembly.py cut_layout.json reviewed-plan.json NEW-r
 
 ## Thiết kế dữ liệu khách hàng riêng
 
-Backend hiện chỉ phục vụ loopback, có bearer auth, ownership, quota, kiểm ảnh, SQLite claim và file quyền 0700/0600. Worker mở BLEND, nhập GLB và ghi checksum từng artifact; API kiểm lại hash/size khi tải, file bị đổi/symlink bị chặn. Đây là bảo vệ cục bộ đã kiểm thử, chưa phải nghiệm thu triển khai Internet.
+Backend hiện chỉ phục vụ loopback, có bearer auth, ownership, quota, kiểm ảnh, SQLite claim và file quyền 0700/0600. Worker mở BLEND, nhập GLB và ghi checksum từng artifact; API kiểm lại hash/size khi tải, file bị đổi/symlink bị chặn. Đây là bảo vệ cục bộ đã kiểm thử, chưa phải nghiệm thu triển khai Internet. Công việc cũ chưa có receipt checksum sẽ bị chặn tải; cần dựng revision mới, không tự tin cậy hoặc cấp hash lại cho file cũ.
 
 Phương án triển khai khả thi khi được cấp máy chủ:
 

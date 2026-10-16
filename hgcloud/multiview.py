@@ -6,8 +6,9 @@ from .core import SceneError
 from .assembly_constraints import VIEW_AXES,verify_placement
 
 def anchors_from_views(views,anchor_ids,tolerance_mm):
- if set(views)!=set(VIEW_AXES) or type(tolerance_mm) not in (float,int) or not 0<tolerance_mm<=5:raise SceneError('Missing views or invalid tolerance')
- if len(anchor_ids)<3 or len(set(anchor_ids))!=len(anchor_ids):raise SceneError('Three unique corresponding anchors required')
+ if not isinstance(views,dict) or set(views)!=set(VIEW_AXES) or type(tolerance_mm) not in (float,int) or not 0<tolerance_mm<=5:raise SceneError('Missing views or invalid tolerance')
+ if not isinstance(anchor_ids,list) or any(not isinstance(a,str) or not a for a in anchor_ids) or len(anchor_ids)<3 or len(set(anchor_ids))!=len(anchor_ids):raise SceneError('Three unique corresponding anchors required')
+ if any(not isinstance(v,dict) or not isinstance(v.get('metric_frame_id'),str) for v in views.values()):raise SceneError('Invalid view annotations or metric frame')
  frames={v.get('metric_frame_id') for v in views.values()}
  if len(frames)!=1 or not next(iter(frames)):raise SceneError('Views do not share an explicitly reviewed metric frame')
  for view in views.values():
