@@ -110,6 +110,27 @@ class EditorWorkspaceTests(unittest.TestCase):
   self.assertGreater(len(fbx),500)
   self.assertEqual(self.errors,[])
 
+ def test_iphone_contextual_panels_and_touch_layout(self):
+  for width,height in [(320,640),(375,812),(390,844),(430,932)]:
+   with self.subTest(width=width):
+    p=self.page(width,height)
+    self.assertTrue(p.locator(".cgpt-grid").is_visible())
+    self.assertTrue(p.locator(".cgpt-inspector").is_hidden())
+    self.assertGreaterEqual(p.locator("#cgpt-viewport").bounding_box()["height"],150)
+    self.assertLessEqual(p.evaluate("document.documentElement.scrollWidth"),width+1)
+    p.locator('[data-ws-tool="parts"]').click()
+    self.assertTrue(p.locator(".cgpt-inspector").is_visible())
+    self.assertTrue(p.locator(".cgpt-grid").is_hidden())
+    self.assertTrue(p.locator("#hg-ws-assets-panel").is_visible())
+    p.locator("#hg-ws-properties-tab").click()
+    self.assertTrue(p.locator("#hg-ws-properties-panel").is_visible())
+    p.locator('[data-ws-tool="material"]').click()
+    self.assertTrue(p.locator(".cgpt-grid").is_visible())
+    self.assertTrue(p.locator(".cgpt-inspector").is_hidden())
+    p.locator('[data-ws-tool="export"]').click()
+    self.assertTrue(p.locator("#hg-ws-panel-glb").is_visible())
+    self.assertEqual(self.errors,[])
+
  def test_mobile_and_tablet_workbench_remain_accessible(self):
   for width,height in [(320,640),(390,844),(820,1180),(1200,800)]:
    with self.subTest(width=width):
