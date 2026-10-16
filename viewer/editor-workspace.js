@@ -19,7 +19,10 @@ function setTool(tool){
  for(const button of root.querySelectorAll('[data-ws-tool]'))button.setAttribute('aria-pressed',String(button.dataset.wsTool===tool));
  $('hg-ws-tool-name').textContent=modes[tool][0];
  $('hg-ws-tool-subtitle').textContent=modes[tool][1];
- if(tool==='parts')setInspector('assets');
+ if(tool==='parts'){
+  window.hgInspectorPanel?.show();
+  setInspector('assets');
+ }
  if(tool==='material')state.mobilePanel='settings';
  root.dataset.wsMobilePanel=state.mobilePanel;
  refresh();
@@ -100,8 +103,8 @@ function forward(id){
 for(const button of root.querySelectorAll('[data-ws-tool]'))button.addEventListener('click',()=>setTool(button.dataset.wsTool));
 $('hg-ws-assets-tab').addEventListener('click',()=>setInspector('assets'));
 $('hg-ws-properties-tab').addEventListener('click',()=>setInspector('properties'));
-$('hg-ws-open-assets').addEventListener('click',()=>setInspector('assets'));
-$('hg-ws-material-properties').addEventListener('click',()=>setInspector('properties'));
+$('hg-ws-open-assets').addEventListener('click',()=>{window.hgInspectorPanel?.show();setInspector('assets');});
+$('hg-ws-material-properties').addEventListener('click',()=>{window.hgInspectorPanel?.show();setInspector('properties');});
 $('hg-ws-change-image').addEventListener('click',()=>$('source-images').click());
 $('hg-ws-import-glb').addEventListener('click',()=>$('cgpt-glb-file').click());
 for(const [from,to] of [['hg-ws-top-glb','cgpt-export-glb'],['hg-ws-top-fbx','cgpt-export-fbx'],
