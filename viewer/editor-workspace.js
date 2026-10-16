@@ -154,6 +154,6 @@ window.addEventListener('hashchange',()=>{
   window.dispatchEvent(new Event('resize'));refresh();
  });
 });
-setTool('model');
 setInspector('properties');
+setTool('model');
 refresh();
