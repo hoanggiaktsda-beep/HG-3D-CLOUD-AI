@@ -8,6 +8,7 @@
     "build": "node build.mjs"
   },
   "dependencies": {
-    "three": "0.180.0"
+    "three": "0.180.0",
+    "@comfyorg/fbx-exporter-three": "1.0.2"
   }
 }
