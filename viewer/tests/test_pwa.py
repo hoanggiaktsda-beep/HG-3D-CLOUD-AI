@@ -12,7 +12,7 @@ class PwaTests(unittest.TestCase):
  def tearDownClass(cls): cls.browser.close();cls.p.stop()
  def page(self,**options):
   c=self.browser.new_context(accept_downloads=True,**options);self.addCleanup(c.close)
-  p=c.new_page();p.goto(URL);p.wait_for_function('() => (window.hgViewer?.ready)');return p
+  p=c.new_page();p.goto(URL);p.evaluate("document.body.classList.remove('hg-minimal-ui')");p.wait_for_function('() => (window.hgViewer?.ready)');return p
  def test_platform_layout_downloads_and_controls(self):
   profiles=[('iphone',320,568,True,'iPhone'),('ipad',820,1180,True,'iPad'),('windows',1366,768,False,'Windows NT 10.0; Win64; x64'),('macos',1440,900,False,'Macintosh; Intel Mac OS X 14_0')]
   for name,w,h,touch,platform in profiles:
