@@ -2,6 +2,10 @@
 
 Dự án thử nghiệm dựng và kiểm định 3D có giám sát. Giữ Director + 17 chuyên gia theo [AGENTS.md](AGENTS.md). **Chưa sẵn sàng sử dụng thực tế như hệ thống tự nhận ảnh và dựng hoàn chỉnh.** Không render.
 
+## Giai đoạn hoàn thiện sản phẩm
+
+[Mẫu AI công khai trên website](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/#public-demo) đã có kết quả Qwen/OCR → Blender thật, GLB/BLEND và QA. Chạy lại qua workflow GitHub được xác thực dành cho người có quyền write; không có token trên website. Mẫu hiện là tấm rời, chưa lắp ráp; ảnh khách hàng không được gửi vào workflow công khai. [Phạm vi đã kiểm chứng và phương án backend riêng](docs/PRODUCT_COMPLETION_VI.md).
+
 ## Trạng thái đã có bằng chứng
 
 - [Viewer mẫu công khai](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/): xoay/zoom, kích thước mesh, QA, GLB/BLEND và PWA. [TEST 32](docs/TEST32_RESULTS_VI.md) đã triển khai và kiểm tra website thật. Kiểm thử dùng Chromium giả lập, chưa thiết bị thật/Safari.

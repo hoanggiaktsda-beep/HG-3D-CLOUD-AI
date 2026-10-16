@@ -1,0 +1,77 @@
+{
+  "phase": "product_completion",
+  "new_numbered_test_series": false,
+  "production_ready": false,
+  "roles": [
+    "Director",
+    "Kiến trúc sư trưởng",
+    "Kiến trúc sư nội thất",
+    "Họa viên 3D",
+    "Chuyên gia hình học",
+    "Kỹ sư cấu tạo",
+    "Chuyên gia đo lường",
+    "Chuyên gia giải mã bản vẽ",
+    "Chuyên gia thị giác tái dựng",
+    "Chuyên gia đa ảnh",
+    "Chuyên gia vật liệu",
+    "Chuyên gia ánh sáng",
+    "Chuyên gia môi trường",
+    "Chuyên gia camera",
+    "Chuyên gia thư viện tài sản",
+    "Chuyên gia tự động hóa",
+    "Chuyên gia kiểm định hình học",
+    "Chuyên gia nghiệm thu từ xa"
+  ],
+  "test30_status": "CẦN XÁC NHẬN",
+  "public_run_url": "https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/actions/runs/38856340988",
+  "public_run_status": "Success",
+  "public_result_commit": "73d9ded505156f16d8d256e6dc02df0729b6d214",
+  "website_verification": {
+    "url": "https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/",
+    "run_id": "38856340988",
+    "actual_public_ai_result_verified": true,
+    "meshes": 20,
+    "assembled": false,
+    "customer_upload_connected": false,
+    "browser": "Chromium Linux, emulated widths 390/820/1440; not physical devices"
+  },
+  "workflow_trigger_exercised": "Git push",
+  "native_github_authenticated_button_clicked_in_codex": false,
+  "private_backend_host_provisioned": false,
+  "private_upload_connected": false,
+  "paid_services_registered": false,
+  "core_regressions": 89,
+  "viewer_regressions": 21,
+  "source_supervised_crops": true,
+  "assembly_reviewed_multiview_math_tested": true,
+  "automatic_assembled_product_accepted": false,
+  "local_blender_reopen": {
+    "run_id": "38856340988",
+    "blender": "4.3.2",
+    "source": "actual public workflow release fetched through Git",
+    "meshes": 20,
+    "max_roundtrip_vertex_error_mm": 0.0,
+    "assembly_accepted": false,
+    "render_executed": false
+  },
+  "next_action": "Cấp máy chủ Linux riêng có HTTPS và storage bền vững qua cấu hình môi trường, không gửi khóa vào chat.",
+  "public_source_catalog_cases": [
+    {
+      "id": "desk",
+      "status": "BLOCKED_NEEDS_CONFIRMATION",
+      "assembly_allowed": false
+    },
+    {
+      "id": "chair",
+      "status": "BUILT_UNASSEMBLED_PARTS_NEEDS_REVIEW",
+      "assembly_allowed": false
+    },
+    {
+      "id": "table",
+      "status": "BLOCKED_NEEDS_CONFIRMATION",
+      "assembly_allowed": false
+    }
+  ],
+  "subsequent_pages_run": "https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/actions/runs/38856743892",
+  "subsequent_pages_verified": true
+}

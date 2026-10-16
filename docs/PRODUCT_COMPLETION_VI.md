@@ -4,7 +4,7 @@ Không mở chuỗi TEST đánh số mới. Giữ Director + 17 trách nhiệm c
 
 ## Luồng mẫu công khai
 
-Website có mục riêng cho ba nguồn OpenDesk đã khóa SHA-256. Người dùng mở workflow trên GitHub và dùng xác thực do GitHub quản lý để bấm Run workflow. Pages không được giữ PAT/token; chưa có nút dispatch API trực tiếp không qua GitHub. Ảnh khách hàng chọn ở mục TẠO MÔ HÌNH 3D không được gửi tới workflow.
+Website có mục riêng cho ba nguồn OpenDesk đã khóa SHA-256. Chủ repository hoặc người có quyền write mở workflow trên GitHub và dùng xác thực do GitHub quản lý để bấm Run workflow. Người xem công khai chỉ xem/tải kết quả; không có quyền gửi việc như khách hàng. Pages không được giữ PAT/token; chưa có nút dispatch API trực tiếp không qua GitHub. Ảnh khách hàng chọn ở mục TẠO MÔ HÌNH 3D không được gửi tới workflow.
 
 Workflow chạy Qwen2-VL-2B thật trước OCR độc lập, chỉ dựng dữ liệu vượt cổng chứng cứ. Có thể chỉ có tấm rời; mẫu thiếu chứng cứ giữ BLOCKED. Không dùng phản hồi AI giả, kết quả mẫu tham số hoặc fixture để công bố nhận diện thành công.
 
@@ -36,4 +36,17 @@ Không tự đăng ký VPS, cloud storage, GPU hoặc dịch vụ có phí. GitH
 
 ## Kiểm chứng và trạng thái phát hành
 
-Đang cập nhật sau lượt chạy thực; không đánh dấu thành công trước khi AI, Blender, đóng gói và website đã được kiểm tra. Chromium emulation không phải thiết bị iPhone/iPad/macOS thật.
+Ngày 16/10/2026: [workflow mẫu công khai 38856340988](https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/actions/runs/38856340988) **Success**, 12 phút 10 giây kể cả thời gian chờ. Infer 6 phút 13 giây; publish 2 phút; deploy 12 giây; verify HTTPS 1 phút 1 giây.
+
+- Qwen/OCR chạy thật trên ba bản vẽ: chair sinh 20 tấm rời; desk/table bị chặn vì thiếu chứng cứ. Không dựng sản phẩm lắp ráp hoặc lỗ khoan chưa biết.
+- Bộ đóng gói đã kiểm nguồn và QA thật. Kết quả được bot lưu tại commit `73d9ded505156f16d8d256e6dc02df0729b6d214`, gồm GLB/BLEND, QA, phản hồi gốc và receipt. Gói public-ai-release 844 KB, SHA-256 `6fcd4e6c2a65fcbc772721e974dec0516800146f5f960284eae54cc89acca824`.
+- Kiểm tra trước phát hành và sau HTTPS đều mở đúng 20 mesh theo run ID, so checksum tài nguyên, tải GLB/BLEND thật và so bytes ở viewport 390/820/1440. Website: [mẫu AI công khai](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/#public-demo).
+- [Lượt triển khai giao diện thông thường 38856743892](https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/actions/runs/38856743892) cũng Success, kiểm website HTTPS và giữ nguyên release AI mới nhất nhờ checkout main trong nhóm triển khai tuần tự.
+- Codex lấy chính file mới qua Git, mở lại BLEND bằng Blender 4.3.2 và nhập GLB; 20 mesh kín, metadata nguồn/giấy phép, điểm mesh round-trip trùng nhau trong lượt kiểm tra (0 mm sai lệch điểm lưu). Đây không phải độ chính xác so bản vẽ. Sai lệch mesh–JSON trong worker 0,000120147 mm; bất định nguồn raster khoảng 1,521622 mm; IoU sơ đồ cắt 0,9978925343, không phải độ giống sản phẩm đã lắp.
+- Hồi quy cục bộ **89/89 lõi**, không skip, và **21/21 viewer** với snapshot AI thật. Bài xác minh trình duyệt riêng cũng tải/xem đúng release thật ở ba viewport. Các fixture toán học/replay trong unit test không được coi là AI thành công.
+- Lượt chạy được khởi động bằng Git push để tự kiểm chứng. Link từ website mở workflow GitHub đúng; bước đăng nhập/bấm Run workflow bằng tài khoản người dùng chưa được thao tác trong Codex. Chưa có API website dispatch trực tiếp; không tuyên bố luồng tải ảnh tùy ý đã nối.
+- Chromium Linux với kích thước màn hình giả lập không phải iPhone/iPad/Windows/macOS thật. Cài PWA và lưu file trong Tệp iOS vẫn chưa được kiểm chứng trên thiết bị thật.
+
+Kết luận: **mẫu công khai dùng được trong phạm vi đã nêu; chưa sẵn sàng xử lý khách hàng thực tế**. Backend Internet, AI cho ảnh tùy ý/riêng tư, storage cloud và lắp ráp tự động vẫn chưa kết nối/nghiệm thu. TEST 30 giữ CẦN XÁC NHẬN, 18 vai trò không thay đổi. Không render, không gọi API trả phí, không sửa repository khác.
+
+**Một thao tác tiếp theo để mở phần khách hàng:** cấp một máy chủ Linux riêng có HTTPS và ổ đĩa bền vững qua cấu hình môi trường (máy chủ đã có hoặc được cấp miễn phí; không tự thuê/đăng ký). Nếu chạy Qwen tại đó cần tài nguyên tương đương runner đã thử, khoảng 4 CPU/16 GB RAM. Khi chưa có hạ tầng này, tiếp tục chỉ dùng mẫu công khai; không chuyển bản vẽ riêng lên GitHub public. Cấp máy chủ chưa đồng nghĩa được mở Internet ngay: phải kiểm chứng auth/storage và chuỗi riêng tư trước.
