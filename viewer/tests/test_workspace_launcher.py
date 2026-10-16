@@ -77,7 +77,7 @@ class WorkspaceLauncherTests(unittest.TestCase):
         }""",encoded)
         page.wait_for_function("() => hgWorkspaceLauncher.verified===1",timeout=15000)
         self.assertEqual(page.locator("#source-images").evaluate("(el)=>el.files[0].name"),"private-photo.png")
-        page.locator("#clear-images").click()
+        page.evaluate("document.getElementById('clear-images').click()")
         page.wait_for_function("() => hgWorkspaceLauncher.verified===0",timeout=15000)
         self.assertTrue(page.locator("#hg-upload-empty").is_visible())
         self.assertTrue(page.locator("#hg-launch-analyze").is_disabled())
