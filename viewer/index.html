@@ -161,8 +161,20 @@
       <button type="button" id="hg-ws-change-image">Chọn / thay ảnh nguồn</button>
       <p class="note">Với ảnh chỉ có một góc nhìn, không tự suy đoán kích thước hoặc cấu tạo khuất.</p>
     </div>
+    <div class="cgpt-subcard hg-ws-tool-card hg-triposr-card" data-ws-panel="model">
+      <div class="hg-ws-create-heading"><strong>01 · AI TẠO 3D TỪ ẢNH</strong><span>TripoSR · Miễn phí</span></div>
+      <p class="note">Chọn <strong>một ảnh sản phẩm</strong> trong mục Ảnh. TripoSR chạy AI thật trên máy tính có cài bộ xử lý, trả GLB để chỉnh trong xưởng. <strong>Không chạy trên máy chủ GitHub Pages.</strong></p>
+      <div class="hg-triposr-actions">
+        <button type="button" id="hg-triposr-check">Kiểm tra TripoSR</button>
+        <button type="button" id="hg-triposr-generate" disabled>✦ TẠO 3D TỪ ẢNH</button>
+      </div>
+      <label class="hg-ws-create-check"><input type="checkbox" id="hg-triposr-consent"> Tôi đồng ý gửi <strong>1 ảnh đã chọn</strong> tới TripoSR trên chính máy tính đang chạy bộ xử lý. Không gửi ảnh tới GitHub hay API trả phí.</label>
+      <p id="hg-triposr-status" class="hg-ws-create-result" role="status" aria-live="polite">CHƯA KẾT NỐI · Nhấn Kiểm tra TripoSR sau khi cài và chạy bộ xử lý cục bộ.</p>
+      <p class="hg-ws-honesty">Cần máy tính chạy Python và TripoSR (GPU NVIDIA khoảng 6 GB VRAM là mức tham khảo). iPhone không thể kết nối tới TripoSR chạy trên PC qua địa chỉ 127.0.0.1. Ảnh đơn không cung cấp số đo thật hay cấu tạo khuất.</p>
+      <a class="hg-triposr-doc" href="https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/blob/main/docs/TRIPOSR_MIEN_PHI_VI.md" target="_blank" rel="noopener noreferrer">Hướng dẫn cài TripoSR miễn phí trên máy tính ↗</a>
+    </div>
     <div class="cgpt-subcard hg-ws-tool-card hg-ws-create-card" data-ws-panel="model">
-      <div class="hg-ws-create-heading"><strong>01 · TẠO MÔ HÌNH 3D</strong><span>Chạy trên thiết bị</span></div>
+      <div class="hg-ws-create-heading"><strong>02 · TẠO MÔ HÌNH 3D</strong><span>Chạy trên thiết bị</span></div>
       <p class="note">Dựng hình học tham số thật từ kích thước chồng xác nhận, xem ngay trong viewport và xuất GLB/FBX. <strong>Không phải AI tự nhận dạng ảnh.</strong></p>
       <label for="hg-ws-create-template">Kiểu hình học</label>
       <select id="hg-ws-create-template">
@@ -295,4 +307,4 @@
 <a href="#chatgpt-studio" data-hg-route="chatgpt-studio"><span>✳</span><small>Chỉnh sửa</small></a>
 <a href="#sample-viewer" data-hg-route="sample-viewer"><span>▧</span><small>Xem mẫu</small></a>
 <a href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home"><span>⌂</span><small>Trang chủ</small></a>
-</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="workspace-launcher.js"></script><script type="module" src="minimal-shell.js"></script><script type="module" src="editor-workspace.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
+</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="workspace-launcher.js"></script><script type="module" src="minimal-shell.js"></script><script type="module" src="editor-workspace.js"></script><script type="module" src="triposr-client.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
