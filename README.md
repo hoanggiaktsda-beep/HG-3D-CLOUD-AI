@@ -1,80 +1,47 @@
-# HOANGGIA 3D CLOUD AI — MASTER CODEX
+# HG 3D CLOUD AI
 
-**Dự án 01 — bộ não kiến trúc & nội thất Cloud 3D, dùng riêng trong Codex.** Không cần GitHub và không đụng tới 3ds Max trên Windows của người dùng.
+Dự án thử nghiệm dựng và kiểm định 3D có giám sát. Giữ Director + 17 chuyên gia theo [AGENTS.md](AGENTS.md). **Chưa sẵn sàng sử dụng thực tế như hệ thống tự nhận ảnh và dựng hoàn chỉnh.** Không render.
 
-## Dùng nhanh (người dùng)
+## Trạng thái đã có bằng chứng
 
-1. Giải nén **nội dung** file ZIP trực tiếp vào thư mục đã chọn cho dự án Codex: `Documents/HG-3D-CLOUD-AI`. Không để lồng thêm thư mục con nếu muốn AGENTS.md ở ngay thư mục gốc.
-2. Quay lại Codex → `HG 3D CLOUD AI` → ô nhập lệnh: **“Hãy đọc AGENTS.md và README.md, chạy kiểm thử, kiểm tra Blender rồi bắt đầu triển khai theo lộ trình; không dùng GitHub.”**
-3. Để thử phần đã có: `python -m unittest discover -s tests -v` → `python scripts/hg3d.py check examples/living_room.json` → `python scripts/hg3d.py report outputs/qa_report.json`.
-4. Nếu Blender được cài trong môi trường làm việc, thử dựng scene: `blender -b --python scripts/blender_build.py -- examples/living_room.json outputs/demo01` (output mới, không ghi đè). File dự kiến `hg_scene.blend`, `hg_scene.glb`, `qa_report.json`, `qa_report.html`.
+- [Viewer mẫu công khai](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/): xoay/zoom, kích thước mesh, QA, GLB/BLEND và PWA. [TEST 32](docs/TEST32_RESULTS_VI.md) đã triển khai và kiểm tra website thật. Kiểm thử dùng Chromium giả lập, chưa thiết bị thật/Safari.
+- [Cloud Worker](docs/GITHUB_ACTIONS_WORKER.md) chạy Blender trên GitHub-hosted Actions, không cần máy cá nhân chạy Blender. Chỉ nhận dữ liệu mẫu công khai, không phải backend website luôn bật.
+- [Qwen + OCR](docs/ASSEMBLY_VISION_TRIAL_RESULTS_VI.md) đã chạy mô hình thật trên ba bản vẽ công khai. Lượt đã ghi nhận dựng được tấm rời của ghế; không phải sản phẩm lắp ráp hoàn chỉnh. Các mẫu thiếu bằng chứng bị chặn.
+- [Backend cục bộ](docs/PRIVATE_BACKEND.md): bearer auth, phân quyền, hàng đợi SQLite, Blender và tải kết quả riêng tư. Chưa công khai API; AI tự động và kết nối nhận ảnh từ Pages vẫn **CHƯA KẾT NỐI**.
+- [TEST 31](docs/TEST31_RESULTS_VI.md): nhận yêu cầu mẫu, tiến độ thật, phiên bản và xử lý lỗi qua Actions. Artifacts có thời hạn, không phải storage bền vững.
+- [TEST 30](docs/TEST30_ASSEMBLY_VI.md): **CẦN XÁC NHẬN**. Chưa chứng minh lắp ráp đúng kỹ thuật; không tự nâng trạng thái.
 
-**Không có Blender?** Chạy Python unit tests vẫn được; Blender build không thể chạy cho đến khi cài Blender trong runtime tương ứng. Không mặc định Codex là máy chủ cloud 24/7.
+TEST 33 kiểm tra tổng thể các năng lực này; kết quả kiểm thử mã không thay thế nghiệm thu AI, hình học, cấu tạo hay bảo mật vận hành.
 
-## Có gì trong bản này?
+## Phát triển và kiểm thử
 
-- `AGENTS.md`: chỉ dẫn Codex — quy trình, 1 Director + 17 bộ phận, quy tắc bảo mật, QA và lộ trình.
-- `docs/`: tiêu chuẩn kiến trúc, đầu vào, schema, quy tắc dựng, kiểm định, cloud và yêu cầu nghiệm thu.
-- `hgcloud/`: kiểm tra JSON scene, quản lý job độc lập và xuất báo cáo HTML chạy trên trình duyệt điện thoại (offline).
-- `scripts/blender_build.py`: dựng cơ bản bằng Blender/Python **không render** với layer collection, vật liệu, đèn, camera.
-- `examples/`: phòng khách tham số, console, mẫu yêu cầu ảnh.
-- `tests/`: unit tests Python không phụ thuộc Blender.
+Chỉ làm việc trong repository này. Tuân thủ yêu cầu người dùng về quyền GitHub; không đưa ảnh/bản vẽ khách hàng lên repository hoặc workflow công khai. Dữ liệu backend nằm trong `.private/`, không commit.
 
-## Phân biệt năng lực đã có / còn thiếu
+```sh
+python -m unittest discover -s tests -v
+python scripts/hg3d.py check examples/living_room.json
+blender -b -t 2 --python-exit-code 1 --python scripts/blender_build.py -- examples/living_room.json outputs/new-public-demo
+blender -b -t 2 --python-exit-code 1 --python scripts/verify_blender.py -- examples/living_room.json outputs/new-public-demo
+```
 
-| Chức năng | Trạng thái khởi tạo |
-|---|---|
-| Kiểm định cấu trúc JSON, đơn vị mm, đánh dấu xác nhận/suy luận | Có mã chạy, có test Python |
-| Lưu job riêng không ghi đè, báo cáo HTML tĩnh | Có mã chạy, có test Python |
-| Blender procedural basic shapes, vật liệu, camera, đèn | Có mã; **chưa kiểm thử Blender thật ở đây** |
-| AI trực tiếp hiểu ảnh → tạo mô hình chi tiết chính xác | **Chưa hoàn thiện**; phải phát triển và đánh giá |
-| Bản vẽ layout → kiến trúc đầy đủ, cửa/cột/trần | **Chưa hoàn thiện** |
-| Geometry verification trong file BLEND & so sánh ảnh | **Chưa hoàn thiện** |
-| Cloud worker chạy khi máy cá nhân tắt + giao diện iPhone trực tuyến | **Chưa triển khai hạ tầng** |
-| Render | **Bị cấm theo yêu cầu** |
+Thư mục đầu ra Blender phải mới/trống. Các bài tích hợp cần Blender, Tesseract, Pillow, NumPy/OpenCV, FastAPI/httpx, Playwright và Chromium; xem các file `requirements*.txt`, `viewer/requirements-test.txt` và workflow TEST 33. Thiếu công cụ phải ghi rõ skip/fail, không coi kiểm thử chưa chạy là đạt.
 
-## Thông số kiến trúc
+```sh
+npm ci --prefix viewer --ignore-scripts --no-audit --no-fund
+npm run build --prefix viewer
+python scripts/serve_pages_preview.py --port 8792
+# Trong terminal khác:
+HG_VIEWER_URL=http://127.0.0.1:8792/HG-3D-CLOUD-AI/ python -m unittest discover -s viewer/tests -v
+```
 
-Đơn vị mm khi biểu diễn JSON, tọa độ Blender chuyển sang m (`mm / 1000`). Hệ trục: X ngang, Y sâu, Z cao; `center_mm` là tâm bbox, `size_mm` ba chiều. `confidence` phân biệt rõ `confirmed`, `inferred`, `needs_confirmation` kèm bằng chứng. Thiếu dữ liệu phải hiện `NEEDS_REVIEW`.
+Backend riêng: [hướng dẫn API](docs/PRIVATE_BACKEND.md), [giao diện loopback và giới hạn cloud miễn phí](docs/LOCAL_UI_AND_FREE_CLOUD.md). Mã local không được đóng gói vào Pages. Không đặt token vào JavaScript công khai.
 
-## Hạn chế
+## Dữ liệu dựng hình và nghiệm thu
 
-Một ảnh 2D không chứa đủ mọi mặt và dữ kiện để tự dựng đúng 100%. Gói này là nền tảng có mã nguồn, bộ não và kiểm thử, **chưa phải hệ thống nhận ảnh và dựng chi tiết không cần giám sát**. Với dự án CLOUD, đầu ra native `.max` cần môi trường 3ds Max hợp lệ; nên xuất BLEND/GLB/FBX rồi chuyển nếu cần.
+JSON dùng mm, Blender dùng m; trục X ngang, Y sâu, Z cao. Từng thuộc tính có `confirmed`, `inferred` hoặc `needs_confirmation` kèm chứng cứ. [Schema](docs/SCENE_SCHEMA.md), [nhập ảnh](docs/IMAGE_PIPELINE.md), [cổng QA](docs/QA_ACCEPTANCE.md), [tích hợp Qwen/OCR](docs/QWEN_OCR_BLENDER_INTEGRATION.md).
 
-## Nhập ảnh có chứng cứ (cục bộ)
+Replay/fixture chỉ kiểm thử phần mềm, không phải chứng cứ AI nhận diện thành công. Box/envelope và đồ nội thất tham số không phải mô hình sản xuất; không tự tạo lỗ khoan, liên kết hay chi tiết khuất. BLEND giữ scene chỉnh sửa; GLB không bảo đảm giữ layer/collection Blender, đèn Area, hoặc mọi thông số vật liệu/camera. Cần kiểm tra từng định dạng thực tế.
 
-Xem [IMAGE_PIPELINE.md](docs/IMAGE_PIPELINE.md) cho CLI nhận ảnh/OCR, observations theo từng trục và kiểm định mesh Blender. Nhận diện hình học tự động từ ảnh chưa được kết nối; output hiện là envelope có chứng cứ, không tự tạo chi tiết khuất.
+Một ảnh không xác định đầy đủ chiều sâu, vật liệu, mặt khuất hoặc cấu tạo. Layout 2D không tự xác nhận chiều cao. Không tuyên bố độ giống 100%, nghiệm thu cuối hoặc sử dụng sản xuất khi còn thiếu dữ liệu.
 
-Giao diện AI thị giác và pipeline replay: `scripts/vision_pipeline.py`; chưa kết nối model thật, mọi gọi live bị chặn. Xem tài liệu IMAGE_PIPELINE để chạy mẫu end-to-end không chi phí.
-
-## Xem GLB trong trình duyệt (thử nghiệm)
-
-Giao diện mẫu tại `viewer/`: xoay/zoom cảm ứng, góc camera, kích thước mesh và QA. Xem [hướng dẫn chạy và giới hạn kiểm thử](docs/GLB_VIEWER.md). Chỉ chạy loopback, chưa Publish; trạng thái cấu tạo luôn CẦN XÁC NHẬN.
-
-Chuẩn bị website tĩnh cho đường dẫn `/HG-3D-CLOUD-AI/`: [hướng dẫn GitHub Pages](docs/GITHUB_PAGES_PREPARATION.md). Workflow triển khai tại `.github/workflows/deploy-pages.yml`; cần Source = GitHub Actions. Chỉ báo website hoạt động sau khi kiểm chứng deployment.
-
-## TẠO MÔ HÌNH 3D — CHƯA KẾT NỐI
-
-Có chọn và xem ảnh cục bộ, soạn yêu cầu; chưa upload, phân tích AI hay tạo job. Các nút gửi/dựng lại khóa tới khi có backend thật. Xem [trạng thái và hợp đồng tích hợp](docs/CREATE_MODEL_CONNECTION.md). Viewer mẫu giữ nguyên, không dùng kết quả mẫu để giả nhận diện ảnh người dùng.
-
-## Backend riêng tư cục bộ
-
-API Python có xác thực, SQLite queue và worker Blender thử nghiệm: xem [PRIVATE_BACKEND.md](docs/PRIVATE_BACKEND.md). Chỉ loopback; dữ liệu trong .private không đưa lên Pages. AI tự động và kết nối frontend công khai chưa bật.
-
-Giao diện backend loopback `/local/`, xác thực trong bộ nhớ và kết quả riêng: [LOCAL_UI_AND_FREE_CLOUD.md](docs/LOCAL_UI_AND_FREE_CLOUD.md). AI tự hiểu ảnh vẫn CHƯA KẾT NỐI; mã local không được đóng gói vào Pages.
-
-## TEST 30 — kiểm chứng lắp ráp
-
-[Báo cáo TEST 30](docs/TEST30_ASSEMBLY_VI.md): bộ giải vị trí theo bằng chứng,
-kiểm định Blender và viewport GUI thật. Trang 3 có hình chiếu và kích thước;
-chương trình chưa hợp nhất chúng thành pose từng tấm nên **chưa xác minh mô hình lắp ráp hoàn chỉnh**, chưa
-chuyển TEST 31. [BLEND/GLB và ảnh đã kiểm tra](docs/test30-evidence/README.md)
-chỉ chứa tấm rời công khai; không phải dữ liệu khách hàng, không render.
-
-## TEST 31 — công việc Blender trên Actions
-
-[Hướng dẫn TEST 31](docs/TEST31_CLOUD_JOBS_VI.md): tự nhận yêu cầu mẫu công khai
-qua Git push/dispatch, phiên bản bất biến, tiến độ, lỗi và BLEND/GLB đã kiểm
-định trong Artifacts. TEST 31 chạy riêng theo yêu cầu mới của người dùng;
-TEST 30 vẫn **CẦN XÁC NHẬN** và không được thực thi lại bởi workflow này.
-Chưa mở API hoặc kết nối website nhận ảnh khách hàng.
+GitHub Pages chỉ phục vụ mẫu tĩnh công khai. Actions miễn phí được dùng trong phạm vi runner tiêu chuẩn và repository công khai; không phải máy chủ 24/7. Không nâng gói, dùng GPU/runner trả phí hoặc công bố dữ liệu riêng. Nguồn OpenDesk/AtFAB phải giữ ghi công và giấy phép; dữ liệu BY-NC không được tự coi là thư viện thương mại.

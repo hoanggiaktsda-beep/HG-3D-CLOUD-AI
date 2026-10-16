@@ -55,6 +55,9 @@ class BackendTests(unittest.TestCase):
         qa=self.client.get('/jobs/'+jid+'/artifacts/qa',headers=self.auth).json()
         self.assertEqual(qa['geometry_status'],'PASS');self.assertEqual(qa['status'],'NEEDS_REVIEW')
         self.assertFalse(qa['automatic_vision_executed'])
+        self.assertEqual(qa['interchange_validation']['status'],'PASS')
+        self.assertTrue(qa['interchange_validation']['glb_reimport'])
+        self.assertTrue(qa['interchange_validation']['blend_reopen'])
         self.assertEqual(self.client.get('/jobs/'+jid+'/artifacts/glb',headers=self.bob).status_code,404)
         new=self.client.post('/jobs/'+jid+'/revisions',headers=self.auth,json={'instruction':'Adjust from new evidence, do not invent hidden parts'})
         self.assertEqual(new.status_code,201);self.assertNotEqual(new.json()['id'],jid)
@@ -81,5 +84,19 @@ class BackendTests(unittest.TestCase):
         self.client.post('/jobs/'+jid+'/observations',headers=self.auth,json=self.observations())
         with patch('hgcloud.backend.worker.command',side_effect=RuntimeError('test worker failure')):
             run_once(self.app.state.store)
+        self.assertEqual(self.app.state.store.get(jid)['state'],'FAILED')
+        self.assertEqual(self.client.get('/jobs/'+jid+'/artifacts/glb',headers=self.auth).status_code,409)
+
+    def test_corrupted_glb_after_real_export_is_not_published(self):
+        # Fault injection into a real Blender export, not simulated successful building.
+        from unittest.mock import patch
+        from hgcloud.backend.worker import command as actual_command
+        jid=self.upload().json()['id']
+        self.client.post('/jobs/'+jid+'/observations',headers=self.auth,json=self.observations())
+        def corrupt_export(args,log,**kwargs):
+            actual_command(args,log,**kwargs)
+            if any(str(arg).endswith('/blender_build.py') for arg in args):
+                (Path(args[-1])/'hg_scene.glb').write_bytes(b'glTF-corrupted-after-real-export')
+        with patch('hgcloud.backend.worker.command',side_effect=corrupt_export):run_once(self.app.state.store)
         self.assertEqual(self.app.state.store.get(jid)['state'],'FAILED')
         self.assertEqual(self.client.get('/jobs/'+jid+'/artifacts/glb',headers=self.auth).status_code,409)

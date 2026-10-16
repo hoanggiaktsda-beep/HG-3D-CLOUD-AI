@@ -19,7 +19,13 @@ def run_once(store):
     try:
         for script in ['blender_build.py','verify_blender.py']:
             command(['blender','-b','-t','2','--python-exit-code','1','--python',str(ROOT/'scripts'/script),'--',str(folder/'scene.json'),str(build)],folder/'worker.log')
+        # Reopen saved BLEND and independently reimport actual GLB before publication.
+        command(['blender','-b','-t','2','--python-exit-code','1','--python',str(ROOT/'scripts/blender_job_interchange.py'),'--',str(build)],folder/'worker.log')
+        interchange=json.loads((build/'interchange_qa.json').read_text())
+        if interchange.get('status')!='PASS' or not interchange.get('blend_reopen') or not interchange.get('glb_reimport'):
+            raise RuntimeError('Interchange verification failed')
         qa=json.loads((build/'qa_report.json').read_text())
+        qa['interchange_validation']=interchange
         if qa.get('geometry_status')!='PASS' or not qa['blender_details']['glb_created'] or qa['blender_details']['glb_error']:
             raise RuntimeError('Verification failed')
         if not (build/'hg_scene.blend').is_file() or not (build/'hg_scene.glb').is_file():raise RuntimeError('Missing artifacts')

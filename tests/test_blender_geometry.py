@@ -17,6 +17,7 @@ class BlenderGeometryTests(unittest.TestCase):
             ('sofa', [3200, 1050, 820], [0, 0, 0]),
             ('armchair', [900, 800, 860], [0, 0, 0]),
             ('sofa', [2800, 950, 860], [0, 0, 37]),
+            ('bed', [2000, 2200, 900], [0, 0, 0]),
         ]:
             obj = dict(scene['objects'][2], id=f'case_{len(scene["objects"])}',
                        kind=kind, size_mm=size, center_mm=[7000, -3000, 1000],
@@ -73,7 +74,7 @@ print('PASS: BLEND and GLB design bounds verified')
             self.assertIsNone(report['blender_details']['glb_error'])
             run('--python', check, '--', source, output)
             measured = json.loads((output / 'measured.json').read_text())
-            self.assertEqual(len(measured), 9)
+            self.assertEqual(len(measured), 10)
             sofa = next(row for row in measured if row['id'] == 'sofa_01')
             self.assertAlmostEqual(sofa['actual_mm'][1], 950, delta=.1)
 

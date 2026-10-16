@@ -39,6 +39,15 @@ class SceneTests(unittest.TestCase):
             rp=Path(d)/'a.json'; save_report(scene,rp)
             hp=Path(d)/'a.html';build_html(rp,hp)
             self.assertNotIn('<script>',hp.read_text(encoding='utf8'))
+    def test_invalid_camera_and_light_settings_rejected(self):
+        import copy
+        for field, value in [('lens_mm', 0), ('lens_mm', -35), ('lens_mm', float('nan')), ('lens_mm', float('inf'))]:
+            scene=copy.deepcopy(self.scene);scene['cameras'][0][field]=value
+            with self.subTest(camera=value), self.assertRaises(SceneError):validate(scene)
+        for value in [-1, 0, float('inf'), float('nan')]:
+            scene=copy.deepcopy(self.scene);scene['lights'][0]['diameter_mm']=value
+            with self.subTest(diameter=value), self.assertRaises(SceneError):validate(scene)
+
     def test_overflow_rejected(self):
         scene=json.loads(json.dumps(self.scene));scene['objects'][0]['size_mm'][0]=float('inf')
         with self.assertRaises(SceneError):validate(scene)

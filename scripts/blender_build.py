@@ -112,7 +112,7 @@ def build(o):
         x,y,z=s;frame_h=z*.32
         add_box('frame',[c[0],c[1],c[2]-z/2+frame_h/2],[x,y,frame_h],'wood')
         add_box('mattress',[c[0],c[1]-y*.045,c[2]-z/2+frame_h+z*.09],[x*.95,y*.84,z*.18],'fabric')
-        add_box('headboard',[c[0],c[1]+y*.45,c[2]+z*.12],[x,y*.11,z*.76],'fabric')
+        add_box('headboard',[c[0],c[1]+y*(.5-.11/2),c[2]+z*.12],[x,y*.11,z*.76],'fabric')
     else:raise ValueError('Unsupported '+kind)
     # IMPORTANT rotations can be applied per part about common center, not each local center.
     if o.get('rotation_deg'):

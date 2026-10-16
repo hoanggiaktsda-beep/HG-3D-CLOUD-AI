@@ -55,12 +55,16 @@ def validate(scene):
     for l in lights:
         require(isinstance(l,dict) and isinstance(l.get('id'),str),'đèn cần id')
         vec3(l.get('position_mm'),f'light {l["id"]}')
+        diameter=l.get('diameter_mm',600)
+        require(type(diameter) in (int,float) and math.isfinite(diameter) and diameter>0,'diameter_mm không hợp lệ')
         require(type(l.get('power_w')) in (int,float) and 0<=l['power_w']<=100000, 'power_w không hợp lệ')
     cams=scene.get('cameras',[]); require(isinstance(cams,list),'cameras phải là mảng')
     for c in cams:
         require(isinstance(c,dict) and isinstance(c.get('id'),str),'camera cần id')
         vec3(c.get('position_mm'),f'camera {c["id"]}')
         vec3(c.get('target_mm'),f'camera target {c["id"]}')
+        lens=c.get('lens_mm',35)
+        require(type(lens) in (int,float) and math.isfinite(lens) and 1<=lens<=5000,'lens_mm phải hữu hạn trong 1..5000')
     return scene
 
 def load(path):
