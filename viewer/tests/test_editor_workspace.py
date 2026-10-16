@@ -81,6 +81,48 @@ class EditorWorkspaceTests(unittest.TestCase):
   self.assertTrue(Path(received.value.path()).read_bytes().startswith(b"Kaydara FBX Binary"))
   self.assertEqual(self.errors,[])
 
+ def test_triposr_local_explicit_consent_and_mocked_glb_import(self):
+  # This test mocks the local TripoSR HTTP response with a fixture.
+  # It does NOT prove the TripoSR model or GPU has run.
+  p=self.page(390,844)
+  self.assertTrue(p.locator("#hg-triposr-generate").is_disabled())
+  self.assertIn("CHƯA KẾT NỐI",p.locator("#hg-triposr-status").inner_text())
+  hits=[]
+  sample=(Path(__file__).resolve().parents[1]/"assets/sample.glb").read_bytes()
+  def route_bridge(route):
+   request=route.request
+   hits.append((request.method,request.url))
+   headers={"Access-Control-Allow-Origin":URL.split("/HG-3D-CLOUD-AI/")[0],
+            "Access-Control-Allow-Private-Network":"true",
+            "Access-Control-Allow-Headers":"Content-Type",
+            "Access-Control-Allow-Methods":"GET,POST,OPTIONS"}
+   if request.method=="OPTIONS":
+    route.fulfill(status=204,headers=headers)
+   elif request.url.endswith("/health"):
+    route.fulfill(status=200,headers=headers,content_type="application/json",
+      body=json.dumps({"engine":"TripoSR","local_only":True,"engine_found":True,"inference_verified":False}))
+   else:
+    route.fulfill(status=200,headers=headers,content_type="model/gltf-binary",body=sample)
+  p.route("http://127.0.0.1:8787/**",route_bridge)
+  self.assertEqual(hits,[])
+  photo=Path(__file__).resolve().parents[2]/"tests/fixtures/dimensioned_cabinet.png"
+  p.locator("#source-images").set_input_files(photo)
+  p.wait_for_function("() => hgPhotoHandoff.verifiedImages===1")
+  self.assertTrue(p.locator("#hg-triposr-generate").is_disabled())
+  self.assertEqual(hits,[])
+  p.locator("#hg-triposr-check").click()
+  p.wait_for_function("() => hgTripoSRLocal.connected===true")
+  self.assertTrue(p.locator("#hg-triposr-generate").is_disabled())
+  p.locator("#hg-triposr-consent").check()
+  self.assertTrue(p.locator("#hg-triposr-generate").is_enabled())
+  p.locator("#hg-triposr-generate").click()
+  p.wait_for_function("() => hgChatGPTStudio.ready && hgTripoSRLocal.working===false",timeout=30000)
+  self.assertTrue(p.locator("#hg-ws-top-glb").is_enabled())
+  self.assertIn("TripoSR",p.locator("#hg-ws-project-name").inner_text())
+  self.assertIn("cần kiểm định",p.locator("#hg-triposr-status").inner_text())
+  self.assertTrue(any("/v1/generate" in url and method=="POST" for method,url in hits))
+  self.assertEqual(self.errors,[])
+
  def test_image_never_auto_generates_wrong_product_without_explicit_consent(self):
   p=self.page()
   photo=Path(__file__).resolve().parents[2]/"tests/fixtures/dimensioned_cabinet.png"

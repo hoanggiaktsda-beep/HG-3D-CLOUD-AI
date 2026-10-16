@@ -1,5 +1,15 @@
 # 3D AI | HOANGGIA AI
 
+
+## TripoSR miễn phí — tạo lưới 3D thật từ một ảnh (cần GPU/máy cục bộ)
+
+Xưởng chỉnh sửa có thêm nút **AI TẠO 3D TỪ ẢNH**, kết nối tới bộ xử lý TripoSR mã nguồn mở chạy tại 127.0.0.1:8787. Ảnh chỉ gửi khi người dùng chủ động đồng ý; kết quả GLB được mở trong bộ chỉnh mesh hiện có và có thể xuất GLB/FBX. Không sử dụng API trả phí.
+
+**GitHub Pages không chạy GPU/TripoSR**. Để sử dụng, người dùng phải cài TripoSR trên máy tính và chạy bộ kết nối Python. iPhone không thể truy cập địa chỉ 127.0.0.1 của PC. Chưa kiểm chứng suy luận GPU trên máy người dùng, và mô hình từ một ảnh chưa có số đo/cấu tạo xác thực.
+
+Xem [hướng dẫn TripoSR tiếng Việt](docs/TRIPOSR_MIEN_PHI_VI.md).
+
+
 Dự án thử nghiệm dựng và kiểm định 3D có giám sát. Giữ Director + 17 chuyên gia theo [AGENTS.md](AGENTS.md). **Chưa sẵn sàng sử dụng thực tế như hệ thống tự nhận ảnh và dựng hoàn chỉnh.** Không render.
 
 ## Xưởng chỉnh sửa 3D AI — Phiên bản P1
