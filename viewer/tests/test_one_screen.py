@@ -38,7 +38,7 @@ class OneScreenTests(unittest.TestCase):
   p.wait_for_function("() => hgMinimalWorkspace.mode === 'editor'")
   self.assertTrue(p.locator("#chatgpt-studio").is_visible())
   self.assertTrue(p.locator("#create-model").is_hidden())
-  p.locator(".hg-editor-back a[href='#create-model']").click()
+  p.locator(".hg-ws-back[href='#create-model']").click()
   p.wait_for_function("() => hgMinimalWorkspace.mode === 'launch'")
   self.assertTrue(p.locator("#create-model").is_visible())
   self.assertTrue(p.locator("#chatgpt-studio").is_hidden())
