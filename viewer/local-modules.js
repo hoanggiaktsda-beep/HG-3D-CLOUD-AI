@@ -1,6 +1,6 @@
 // Local evidence-gated modeling modules. No AI inference, API, upload or persistence.
 const $=id=>document.getElementById(id);
-const ui={width:$('hg-width'),depth:$('hg-depth'),height:$('hg-height'),template:$('hg-template'),confirm:$('hg-confirm-dims')};
+const ui={width:$('hg-width'),depth:$('hg-depth'),height:$('hg-height'),template:$('hg-template'),confirm:$('hg-confirm-dims'),illustration:$('hg-allow-illustration')};
 const state={status:'WAITING',runs:0,meshes:0,template:null,errors:[],imageCount:0};
 window.hgLocalModules=state;
 let lastSignature='',timer;
@@ -58,6 +58,20 @@ function makeParts(width,depth,height,kind){
 }
 function build(force=false){
  const input=inputState();
+ // A valid photo is a reference, NOT a shape-recognition input to this parametric engine.
+ // Without explicit separate consent, never replace the depicted product with a generic table/cabinet.
+ if(input.photos.length&&!input.verified){
+  state.status='WAITING_IMAGES';show('hg-engine-result','Ảnh đang được kiểm tra định dạng. Hãy đợi...');return false;
+ }
+ if(input.verified&&!ui.illustration.checked){
+  state.status='WAITING_CHATGPT_IMAGE_ANALYSIS';
+  show('hg-mod-geometry','Chờ phân tích ảnh trong ChatGPT — chưa dựng');
+  show('hg-mod-preview','Chưa có kết quả từ ảnh nguồn');
+  show('hg-mod-qa','Chưa thể đối chiếu với ảnh');
+  show('hg-mod-export','Chưa có mô hình của ảnh');
+  show('hg-engine-result','Ảnh đã được nhận nhưng chưa được AI phân tích. Chọn “Sao chép lệnh phân tích ảnh” và mở ChatGPT ở phía trên. Nếu chỉ cần mẫu minh họa KHÔNG THEO ẢNH, hãy bật ô xác nhận riêng.');
+  return false;
+ }
  if(!input.valid||!input.approved){
   state.status='WAITING_MEASUREMENTS';
   const msg=!input.valid?'Nhập Dài, Sâu, Cao bằng mm rồi xác nhận số đo.':'Đánh dấu xác nhận số đo để dựng mô hình.';
@@ -69,7 +83,7 @@ function build(force=false){
   state.status='WAITING_IMAGES';show('hg-engine-result','Ảnh đang được kiểm tra định dạng. Hãy đợi...');return false;
  }
  const dims=input.values,kind=ui.template.value;
- const signature=[...dims,kind,input.photos.map(f=>f.name+':'+f.size).join('|')].join('/');
+ const signature=[...dims,kind,ui.illustration.checked?'illustration':'noimage',input.photos.map(f=>f.name+':'+f.size).join('|')].join('/');
  if(!force&&signature===lastSignature)return false;
  try{
   const objects=makeParts(...dims,kind);
@@ -77,8 +91,7 @@ function build(force=false){
   if(kind!=='box')notes.unshift('Các tấm, chân và độ dày là cấu tạo minh họa từ mô hình tham số; không đo từ ảnh.');
   const data={schema:'hg-chatgpt-scene-v1',unit:'mm',review_status:'NEEDS_REVIEW',objects,unknown_details:notes};
   const editor=$('cgpt-scene-json');editor.value=JSON.stringify(data,null,2);
-  $('cgpt-preview-json').click();
-  if(!window.hgChatGPTStudio?.ready)throw Error('Trình dựng hình 3D không khởi tạo thành công.');
+  if(!window.hgChatGPTStudio?.loadParametricDraft?.(data))throw Error('Trình dựng hình 3D không khởi tạo thành công.');
   lastSignature=signature;
   state.status='BUILT_PARAMETRIC_DRAFT';state.runs+=1;state.template=kind;state.meshes=objects.length;state.errors=[];
   show('hg-mod-geometry','Đã dựng '+objects.length+' mesh tham số');
@@ -95,11 +108,15 @@ function build(force=false){
  }
 }
 function changed(){clearTimeout(timer);timer=setTimeout(()=>build(false),220);}
-for(const f of [ui.width,ui.depth,ui.height,ui.template,ui.confirm]){
+for(const f of [ui.width,ui.depth,ui.height,ui.template,ui.confirm,ui.illustration]){
  f.addEventListener('change',changed);
  if(f.type==='number')f.addEventListener('input',changed);
 }
 $('hg-run-modules').addEventListener('click',()=>build(true));
-document.addEventListener('hg3d:imagesvalidated',()=>{lastSignature='';changed();});
+document.addEventListener('hg3d:imagesvalidated',event=>{
+ // Uploading/replacing a photo cancels an earlier permission to show unrelated model templates.
+ if(event.detail?.count>0)ui.illustration.checked=false;
+ lastSignature='';changed();
+});
 $('source-images').addEventListener('change',()=>{state.status='VERIFYING_INPUT';show('hg-mod-source','Đang xác minh ảnh tại thiết bị');});
 inputState();
