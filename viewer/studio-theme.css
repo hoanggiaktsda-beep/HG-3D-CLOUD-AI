@@ -621,3 +621,10 @@ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .hg-photo-reference{margin:7px 1
 .hg-triposr-doc{display:inline-block;margin:7px 0 3px;font-size:12px;color:#e6c993;text-decoration:underline;text-underline-offset:3px}
 .hg-3d-editor .hg-triposr-card .hg-ws-create-check{font-size:12px}
 @media(max-width:360px){.hg-triposr-actions{grid-template-columns:1fr}}
+
+/* HG 3D: maximize viewing area; optional inspector is collapsed by default. */
+body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden .cgpt-inspector{display:none!important}
+body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden{grid-template-columns:var(--hg-rail-width,72px) minmax(0,1fr)!important}
+body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden .cgpt-scene{grid-column:scene!important}
+body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden .cgpt-editor{grid-template-columns:minmax(0,1fr)!important}
+.hg-3d-editor #hg-inspector-open[hidden],.hg-3d-editor #hg-inspector-collapsible[hidden]{display:none!important}
