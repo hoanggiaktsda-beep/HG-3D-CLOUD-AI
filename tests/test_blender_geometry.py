@@ -57,6 +57,9 @@ def measure(imported=False):
         rows.append({'id':spec['id'],'actual_mm':actual,'expected_mm':spec['size_mm']})
     return rows
 rows=measure()
+# Unused retained material must not be misclassified as an active scene surface.
+unused=bpy.data.materials.new('Unused audit regression');unused.use_nodes=False;unused.use_fake_user=True
+bpy.ops.wm.save_as_mainfile(filepath=str(out/'hg_scene.blend'))
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=str(out/'hg_scene.glb'))
 measure(imported=True)
@@ -73,6 +76,7 @@ print('PASS: BLEND and GLB design bounds verified')
             self.assertTrue(report['blender_details']['glb_created'])
             self.assertIsNone(report['blender_details']['glb_error'])
             run('--python', check, '--', source, output)
+            run('--python', ROOT / 'scripts/audit_scene33.py', '--', source, output, output/'inventory.json')
             measured = json.loads((output / 'measured.json').read_text())
             self.assertEqual(len(measured), 10)
             sofa = next(row for row in measured if row['id'] == 'sofa_01')

@@ -19,4 +19,6 @@ summary={'test':33,'generated_utc':datetime.now(timezone.utc).isoformat(),'tests
 a.output.parent.mkdir(parents=True,exist_ok=True)
 with a.output.open('x') as f:json.dump(summary,f,ensure_ascii=False,indent=2)
 print(json.dumps(summary,ensure_ascii=False))
+if __import__('os').environ.get('GITHUB_ACTIONS'):
+    print('::notice title=Actual TEST33 core regressions::'+json.dumps(summary,ensure_ascii=False).replace('%','%25').replace('\n','%0A').replace('\r','%0D'))
 if not summary['regression_passed']:raise SystemExit(1)
