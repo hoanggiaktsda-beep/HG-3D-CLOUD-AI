@@ -78,12 +78,12 @@ class ViewerTests(unittest.TestCase):
         self.assertEqual(page.locator('#object-rows td.pending').count(),8)
     def test_missing_glb_shows_error_not_pass(self):
         page=self.page();page.route('**/assets/sample.glb',lambda route:route.fulfill(status=404,body='not found'))
-        page.goto(URL);page.locator('#error').wait_for(state='visible')
+        page.goto(URL);page.evaluate("document.body.classList.remove('hg-minimal-ui')");page.locator('#error').wait_for(state='visible')
         self.assertEqual(page.locator('#qa-result').inner_text(),'CHƯA KIỂM CHỨNG')
         self.assertFalse(page.evaluate('hgViewer.ready'))
     def test_invalid_report_blocks_viewer(self):
         page=self.page();page.route('**/assets/sample-qa.json',lambda route:route.fulfill(json={'status':'APPROVED'}))
-        page.goto(URL);page.locator('#error').wait_for(state='visible')
+        page.goto(URL);page.evaluate("document.body.classList.remove('hg-minimal-ui')");page.locator('#error').wait_for(state='visible')
         self.assertFalse(page.evaluate('hgViewer.ready'))
     def test_no_external_runtime_requests(self):
         page=self.page();external=[]
