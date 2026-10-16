@@ -624,7 +624,24 @@ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .hg-photo-reference{margin:7px 1
 
 /* HG 3D: maximize viewing area; optional inspector is collapsed by default. */
 body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden .cgpt-inspector{display:none!important}
-body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden{grid-template-columns:var(--hg-rail-width,72px) minmax(0,1fr)!important}
-body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden .cgpt-scene{grid-column:scene!important}
-body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden .cgpt-editor{grid-template-columns:minmax(0,1fr)!important}
+/* Preserve all grid areas when the optional inspector is collapsed.
+   Do not reduce a four-area editor to two columns: that pushed the 3D canvas off-screen. */
+@media(min-width:901px){
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden{
+  grid-template-columns:66px minmax(245px,290px) minmax(0,1fr)!important;
+  grid-template-areas:"bar bar bar" "rail settings scene" "feedback feedback feedback"!important;
+ }
+}
+body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden .cgpt-scene{grid-area:scene!important;min-width:0}
+body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden .cgpt-editor{display:contents!important}
+@media(max-width:900px){
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor.hg-inspector-hidden{
+  grid-template-areas:"bar" "rail" "scene" "settings" "feedback"!important;
+ }
+}
+.hg-3d-editor #hg-inspector-open{align-self:flex-start;position:relative;z-index:2}
+.hg-3d-editor .hg-ws-bar{background:#111713;border-bottom:1px solid #655437}
+.hg-3d-editor .cgpt-scene{background:#202824}
+.hg-3d-editor .hg-ws-viewport-tools button[aria-pressed="true"]{border-color:#d2af73;color:#f5d6a0}
+
 .hg-3d-editor #hg-inspector-open[hidden],.hg-3d-editor #hg-inspector-collapsible[hidden]{display:none!important}
