@@ -25,6 +25,7 @@ class ChatGPTStudioTests(unittest.TestCase):
         self.addCleanup(context.close)
         page=context.new_page()
         page.goto(URL)
+        page.evaluate("document.body.classList.remove('hg-minimal-ui')")
         return page
 
     def test_manual_prompt_does_not_upload_or_store_files(self):
