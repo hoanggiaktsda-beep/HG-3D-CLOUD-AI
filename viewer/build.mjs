@@ -20,6 +20,9 @@ const copy={ 'public-demo.js':'public-demo.js', 'pwa.js':'pwa.js','studio-theme.
  'node_modules/three/examples/jsm/controls/OrbitControls.js':'vendor/three/addons/controls/OrbitControls.js',
  'node_modules/three/examples/jsm/loaders/GLTFLoader.js':'vendor/three/addons/loaders/GLTFLoader.js',
  'node_modules/three/examples/jsm/loaders/FBXLoader.js':'vendor/three/addons/loaders/FBXLoader.js',
+ 'node_modules/three/examples/jsm/libs/fflate.module.js':'vendor/three/addons/libs/fflate.module.js',
+ 'node_modules/three/examples/jsm/curves/NURBSCurve.js':'vendor/three/addons/curves/NURBSCurve.js',
+ 'node_modules/three/examples/jsm/curves/NURBSUtils.js':'vendor/three/addons/curves/NURBSUtils.js',
  'node_modules/fflate/esm/browser.js':'vendor/fflate/esm/browser.js',
  'node_modules/three/examples/jsm/exporters/GLTFExporter.js':'vendor/three/addons/exporters/GLTFExporter.js',
  'node_modules/three/examples/jsm/utils/BufferGeometryUtils.js':'vendor/three/addons/utils/BufferGeometryUtils.js','node_modules/three/LICENSE':'vendor/three/LICENSE'};
