@@ -59,7 +59,7 @@ class CreateModelTests(unittest.TestCase):
             with self.subTest(size=(width,height)):
                 page=self.page(width,height)
                 self.assertLessEqual(page.evaluate('document.documentElement.scrollWidth'),width)
-                page.locator('a[href="#create-model"]').click()
+                page.locator('.section-nav a[href="#create-model"]').click()
                 page.locator('#input-type').select_option('layout')
                 page.locator('#source-images').set_input_files(IMAGE)
                 page.wait_for_function('() => (document.querySelectorAll("#image-previews img").length === 1)')
