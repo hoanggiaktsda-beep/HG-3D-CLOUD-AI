@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    timeout-minutes: 15
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,14 +40,17 @@ jobs:
         working-directory: viewer
       - run: python -m playwright install --with-deps chromium
         working-directory: viewer
-      - name: TEST 32 static, security and responsive browser checks
+      # Deployment gate: bounded smoke tests only. Full browser/regression tests run
+      # in separate workflows so a stalled WebGL browser cannot block publishing.
+      - name: Pages release smoke tests (hard timeout 4 minutes)
+        timeout-minutes: 5
         working-directory: viewer
         run: |
           mkdir -p ../outputs/test32
           python ../scripts/serve_pages_preview.py --port 8792 > ../outputs/test32/server.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
-          HG_VIEWER_URL=http://127.0.0.1:8792/HG-3D-CLOUD-AI/ python -m unittest discover -s tests -v
+          timeout --signal=TERM --kill-after=10s 240s python -m unittest -v tests.test_static_build tests.test_workflow tests.test_hoanggia_theme
       - uses: actions/upload-pages-artifact@v3
         with:
           path: viewer/dist
