@@ -12,9 +12,10 @@ permissions:
   contents: read
   pages: write
   id-token: write
+# Publish the newest main commit; supersede stale builds rather than queueing outdated Pages releases.
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   build:
     timeout-minutes: 15
