@@ -610,3 +610,14 @@ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .hg-photo-reference{margin:7px 1
  .hg-ws-create-dims{gap:5px}
  .hg-ws-create-dims input{font-size:16px!important;padding:8px 5px}
 }
+
+
+/* Optional free local TripoSR inference; never suggests remote AI is active. */
+.hg-3d-editor .hg-triposr-card{background:linear-gradient(145deg,#20342a,#19241f)!important;border-color:#638b72!important}
+.hg-triposr-actions{display:grid;grid-template-columns:1fr 1.2fr;gap:8px;margin:12px 0}
+.hg-3d-editor .cgpt-grid .hg-triposr-actions button{min-height:47px;font-size:12px;white-space:normal}
+.hg-3d-editor .cgpt-grid #hg-triposr-generate{background:#b99760;color:#111a12;font-weight:800;border-color:#c7ad77}
+.hg-3d-editor .cgpt-grid #hg-triposr-generate:disabled{background:#344238;color:#8f9f91;opacity:.65;border-color:#4d5d50}
+.hg-triposr-doc{display:inline-block;margin:7px 0 3px;font-size:12px;color:#e6c993;text-decoration:underline;text-underline-offset:3px}
+.hg-3d-editor .hg-triposr-card .hg-ws-create-check{font-size:12px}
+@media(max-width:360px){.hg-triposr-actions{grid-template-columns:1fr}}
