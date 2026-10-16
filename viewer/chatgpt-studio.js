@@ -142,6 +142,7 @@ state.loadParametricDraft = data => {
 state.clearForNewSource = () => {
  if(model){scene?.remove(model);model=null;}
  part=null;state.ready=false;state.origin=null;state.edited=false;state.objects=0;
+ $('cgpt-scene-json').value='';$('cgpt-prompt').value='';
  if(renderer){const select=$('cgpt-part');select.replaceChildren();$('cgpt-part-count').textContent='Chưa có mô hình của ảnh mới';fill();}
  review.textContent='ẢNH MỚI · CHƯA ĐƯỢC AI PHÂN TÍCH. Không dùng mô hình cũ hoặc mẫu tự dựng để đại diện ảnh này.';
  say('Đã nhận ảnh mới. Chờ phân tích bằng ChatGPT hoặc người dùng chọn dựng mẫu riêng.');
