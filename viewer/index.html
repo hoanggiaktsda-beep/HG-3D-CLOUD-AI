@@ -205,32 +205,16 @@
       <p class="hg-ws-honesty">AI tái dựng đúng sản phẩm từ ảnh như Tripo chưa được kết nối. Nút này dựng <strong>mô hình tham số có thể chỉnh sửa</strong>, không giả kết quả AI.</p>
     </div>
     <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="model">
-      <h4>02 · Tạo yêu cầu cho ChatGPT</h4>
-      <p class="note">Mô tả yêu cầu và số đo dưới đây được chuyển vào bộ tạo lệnh ChatGPT có sẵn, không kích hoạt API.</p>
-      <label for="hg-ws-input-kind">Loại nguồn</label>
-      <select id="hg-ws-input-kind">
-        <option value="product_photo">Ảnh sản phẩm / nội thất</option>
-        <option value="technical_drawing">Bản vẽ kỹ thuật</option>
-        <option value="layout">Mặt bằng / sơ đồ</option>
-      </select>
-      <label for="hg-ws-instruction">Yêu cầu hình dáng / chỉnh sửa</label>
-      <textarea id="hg-ws-instruction" rows="4" maxlength="4000" placeholder="Ví dụ: sofa 2 chỗ có console giữa, 2 gác chân recliner..."></textarea>
-      <label for="hg-ws-measurements">Kích thước được xác nhận (mm)</label>
-      <textarea id="hg-ws-measurements" rows="3" maxlength="2000" placeholder="Ví dụ: dài 2460 × sâu 1100 × cao 770 mm; nguồn: bản vẽ hãng"></textarea>
-      <div class="cgpt-buttons"><button type="button" id="cgpt-generate">Tạo lệnh từ yêu cầu</button><button type="button" id="cgpt-copy">Sao chép lệnh</button><button type="button" id="cgpt-download-job">Tải JSON công việc</button></div>
-      <label for="cgpt-prompt">Lệnh đã chuẩn bị</label>
-      <textarea id="cgpt-prompt" readonly rows="7" placeholder="Nhập yêu cầu ở biểu mẫu bên dưới, sau đó nhấn Tạo lệnh..."></textarea>
-      <a class="cgpt-link" id="cgpt-open" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Mở ChatGPT ↗</a>
-      <p class="note">Lưu ý: Lệnh sao chép KHÔNG tự chuyển ảnh. Chồng tự tải ảnh vào ChatGPT, sau đó sao chép JSON mô hình ChatGPT trả về vào ô bên cạnh.</p>
-    </div>
-    <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="model">
-      <h4>03 · Nhận mô hình ChatGPT trả về</h4>
-      <p class="note">Dán JSON đúng cấu trúc <code>hg-chatgpt-scene-v1</code> để dựng hình khối có kích thước. Mọi kết quả chỉ là bản nháp.</p>
-      <label for="cgpt-scene-json">JSON hình học</label>
-      <textarea id="cgpt-scene-json" rows="7" spellcheck="false" placeholder='{"schema":"hg-chatgpt-scene-v1","unit":"mm","objects":[...],"unknown_details":[...]}'></textarea>
-      <div class="cgpt-buttons"><button type="button" id="cgpt-preview-json">Xem 3D từ JSON</button><label for="cgpt-json-file" class="cgpt-file-button">Mở JSON cục bộ</label><input id="cgpt-json-file" type="file" accept=".json,application/json"></div>
-      <p class="note">Chồng cũng có thể nhập mô hình GLB đã có trên thiết bị để xem và thay đổi vị trí, góc xoay, tỷ lệ từng bộ phận.</p>
-      <label for="cgpt-glb-file" class="cgpt-file-button">Mở mô hình GLB trên thiết bị</label><input id="cgpt-glb-file" type="file" accept=".glb,model/gltf-binary">
+      <h4>03 · Xem mô hình 3D</h4>
+      <p class="note">Mô hình tạo từ ảnh đã phân tích hoặc từ file 3D có sẵn. Các dữ liệu kỹ thuật được thu gọn để giao diện dễ sử dụng.</p>
+      <label for="cgpt-glb-file" class="cgpt-file-button">Mở file 3D (GLB)</label><input id="cgpt-glb-file" type="file" accept=".glb,model/gltf-binary">
+      <details style="margin-top:12px;border:1px solid #46584a;border-radius:9px;padding:10px">
+        <summary style="cursor:pointer;color:#d9bc80;font-weight:600">Tùy chọn nâng cao · Nhập dữ liệu JSON</summary>
+        <p class="note">Chỉ sử dụng khi ChatGPT cung cấp dữ liệu hình học JSON.</p>
+        <label for="cgpt-scene-json">Dữ liệu hình học</label>
+        <textarea id="cgpt-scene-json" rows="5" spellcheck="false" placeholder="Dán JSON từ ChatGPT tại đây"></textarea>
+        <div class="cgpt-buttons"><button type="button" id="cgpt-preview-json">Xem mô hình từ JSON</button><label for="cgpt-json-file" class="cgpt-file-button">Chọn file JSON</label><input id="cgpt-json-file" type="file" accept=".json,application/json"></div>
+      </details>
     </div>
     <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="parts">
       <h4>Chỉnh từng bộ phận</h4>
