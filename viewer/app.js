@@ -113,6 +113,29 @@ async function start() {
   renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
 
   let localRoot = null;
+  // A freshly selected photo must NEVER be visually associated with the old sample/model.
+  state.clearForNewSource = () => {
+    if(!state.ready)return false;
+    if(localRoot){scene.remove(localRoot);localRoot=null;}
+    gltf.scene.visible=false;
+    center.set(0,0,0);boxSize.set(1,1,1);
+    camera.near=.01;camera.far=100;camera.updateProjectionMatrix();
+    controls.minDistance=.1;controls.maxDistance=20;
+    ['width','depth','height','max-error','tolerance','mesh-count'].forEach(id=>text(id,'—'));
+    text('qa-result','CHƯA PHÂN TÍCH ẢNH');
+    text('object-count','Chưa có hình học từ ảnh mới');
+    text('measurement-note','Không có số đo đã xác minh từ ảnh; chưa tạo mô hình.');
+    const list=document.querySelector('#unknown-list');list.replaceChildren();
+    const li=document.createElement('li');li.textContent='Ảnh vừa chọn chưa được ChatGPT phân tích; không sử dụng lại mô hình mẫu/bản nháp cũ.';list.append(li);
+    document.querySelector('#object-rows').replaceChildren();
+    document.querySelector('#sample-viewer h1').textContent='CHỜ PHÂN TÍCH ẢNH';
+    document.querySelector('#sample-viewer .subtitle').textContent='Ảnh đã nhận ở trình duyệt · chưa tạo mô hình theo ảnh';
+    document.querySelector('#sample-viewer .review-badge').textContent='● CHƯA NHẬN DIỆN';
+    for(const id of ['hg-download-glb','hg-download-fbx'])document.getElementById(id).hidden=true;
+    state.displayMode='awaiting_photo_analysis';state.localMeshes=0;state.measured_mm=null;
+    setView('perspective');
+    return true;
+  };
   // Display local drafts in the SAME viewer as the sample screenshot, without altering public source assets.
   // Three.js editors use Y-up; the original QA viewer uses Z-up.
   state.showLocalDraft = (source, metadata = {}) => {
