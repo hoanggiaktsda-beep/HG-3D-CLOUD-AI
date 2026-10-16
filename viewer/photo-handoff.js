@@ -27,6 +27,7 @@ function updateReference(){
 function resetForPhoto(count){
  const list=verifiedFiles();
  handoff.verifiedImages=count||0;handoff.prepared=false;handoff.imported=false;handoff.imageCopied=false;
+ $('cgpt-prompt').value='';
  status.textContent=list.length?'ĐÃ NHẬN ẢNH · CHƯA NHẬN DIỆN':'CHƯA CÓ ẢNH';
  copyPromptButton.disabled=!list.length;
  copyImageButton.disabled=!list.length;
