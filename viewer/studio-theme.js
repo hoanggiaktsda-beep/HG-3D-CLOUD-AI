@@ -1,5 +1,6 @@
 // HOANGGIA STUDIO navigation semantics. No network access, no local data stored.
 const labels={
+ 'hg-launch':'TẠO 3D TỪ ẢNH',
  'create-model':'TẠO MÔ HÌNH 3D',
  'chatgpt-studio':'XƯỞNG CHATGPT',
  'sample-viewer':'XEM MÔ HÌNH MẪU',
