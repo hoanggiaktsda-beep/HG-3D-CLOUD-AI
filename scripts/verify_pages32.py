@@ -17,13 +17,21 @@ with sync_playwright() as p:
  context=browser.new_context(accept_downloads=True,viewport={'width':390,'height':844})
  page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(url);page.wait_for_function('()=>window.hgViewer?.ready',timeout=60000)
+ assert page.locator('#create-model.hg-launch').is_visible(), 'Single image-first workspace must be displayed'
+ assert page.locator('header.hg-topbar').is_hidden(), 'Old navigation must remain hidden'
  assert page.locator('#height').inner_text()=='850'
  assert page.locator('#create-job').is_disabled()
+ # Open the preserved viewer explicitly: it is intentionally hidden on the single-screen homepage.
+ page.evaluate("location.hash='#sample-viewer'")
+ page.wait_for_function("() => window.hgMinimalWorkspace?.mode==='viewer'")
+ assert page.locator('.workspace').is_visible()
  page.locator('[data-view=top]').click();assert page.evaluate('hgViewer.currentView')=='top'
+ # Public sample downloads are intentionally removed from the default user interface.
+ # Verify their live bytes directly without requiring hidden footer links to be clickable.
  for ext in ('glb','blend'):
-  with page.expect_download() as event:page.locator(f'a[href="assets/sample.{ext}"]').click()
-  dl=event.value;assert dl.failure() is None
-  assert Path(dl.path()).read_bytes()==(root/f'viewer/assets/sample.{ext}').read_bytes()
+  response=context.request.get(url+f'assets/sample.{ext}')
+  assert response.status==200
+  assert response.body()==(root/f'viewer/assets/sample.{ext}').read_bytes()
  page.wait_for_function('()=>navigator.serviceWorker.controller!==null',timeout=60000)
  context.set_offline(True);page.reload();page.wait_for_function('()=>hgViewer.ready',timeout=60000)
  assert not errors,errors
