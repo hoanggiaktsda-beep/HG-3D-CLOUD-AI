@@ -39,11 +39,11 @@
  <p id="hg-photo-guidance" role="status" aria-live="polite">Sau khi chọn ảnh, hãy đưa chính ảnh đó sang ChatGPT để phân tích. Website không được phép tự gửi ảnh.</p>
  <div class="hg-photo-steps">
    <button type="button" id="hg-photo-copy-prompt">01 · Sao chép lệnh phân tích ảnh</button>
-   <button type="button" id="hg-photo-copy-image">02 · Sao chép ảnh đầu tiên</button>
-   <a id="hg-photo-open-chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">03 · Mở ChatGPT ↗</a>
-   <a id="hg-photo-import-result" href="#chatgpt-studio">04 · Dán kết quả → Xem 3D</a>
+   <a id="hg-photo-open-chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">02 · Mở ChatGPT, dán lệnh ↗</a>
+   <button type="button" id="hg-photo-copy-image">03 · Sao chép ảnh đầu tiên (tùy chọn)</button>
+   <a id="hg-photo-import-result" href="#chatgpt-studio">04 · Dán JSON → Xem 3D</a>
  </div>
- <p class="note">Trong ChatGPT: dán lệnh và đính kèm ảnh (hoặc dán ảnh đã sao chép). Trở lại website dán JSON do ChatGPT trả về. Ảnh chưa được nhận diện chỉ bằng thao tác tải lên. Nếu trình duyệt không cho sao chép ảnh, chồng đính kèm ảnh thủ công.</p>
+ <p class="note">Trong ChatGPT: dán lệnh trước, sau đó đính kèm ảnh từ máy hoặc quay lại trang này nhấn Sao chép ảnh rồi dán tiếp. Trở lại website dán JSON do ChatGPT trả về. Ảnh chưa được nhận diện chỉ bằng thao tác tải lên. Nếu trình duyệt không cho sao chép ảnh, chồng đính kèm ảnh thủ công.</p>
 </div>
 <label for="model-instruction">Yêu cầu dựng / chỉnh sửa</label><textarea id="model-instruction" rows="4" maxlength="4000" placeholder="Giữ nguyên hình dáng, sửa vị trí bộ phận…"></textarea>
 <label for="confirmed-measurements">Kích thước do bạn xác nhận (mm)</label><textarea id="confirmed-measurements" rows="2" maxlength="2000" placeholder="Chỉ nhập số đo đã biết và nguồn. Phần chưa rõ để trống."></textarea>
@@ -130,4 +130,4 @@
 <a href="#chatgpt-studio" data-hg-route="chatgpt-studio"><span>✳</span><small>Chỉnh sửa</small></a>
 <a href="#sample-viewer" data-hg-route="sample-viewer"><span>▧</span><small>Xem mẫu</small></a>
 <a href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home"><span>⌂</span><small>Trang chủ</small></a>
-</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
+</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
