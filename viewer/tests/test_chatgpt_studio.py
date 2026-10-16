@@ -3,6 +3,7 @@ import json
 import os
 import shutil
 import unittest
+from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 URL=os.environ.get("HG_VIEWER_URL","http://127.0.0.1:8765")
@@ -39,7 +40,7 @@ class ChatGPTStudioTests(unittest.TestCase):
         self.assertEqual(page.locator("#cgpt-open").get_attribute("href"),"https://chatgpt.com/")
         with page.expect_download() as received:
             page.locator("#cgpt-download-job").click()
-        blob=received.value.path().read_text()
+        blob=Path(received.value.path()).read_text()
         job=json.loads(blob)
         self.assertFalse(job["image_bytes_included"])
         self.assertEqual(job["mode"],"manual_chatgpt_only")
@@ -67,7 +68,7 @@ class ChatGPTStudioTests(unittest.TestCase):
         self.assertTrue(page.evaluate("hgChatGPTStudio.edited"))
         with page.expect_download(timeout=20000) as received:
             page.locator("#cgpt-export-glb").click()
-        p=received.value.path()
+        p=Path(received.value.path())
         self.assertEqual(p.read_bytes()[:4],b"glTF")
         self.assertGreater(p.stat().st_size,200)
         self.assertEqual(errors,[])
