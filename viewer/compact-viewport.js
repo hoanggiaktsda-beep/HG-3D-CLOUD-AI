@@ -11,6 +11,8 @@ function toggle(show){
  // Three.js viewport resize follows normal window resize listeners.
  requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
 }
+// The editor can reopen this panel when the user explicitly selects Parts.
+window.hgInspectorPanel={show:()=>toggle(true),hide:()=>toggle(false),isOpen:()=>!inspector?.hidden};
 close?.addEventListener('click',()=>toggle(false));
 open?.addEventListener('click',()=>toggle(true));
 toggle(false);
