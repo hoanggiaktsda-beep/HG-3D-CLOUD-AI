@@ -19,6 +19,8 @@ const copy={ 'public-demo.js':'public-demo.js', 'pwa.js':'pwa.js','studio-theme.
  'node_modules/three/build/three.module.js':'vendor/three/three.module.js','node_modules/three/build/three.core.js':'vendor/three/three.core.js',
  'node_modules/three/examples/jsm/controls/OrbitControls.js':'vendor/three/addons/controls/OrbitControls.js',
  'node_modules/three/examples/jsm/loaders/GLTFLoader.js':'vendor/three/addons/loaders/GLTFLoader.js',
+ 'node_modules/three/examples/jsm/loaders/FBXLoader.js':'vendor/three/addons/loaders/FBXLoader.js',
+ 'node_modules/fflate/esm/browser.js':'vendor/fflate/esm/browser.js',
  'node_modules/three/examples/jsm/exporters/GLTFExporter.js':'vendor/three/addons/exporters/GLTFExporter.js',
  'node_modules/three/examples/jsm/utils/BufferGeometryUtils.js':'vendor/three/addons/utils/BufferGeometryUtils.js','node_modules/three/LICENSE':'vendor/three/LICENSE'};
 // Optional release produced only by the fixed public Qwen workflow.
@@ -36,6 +38,26 @@ if(fs.existsSync(releasePath)){
  for(const f of release.files){const p=path.join(root,f.path);if(fs.lstatSync(p).isSymbolicLink()||fs.statSync(p).size>25*1024*1024||fs.statSync(p).size!==f.bytes||sha(fs.readFileSync(p))!==f.sha256)throw Error('Public result changed without matching receipt');copy[f.path]=f.path;}
  copy['public-demo/release.json']='public-demo/release.json';
 }
+// Vendor only published FBX library JavaScript and its MIT license; never copy arbitrary assets.
+const packageDist=path.join(root,'node_modules/@comfyorg/fbx-exporter-three/dist');
+if(!fs.existsSync(packageDist))throw Error('Missing @comfyorg/fbx-exporter-three package; npm ci required');
+function includeFBX(dir){
+ for(const item of fs.readdirSync(dir,{withFileTypes:true})){
+  const full=path.join(dir,item.name);
+  if(item.isSymbolicLink())throw Error('Symlink forbidden in FBX vendor package');
+  if(item.isDirectory())includeFBX(full);
+  else if(item.isFile()&&item.name.endsWith('.js')){
+    const rel=path.relative(packageDist,full).split(path.sep).join('/');
+    copy[path.relative(root,full).split(path.sep).join('/')]='vendor/fbx-exporter/'+rel;
+  }
+ }
+}
+includeFBX(packageDist);
+if(!Object.values(copy).includes('vendor/fbx-exporter/index.js'))throw Error('Missing published FBX entrypoint');
+for(const [from,to] of [
+ ['node_modules/@comfyorg/fbx-exporter-three/LICENSE','vendor/fbx-exporter/LICENSE'],
+ ['node_modules/fflate/LICENSE','vendor/fflate/LICENSE']
+]){if(!fs.existsSync(path.join(root,from)))throw Error('Missing third-party license: '+from);copy[from]=to;}
 const files=[...Object.values(copy),'index.html','.nojekyll','service-worker.js','build-manifest.json'].sort();
 if(fs.existsSync(out)){
  const p=path.join(out,'build-manifest.json');if(!fs.existsSync(p)||JSON.parse(fs.readFileSync(p)).owner!=='hg-static-viewer-build')throw Error('Unknown dist; refuse overwrite');
@@ -45,7 +67,7 @@ if(fs.existsSync(out)){
 const tmp=fs.mkdtempSync(path.join(root,'.build-'));
 try{
  for(const [from,to] of Object.entries(copy)){const p=path.join(tmp,to);fs.mkdirSync(path.dirname(p),{recursive:true});fs.copyFileSync(path.join(root,from),p);}
- let html=fs.readFileSync(path.join(root,'index.html'),'utf8').replace('./node_modules/three/build/three.module.js','./vendor/three/three.module.js').replace('./node_modules/three/examples/jsm/','./vendor/three/addons/');
+ let html=fs.readFileSync(path.join(root,'index.html'),'utf8').replace('./node_modules/three/build/three.module.js','./vendor/three/three.module.js').replace('./node_modules/three/examples/jsm/','./vendor/three/addons/').replace('./node_modules/@comfyorg/fbx-exporter-three/dist/','./vendor/fbx-exporter/').replace('./node_modules/fflate/esm/browser.js','./vendor/fflate/esm/browser.js');
  if(html.includes('node_modules')||html.includes('<base'))throw Error('Unexpected module path');
  const importmap=html.match(/<script type="importmap">([\s\S]*?)<\/script>/)[1];
  const scriptHash=createHash('sha256').update(importmap).digest('base64');
