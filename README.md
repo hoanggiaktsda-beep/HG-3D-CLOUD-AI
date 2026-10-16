@@ -6,6 +6,14 @@ Dự án thử nghiệm dựng và kiểm định 3D có giám sát. Giữ Direc
 
 Bản website HG 3D CLOUD AI dùng cùng hệ nhận diện với [HOANGGIA STUDIO](https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home): monogram HA, sidebar desktop, thanh điều hướng dưới trên điện thoại, sắc tối/xanh than/vàng champagne, breadcrumb và nút Home. Giao diện độc lập, chỉ thay đổi repository này; toàn bộ viewer, kiểm định và trình chỉnh GLB giữ nguyên logic.
 
+## Giao diện duy nhất — Màn hình Ảnh của bạn · Mô hình của bạn
+
+Theo yêu cầu rút gọn, trang mặc định **chỉ còn một mục được hiển thị:** khu vực ảnh trung tâm, hai chế độ Giữ đúng hình dáng/Tách bộ phận, nút Chuẩn bị lệnh phân tích, Xưởng chỉnh sửa, bảng 4 bước. Tất cả sidebar, thanh menu, bảng test, viewer mẫu, khu vực cấu hình kỹ thuật, ghi chú dài, thư viện công khai và các phần khác **được ẩn khỏi giao diện mặc định**, không xóa bất kỳ mô-đun phân tích, kiểm định, mã dựng tham số hoặc xuất file nào.
+
+Nút **Chuẩn bị lệnh phân tích ảnh** chỉ mở khung lệnh ChatGPT gọn *trong cùng màn hình*. Nút **Xưởng chỉnh sửa 3D** mở *chế độ chỉnh sửa tập trung* (không hiện lại cả website cũ), có nút quay về. Nút xem 3D chỉ dẫn sang trình xem khi đã có mô hình nháp, không gán mẫu cũ thành kết quả ảnh. Số đo phải được xác nhận, không tự sinh một model sai theo ảnh. [Thiết kế và phạm vi](docs/MINIMAL_ONE_SCREEN_VI.md).
+
+Mọi mã được giữ để phát triển tiếp. Không kết nối ChatGPT tự động, không tự tải ảnh khách hàng đi, không phí API, không cần dịch vụ Linux. Giữ nguyên hành vi nghiệp vụ và kiểm thử hậu trường bằng chế độ trình bày chẩn đoán riêng; giao diện thường không hiển thị các bảng cũ.
+
 ## HOANGGIA 3D WORKSPACE — giao diện lấy cảm hứng từ Tripo Studio
 
 Trang đầu \`/HG-3D-CLOUD-AI/\` và \`#hg-launch\` có vùng chọn/kéo thả/dán ảnh ở trung tâm, chế độ **Giữ đúng hình dáng** hoặc **Tách bộ phận**, bảng các giai đoạn từ ảnh đến FBX/GLB và điều hướng trực tiếp đến trình xem, chỉnh sửa. Vẫn giữ nguyên logo, màu sắc và nguyên tắc HOANGGIA STUDIO. Không sử dụng mã nguồn, ảnh thương mại, logo hoặc từ ngữ thương hiệu của Tripo Studio.
