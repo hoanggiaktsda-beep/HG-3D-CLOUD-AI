@@ -90,7 +90,29 @@ function makeParts(width,depth,height,kind){
  return objects;
 }
 function build(force=false){
+ const input=
+const photoStart=$('hg-photo-analysis-start');
+photoStart?.addEventListener('click',async()=>{
  const input=inputState();
+ if(!input.verified){$('hg-photo-analysis-status').textContent='Hãy tải ảnh nguồn hợp lệ trước khi phân tích.';return;}
+ const kind=ui.template.selectedOptions[0]?.textContent||'Sản phẩm nội thất';
+ const prompt=[
+ 'HOANGGIA 3D CLOUD AI — PHÂN TÍCH ẢNH ĐỂ TẠO MÔ HÌNH 3D THAM KHẢO',
+ 'Hãy quan sát các ảnh tôi đính kèm. Nhận diện đúng sản phẩm, không dùng mẫu bàn/ghế/tủ có sẵn để thay thế.',
+ 'Loại tham khảo do người dùng chọn: '+kind,
+ 'Kích thước người dùng nhập (mm): '+input.values.join(' × ')+'. Đã xác nhận: '+(input.approved?'CÓ':'CHƯA')+'. Nếu chưa xác nhận, không được coi là số đo thực.',
+ 'Liệt kê rõ từng bộ phận quan sát được, hình dáng, lòng rỗng, chân, tay nắm, bề mặt và vị trí tương đối. Không tự thêm chi tiết khuất.',
+ 'Chỉ dùng các số đo đã xác nhận để đặt kích thước thực. Khi thiếu số đo quan trọng, trả objects=[] và yêu cầu bổ sung; không giả vờ dựng đúng.',
+ 'Nếu đủ dữ liệu, trả một khối JSON THUẦN duy nhất đúng schema sau để tôi dán vào HG-3D-CLOUD-AI:',
+ '{"schema":"hg-chatgpt-scene-v1","unit":"mm","review_status":"NEEDS_REVIEW","objects":[{"id":"part_01","name":"Tên bộ phận quan sát được","shape":"box","size_mm":[500,400,20],"position_mm":[0,0,500],"rotation_deg":[0,0,0],"color":"#806c5c","confidence":"inferred"}],"unknown_details":["Chi tiết cần xác nhận"]}',
+ 'Các con số trong JSON trên chỉ minh họa cú pháp, KHÔNG được sao chép vào kết quả. Chỉ shape box/cylinder, tối đa 80 bộ phận, vị trí là tâm, trục Z đứng, đơn vị mm.',
+ 'Đánh dấu XÁC NHẬN / SUY LUẬN / CẦN XÁC NHẬN. Không cam kết giống 100%; kết quả chỉ để kiểm tra ngoại hình sơ bộ.'
+ ].join('\n\n');
+ try{await navigator.clipboard.writeText(prompt);$('hg-photo-analysis-status').textContent='Đã sao chép lệnh. Mở ChatGPT, dán lệnh cùng ảnh, rồi dán JSON nhận được vào mục Chỉnh sửa với ChatGPT để xem 3D.';}
+ catch{$('hg-photo-analysis-status').textContent='Không sao chép tự động được. Hãy dùng mục Tạo yêu cầu cho ChatGPT ở bên dưới.';}
+});
+
+inputState();
  // A valid photo is a reference, NOT a shape-recognition input to this parametric engine.
  // Without explicit separate consent, never replace the depicted product with a generic table/cabinet.
  if(input.photos.length&&!input.verified){
