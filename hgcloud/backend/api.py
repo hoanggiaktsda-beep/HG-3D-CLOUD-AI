@@ -146,10 +146,14 @@ def create_app(root,credentials):
         j=owned(jid,user)
         if kind not in {'glb','blend','qa','html'}:raise HTTPException(404,'Artifact not found')
         if j['state']!='NEEDS_REVIEW':raise HTTPException(409,'Artifact not ready')
-        folder=store.folder(jid);run=json.loads((folder/'result.json').read_text())['run']
+        folder=store.folder(jid);receipt=json.loads((folder/'result.json').read_text());run=receipt['run']
         if not re.fullmatch(r'run-[0-9a-f]{32}',run):raise HTTPException(500,'Invalid artifact reference')
         filename={'glb':'hg_scene.glb','blend':'hg_scene.blend','qa':'qa_report.json','html':'qa_report.html'}[kind]
-        return FileResponse(folder/run/filename,filename=filename,media_type={'glb':'model/gltf-binary','blend':'application/octet-stream','qa':'application/json','html':'text/html'}[kind])
+        path=folder/run/filename
+        item=receipt.get('artifacts',{}).get(filename,{})
+        if path.is_symlink() or not path.is_file() or path.stat().st_size!=item.get('bytes') or hashlib.sha256(path.read_bytes()).hexdigest()!=item.get('sha256'):
+            raise HTTPException(409,'Artifact integrity verification failed; operator review required')
+        return FileResponse(path,filename=filename,media_type={'glb':'model/gltf-binary','blend':'application/octet-stream','qa':'application/json','html':'text/html'}[kind])
     @app.get('/local/{file:path}')
     def local_ui(file:str):
         from fastapi.responses import HTMLResponse

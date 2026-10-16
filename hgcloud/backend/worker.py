@@ -1,5 +1,5 @@
 """Single local Blender worker, persisted SQLite claim, no user code execution."""
-import fcntl,json,os,signal,subprocess,time,uuid
+import fcntl,hashlib,json,os,signal,subprocess,time,uuid
 from pathlib import Path
 from .store import Store
 ROOT=Path(__file__).resolve().parents[2]
@@ -34,7 +34,8 @@ def run_once(store):
         (build/'qa_report.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2))
         from hgcloud.preview import build_html
         build_html(build/'qa_report.json',build/'qa_report.html')
-        (folder/'result.json').write_text(json.dumps({'run':run}))
+        artifacts={name:{'sha256':hashlib.sha256((build/name).read_bytes()).hexdigest(),'bytes':(build/name).stat().st_size} for name in ['hg_scene.glb','hg_scene.blend','qa_report.json','qa_report.html']}
+        (folder/'result.json').write_text(json.dumps({'run':run,'artifacts':artifacts}))
         store.transition(job['id'],'NEEDS_REVIEW')
     except Exception:
         store.transition(job['id'],'FAILED','Worker failed; operator can inspect private log')

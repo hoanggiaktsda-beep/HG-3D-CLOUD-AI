@@ -54,6 +54,12 @@ class BackendTests(unittest.TestCase):
         blend=self.client.get('/jobs/'+jid+'/artifacts/blend',headers=self.auth);self.assertTrue(blend.content.startswith(b'BLENDER'))
         qa=self.client.get('/jobs/'+jid+'/artifacts/qa',headers=self.auth).json()
         self.assertEqual(qa['geometry_status'],'PASS');self.assertEqual(qa['status'],'NEEDS_REVIEW')
+        # Private artifacts are immutable after QA; corruption must fail closed.
+        receipt=json.loads((self.app.state.store.folder(jid)/'result.json').read_text())
+        artifact=self.app.state.store.folder(jid)/receipt['run']/'hg_scene.glb'
+        original=artifact.read_bytes();artifact.write_bytes(b'corrupted')
+        self.assertEqual(self.client.get('/jobs/'+jid+'/artifacts/glb',headers=self.auth).status_code,409)
+        artifact.write_bytes(original)
         self.assertFalse(qa['automatic_vision_executed'])
         self.assertEqual(qa['interchange_validation']['status'],'PASS')
         self.assertTrue(qa['interchange_validation']['glb_reimport'])
