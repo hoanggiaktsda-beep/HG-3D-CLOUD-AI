@@ -5,7 +5,9 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 const $=id=>document.getElementById(id);
 const info=$('cgpt-feedback'),review=$('cgpt-result-note');
-let renderer,camera,controls,observer,scene,model,part;
+let renderer,camera,controls,observer,scene,model,part,grid,highlight;
+const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
+let dragStart=null;
 const state={ready:false,origin:null,edited:false};
 window.hgChatGPTStudio=state;
 function say(message,error=false){info.textContent=message;info.classList.toggle('cgpt-error',error);}
@@ -88,17 +90,112 @@ function setup(){
  scene=new THREE.Scene();scene.background=new THREE.Color('#1b231d');
  scene.add(new THREE.HemisphereLight(0xffffff,0x3c473f,2.4));
  const light=new THREE.DirectionalLight(0xffffff,2.2);light.position.set(4,6,3);scene.add(light);
- scene.add(new THREE.GridHelper(10,20,0x58664d,0x354339));
+ grid=new THREE.GridHelper(10,20,0x58664d,0x354339);scene.add(grid);
+ highlight=new THREE.BoxHelper(new THREE.Object3D(),0xd9b46e);highlight.visible=false;scene.add(highlight);
  camera=new THREE.PerspectiveCamera(45,1,.001,1000);renderer=new THREE.WebGLRenderer({antialias:true});
  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
  const target=$('cgpt-viewport');target.replaceChildren(renderer.domElement);
  renderer.domElement.setAttribute('aria-label','Trình xem 3D cục bộ. Kéo để xoay, dùng hai ngón để thu phóng.');
  controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;
- const resize=()=>{const w=Math.max(200,target.clientWidth);camera.aspect=w/360;camera.updateProjectionMatrix();renderer.setSize(w,360,false);};
+ const resize=()=>{
+  const w=Math.max(200,target.clientWidth),h=Math.max(240,target.clientHeight||360);
+  camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false);
+ };
  resize();observer=new ResizeObserver(resize);observer.observe(target);
- renderer.setAnimationLoop(()=>{controls.update();renderer.render(scene,camera);});
+ renderer.domElement.addEventListener('pointerdown',event=>{dragStart=[event.clientX,event.clientY];});
+ renderer.domElement.addEventListener('pointerup',event=>{
+  if(!model||!dragStart)return;
+  const distance=Math.hypot(event.clientX-dragStart[0],event.clientY-dragStart[1]);dragStart=null;
+  if(distance>6)return;
+  const rect=renderer.domElement.getBoundingClientRect();
+  if(!rect.width||!rect.height)return;
+  pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);
+  raycaster.setFromCamera(pointer,camera);
+  const found=raycaster.intersectObjects(meshes().filter(mesh=>mesh.visible),false)[0];
+  if(found){const selectedIndex=meshes().indexOf(found.object);if(selectedIndex>=0)state.selectPart(selectedIndex);}
+ });
+ renderer.setAnimationLoop(()=>{controls.update();if(highlight?.visible&&part)highlight.setFromObject(part);renderer.render(scene,camera);});
 }
 function meshes(){const list=[];model?.traverse(x=>{if(x.isMesh)list.push(x);});return list;}
+function notifyChange(reason='selection'){
+ const selected=part&&meshes().includes(part)?part:null;
+ const all=meshes();
+ document.dispatchEvent(new CustomEvent('hg3d:editorchange',{
+  detail:{reason,ready:all.length>0,origin:state.origin||'',meshCount:all.length,
+          selectedIndex:selected?all.indexOf(selected):-1,selectedName:selected?.name||'',
+          selectedVisible:selected?.visible??false,edited:!!state.edited}
+ }));
+ if(highlight){
+  highlight.visible=Boolean(selected&&selected.visible);
+  if(highlight.visible)highlight.setFromObject(selected);
+ }
+}
+function setPartIndex(index){
+ const m=meshes()[Number(index)]||null;
+ part=m;
+ const select=$('cgpt-part');
+ if(m)select.value=String(meshes().indexOf(m));
+ fill();notifyChange('selection');
+ return !!m;
+}
+state.selectPart=setPartIndex;
+state.getParts=()=>meshes().map((mesh,index)=>({index,name:mesh.name||'Bộ phận '+(index+1),visible:mesh.visible,
+  color:mesh.material?.color?.getHexString?.()?('#'+mesh.material.color.getHexString()):'#948773'}));
+state.getSelectedPart=()=>{
+ const list=meshes(),index=list.indexOf(part);
+ if(index<0)return null;
+ const mesh=list[index];
+ return {index,name:mesh.name,visible:mesh.visible,
+         color:mesh.material?.color?.getHexString?.()?('#'+mesh.material.color.getHexString()):'#948773'};
+};
+state.setAppearance=({name,color,visible}={})=>{
+ if(!part||!meshes().includes(part))throw Error('Chưa có bộ phận được chọn.');
+ if(typeof name==='string'){const clean=name.trim();if(!clean||clean.length>80)throw Error('Tên bộ phận phải dài từ 1 đến 80 ký tự.');part.name=clean;}
+ if(color!==undefined){
+  if(typeof color!=='string'||!/^#[0-9A-Fa-f]{6}$/.test(color))throw Error('Mã màu phải có dạng #RRGGBB.');
+  if(Array.isArray(part.material))part.material=part.material.map(m=>m.clone());
+  else if(part.material)part.material=part.material.clone();
+  const materials=Array.isArray(part.material)?part.material:[part.material];
+  for(const material of materials)if(material?.color){material.color.set(color);material.needsUpdate=true;}
+ }
+ if(typeof visible==='boolean')part.visible=visible;
+ state.edited=true;
+ listPartsKeepSelection();
+ syncMainViewer();notifyChange('appearance');
+ say('Đã cập nhật tên, trạng thái hiển thị và màu vật liệu của bộ phận.');
+ return true;
+};
+state.setGrid=visible=>{if(grid)grid.visible=Boolean(visible);};
+state.setWireframe=enabled=>{
+ const isOn=Boolean(enabled);
+ for(const mesh of meshes()){
+  for(const material of (Array.isArray(mesh.material)?mesh.material:[mesh.material])){
+   if(material&&'wireframe' in material){material.wireframe=isOn;material.needsUpdate=true;}
+  }
+ }
+};
+state.setCameraView=name=>{
+ if(!model)return false;
+ const bb=new THREE.Box3().setFromObject(model);
+ if(bb.isEmpty())return false;
+ const center=bb.getCenter(new THREE.Vector3()),radius=Math.max(.25,bb.getSize(new THREE.Vector3()).length()/2);
+ const directions={perspective:[1.4,1.1,1.65],front:[0,.03,1],right:[1,.03,0],top:[0,1,.001]};
+ if(!directions[name])return false;
+ const position=new THREE.Vector3(...directions[name]).normalize().multiplyScalar(radius*3).add(center);
+ controls.target.copy(center);camera.position.copy(position);camera.up.set(0,1,0);
+ camera.lookAt(center);controls.update();state.currentView=name;
+ return true;
+};
+function listPartsKeepSelection(){
+ const selected=part;
+ const list=meshes(),select=$('cgpt-part');select.replaceChildren();
+ list.forEach((m,i)=>{const option=document.createElement('option');option.value=String(i);option.textContent=m.name||'Bộ phận '+(i+1);select.append(option);});
+ $('cgpt-part-count').textContent=list.length+' bộ phận · BẢN NHÁP';
+ part=list.includes(selected)?selected:list[0]||null;
+ state.objects=list.length;state.ready=list.length>0;
+ if(part)select.value=String(list.indexOf(part));
+ fill();
+}
 function recenter(){
  if(!model)return;
  model.updateMatrixWorld(true);
@@ -119,7 +216,7 @@ function listParts(){
  const list=meshes(),select=$('cgpt-part');select.replaceChildren();
  list.forEach((m,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=m.name||'Bộ phận '+(i+1);select.append(o);});
  $('cgpt-part-count').textContent=list.length+' bộ phận · BẢN NHÁP';
- part=list[0]||null;fill();state.objects=list.length;
+ part=list[0]||null;fill();state.objects=list.length;notifyChange('model');
 }
 function syncMainViewer(){
  try {
@@ -133,7 +230,7 @@ function syncMainViewer(){
 function show(group,origin,missing=[]){
  setup();if(model)scene.remove(model);model=group;scene.add(group);
  state.ready=true;state.origin=origin;state.edited=false;state.reviewItems=missing;
- listParts();recenter();syncMainViewer();
+ listParts();recenter();syncMainViewer();notifyChange('model');
  review.textContent='CẦN XÁC NHẬN: '+(missing.length?missing.map(s=>String(s).slice(0,180)).join('; '):'Mô hình nháp chưa kiểm tra cấu tạo và kích thước.');
  say('Đang xem 3D cục bộ từ '+origin+'. Không gửi dữ liệu lên máy chủ.');
 }
@@ -149,6 +246,7 @@ state.clearForNewSource = () => {
  if(renderer){const select=$('cgpt-part');select.replaceChildren();$('cgpt-part-count').textContent='Chưa có mô hình của ảnh mới';fill();}
  review.textContent='ẢNH MỚI · CHƯA ĐƯỢC AI PHÂN TÍCH. Không dùng mô hình cũ hoặc mẫu tự dựng để đại diện ảnh này.';
  say('Đã nhận ảnh mới. Chờ phân tích bằng ChatGPT hoặc người dùng chọn dựng mẫu riêng.');
+ notifyChange('clear');
 };
 $('cgpt-preview-json').addEventListener('click',()=>{
  try{
@@ -158,7 +256,7 @@ $('cgpt-preview-json').addEventListener('click',()=>{
  }catch(e){say('JSON chưa dựng được: '+e.message,true);}
 });
 $('cgpt-json-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{if(f.size>256000)throw Error('JSON vượt 256 KB.');$('cgpt-scene-json').value=await f.text();say('Đã nhập JSON. Bấm Xem 3D từ JSON để tạo bản nháp.');}catch(err){say(err.message,true);}e.target.value='';});
-$('cgpt-part').addEventListener('change',()=>{part=meshes()[Number($('cgpt-part').value)]||null;fill();});
+$('cgpt-part').addEventListener('change',()=>setPartIndex($('cgpt-part').value));
 $('cgpt-recenter').addEventListener('click',recenter);
 $('cgpt-apply').addEventListener('click',()=>{
  if(!part)return say('Chưa chọn bộ phận.',true);
@@ -168,13 +266,13 @@ $('cgpt-apply').addEventListener('click',()=>{
  part.position.set(...world(values.slice(0,3)));part.rotation.y=THREE.MathUtils.degToRad(values[3]);
  if(!part.userData.initialScale)part.userData.initialScale=part.scale.toArray();
  part.scale.fromArray(part.userData.initialScale).multiplyScalar(values[4]/100);
- part.userData.hgScalePercent=values[4];state.edited=true;syncMainViewer();
+ part.userData.hgScalePercent=values[4];state.edited=true;syncMainViewer();notifyChange('transform');
  review.textContent='ĐÃ CHỈNH CỤC BỘ · CẦN XÁC NHẬN vị trí, va chạm, kích thước thực và cấu tạo.';
  say('Đã chỉnh bộ phận trong trình duyệt; chưa lưu lên server.');
 });
 $('cgpt-remove-part').addEventListener('click',()=>{
  if(!part||!part.parent)return say('Chưa có bộ phận cần bỏ.',true);
- part.parent.remove(part);state.edited=true;listParts();recenter();syncMainViewer();
+ part.parent.remove(part);state.edited=true;listParts();recenter();syncMainViewer();notifyChange('remove');
  review.textContent='ĐÃ BỎ BỘ PHẬN · CẦN XÁC NHẬN';say('Đã xóa bộ phận khỏi bản nháp cục bộ.');
 });
 $('cgpt-glb-file').addEventListener('change',async e=>{

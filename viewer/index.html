@@ -1,4 +1,4 @@
-<!doctype html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101411"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="assets/hoanggia-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icons/icon-192.png"><title>HOANGGIA 3D WORKSPACE · Tạo 3D từ ảnh</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="studio-theme.css"><script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/","@comfyorg/fbx-exporter-three":"./node_modules/@comfyorg/fbx-exporter-three/dist/index.js","fflate":"./node_modules/fflate/esm/browser.js"}}</script></head>
+<!doctype html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101411"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="assets/hoanggia-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icons/icon-192.png"><title>3D AI | HOANGGIA AI — Xưởng dựng & chỉnh sửa 3D</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="studio-theme.css"><script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/","@comfyorg/fbx-exporter-three":"./node_modules/@comfyorg/fbx-exporter-three/dist/index.js","fflate":"./node_modules/fflate/esm/browser.js"}}</script></head>
 <body class="hg-minimal-ui"><div class="hg-app">
 <aside class="hg-side" aria-label="Điều hướng HOANGGIA AI">
   <a class="hg-brand" href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home" aria-label="Về HOANGGIA STUDIO"><img src="assets/hoanggia-icon.svg" alt=""><span><strong>HOANGGIA</strong><small>STUDIO <b>3D CLOUD AI</b></small></span></a>
@@ -13,12 +13,12 @@
   <div class="hg-side-bottom"><span class="hg-dot"></span><span>Chỉnh sửa trên thiết bị</span><small>V1.0</small></div>
 </aside>
 <div class="hg-frame">
-<header class="hg-topbar"><div class="hg-breadcrumb"><span class="hg-overline">HOANGGIA AI / 3D CLOUD /</span><strong id="hg-crumb">TẠO MÔ HÌNH 3D</strong></div>
+<header class="hg-topbar"><div class="hg-breadcrumb"><span class="hg-overline">HOANGGIA AI / 3D AI /</span><strong id="hg-crumb">TẠO MÔ HÌNH 3D</strong></div>
 <nav class="hg-top-links" aria-label="Điều hướng không gian tạo 3D"><a href="#hg-launch" data-hg-route="hg-launch">Tạo từ ảnh</a><a href="#sample-viewer" data-hg-route="sample-viewer">Không gian 3D</a><a href="#chatgpt-studio" data-hg-route="chatgpt-studio">Chỉnh sửa</a><a href="#public-demo" data-hg-route="public-demo">Thư viện</a></nav><div class="hg-top-actions"><span class="hg-storage-label">◉ Xử lý cục bộ</span><a class="hg-gold-btn" href="#create-model">＋ Tạo mô hình</a><a class="hg-homelink" href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home" aria-label="Về trang chủ HOANGGIA STUDIO">⌂ Home</a></div></header>
 <main class="hg-content">
 <section id="create-model" class="hg-launch" aria-labelledby="hg-launch-title">
   <div class="hg-launch-halo" aria-hidden="true"></div>
-  <div id="hg-launch" class="hg-launch-topline"><span class="hg-launch-chip"><span class="hg-live-dot"></span> HOANGGIA / 3D WORKSPACE</span><span class="hg-launch-meta">MIỄN PHÍ · KHÔNG MÁY CHỦ · KHÔNG TỰ GỬI ẢNH</span></div>
+  <div id="hg-launch" class="hg-launch-topline"><span class="hg-launch-chip"><span class="hg-live-dot"></span> 3D AI / HOANGGIA AI</span><span class="hg-launch-meta">MIỄN PHÍ · KHÔNG MÁY CHỦ · KHÔNG TỰ GỬI ẢNH</span></div>
   <div class="hg-launch-copy">
     <p class="hg-launch-eyebrow">MỘT KHÔNG GIAN LÀM VIỆC 3D</p>
     <h1 id="hg-launch-title">Ảnh của bạn.<br><em>Mô hình của bạn.</em></h1>
@@ -126,22 +126,61 @@
   <p class="hg-disclaimer">Mô-đun trên là thuật toán cục bộ, <strong>không phải 18 mô hình AI đang suy luận</strong>. Nếu chọn Console/Bàn/Tủ, vị trí tấm và chân là giả định minh họa, không trích xuất tự động từ ảnh. Để ChatGPT đọc ảnh, hãy dùng quy trình thủ công ngay phía dưới.</p>
 </section>
 <div class="hg-minimal-back hg-editor-back"><a href="#create-model">← Về không gian tạo 3D</a><span>CHỈNH SỬA · GLB / FBX</span></div>
-<section id="chatgpt-studio" class="cgpt-workbench card" aria-labelledby="cgpt-heading">
+<section id="chatgpt-studio" class="cgpt-workbench card hg-3d-editor" aria-labelledby="cgpt-heading">
+  <div class="hg-ws-bar" aria-label="Thanh tác vụ 3D AI">
+    <a class="hg-ws-back" href="#create-model" aria-label="Quay lại tạo 3D">←</a>
+    <div class="hg-ws-brand"><strong>3D AI</strong><span>HOANGGIA AI</span></div>
+    <span class="hg-ws-bar-separator" aria-hidden="true"></span>
+    <div class="hg-ws-project"><strong id="hg-ws-project-name">Dự án chưa đặt tên</strong><small id="hg-ws-project-state">Chưa có mô hình · Dữ liệu trên thiết bị</small></div>
+    <div class="hg-ws-top-actions">
+      <button type="button" id="hg-ws-import-glb">＋ Mở GLB</button>
+      <button type="button" id="hg-ws-top-glb" disabled>↓ GLB</button>
+      <button type="button" id="hg-ws-top-fbx" disabled>↓ FBX</button>
+    </div>
+  </div>
+  <nav class="hg-ws-rail" aria-label="Thanh công cụ dựng và chỉnh sửa 3D">
+    <button type="button" data-ws-tool="image" aria-pressed="false"><span aria-hidden="true">▧</span><small>Ảnh</small></button>
+    <button type="button" data-ws-tool="model" aria-pressed="true"><span aria-hidden="true">◈</span><small>Model</small></button>
+    <button type="button" data-ws-tool="parts" aria-pressed="false"><span aria-hidden="true">▦</span><small>Bộ phận</small></button>
+    <button type="button" data-ws-tool="material" aria-pressed="false"><span aria-hidden="true">◉</span><small>Vật liệu</small></button>
+    <button type="button" data-ws-tool="export" aria-pressed="false"><span aria-hidden="true">⇩</span><small>Xuất file</small></button>
+    <div class="hg-ws-rail-divider"></div>
+    <button type="button" disabled title="Tối ưu lưới tự động chưa được kết nối" aria-label="Retopo chưa kết nối"><span aria-hidden="true">◇</span><small>Retopo</small></button>
+    <button type="button" disabled title="Tạo UV tự động chưa hỗ trợ" aria-label="UV tự động chưa hỗ trợ"><span aria-hidden="true">▤</span><small>UV AI</small></button>
+  </nav>
   <div class="cgpt-title">
     <div><p class="eyebrow">LÀM VIỆC CÙNG CHATGPT · TRONG TRÌNH DUYỆT</p><h3 id="cgpt-heading">XƯỞNG CHỈNH SỬA MÔ HÌNH 3D</h3><p class="note">Công cụ cục bộ: không có API tự động, không gửi ảnh/GLB/JSON lên GitHub. ChatGPT chỉ đọc ảnh khi chồng tự đính kèm trong cuộc trò chuyện.</p></div>
     <span class="cgpt-state">CHATGPT · THỦ CÔNG</span>
   </div>
   <div class="cgpt-grid">
-    <div class="cgpt-subcard">
+    <div class="hg-ws-settings-title"><strong id="hg-ws-tool-name">Dựng mô hình</strong><small id="hg-ws-tool-subtitle">Nhập dữ liệu hình học thật từ ChatGPT hoặc GLB</small></div>
+    <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="image">
+      <h4>Ảnh tham chiếu</h4>
+      <div class="hg-ws-image-stage"><img id="hg-ws-source-image" alt="Ảnh nguồn người dùng tải lên" hidden><span id="hg-ws-source-empty">Chưa chọn ảnh đầu vào</span></div>
+      <p id="hg-ws-source-info" class="note">Ảnh chỉ ở trong trình duyệt. Trang chưa có AI tự nhận diện ảnh.</p>
+      <button type="button" id="hg-ws-change-image">Chọn / thay ảnh nguồn</button>
+      <p class="note">Với ảnh chỉ có một góc nhìn, không tự suy đoán kích thước hoặc cấu tạo khuất.</p>
+    </div>
+    <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="model">
       <h4>01 · Tạo yêu cầu cho ChatGPT</h4>
-      <p class="note">Chọn ảnh, loại đầu vào và nhập yêu cầu ở biểu mẫu bên dưới; sau đó tạo lệnh và mở ChatGPT.</p>
+      <p class="note">Mô tả yêu cầu và số đo dưới đây được chuyển vào bộ tạo lệnh ChatGPT có sẵn, không kích hoạt API.</p>
+      <label for="hg-ws-input-kind">Loại nguồn</label>
+      <select id="hg-ws-input-kind">
+        <option value="product_photo">Ảnh sản phẩm / nội thất</option>
+        <option value="technical_drawing">Bản vẽ kỹ thuật</option>
+        <option value="layout">Mặt bằng / sơ đồ</option>
+      </select>
+      <label for="hg-ws-instruction">Yêu cầu hình dáng / chỉnh sửa</label>
+      <textarea id="hg-ws-instruction" rows="4" maxlength="4000" placeholder="Ví dụ: sofa 2 chỗ có console giữa, 2 gác chân recliner..."></textarea>
+      <label for="hg-ws-measurements">Kích thước được xác nhận (mm)</label>
+      <textarea id="hg-ws-measurements" rows="3" maxlength="2000" placeholder="Ví dụ: dài 2460 × sâu 1100 × cao 770 mm; nguồn: bản vẽ hãng"></textarea>
       <div class="cgpt-buttons"><button type="button" id="cgpt-generate">Tạo lệnh từ yêu cầu</button><button type="button" id="cgpt-copy">Sao chép lệnh</button><button type="button" id="cgpt-download-job">Tải JSON công việc</button></div>
       <label for="cgpt-prompt">Lệnh đã chuẩn bị</label>
       <textarea id="cgpt-prompt" readonly rows="7" placeholder="Nhập yêu cầu ở biểu mẫu bên dưới, sau đó nhấn Tạo lệnh..."></textarea>
       <a class="cgpt-link" id="cgpt-open" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Mở ChatGPT ↗</a>
       <p class="note">Lưu ý: Lệnh sao chép KHÔNG tự chuyển ảnh. Chồng tự tải ảnh vào ChatGPT, sau đó sao chép JSON mô hình ChatGPT trả về vào ô bên cạnh.</p>
     </div>
-    <div class="cgpt-subcard">
+    <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="model">
       <h4>02 · Nhận mô hình ChatGPT trả về</h4>
       <p class="note">Dán JSON đúng cấu trúc <code>hg-chatgpt-scene-v1</code> để dựng hình khối có kích thước. Mọi kết quả chỉ là bản nháp.</p>
       <label for="cgpt-scene-json">JSON hình học</label>
@@ -150,10 +189,40 @@
       <p class="note">Chồng cũng có thể nhập mô hình GLB đã có trên thiết bị để xem và thay đổi vị trí, góc xoay, tỷ lệ từng bộ phận.</p>
       <label for="cgpt-glb-file" class="cgpt-file-button">Mở mô hình GLB trên thiết bị</label><input id="cgpt-glb-file" type="file" accept=".glb,model/gltf-binary">
     </div>
+    <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="parts">
+      <h4>Chỉnh từng bộ phận</h4>
+      <p class="note">Chọn một mesh trực tiếp trong khung 3D hoặc trong bảng Tài sản. Sau đó mở tab Thuộc tính để đổi vị trí, xoay, tỷ lệ và tên.</p>
+      <button type="button" id="hg-ws-open-assets">Mở danh sách bộ phận ↗</button>
+      <p class="hg-ws-honesty">Tách mesh tự động bằng AI chưa được kết nối. Chỉ chỉnh các mesh đã tồn tại trong JSON hoặc GLB.</p>
+    </div>
+    <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="material">
+      <h4>Vật liệu và hiển thị</h4>
+      <p class="note">Thay màu vật liệu đơn sắc của bộ phận được chọn. Màu và chế độ lưới là thao tác thực trong trình duyệt, không phải AI tạo vật liệu PBR.</p>
+      <label class="hg-ws-toggle"><input id="hg-ws-wireframe" type="checkbox"> Hiển thị lưới hình học (wireframe)</label>
+      <label class="hg-ws-toggle"><input id="hg-ws-grid" type="checkbox" checked> Hiển thị sàn lưới</label>
+      <button type="button" id="hg-ws-material-properties">Mở thuộc tính vật liệu ↗</button>
+      <p class="hg-ws-honesty">UV tự động, tạo texture từ ảnh và tái cấu trúc lưới chưa hỗ trợ ở phiên bản này.</p>
+    </div>
+    <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="export">
+      <h4>Xuất mô hình 3D</h4>
+      <p class="note">Tải file thật từ mesh hiện có trên thiết bị. Không tạo file khi chưa có mô hình.</p>
+      <div class="hg-ws-export-actions">
+        <button type="button" id="hg-ws-panel-glb" disabled>↓ Xuất GLB</button>
+        <button type="button" id="hg-ws-panel-fbx" disabled>↓ Xuất FBX</button>
+      </div>
+      <p class="hg-ws-honesty">Cả hai là bản nháp CẦN XÁC NHẬN. Xuất BLEND / MAX trực tiếp chưa được kết nối.</p>
+    </div>
   </div>
   <div class="cgpt-editor">
     <div class="cgpt-scene">
-      <div class="cgpt-panel-head"><strong>Bản nháp 3D tương tác</strong><span id="cgpt-part-count">Chưa có mô hình</span></div>
+      <div class="cgpt-panel-head"><strong>KHÔNG GIAN 3D</strong><span id="cgpt-part-count">Chưa có mô hình</span></div>
+      <div class="hg-ws-viewport-tools" role="toolbar" aria-label="Góc nhìn mô hình">
+        <button type="button" data-ws-view="perspective" aria-pressed="true">Phối cảnh</button>
+        <button type="button" data-ws-view="front" aria-pressed="false">Mặt đứng</button>
+        <button type="button" data-ws-view="right" aria-pressed="false">Mặt cạnh</button>
+        <button type="button" data-ws-view="top" aria-pressed="false">Mặt bằng</button>
+        <button type="button" id="hg-ws-reset-view">Đặt lại ↺</button>
+      </div>
       
 <div id="hg-photo-reference" class="hg-photo-reference" hidden>
  <div class="hg-photo-reference-title"><strong>Ảnh tham chiếu chồng đã chọn</strong><span id="hg-photo-reference-status">CHƯA PHÂN TÍCH</span></div>
@@ -164,7 +233,22 @@
       <p id="cgpt-result-note" class="cgpt-warning">CẦN XÁC NHẬN · Mô hình chưa đủ điều kiện sử dụng sản xuất.</p>
     </div>
     <div class="cgpt-inspector">
-      <h4>03 · Chỉnh sửa bộ phận</h4>
+      <div class="hg-ws-inspector-tabs" role="tablist" aria-label="Tài sản và thuộc tính">
+        <button type="button" id="hg-ws-assets-tab" role="tab" aria-selected="false" aria-controls="hg-ws-assets-panel">Tài sản</button>
+        <button type="button" id="hg-ws-properties-tab" role="tab" aria-selected="true" aria-controls="hg-ws-properties-panel">Thuộc tính</button>
+      </div>
+      <div id="hg-ws-assets-panel" class="hg-ws-inspector-panel" role="tabpanel" aria-labelledby="hg-ws-assets-tab" hidden>
+        <strong class="hg-ws-aside-heading">Ảnh đầu vào</strong>
+        <div id="hg-ws-source-assets" class="hg-ws-source-assets">Chưa có ảnh nguồn.</div>
+        <strong class="hg-ws-aside-heading">Danh sách bộ phận <span id="hg-ws-asset-count">0</span></strong>
+        <div id="hg-ws-mesh-assets" class="hg-ws-mesh-assets">Chưa có mô hình từ JSON / GLB.</div>
+      </div>
+      <div id="hg-ws-properties-panel" class="hg-ws-inspector-panel" role="tabpanel" aria-labelledby="hg-ws-properties-tab">
+      <h4>03 · Thuộc tính bộ phận</h4>
+      <label for="hg-ws-part-name">Tên bộ phận</label><input type="text" id="hg-ws-part-name" maxlength="80" placeholder="Chọn mesh để chỉnh sửa">
+      <label class="hg-ws-toggle"><input type="checkbox" id="hg-ws-part-visible" checked> Hiển thị bộ phận</label>
+      <label for="hg-ws-part-color">Màu vật liệu</label><input type="color" id="hg-ws-part-color" value="#948773">
+      <button type="button" id="hg-ws-apply-appearance">Áp dụng tên, hiển thị và màu</button>
       <label for="cgpt-part">Chọn bộ phận</label><select id="cgpt-part"></select>
       <div class="cgpt-coordinates">
         <label for="cgpt-x">X (mm)<input id="cgpt-x" type="number" step="1"></label>
@@ -176,6 +260,7 @@
       <div class="cgpt-buttons"><button type="button" id="cgpt-apply">Áp dụng chỉnh sửa</button><button type="button" id="cgpt-remove-part">Bỏ bộ phận</button><button type="button" id="cgpt-recenter">Đặt lại góc nhìn</button></div>
       <button type="button" id="cgpt-export-glb" class="cgpt-primary">Tải GLB đã chỉnh · BẢN NHÁP</button><button type="button" id="cgpt-export-fbx" class="cgpt-primary">Tải FBX đã chỉnh · BẢN NHÁP</button>
       <p class="note">Chỉnh vị trí, tỷ lệ và góc quay ngay trên thiết bị; không phải AI tự dựng. Không có chức năng xuất BLEND trực tiếp trên website này.</p>
+      </div>
     </div>
   </div>
   <p id="cgpt-feedback" role="status" aria-live="polite" class="cgpt-feedback">Chưa có thao tác.</p>
@@ -186,4 +271,4 @@
 <a href="#chatgpt-studio" data-hg-route="chatgpt-studio"><span>✳</span><small>Chỉnh sửa</small></a>
 <a href="#sample-viewer" data-hg-route="sample-viewer"><span>▧</span><small>Xem mẫu</small></a>
 <a href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home"><span>⌂</span><small>Trang chủ</small></a>
-</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="workspace-launcher.js"></script><script type="module" src="minimal-shell.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
+</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="workspace-launcher.js"></script><script type="module" src="minimal-shell.js"></script><script type="module" src="editor-workspace.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>

@@ -32,7 +32,14 @@ with sync_playwright() as p:
   response=context.request.get(url+f'assets/sample.{ext}')
   assert response.status==200
   assert response.body()==(root/f'viewer/assets/sample.{ext}').read_bytes()
- page.wait_for_function('()=>navigator.serviceWorker.controller!==null',timeout=60000)
+ # Wait for the ACTIVE controller's public shell to be present before simulating offline.
+ # Do not rely only on controller!=null while a new SW/cache install may still be racing.
+ page.wait_for_function("""async () => {
+   const registration=await navigator.serviceWorker.ready;
+   const index=new URL('index.html',registration.scope).href;
+   const shell=await caches.match(index);
+   return !!navigator.serviceWorker.controller && !!shell && !registration.installing;
+ }""",timeout=60000)
  context.set_offline(True);page.reload();page.wait_for_function('()=>hgViewer.ready',timeout=60000)
  assert not errors,errors
  browser.close()
