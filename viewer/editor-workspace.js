@@ -126,6 +126,17 @@ $('hg-ws-reset-view').addEventListener('click',()=>{
  $('cgpt-recenter').click();
  for(const b of root.querySelectorAll('[data-ws-view]'))b.setAttribute('aria-pressed',String(b.dataset.wsView==='perspective'));
 });
+// Reuse the existing evidence-aware ChatGPT job builder rather than implementing another.
+for(const [visibleId,engineId] of [
+ ['hg-ws-input-kind','input-type'],
+ ['hg-ws-instruction','model-instruction'],
+ ['hg-ws-measurements','confirmed-measurements']
+]){
+ const visible=$(visibleId),original=$(engineId);
+ visible.value=original.value;
+ visible.addEventListener('input',()=>{original.value=visible.value;original.dispatchEvent(new Event('input',{bubbles:true}));});
+ visible.addEventListener('change',()=>{original.value=visible.value;original.dispatchEvent(new Event('change',{bubbles:true}));});
+}
 document.addEventListener('hg3d:editorchange',event=>{
  if(event.detail?.reason==='model'){
   core()?.setWireframe?.($('hg-ws-wireframe').checked);
