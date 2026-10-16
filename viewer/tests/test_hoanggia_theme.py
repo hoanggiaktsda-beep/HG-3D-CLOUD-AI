@@ -28,7 +28,7 @@ class ThemeTests(unittest.TestCase):
         self.assertEqual(page.locator(".hg-brand img").get_attribute("src"),"assets/hoanggia-icon.svg")
         self.assertEqual(page.locator('.hg-side-home').get_attribute('href'),"https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home")
         page.locator('.hg-side-nav a[href="#create-model"]').click()
-        self.assertEqual(page.locator("#hg-crumb").inner_text(),"TẠO MÔ HÌNH 3D")
+        page.wait_for_function('() => document.querySelector("#hg-crumb").textContent === "TẠO MÔ HÌNH 3D"')
 
     def test_phone_bottom_navigation_and_no_overflow(self):
         for width,height in [(390,844),(375,812),(320,640),(820,1180)]:
@@ -43,7 +43,7 @@ class ThemeTests(unittest.TestCase):
                     self.assertTrue(page.locator(".hg-mobile-nav").is_visible())
                     self.assertFalse(page.locator(".hg-side").is_visible())
                     page.locator('.hg-mobile-nav [href="#chatgpt-studio"]').click()
-                    self.assertEqual(page.locator('#hg-crumb').inner_text(),"XƯỞNG CHATGPT")
+                    page.wait_for_function('() => document.querySelector("#hg-crumb").textContent === "XƯỞNG CHATGPT"')
                 else:
                     self.assertTrue(page.locator(".hg-side").is_visible())
 
