@@ -1,10 +1,10 @@
-<!doctype html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101411"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="assets/hoanggia-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icons/icon-192.png"><title>HG 3D CLOUD AI · HOANGGIA STUDIO</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="studio-theme.css"><script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/","@comfyorg/fbx-exporter-three":"./node_modules/@comfyorg/fbx-exporter-three/dist/index.js","fflate":"./node_modules/fflate/esm/browser.js"}}</script></head>
+<!doctype html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101411"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="assets/hoanggia-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icons/icon-192.png"><title>HOANGGIA 3D WORKSPACE · Tạo 3D từ ảnh</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="studio-theme.css"><script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/","@comfyorg/fbx-exporter-three":"./node_modules/@comfyorg/fbx-exporter-three/dist/index.js","fflate":"./node_modules/fflate/esm/browser.js"}}</script></head>
 <body><div class="hg-app">
 <aside class="hg-side" aria-label="Điều hướng HOANGGIA AI">
   <a class="hg-brand" href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home" aria-label="Về HOANGGIA STUDIO"><img src="assets/hoanggia-icon.svg" alt=""><span><strong>HOANGGIA</strong><small>STUDIO <b>3D CLOUD AI</b></small></span></a>
   <div class="hg-side-label">KHÔNG GIAN LÀM VIỆC</div>
   <nav class="hg-side-nav" aria-label="Công cụ 3D">
-    <a href="#create-model" data-hg-route="create-model"><span class="hg-ni">◈</span><span>Tạo mô hình 3D</span></a>
+    <a href="#hg-launch" data-hg-route="hg-launch"><span class="hg-ni">✦</span><span>Không gian tạo 3D</span></a><a href="#create-model" data-hg-route="create-model"><span class="hg-ni">◈</span><span>Tạo mô hình 3D</span></a>
     <a href="#chatgpt-studio" data-hg-route="chatgpt-studio"><span class="hg-ni">✳</span><span>Chỉnh sửa với ChatGPT</span></a>
     <a href="#sample-viewer" data-hg-route="sample-viewer"><span class="hg-ni">▧</span><span>Xem 3D mẫu</span></a>
     <a href="#public-demo" data-hg-route="public-demo"><span class="hg-ni">▤</span><span>Thư viện kiểm định</span></a>
@@ -14,11 +14,57 @@
 </aside>
 <div class="hg-frame">
 <header class="hg-topbar"><div class="hg-breadcrumb"><span class="hg-overline">HOANGGIA AI / 3D CLOUD /</span><strong id="hg-crumb">TẠO MÔ HÌNH 3D</strong></div>
-<div class="hg-top-actions"><span class="hg-storage-label">◉ Xử lý cục bộ</span><a class="hg-gold-btn" href="#create-model">＋ Tạo mô hình</a><a class="hg-homelink" href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home" aria-label="Về trang chủ HOANGGIA STUDIO">⌂ Home</a></div></header>
+<nav class="hg-top-links" aria-label="Điều hướng không gian tạo 3D"><a href="#hg-launch" data-hg-route="hg-launch">Tạo từ ảnh</a><a href="#sample-viewer" data-hg-route="sample-viewer">Không gian 3D</a><a href="#chatgpt-studio" data-hg-route="chatgpt-studio">Chỉnh sửa</a><a href="#public-demo" data-hg-route="public-demo">Thư viện</a></nav><div class="hg-top-actions"><span class="hg-storage-label">◉ Xử lý cục bộ</span><a class="hg-gold-btn" href="#create-model">＋ Tạo mô hình</a><a class="hg-homelink" href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home" aria-label="Về trang chủ HOANGGIA STUDIO">⌂ Home</a></div></header>
 <main class="hg-content">
-<section class="hg-hero" aria-label="Tổng quan HG 3D CLOUD AI">
- <div class="hg-hero-copy"><p class="eyebrow">HOANGGIA STUDIO / XƯỞNG SÁNG TẠO</p><h1>HG 3D <em>CLOUD AI</em></h1><p>Tạo yêu cầu từ ảnh nội thất, chỉnh sửa mô hình trong trình duyệt và kiểm định hình học có giám sát. Thống nhất không gian làm việc với HOANGGIA STUDIO.</p><div class="hg-hero-actions"><a class="hg-gold-btn" href="#create-model">Bắt đầu từ ảnh ↗</a><a class="hg-secondary-btn" href="#chatgpt-studio">Mở xưởng chỉnh sửa</a></div></div>
- <div class="hg-hero-emblem" aria-hidden="true"><img src="assets/hoanggia-icon.svg" alt=""><span>DESIGN INTELLIGENCE<br>3D WORKSPACE</span></div>
+<section id="hg-launch" class="hg-launch" aria-labelledby="hg-launch-title">
+  <div class="hg-launch-halo" aria-hidden="true"></div>
+  <div class="hg-launch-topline"><span class="hg-launch-chip"><span class="hg-live-dot"></span> HOANGGIA / 3D WORKSPACE</span><span class="hg-launch-meta">MIỄN PHÍ · KHÔNG MÁY CHỦ · KHÔNG TỰ GỬI ẢNH</span></div>
+  <div class="hg-launch-copy">
+    <p class="hg-launch-eyebrow">MỘT KHÔNG GIAN LÀM VIỆC 3D</p>
+    <h1 id="hg-launch-title">Ảnh của bạn.<br><em>Mô hình của bạn.</em></h1>
+    <p>Từ ảnh nội thất đến mô hình 3D có thể xoay, chỉnh từng bộ phận và xuất <strong>GLB / FBX</strong> bản nháp.</p>
+  </div>
+  <div class="hg-launch-layout">
+    <div class="hg-launch-workbench">
+      <div class="hg-upload-drop" id="hg-upload-drop" role="button" tabindex="0" aria-describedby="hg-upload-hint hg-launch-upload-status" aria-label="Chọn, kéo thả hoặc dán ảnh sản phẩm">
+        <div class="hg-upload-empty" id="hg-upload-empty">
+          <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="9" width="38" height="30" rx="6"/><circle cx="17" cy="20" r="3"/><path d="m10 33 9-8 7 6 6-9 7 11"/><path d="M35 2v12M29 8h12"/></svg>
+          <strong>Kéo thả ảnh sản phẩm vào đây</strong>
+          <span>hoặc chọn ảnh trên thiết bị để bắt đầu</span>
+          <span class="hg-upload-choose">＋ Chọn ảnh nội thất</span>
+          <small id="hg-upload-hint">PNG, JPG, WebP · Tối đa 8 ảnh, 20 MB/ảnh · Dữ liệu ở thiết bị</small>
+        </div>
+        <div class="hg-upload-loaded" id="hg-upload-loaded" hidden>
+          <img id="hg-launch-preview" alt="Ảnh tham chiếu vừa được chọn">
+          <div><strong id="hg-launch-filename"></strong><span id="hg-launch-filecount"></span><small>Ảnh nguồn đã được kiểm tra. Chưa có AI nhận diện tự động.</small><span class="hg-upload-choose">＋ Thay ảnh</span></div>
+        </div>
+      </div>
+      <div class="hg-launch-options">
+        <div class="hg-option-title"><strong>Ưu tiên khi phân tích với ChatGPT</strong><span>Chọn một chế độ</span></div>
+        <div class="hg-mode-row" role="radiogroup" aria-label="Mục tiêu của mô hình 3D">
+          <label class="hg-mode-option"><input type="radio" name="hg-model-priority" value="shape" checked><span><strong>◈ Giữ đúng hình dáng</strong><small>Ưu tiên hình khối và tỷ lệ quan sát được</small></span></label>
+          <label class="hg-mode-option"><input type="radio" name="hg-model-priority" value="parts"><span><strong>▦ Tách bộ phận</strong><small>Ưu tiên cấu tạo để chỉnh sửa từng mesh</small></span></label>
+        </div>
+      </div>
+      <div class="hg-launch-actions">
+        <button type="button" id="hg-launch-analyze" disabled>Chuẩn bị lệnh phân tích ảnh <span aria-hidden="true">↗</span></button>
+        <a href="#chatgpt-studio" class="hg-launch-outline">Xưởng chỉnh sửa 3D</a>
+      </div>
+      <p id="hg-launch-upload-status" role="status" aria-live="polite">Chọn ảnh để bắt đầu. Trang chưa tự gọi ChatGPT hoặc tạo mô hình từ pixel.</p>
+    </div>
+    <aside class="hg-launch-inspector" aria-label="Các bước trong không gian 3D">
+      <div class="hg-inspector-top"><span>3D WORKFLOW</span><span class="hg-inspector-status">TRÊN THIẾT BỊ</span></div>
+      <h2>Không gian sáng tạo</h2>
+      <div class="hg-inspector-steps">
+        <a href="#create-model"><span class="hg-inspector-icon">01</span><span><strong>Hình ảnh</strong><small id="hg-stage-source">Chưa chọn ảnh nguồn</small></span><span aria-hidden="true">↗</span></a>
+        <a href="#hg-photo-workflow"><span class="hg-inspector-icon">02</span><span><strong>Phân tích cùng ChatGPT</strong><small id="hg-stage-analysis">Đính kèm ảnh thủ công</small></span><span aria-hidden="true">↗</span></a>
+        <a href="#chatgpt-studio"><span class="hg-inspector-icon">03</span><span><strong>Dựng & chỉnh mesh</strong><small id="hg-stage-model">Đợi JSON/GLB hợp lệ</small></span><span aria-hidden="true">↗</span></a>
+        <a href="#sample-viewer"><span class="hg-inspector-icon">04</span><span><strong>Xem & xuất GLB/FBX</strong><small id="hg-stage-export">Có file khi đã dựng hình học</small></span><span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="hg-inspector-notice">AI thị giác chưa được nối trực tiếp với website. Không tạo model giả hoặc mặc định sai với ảnh.</p>
+    </aside>
+  </div>
+  <div class="hg-launch-footer"><span>ẢNH → PHÂN TÍCH → MÔ HÌNH → CHỈNH SỬA → XUẤT FILE</span><a href="#hg-modules">Dựng khối theo kích thước đã biết ↗</a></div>
 </section>
 <div class="hg-stats" aria-label="Các không gian làm việc"><a href="#create-model"><span>01 / ĐẦU VÀO</span><strong>Ảnh & bản vẽ</strong><small>Tạo yêu cầu cục bộ</small></a><a href="#chatgpt-studio"><span>02 / XƯỞNG 3D</span><strong>ChatGPT Studio</strong><small>Chỉnh JSON / GLB nháp</small></a><a href="#sample-viewer"><span>03 / KIỂM ĐỊNH</span><strong>Trình xem 360°</strong><small>Góc máy và kích thước</small></a></div><nav class="section-nav" aria-label="Chức năng"><a href="#sample-viewer">Xem 3D mẫu</a><a href="#create-model">TẠO MÔ HÌNH 3D</a><a href="#chatgpt-studio">ChatGPT Studio</a></nav><section id="sample-viewer" class="intro"><div><p class="eyebrow">BỘ SƯU TẬP / 001</p><h1>Console Luxury</h1><p class="subtitle">Khối bao thiết kế · Gỗ tối màu & chân kim loại</p></div><span class="review-badge">● CẦN XÁC NHẬN</span></section>
 <div class="workspace"><section class="model-panel" aria-label="Xem mô hình 3D"><div class="panel-top"><span>KHÔNG GIAN 3D</span><span id="active-view">Phối cảnh</span></div><div id="viewport"><div id="loading" role="status">Đang tải mô hình…</div><div id="error" role="alert" hidden></div></div><div class="viewbar" role="group" aria-label="Góc camera"><button data-view="perspective" aria-pressed="true">Phối cảnh</button><button data-view="front" aria-pressed="false">Mặt đứng</button><button data-view="right" aria-pressed="false">Mặt cạnh</button><button data-view="top" aria-pressed="false">Mặt bằng</button><button data-view="back" aria-pressed="false">Mặt sau</button></div><div class="tools"><span class="hint">Một ngón để xoay · Hai ngón để zoom / di chuyển</span><div><button id="zoom-in" aria-label="Phóng to">＋</button><button id="zoom-out" aria-label="Thu nhỏ">−</button><button id="reset">Đặt lại</button><button id="hg-download-glb" type="button" hidden>Tải GLB bản nháp</button><button id="hg-download-fbx" type="button" hidden>Tải FBX bản nháp</button></div></div></section>
@@ -130,4 +176,4 @@
 <a href="#chatgpt-studio" data-hg-route="chatgpt-studio"><span>✳</span><small>Chỉnh sửa</small></a>
 <a href="#sample-viewer" data-hg-route="sample-viewer"><span>▧</span><small>Xem mẫu</small></a>
 <a href="https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home"><span>⌂</span><small>Trang chủ</small></a>
-</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
+</nav></div><script type="module" src="app.js"></script><script type="module" src="create-model.js"></script><script type="module" src="studio-theme.js"></script><script type="module" src="chatgpt-studio.js"></script><script type="module" src="local-modules.js"></script><script type="module" src="photo-handoff.js"></script><script type="module" src="workspace-launcher.js"></script><script type="module" src="pwa.js"></script><script type="module" src="public-demo.js"></script></body></html>
