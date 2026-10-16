@@ -24,9 +24,11 @@ function job(){
  'Đóng vai 18 bộ phận chuyên gia: giám đốc kỹ thuật, kiến trúc, nội thất, họa viên, đo lường, hình học, cấu tạo, thị giác, đa ảnh, vật liệu, UV, ánh sáng, môi trường, camera, tự động hóa và kiểm định.',
  'Nguồn: '+kind+'. Tên ảnh (tôi sẽ tự đính kèm ảnh vào ChatGPT): '+(images.map(f=>f.name).join(', ')||'Không có, yêu cầu bằng văn bản.'),
  'NHIỆM VỤ: '+(instruction||'Phân tích ảnh và tạo bản 3D nháp có thể chỉnh sửa.'),
+ 'BẮT BUỘC NHẬN DIỆN ĐÚNG ẢNH TRƯỚC KHI DỰNG: Nhìn chính ảnh tôi đính kèm và mô tả loại đồ nội thất, dáng tổng thể, bệ/chân, mặt trên, hốc lõm, thành viền, tỉ lệ nhìn thấy và mặt khuất. Phân biệt rõ chi tiết quan sát được với chi tiết suy luận. Không thay ảnh bàn trà khối hộp thấp có hốc lõm bằng mẫu bàn ăn bốn chân. Không sao chép mô hình bàn/tủ mẫu trên website. Nếu không thấy rõ ảnh, nói chưa đọc được ảnh thay vì giả định.',
+ 'HÌNH HỌC THỂ HIỆN HỐC: Nếu quan sát thấy mặt bàn có hốc/lòng rỗng, hãy chia thành các tấm viền bên và đáy hốc bằng nhiều đối tượng box, để giữa thực sự không bị che kín bởi tấm đặc; nếu không đủ chứng cứ kích thước thì chưa tạo kích thước thật.',
  'SỐ ĐO ĐÃ XÁC NHẬN (mm): '+(known||'Không có; không được tự đặt kích thước tuyệt đối.'),
  'GIỚI HẠN: không render; không thay kiến trúc hay camera nếu không được yêu cầu. Phân biệt XÁC NHẬN, SUY LUẬN, CẦN XÁC NHẬN. Không phát minh cấu tạo khuất, đường kính lỗ, vật liệu, số đo. Nếu chỉ có một ảnh thiếu tỉ lệ, phải nêu điều thiếu và có thể trả objects=[] thay vì bịa.',
- 'KẾT QUẢ: (1) phân tích ngắn và các câu hỏi cần xác nhận; (2) chỉ nếu có đủ bằng chứng kích thước, cung cấp một khối JSON theo cấu trúc ở dưới để tôi dán vào công cụ HG 3D. JSON là bản nháp, không phải file BLEND/GLB đã dựng.',
+ 'KẾT QUẢ: (1) ghi nhận diện hình dáng cụ thể của sản phẩm trong ảnh; (2) liệt kê kích thước và chi tiết chưa có chứng cứ; (3) CHỈ nếu có kích thước đủ xác nhận, cung cấp một khối JSON để tạo 3D; nếu chưa đủ, trả objects=[] và đề nghị tôi cung cấp đúng một hoặc vài số đo cần thiết. Không trả JSON mẫu bốn chân thay cho kiểu dáng thực của ảnh.',
  'JSON SCHEMA: {"schema":"hg-chatgpt-scene-v1","unit":"mm","review_status":"NEEDS_REVIEW","objects":[{"id":"part_01","name":"Tấm mẫu","shape":"box","size_mm":[1000,450,25],"position_mm":[0,0,500],"rotation_deg":[0,0,0],"color":"#86755f","confidence":"inferred"}],"unknown_details":["Kết cấu khuất chưa xác minh"]}',
  'Đối tượng chỉ dùng shape box hoặc cylinder; size_mm theo [rộng,sâu,cao], position_mm là tọa độ tâm; cylinder có X=Y là đường kính. Không sao chép con số ví dụ nếu không có chứng cứ. Đối tượng không đủ số đo phải được nêu trong unknown_details. Trạng thái luôn NEEDS_REVIEW.'
  ].join('\n\n');
@@ -132,7 +134,25 @@ function show(group,origin,missing=[]){
  review.textContent='CẦN XÁC NHẬN: '+(missing.length?missing.map(s=>String(s).slice(0,180)).join('; '):'Mô hình nháp chưa kiểm tra cấu tạo và kích thước.');
  say('Đang xem 3D cục bộ từ '+origin+'. Không gửi dữ liệu lên máy chủ.');
 }
-$('cgpt-preview-json').addEventListener('click',()=>{try{const data=parseJSON($('cgpt-scene-json').value);show(groupFromJSON(data),'JSON ChatGPT do người dùng dán',data.unknown_details||[]);}catch(e){say('JSON chưa dựng được: '+e.message,true);}});
+state.loadParametricDraft = data => {
+ const validData=parseJSON(JSON.stringify(data));
+ show(groupFromJSON(validData),'Mẫu tham số do người dùng chọn (KHÔNG nhận diện từ ảnh)',validData.unknown_details||[]);
+ return state.ready;
+};
+state.clearForNewSource = () => {
+ if(model){scene?.remove(model);model=null;}
+ part=null;state.ready=false;state.origin=null;state.edited=false;state.objects=0;
+ if(renderer){const select=$('cgpt-part');select.replaceChildren();$('cgpt-part-count').textContent='Chưa có mô hình của ảnh mới';fill();}
+ review.textContent='ẢNH MỚI · CHƯA ĐƯỢC AI PHÂN TÍCH. Không dùng mô hình cũ hoặc mẫu tự dựng để đại diện ảnh này.';
+ say('Đã nhận ảnh mới. Chờ phân tích bằng ChatGPT hoặc người dùng chọn dựng mẫu riêng.');
+};
+$('cgpt-preview-json').addEventListener('click',()=>{
+ try{
+  const data=parseJSON($('cgpt-scene-json').value);
+  show(groupFromJSON(data),'JSON người dùng dán từ ChatGPT (chưa đối chiếu ảnh)',data.unknown_details||[]);
+  document.dispatchEvent(new CustomEvent('hg3d:sceneimported',{detail:{objectCount:data.objects.length}}));
+ }catch(e){say('JSON chưa dựng được: '+e.message,true);}
+});
 $('cgpt-json-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{if(f.size>256000)throw Error('JSON vượt 256 KB.');$('cgpt-scene-json').value=await f.text();say('Đã nhập JSON. Bấm Xem 3D từ JSON để tạo bản nháp.');}catch(err){say(err.message,true);}e.target.value='';});
 $('cgpt-part').addEventListener('change',()=>{part=meshes()[Number($('cgpt-part').value)]||null;fill();});
 $('cgpt-recenter').addEventListener('click',recenter);
