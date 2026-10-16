@@ -1,0 +1,173 @@
+{
+  "test": 33,
+  "overall": "CHƯA ĐẠT",
+  "production_ready": false,
+  "test30": "CẦN XÁC NHẬN",
+  "roles_count": 18,
+  "core_tests": 84,
+  "viewer_tests": 19,
+  "physical_devices_tested": false,
+  "run_url": "https://github.com/hoanggiaktsda-beep/HG-3D-CLOUD-AI/actions/runs/38840914648",
+  "components": [
+    {
+      "function": "Nhận ảnh và kiểm tra định dạng/dung lượng",
+      "classification": "ĐẠT",
+      "scope_and_limits": "PNG/JPEG/WebP, kiểm signature/giải mã và giới hạn; HEIC chưa hỗ trợ"
+    },
+    {
+      "function": "OCR số đo từ bản vẽ",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Tesseract thật; cần ROI/chọn trang, đối chiếu nhãn và đơn vị"
+    },
+    {
+      "function": "Qwen2-VL-2B đọc ảnh",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Có lượt suy luận thật; chưa tự gán đầy đủ số đo–vật thể–pose"
+    },
+    {
+      "function": "Phối cảnh/ảnh sản phẩm → 3D metric đầy đủ",
+      "classification": "CHƯA ĐẠT",
+      "scope_and_limits": "Chưa có benchmark đạt trên ảnh sản phẩm/nội thất thực đa dạng"
+    },
+    {
+      "function": "Layout → kiến trúc đầy đủ",
+      "classification": "CHƯA ĐẠT",
+      "scope_and_limits": "Chưa tự xác định tường, cửa, trần và cao độ đủ chứng cứ"
+    },
+    {
+      "function": "Đối chiếu AI/OCR và chặn dữ liệu mâu thuẫn",
+      "classification": "ĐẠT",
+      "scope_and_limits": "Cổng bằng chứng và ca âm; không tự lấy OCR thay AI để báo thành công"
+    },
+    {
+      "function": "JSON và phân biệt confirmed/inferred/needs_confirmation",
+      "classification": "ĐẠT",
+      "scope_and_limits": "Nguồn, hash, từng trục; đề xuất model không tự xác nhận"
+    },
+    {
+      "function": "Tự hợp nhất mặt bằng/đứng/cạnh",
+      "classification": "CHƯA ĐẠT",
+      "scope_and_limits": "Chưa suy ra pose từng cấu kiện đã kiểm chứng"
+    },
+    {
+      "function": "Blender tham số và envelope",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Dựng thật, giữ khối bao; không phải tái dựng chi tiết sản phẩm"
+    },
+    {
+      "function": "Contour tấm, chi tiết mỏng, đường cắt trong",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Mẫu công khai; tỷ lệ pixel/ROI có giám sát, chưa tổng quát"
+    },
+    {
+      "function": "Lỗ chốt, khoan, liên kết và bán kính gia công",
+      "classification": "CHƯA ĐẠT",
+      "scope_and_limits": "Thiếu số đo giữ CẦN XÁC NHẬN; marker không phải lỗ vật lý"
+    },
+    {
+      "function": "Sản phẩm lắp ráp đúng kỹ thuật",
+      "classification": "CHƯA ĐẠT",
+      "scope_and_limits": "TEST 30 chưa giải được pose/quan hệ đủ bằng chứng"
+    },
+    {
+      "function": "Đo kích thước/vị trí từng mesh",
+      "classification": "ĐẠT",
+      "scope_and_limits": "Đo Blender thật, so nguồn JSON; không đồng nghĩa JSON đúng bản vẽ"
+    },
+    {
+      "function": "Va chạm, khe hở, độ dày lắp ráp",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Có bộ kiểm tra và ca tổng hợp, chưa đủ pose ghế thật để nghiệm thu"
+    },
+    {
+      "function": "Vật liệu, PBR và UV",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Có slot/giá trị cơ bản; chưa kiểm chất lượng UV/texture hoặc giống sản phẩm"
+    },
+    {
+      "function": "Ánh sáng",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "BLEND giữ đèn/giá trị; GLB mẫu mất đèn Area; chưa đối chiếu ảnh"
+    },
+    {
+      "function": "Môi trường/bối cảnh từ ảnh",
+      "classification": "CHƯA ĐẠT",
+      "scope_and_limits": "World mặc định không phải môi trường được tái dựng"
+    },
+    {
+      "function": "Camera và góc nhìn",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Pose/lens BLEND, camera viewer có thật; chưa khớp camera ảnh nguồn"
+    },
+    {
+      "function": "Layer/collection",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Có collection BLEND; không bảo toàn collection Blender trong GLB"
+    },
+    {
+      "function": "Lưu và mở lại BLEND/GLB",
+      "classification": "ĐẠT",
+      "scope_and_limits": "Kiểm kỹ thuật trên mẫu; backend nay nhập lại GLB trước tải"
+    },
+    {
+      "function": "Dựng độc lập trên GitHub-hosted Actions",
+      "classification": "ĐẠT",
+      "scope_and_limits": "Runner cloud chạy Blender; không cần Blender ở máy cá nhân, không phải server 24/7"
+    },
+    {
+      "function": "Nhận việc/tiến độ/phiên bản/lỗi",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "TEST 31 batch công khai và backend loopback; chưa quản lý việc riêng qua website"
+    },
+    {
+      "function": "Backend auth và phân quyền file",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Loopback kiểm 401/404/ownership/Host/Origin/quota; chưa nghiệm thu bảo mật Internet"
+    },
+    {
+      "function": "Lưu trữ riêng bền vững và API Internet",
+      "classification": "CHƯA ĐẠT",
+      "scope_and_limits": "Chưa triển khai; chưa TLS/rotation/rate limit/backup/retention vận hành được nghiệm thu"
+    },
+    {
+      "function": "Website xem mẫu, xoay/zoom/QA",
+      "classification": "ĐẠT",
+      "scope_and_limits": "Chromium thật, giả lập màn hình/cảm ứng; website chỉ mẫu công khai"
+    },
+    {
+      "function": "PWA ngoại tuyến",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Cache allowlist mẫu, reload ngoại tuyến; cài thực trên iOS/macOS chưa kiểm chứng"
+    },
+    {
+      "function": "iPhone/iPad/Windows/macOS thật",
+      "classification": "CHƯA ĐẠT",
+      "scope_and_limits": "Chỉ Chromium Linux giả lập, không Safari/thiết bị thật"
+    },
+    {
+      "function": "Tải GLB/BLEND/báo cáo",
+      "classification": "ĐẠT",
+      "scope_and_limits": "GLB/BLEND download thực và so bytes; QA JSON đọc qua HTTP, chưa thử lưu vào Tệp iOS"
+    },
+    {
+      "function": "Ảnh khách hàng không lên Pages/Actions",
+      "classification": "ĐẠT",
+      "scope_and_limits": "Build allowlist, upload website khóa, workflow mới không nhận ảnh tùy ý; phạm vi mã thử nghiệm"
+    },
+    {
+      "function": "Website → AI → Worker → kết quả riêng",
+      "classification": "CHƯA ĐẠT",
+      "scope_and_limits": "CHƯA KẾT NỐI, không dùng job/progress/model giả"
+    },
+    {
+      "function": "Giới hạn miễn phí",
+      "classification": "ĐẠT MỘT PHẦN",
+      "scope_and_limits": "Runner tiêu chuẩn public, không dịch vụ trả phí; chưa truy cập billing/quota tài khoản thực"
+    },
+    {
+      "function": "18 vai trò và báo cáo có giám sát",
+      "classification": "ĐẠT",
+      "scope_and_limits": "Giữ danh sách 18, không giả vờ 18 model chạy; không tự nghiệm thu"
+    }
+  ]
+}

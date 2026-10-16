@@ -1,0 +1,458 @@
+{
+  "status": "TECHNICAL_SAMPLE_CHECKED_NOT_FINAL_APPROVAL",
+  "blend": {
+    "meshes": [
+      {
+        "id": "floor_01_body",
+        "source_id": "floor_01",
+        "confidence": "confirmed",
+        "collections": [
+          "HG_ARCH"
+        ],
+        "material_slots": [
+          "HG_stone"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 3.0000001192092887,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "wall_back_body",
+        "source_id": "wall_back",
+        "confidence": "confirmed",
+        "collections": [
+          "HG_ARCH"
+        ],
+        "material_slots": [
+          "HG_paint"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 1.5000000223517418,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "sofa_01_seat",
+        "source_id": "sofa_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_fabric"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.2649941209777478,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "sofa_01_base",
+        "source_id": "sofa_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_fabric"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.5778367789596486,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "sofa_01_back",
+        "source_id": "sofa_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_fabric"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.2379103931152344,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "sofa_01_arm_left",
+        "source_id": "sofa_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_fabric"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.0324900027108193,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "sofa_01_arm_right",
+        "source_id": "sofa_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_fabric"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.0324900027108193,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "coffee_table_01_top",
+        "source_id": "coffee_table_01",
+        "confidence": "confirmed",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_wood"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.03931200017130369,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "coffee_table_01_leg_00",
+        "source_id": "coffee_table_01",
+        "confidence": "confirmed",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_metal"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.0009993984358245848,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "coffee_table_01_leg_01",
+        "source_id": "coffee_table_01",
+        "confidence": "confirmed",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_metal"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.0009993984358245848,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "coffee_table_01_leg_10",
+        "source_id": "coffee_table_01",
+        "confidence": "confirmed",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_metal"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.0009993984358245848,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "coffee_table_01_leg_11",
+        "source_id": "coffee_table_01",
+        "confidence": "confirmed",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_metal"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.0009993984358245848,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "rug_01_body",
+        "source_id": "rug_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_carpet"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.08320000090002998,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "cabinet_01_bottom",
+        "source_id": "cabinet_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_wood"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.011249999869614835,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "cabinet_01_top",
+        "source_id": "cabinet_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_wood"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.011249999869614835,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "cabinet_01_side_-1",
+        "source_id": "cabinet_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_wood"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.009000000029802316,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "cabinet_01_side_1",
+        "source_id": "cabinet_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_wood"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.009000000029802316,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "cabinet_01_back",
+        "source_id": "cabinet_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_wood"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.02000000059604645,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "cabinet_01_door_L",
+        "source_id": "cabinet_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_wood"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.009140625359723348,
+        "uv_layers": [
+          "UVMap"
+        ]
+      },
+      {
+        "id": "cabinet_01_door_R",
+        "source_id": "cabinet_01",
+        "confidence": "inferred",
+        "collections": [
+          "HG_FURNITURE"
+        ],
+        "material_slots": [
+          "HG_wood"
+        ],
+        "vertices": 8,
+        "manifold": true,
+        "volume_m3": 0.009140625359723348,
+        "uv_layers": [
+          "UVMap"
+        ]
+      }
+    ],
+    "materials": [
+      {
+        "id": "HG_carpet",
+        "base_color": [
+          0.4699999988079071,
+          0.4300000071525574,
+          0.4000000059604645,
+          1.0
+        ],
+        "roughness": 0.7200000286102295,
+        "metallic": 0.0
+      },
+      {
+        "id": "HG_fabric",
+        "base_color": [
+          0.5899999737739563,
+          0.5600000023841858,
+          0.5099999904632568,
+          1.0
+        ],
+        "roughness": 0.7200000286102295,
+        "metallic": 0.0
+      },
+      {
+        "id": "HG_metal",
+        "base_color": [
+          0.30000001192092896,
+          0.3199999928474426,
+          0.3499999940395355,
+          1.0
+        ],
+        "roughness": 0.4000000059604645,
+        "metallic": 0.800000011920929
+      },
+      {
+        "id": "HG_paint",
+        "base_color": [
+          0.8299999833106995,
+          0.8199999928474426,
+          0.7799999713897705,
+          1.0
+        ],
+        "roughness": 0.7200000286102295,
+        "metallic": 0.0
+      },
+      {
+        "id": "HG_stone",
+        "base_color": [
+          0.7099999785423279,
+          0.699999988079071,
+          0.6600000262260437,
+          1.0
+        ],
+        "roughness": 0.4000000059604645,
+        "metallic": 0.0
+      },
+      {
+        "id": "HG_wood",
+        "base_color": [
+          0.25999999046325684,
+          0.15000000596046448,
+          0.07999999821186066,
+          1.0
+        ],
+        "roughness": 0.7200000286102295,
+        "metallic": 0.0
+      }
+    ],
+    "lights": [
+      {
+        "id": "general_softbox_01",
+        "type": "AREA",
+        "power_w": 320.0,
+        "size_mm": 1700.0000476837158
+      }
+    ],
+    "cameras": [
+      {
+        "id": "camera_main",
+        "lens_mm": 35.0,
+        "direction_dot": 0.9999999795109034
+      }
+    ],
+    "world": {
+      "present": true,
+      "source_environment_specified": false,
+      "verified_against_photo": false
+    },
+    "active_camera": "camera_main"
+  },
+  "glb": {
+    "meshes": 20,
+    "cameras": [
+      {
+        "id": "camera_main",
+        "lens_mm": 41.481475830078125
+      }
+    ],
+    "lights": [],
+    "collections": [],
+    "limits": [
+      "GLB does not guarantee Blender collection/layer semantics or area-light fidelity; measured inventory only."
+    ]
+  },
+  "render_executed": false,
+  "automatic_vision_executed": false,
+  "test30_status": "CẦN XÁC NHẬN",
+  "limits": [
+    "Basic PBR values are not verified product materials, UV quality or photo matching.",
+    "No source environment, HDRI or photographic lighting reference was supplied.",
+    "Closed basic meshes do not establish joinery, collision-free assembly or manufacturing readiness."
+  ]
+}

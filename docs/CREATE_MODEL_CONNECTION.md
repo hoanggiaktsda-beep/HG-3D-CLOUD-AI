@@ -8,7 +8,7 @@ Giao diện phải luôn nói CHƯA KẾT NỐI khi chưa có đầy đủ backe
 
 ## Hợp đồng tích hợp cần hoàn thiện trước khi mở chức năng
 
-Không có backend hoạt động trong bản phát hành này. API dự kiến (chưa triển khai):
+Website Pages chưa kết nối backend. Backend loopback có xác thực đã được triển khai thử nghiệm riêng: [PRIVATE_BACKEND](PRIVATE_BACKEND.md) và [LOCAL_UI_AND_FREE_CLOUD](LOCAL_UI_AND_FREE_CLOUD.md). Hợp đồng dưới đây mô tả yêu cầu cho kết nối website riêng trong tương lai; không có API Internet đã được nghiệm thu:
 
 - GET /capabilities: ready từng dịch vụ, không gửi secrets cho browser.
 - POST /jobs: multipart ảnh đã cấp quyền, input_type, instruction, user-confirmed measurements; tạo job riêng theo người dùng và checksum nguồn.
@@ -24,4 +24,4 @@ GitHub Pages chỉ là static viewer, không chạy Python/Blender. Chưa kết 
 
 Bộ browser kiểm tra xem ảnh hợp lệ cục bộ, từ chối file giả/không hỗ trợ/quá nhiều, xóa ảnh, mọi job operation bị từ chối, không phát sinh request khi chọn ảnh/soạn yêu cầu, không lưu storage, bố cục ba kích thước màn hình và viewer mẫu vẫn đúng số đo. Fixture chỉ kiểm tra UI; không dùng làm bằng chứng AI nhận diện hay dựng thành công từ ảnh.
 
-Build allowlist thêm đúng create-model.js/model-service.js, tổng 16 file. Chỉ hai mẫu tổng hợp trong public-assets.json được phép đi vào artifact. Không đưa ảnh được chọn, bản vẽ khách hàng, outputs, BLEND hoặc dữ liệu private vào build hoặc Git. Chỉ publish UI đã kiểm thử; không quảng bá backend chưa hoạt động. Safari/iOS thật chưa kiểm chứng.
+Build allowlist thêm đúng create-model.js/model-service.js, tổng 22 file sau TEST 32. Chỉ ba file mẫu tổng hợp (GLB, BLEND và QA JSON) trong public-assets.json được phép đi vào artifact. Không đưa ảnh được chọn, bản vẽ khách hàng, outputs, BLEND ngoài mẫu đã rà soát hoặc dữ liệu private vào build hoặc Git. Chỉ publish UI đã kiểm thử; không quảng bá backend chưa hoạt động. Safari/iOS thật chưa kiểm chứng.

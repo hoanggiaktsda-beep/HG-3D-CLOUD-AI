@@ -11,7 +11,7 @@ Dự án thử nghiệm dựng và kiểm định 3D có giám sát. Giữ Direc
 - [TEST 31](docs/TEST31_RESULTS_VI.md): nhận yêu cầu mẫu, tiến độ thật, phiên bản và xử lý lỗi qua Actions. Artifacts có thời hạn, không phải storage bền vững.
 - [TEST 30](docs/TEST30_ASSEMBLY_VI.md): **CẦN XÁC NHẬN**. Chưa chứng minh lắp ráp đúng kỹ thuật; không tự nâng trạng thái.
 
-TEST 33 kiểm tra tổng thể các năng lực này; kết quả kiểm thử mã không thay thế nghiệm thu AI, hình học, cấu tạo hay bảo mật vận hành.
+[Báo cáo nghiệm thu TEST 33](docs/TEST33_ACCEPTANCE_VI.md): 84/84 kiểm thử lõi và 19/19 viewer đạt, Qwen/OCR chạy thật nhưng chỉ có tấm rời. Kết luận tổng thể **CHƯA ĐẠT** điều kiện sử dụng thực tế. Kết quả kiểm thử mã không thay thế nghiệm thu AI, hình học, cấu tạo hay bảo mật vận hành.
 
 ## Phát triển và kiểm thử
 

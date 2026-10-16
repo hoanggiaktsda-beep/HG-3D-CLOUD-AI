@@ -39,6 +39,6 @@ python3 -m unittest discover -s viewer/tests -v
 
 Browser suite cần Python Playwright và Chromium. Trong môi trường hiện tại có sẵn; test dùng /usr/bin/chromium và software WebGL. Kiểm tra desktop, kích thước iPhone 390×844, iPad 820×1180 và ngang 1180×820, touch orbit/pinch thật qua CDP, camera, zoom, kích thước GLB, lỗi tải, báo cáo không hợp lệ, chèn HTML và không có runtime request bên ngoài.
 
-Mô phỏng Chromium không chứng minh Safari hoặc thiết bị iPhone/iPad thật đã chạy. WebKit Playwright chưa có binary trong môi trường này. Chưa kiểm chứng hiệu năng trên thiết bị thật hoặc GLB lớn. Giao diện không Publish.
+Mô phỏng Chromium không chứng minh Safari hoặc thiết bị iPhone/iPad thật đã chạy. WebKit Playwright chưa có binary trong môi trường này. Chưa kiểm chứng hiệu năng trên thiết bị thật hoặc GLB lớn. Viewer mẫu đã được triển khai và kiểm tra website thật tại TEST 32; xem [báo cáo](TEST32_RESULTS_VI.md).
 
-Bản đóng gói tại đường dẫn project Pages: xem [GITHUB_PAGES_PREPARATION.md](GITHUB_PAGES_PREPARATION.md). Đây là chuẩn bị, chưa kích hoạt Pages.
+Bản đóng gói tại đường dẫn project Pages: xem [GITHUB_PAGES_PREPARATION.md](GITHUB_PAGES_PREPARATION.md). Pages đã kích hoạt bằng GitHub Actions ở TEST 32; tài liệu chuẩn bị bên dưới ghi lại cách đóng gói.
