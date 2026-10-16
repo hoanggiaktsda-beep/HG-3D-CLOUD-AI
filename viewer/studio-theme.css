@@ -486,3 +486,97 @@ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .hg-photo-reference{margin:7px 1
  .hg-3d-editor #hg-ws-import-glb::before{content:"＋";font-size:19px}
  .hg-3d-editor .hg-ws-back{width:29px;height:34px}
 }
+
+
+/* iPhone editing UX v2: one compact tool panel, not an endless settings/inspector stack. */
+@media(max-width:600px){
+ body.hg-minimal-ui.hg-show-editor #chatgpt-studio.hg-3d-editor{
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:56px 62px minmax(320px,49dvh) auto auto!important;
+  grid-template-areas:"bar" "rail" "scene" "mobilepanel" "feedback"!important;
+  min-height:100dvh;height:auto;overflow:clip;gap:0;
+ }
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .hg-ws-bar{
+  min-width:0;max-width:100%;padding:0 10px;gap:8px;
+ }
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .hg-ws-rail{
+  min-height:62px;height:62px;gap:4px;justify-content:space-around;padding:4px;
+  overscroll-behavior-x:contain;scrollbar-width:none;
+ }
+ .hg-3d-editor .hg-ws-rail::-webkit-scrollbar{display:none}
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .hg-ws-rail button{
+  flex:1 1 0;min-width:0;min-height:51px;padding:4px 2px;gap:1px;
+ }
+ .hg-3d-editor .hg-ws-rail button span{font-size:18px}
+ .hg-3d-editor .hg-ws-rail button small{font-size:10px;white-space:nowrap}
+ .hg-3d-editor .hg-ws-rail-divider,.hg-3d-editor .hg-ws-rail button:disabled{display:none}
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .cgpt-scene{
+  grid-area:scene;min-height:320px;max-height:49dvh;height:49dvh;
+  overflow:hidden;min-width:0;
+ }
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .cgpt-panel-head{
+  min-height:35px;padding:9px 12px;
+ }
+ .hg-3d-editor .hg-ws-viewport-tools{
+  min-height:42px;gap:5px;padding:5px 8px;
+  overscroll-behavior-x:contain;scrollbar-width:none;
+ }
+ .hg-3d-editor .hg-ws-viewport-tools button{min-height:32px;padding:5px 9px;font-size:11px}
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor #cgpt-viewport{
+  min-height:150px;flex:1;height:0;
+ }
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .hg-photo-reference{
+  margin:3px 8px;padding:5px;max-height:55px;overflow:hidden;
+ }
+ .hg-3d-editor #hg-photo-reference-image{max-height:40px}
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .cgpt-warning{
+  max-height:44px;padding:5px 9px;font-size:10px;
+ }
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .cgpt-grid,
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .cgpt-inspector{
+  grid-area:mobilepanel;min-width:0;min-height:0;max-height:none;
+  border:0;border-top:1px solid #4c5c4a;overflow:visible;
+ }
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .cgpt-grid{
+  display:flex;flex-direction:column;padding:0 12px 16px;gap:8px;
+ }
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .cgpt-inspector{
+  display:flex;flex-direction:column;
+ }
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor[data-ws-mobile-panel="settings"] .cgpt-inspector,
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor[data-ws-mobile-panel="inspector"] .cgpt-grid{
+  display:none!important;
+ }
+ .hg-3d-editor .hg-ws-settings-title{padding:13px 3px 4px}
+ .hg-3d-editor .hg-ws-settings-title strong{font-size:15px}
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .cgpt-subcard{padding:13px}
+ .hg-3d-editor .cgpt-grid textarea,.hg-3d-editor .cgpt-grid input,
+ .hg-3d-editor .cgpt-inspector input,.hg-3d-editor .cgpt-inspector select{
+  font-size:16px!important;
+ }
+ .hg-3d-editor .cgpt-grid button,.hg-3d-editor .cgpt-inspector button,
+ .hg-3d-editor .cgpt-grid a.cgpt-link{
+  min-height:44px;font-size:13px;
+ }
+ .hg-3d-editor .hg-ws-inspector-tabs button{min-height:46px;font-size:13px}
+ .hg-3d-editor .hg-ws-inspector-panel{padding:12px;overflow:visible}
+ body.hg-minimal-ui.hg-show-editor .hg-3d-editor #cgpt-feedback{
+  grid-area:feedback;padding:9px 12px;font-size:11px;
+  padding-bottom:max(9px,env(safe-area-inset-bottom));
+ }
+ .hg-3d-editor .hg-ws-top-actions #hg-ws-top-glb,
+ .hg-3d-editor .hg-ws-top-actions #hg-ws-top-fbx{display:none}
+ .hg-3d-editor .hg-ws-project{display:flex;flex:1;min-width:0}
+ .hg-3d-editor .hg-ws-project strong{font-size:10px}
+ .hg-3d-editor .hg-ws-project small{display:none}
+ .hg-3d-editor .hg-ws-brand strong{font-size:17px}
+ .hg-3d-editor .hg-ws-brand span{font-size:8px}
+ .hg-3d-editor .hg-ws-top-actions #hg-ws-import-glb{
+  font-size:11px;min-width:64px;max-width:none;padding:8px;
+ }
+ .hg-3d-editor #hg-ws-import-glb::before{content:none}
+}
+@media(max-width:360px){
+ .hg-3d-editor .hg-ws-project{display:none}
+ .hg-3d-editor .hg-ws-rail button small{font-size:9px}
+}
