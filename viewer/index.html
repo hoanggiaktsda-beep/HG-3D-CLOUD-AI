@@ -88,6 +88,12 @@
 <label for="input-type">Loại đầu vào</label><select id="input-type"><option value="interior_photo">Ảnh phối cảnh / không gian nội thất</option><option value="product_photo">Ảnh sản phẩm nội thất</option><option value="technical_drawing">Ảnh bản vẽ kỹ thuật</option><option value="layout">Mặt bằng layout</option></select>
 <label for="source-images" class="file-label">Chọn ảnh trên thiết bị</label><input id="source-images" type="file" accept="image/png,image/jpeg,image/webp" multiple aria-describedby="upload-help image-status">
 <p id="upload-help" class="note">Tối đa 8 ảnh · 20 MB/ảnh · tổng 60 MB · PNG/JPEG/WebP. iPhone dùng HEIC: xuất sang JPEG trước.</p><p id="image-status" role="status" aria-live="polite">Chưa chọn ảnh.</p><div id="image-previews" aria-label="Ảnh xem cục bộ"></div><button id="clear-images" type="button">Bỏ ảnh đã chọn</button>
+<details id="hg-3d-brain" style="border:1px solid #b49a65;border-radius:12px;padding:12px;margin:12px 0;background:#1c2820">
+<summary style="cursor:pointer;color:#ebcc8a;font-weight:700">BỘ NÃO CHUYÊN GIA MODEL 3D · Tài liệu tham chiếu</summary>
+<p class="note">Hệ chuyên gia phối hợp: Phân tích ảnh và hình chiếu · Nhận dạng hình khối · Kiến trúc sư nội thất · Đo lường và tỷ lệ · Hình học lưới · Vật liệu/PBR · Kiểm tra cấu tạo · Tối ưu lưới/UV · Kiểm định chất lượng · Chuyển đổi định dạng.</p>
+<p class="note">Quy tắc: Ảnh nguồn là bằng chứng, không phải mô hình. Không bịa mặt khuất; tách XÁC NHẬN / SUY LUẬN / CẦN XÁC NHẬN. Giữ kích thước mm và tính nhất quán các góc nhìn. Chỉ yêu cầu FBX/OBJ/GLB khi nền tảng hỗ trợ xuất thật.</p>
+<p class="note">Tài liệu này định hướng prompt, không phải mô hình AI được huấn luyện hoặc kết nối tự động.</p>
+</details>
 <section id="hg-5step" style="border:1px solid #b89b60;border-radius:12px;padding:14px;margin:14px 0;background:#19251e">
 <h3 style="color:#e8c786">QUY TRÌNH TẠO MODEL 3D TỪ ẢNH</h3>
 <p class="note">01 · Đưa ảnh vào → 02 · Phân tích ảnh → 03 · Chọn kiểu loại → 04 · Điền kích thước → 05 · Chọn định dạng và xuất prompt</p>
@@ -166,12 +172,8 @@
   <nav class="hg-ws-rail" aria-label="Thanh công cụ dựng và chỉnh sửa 3D">
     <button type="button" data-ws-tool="image" aria-pressed="false"><span aria-hidden="true">▧</span><small>Ảnh</small></button>
     <button type="button" data-ws-tool="model" aria-pressed="true"><span aria-hidden="true">◈</span><small>Model</small></button>
-    <button type="button" data-ws-tool="parts" aria-pressed="false"><span aria-hidden="true">▦</span><small>Bộ phận</small></button>
-    <button type="button" data-ws-tool="material" aria-pressed="false"><span aria-hidden="true">◉</span><small>Vật liệu</small></button>
-    <button type="button" data-ws-tool="export" aria-pressed="false"><span aria-hidden="true">⇩</span><small>Xuất file</small></button>
-    <div class="hg-ws-rail-divider"></div>
-    <button type="button" disabled title="Tối ưu lưới tự động chưa được kết nối" aria-label="Retopo chưa kết nối"><span aria-hidden="true">◇</span><small>Retopo</small></button>
-    <button type="button" disabled title="Tạo UV tự động chưa hỗ trợ" aria-label="UV tự động chưa hỗ trợ"><span aria-hidden="true">▤</span><small>UV AI</small></button>
+    <!-- Advanced editing, materials, export, retopo and UV removed from quick rail.
+         Existing model viewer and backend-independent data controls remain available. -->
   </nav>
   <div class="cgpt-title">
     <div><p class="eyebrow">LÀM VIỆC CÙNG CHATGPT · TRONG TRÌNH DUYỆT</p><h3 id="cgpt-heading">XƯỞNG CHỈNH SỬA MÔ HÌNH 3D</h3><p class="note">Công cụ cục bộ: không có API tự động, không gửi ảnh/GLB/JSON lên GitHub. ChatGPT chỉ đọc ảnh khi chồng tự đính kèm trong cuộc trò chuyện.</p></div>
