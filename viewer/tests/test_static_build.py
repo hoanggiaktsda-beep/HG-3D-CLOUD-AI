@@ -10,6 +10,7 @@ class StaticBuildTests(unittest.TestCase):
         self.assertEqual(actual,listed);self.assertGreaterEqual(len(actual),34+sum(p.startswith('public-demo/') for p in actual))
         self.assertNotIn('local-client.js',actual);self.assertNotIn('local-style.css',actual)
         self.assertIn('chatgpt-studio.js',actual)
+        self.assertIn('photo-handoff.js',actual)
         for module in ['local-modules.js','vendor/fflate/esm/browser.js','vendor/fflate/LICENSE','vendor/fbx-exporter/index.js','vendor/fbx-exporter/LICENSE','vendor/three/addons/loaders/FBXLoader.js']:
             self.assertIn(module,actual)
         for theme_asset in ['studio-theme.css','studio-theme.js','assets/hoanggia-icon.svg']:

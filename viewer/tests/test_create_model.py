@@ -30,7 +30,8 @@ class CreateModelTests(unittest.TestCase):
         self.assertEqual(page.evaluate('localStorage.length'),0)
         self.assertEqual(page.evaluate('sessionStorage.length'),0)
         self.assertEqual(page.locator('.pipeline-steps li').count(),4)
-        self.assertEqual(page.locator('#width').inner_text(),'1.800')
+        self.assertEqual(page.locator('#width').inner_text(),'—')
+        self.assertEqual(page.locator('#qa-result').inner_text(),'CHƯA PHÂN TÍCH ẢNH')
         page.locator('#clear-images').click();self.assertEqual(page.locator('#image-previews img').count(),0)
         self.assertEqual(page.locator('#source-images').input_value(),'')
     def test_reject_invalid_and_too_many_files(self):
