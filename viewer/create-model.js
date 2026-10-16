@@ -39,6 +39,7 @@ async function selected() {
     }
     urls = pending;
     message(`${files.length} ảnh đang xem trên thiết bị. Chưa tải lên máy chủ, chưa phân tích AI.`);
+    document.dispatchEvent(new CustomEvent('hg3d:imagesvalidated', {detail:{count:files.length}}));
   } catch (error) {
     pending.forEach(URL.revokeObjectURL);
     if (version !== selectionVersion) return;
@@ -48,6 +49,7 @@ async function selected() {
 input.addEventListener('change', selected);
 document.querySelector('#clear-images').addEventListener('click', () => {
   ++selectionVersion; input.value = ''; clear(); message('Đã bỏ ảnh khỏi phiên xem. Chưa gửi dữ liệu đi.');
+  document.dispatchEvent(new CustomEvent('hg3d:imagesvalidated', {detail:{count:0}}));
 });
 window.addEventListener('pagehide', () => { ++selectionVersion; clear(); });
 document.querySelector('#model-request').addEventListener('submit', event => event.preventDefault());
