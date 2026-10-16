@@ -13,6 +13,7 @@ class StaticBuildTests(unittest.TestCase):
         self.assertIn('photo-handoff.js',actual)
         self.assertIn('workspace-launcher.js',actual)
         self.assertIn('minimal-shell.js',actual)
+        self.assertIn('editor-workspace.js',actual)
         for module in ['local-modules.js','vendor/fflate/esm/browser.js','vendor/fflate/LICENSE','vendor/fbx-exporter/index.js','vendor/fbx-exporter/LICENSE','vendor/three/addons/loaders/FBXLoader.js']:
             self.assertIn(module,actual)
         for theme_asset in ['studio-theme.css','studio-theme.js','assets/hoanggia-icon.svg']:
