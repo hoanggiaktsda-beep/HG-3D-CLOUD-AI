@@ -224,11 +224,31 @@
       <p id="hg-ws-create-result" class="hg-ws-create-result" role="status" aria-live="polite">Nhập kích thước đã xác nhận để bắt đầu.</p>
       <p class="hg-ws-honesty">AI tái dựng đúng sản phẩm từ ảnh như Tripo chưa được kết nối. Nút này dựng <strong>mô hình tham số có thể chỉnh sửa</strong>, không giả kết quả AI.</p>
     </div>
+    <div class="cgpt-subcard hg-ws-tool-card hg-ws-manual-card" data-ws-panel="model">
+      <details id="hg-ws-manual-tools" open>
+        <summary>02 · ChatGPT thủ công — công cụ nâng cao</summary>
+        <p class="note">Khi không có TripoSR, có thể tạo lệnh ChatGPT và tự đính kèm ảnh. Công cụ không gửi ảnh hoặc chạy AI tự động.</p>
+        <label for="hg-ws-input-kind">Loại nguồn</label>
+        <select id="hg-ws-input-kind">
+          <option value="product_photo">Ảnh sản phẩm / nội thất</option>
+          <option value="technical_drawing">Bản vẽ kỹ thuật</option>
+          <option value="layout">Mặt bằng / sơ đồ</option>
+        </select>
+        <label for="hg-ws-instruction">Yêu cầu hình dáng / chỉnh sửa</label>
+        <textarea id="hg-ws-instruction" rows="3" maxlength="4000" placeholder="Mô tả chính xác sản phẩm cần dựng..."></textarea>
+        <label for="hg-ws-measurements">Kích thước được xác nhận (mm)</label>
+        <textarea id="hg-ws-measurements" rows="2" maxlength="2000" placeholder="Ví dụ: dài 2460 × sâu 1100 × cao 770 mm"></textarea>
+        <div class="cgpt-buttons"><button type="button" id="cgpt-generate">Tạo lệnh từ yêu cầu</button><button type="button" id="cgpt-copy">Sao chép lệnh</button><button type="button" id="cgpt-download-job">Tải JSON công việc</button></div>
+        <label for="cgpt-prompt">Lệnh đã chuẩn bị</label>
+        <textarea id="cgpt-prompt" readonly rows="5" placeholder="Chọn ảnh, nhập yêu cầu rồi nhấn Tạo lệnh..."></textarea>
+        <a class="cgpt-link" id="cgpt-open" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Mở ChatGPT ↗</a>
+      </details>
+    </div>
     <div class="cgpt-subcard hg-ws-tool-card" data-ws-panel="model">
       <h4>03 · Xem mô hình 3D</h4>
       <p class="note">Mô hình tạo từ ảnh đã phân tích hoặc từ file 3D có sẵn. Các dữ liệu kỹ thuật được thu gọn để giao diện dễ sử dụng.</p>
       <label for="cgpt-glb-file" class="cgpt-file-button">Mở file 3D (GLB)</label><input id="cgpt-glb-file" type="file" accept=".glb,model/gltf-binary">
-      <details style="margin-top:12px;border:1px solid #46584a;border-radius:9px;padding:10px">
+      <details id="hg-ws-json-tools" open style="margin-top:12px;border:1px solid #46584a;border-radius:9px;padding:10px">
         <summary style="cursor:pointer;color:#d9bc80;font-weight:600">Tùy chọn nâng cao · Nhập dữ liệu JSON</summary>
         <p class="note">Chỉ sử dụng khi ChatGPT cung cấp dữ liệu hình học JSON.</p>
         <label for="cgpt-scene-json">Dữ liệu hình học</label>
