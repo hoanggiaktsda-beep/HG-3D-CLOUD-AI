@@ -63,6 +63,9 @@ class ChatGPTStudioTests(unittest.TestCase):
         page.wait_for_function("() => window.hgChatGPTStudio.ready",timeout=20000)
         self.assertEqual(page.evaluate("hgChatGPTStudio.objects"),2)
         self.assertIn("CẦN XÁC NHẬN",page.locator("#cgpt-result-note").inner_text())
+        # Inspector intentionally starts collapsed; reopen before editing mesh fields.
+        page.locator("#hg-inspector-open").click()
+        self.assertTrue(page.locator("#cgpt-x").is_visible())
         page.locator("#cgpt-x").fill("150")
         page.locator("#cgpt-scale").fill("125")
         page.locator("#cgpt-apply").click()
