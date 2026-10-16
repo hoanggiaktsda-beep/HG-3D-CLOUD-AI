@@ -6,6 +6,12 @@ Dự án thử nghiệm dựng và kiểm định 3D có giám sát. Giữ Direc
 
 Bản website HG 3D CLOUD AI dùng cùng hệ nhận diện với [HOANGGIA STUDIO](https://hoanggiaktsda-beep.github.io/hoanggia-studio/#home): monogram HA, sidebar desktop, thanh điều hướng dưới trên điện thoại, sắc tối/xanh than/vàng champagne, breadcrumb và nút Home. Giao diện độc lập, chỉ thay đổi repository này; toàn bộ viewer, kiểm định và trình chỉnh GLB giữ nguyên logic.
 
+## HOANGGIA 3D WORKSPACE — giao diện lấy cảm hứng từ Tripo Studio
+
+Trang đầu \`/HG-3D-CLOUD-AI/\` và \`#hg-launch\` có vùng chọn/kéo thả/dán ảnh ở trung tâm, chế độ **Giữ đúng hình dáng** hoặc **Tách bộ phận**, bảng các giai đoạn từ ảnh đến FBX/GLB và điều hướng trực tiếp đến trình xem, chỉnh sửa. Vẫn giữ nguyên logo, màu sắc và nguyên tắc HOANGGIA STUDIO. Không sử dụng mã nguồn, ảnh thương mại, logo hoặc từ ngữ thương hiệu của Tripo Studio.
+
+Hai lựa chọn đầu vào **thực sự ảnh hưởng đến yêu cầu phân tích gửi ChatGPT**: một hướng giữ đúng đường bao và hình dáng, một hướng ưu tiên chia mesh có chứng cứ để dễ chỉnh sửa. Nhận ảnh và kiểm định file chỉ chạy cục bộ, không upload. Chuyển ảnh sang ChatGPT vẫn phải do người dùng chủ động. Các mẫu tham số, viewer, kiểm định và xuất FBX/GLB thật từ phiên trước vẫn hoạt động. Không có AI tự phân tích ảnh, retopology AI hay DCC Bridge tự động; không có API key/đăng ký có phí. [Hướng dẫn và giới hạn](docs/WORKSPACE_UI_VI.md).
+
 ## Mục 01 — Nhận ảnh đúng, không dựng nhầm mô hình mẫu
 
 Đã khắc phục tình huống tải ảnh bàn trà khối hộp thấp/hốc lõm mà hệ thống lại hiển thị bàn 4 chân: **vừa chọn ảnh nguồn mới, website xóa bản nháp cũ và báo CHỜ PHÂN TÍCH ẢNH; tuyệt đối không tự dựng mẫu theo ảnh**. Mẫu tham số chỉ chạy khi không có ảnh, hoặc người dùng chủ động tích thêm ô **Chỉ dựng mẫu minh họa, KHÔNG theo ảnh đã tải lên**. Nút sao chép lệnh / sao chép ảnh / mở ChatGPT / dán JSON giúp tạo vòng làm việc từ ảnh gốc, có ảnh tham chiếu cạnh khung 3D để đối chiếu. Không có API hay 18 AI chạy tự động từ thao tác tải ảnh. [Xem hướng dẫn và giới hạn](docs/PHOTO_CHATGPT_HANDOFF_VI.md).
