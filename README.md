@@ -2,6 +2,10 @@
 
 Dự án thử nghiệm dựng và kiểm định 3D có giám sát. Giữ Director + 17 chuyên gia theo [AGENTS.md](AGENTS.md). **Chưa sẵn sàng sử dụng thực tế như hệ thống tự nhận ảnh và dựng hoàn chỉnh.** Không render.
 
+## Chỉnh sửa 3D cùng ChatGPT trên website (không cần Codex)
+
+[**Mở công cụ ChatGPT Studio**](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/#create-model): chọn ảnh trên thiết bị → tự tạo lệnh ChatGPT và đính kèm thủ công → dán JSON hình học ChatGPT trả về → xem/chỉnh mô hình cục bộ bằng Three.js → tải GLB **bản nháp**. Có thể nhập GLB có sẵn để chỉnh vị trí, góc xoay và tỷ lệ. Không lưu ảnh khách hàng, không yêu cầu API key, không dùng server riêng, không phát sinh chi phí API tự động. **Không kết nối ChatGPT tự động**, không xuất BLEND từ trình duyệt, không khẳng định tái dựng chính xác từ một ảnh. Xem [hướng dẫn chi tiết](docs/CHATGPT_BROWSER_STUDIO_VI.md).
+
 ## Giai đoạn hoàn thiện sản phẩm
 
 [Mẫu AI công khai trên website](https://hoanggiaktsda-beep.github.io/HG-3D-CLOUD-AI/#public-demo) đã có kết quả Qwen/OCR → Blender thật, GLB/BLEND và QA. Chạy lại qua workflow GitHub được xác thực dành cho người có quyền write; không có token trên website. Mẫu hiện là tấm rời, chưa lắp ráp; ảnh khách hàng không được gửi vào workflow công khai. [Phạm vi đã kiểm chứng và phương án backend riêng](docs/PRODUCT_COMPLETION_VI.md).
