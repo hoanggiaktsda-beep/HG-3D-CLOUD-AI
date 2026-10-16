@@ -114,7 +114,14 @@
   </div>
   <label class="hg-affirm"><input type="checkbox" id="hg-confirm-dims"><span>Tôi xác nhận ba kích thước này do người dùng cung cấp, không phải AI tự đo từ ảnh. Mọi cấu tạo mẫu cần kiểm định lại.</span></label>
 <label class="hg-affirm hg-photo-override"><input type="checkbox" id="hg-allow-illustration"><span><strong>Chỉ dựng mẫu minh họa, KHÔNG theo ảnh đã tải lên.</strong> Nếu có ảnh, chỉ tích mục này khi chồng chủ động muốn dựng một mẫu hình khối theo số đo thay vì chờ ChatGPT phân tích hình dáng.</span></label>
-  <div class="hg-engine-actions"><button type="button" id="hg-run-modules">Dựng mô hình ngay trên web</button><a href="#sample-viewer">Xem ở KHÔNG GIAN 3D ↑</a><span id="hg-engine-result" role="status">Chờ kích thước được xác nhận. Khi ảnh hợp lệ và đủ kích thước, mô-đun tự chạy.</span></div>
+  <section id="hg-photo-geometry-mode" style="border:1px solid #a88953;border-radius:12px;padding:14px;margin:12px 0;background:#202b23">
+<strong style="color:#e9c987">DỰNG 3D THEO ẢNH NGUỒN — QUY TRÌNH CÓ PHÂN TÍCH</strong>
+<p style="font-size:13px;line-height:1.6">Ảnh được phân tích trong ChatGPT trước khi dựng hình học. Website không tự nhận dạng hình học từ ảnh và không dùng mẫu tham số thay thế sản phẩm thật.</p>
+<button type="button" id="hg-photo-analysis-start" style="padding:12px;background:#b99a5c;color:#101b14;border-radius:8px;font-weight:700">01 · Tạo lệnh phân tích ảnh</button>
+<a href="#chatgpt-studio" style="display:inline-block;margin:8px;color:#e9c987">02 · Nhập JSON để xem 3D →</a>
+<p id="hg-photo-analysis-status" role="status" style="font-size:12px;color:#d8c6a0">Cần gửi ảnh và lệnh sang ChatGPT, sau đó dán JSON hình học trả về vào trình xem 3D.</p>
+</section>
+<div class="hg-engine-actions"><button type="button" id="hg-run-modules">Dựng mô hình ngay trên web</button><a href="#sample-viewer">Xem ở KHÔNG GIAN 3D ↑</a><span id="hg-engine-result" role="status">Chờ kích thước được xác nhận. Khi ảnh hợp lệ và đủ kích thước, mô-đun tự chạy.</span></div>
   <div class="hg-module-list" aria-label="Tiến độ mô-đun thực tế">
     <div><span>01</span><strong>Nhận ảnh</strong><small id="hg-mod-source">Chờ ảnh hoặc yêu cầu</small></div>
     <div><span>02</span><strong>Kiểm tra số đo</strong><small id="hg-mod-measure">Chưa xác nhận</small></div>
