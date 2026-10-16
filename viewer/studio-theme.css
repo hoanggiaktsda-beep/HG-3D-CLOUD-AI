@@ -580,3 +580,33 @@ body.hg-minimal-ui.hg-show-editor .hg-3d-editor .hg-photo-reference{margin:7px 1
  .hg-3d-editor .hg-ws-project{display:none}
  .hg-3d-editor .hg-ws-rail button small{font-size:9px}
 }
+
+
+/* 3D generation is now the primary action in the existing editor. Not an AI inference mock. */
+.hg-3d-editor .hg-ws-create-card{
+ border-color:#876f45!important;
+ background:linear-gradient(145deg,#253126,#1b251d)!important;
+}
+.hg-ws-create-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.hg-ws-create-heading strong{color:#f2d39c;font-size:13px;letter-spacing:.02em}
+.hg-ws-create-heading span{border:1px solid #516c52;border-radius:16px;color:#a9cdb0;padding:3px 8px;font-size:10px;white-space:nowrap}
+.hg-3d-editor .hg-ws-create-card label{font-size:12px;color:#e8dec8}
+.hg-3d-editor .hg-ws-create-card select{width:100%;min-height:44px;font-size:13px;margin:5px 0 12px}
+.hg-ws-create-dims{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0 12px}
+.hg-ws-create-dims label{min-width:0;font-size:11px!important}
+.hg-ws-create-dims input{width:100%;min-width:0;min-height:44px;margin-top:5px;padding:9px 5px;font-size:16px!important}
+.hg-ws-create-check{display:flex;align-items:flex-start;gap:8px;margin:9px 0;font-size:12px;line-height:1.5}
+.hg-ws-create-check input{width:18px;height:18px;min-width:18px;margin:1px 0 0;accent-color:#c4a66c}
+.hg-ws-create-check[hidden]{display:none!important}
+.hg-3d-editor .cgpt-grid button.hg-ws-create-button{
+ width:100%;min-height:51px;margin:11px 0 6px;background:#b59559;
+ border:1px solid #d7b879;color:#121913;font-size:14px;font-weight:800;
+}
+.hg-3d-editor .cgpt-grid button.hg-ws-create-button:hover{background:#d2b77f;color:#0d1710}
+.hg-ws-create-result{margin:4px 0 10px;min-height:20px;color:#c7dec3;font-size:11px;line-height:1.5}
+@media(max-width:600px){
+ .hg-3d-editor .hg-ws-create-card{margin-top:10px}
+ .hg-ws-create-heading strong{font-size:14px}
+ .hg-ws-create-dims{gap:5px}
+ .hg-ws-create-dims input{font-size:16px!important;padding:8px 5px}
+}
