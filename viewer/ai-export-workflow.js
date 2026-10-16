@@ -19,6 +19,8 @@ function build(analysisOnly=false){
  const preface=[
  'HOANGGIA 3D CLOUD AI — '+(analysisOnly?'PHÂN TÍCH ẢNH NGUỒN':'YÊU CẦU DỰNG MÔ HÌNH 3D THEO ẢNH'),
  'Tôi sẽ đính kèm '+files.length+' ảnh nguồn riêng. Tên ảnh: '+files.map(f=>f.name).join(', ')+'.',
+ 'BỘ NÃO CHUYÊN GIA 3D (quy trình phối hợp, không phải mô hình đã huấn luyện): Chuyên gia thị giác kiểm tra ảnh và góc nhìn; chuyên gia thiết kế nội thất xác định loại sản phẩm và công năng; chuyên gia hình học chia mesh theo bộ phận; chuyên gia tỷ lệ kiểm tra số đo mm; chuyên gia vật liệu đánh giá màu/PBR; chuyên gia cấu tạo kiểm tra chi tiết nhìn thấy; chuyên gia QA so sánh hình chiếu; chuyên gia định dạng xác minh đường xuất file.',
+ 'CỔNG CHẤT LƯỢNG: (1) đủ ảnh? (2) đủ kích thước xác nhận? (3) đúng số bộ phận? (4) khớp silhouette ở góc nhìn gốc? (5) có đánh dấu phần khuất? (6) xuất file thật hay chỉ hướng dẫn? Nếu thiếu dữ liệu, báo thiếu trước khi tạo.',
  'BƯỚC 1: Quan sát chính ảnh đính kèm; mô tả loại sản phẩm, hình dáng, số bộ phận, chân, hộc, tay nắm, đường cong, vật liệu và những chi tiết nhìn thấy. Không dùng mẫu 3D mặc định thay sản phẩm.',
  'BƯỚC 2: Phân loại từng đặc điểm thành XÁC NHẬN (quan sát được), SUY LUẬN và CẦN XÁC NHẬN. Nếu không xem được ảnh, phải báo rõ.',
  'BƯỚC 3: Kiểu loại mong muốn: '+type+'. Nếu không khớp ảnh, cảnh báo trước khi dựng.',
