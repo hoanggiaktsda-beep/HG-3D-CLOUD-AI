@@ -104,8 +104,9 @@ async function start() {
   const grid = new THREE.GridHelper(5, 20, 0x64705c, 0x3e493b);
   grid.rotation.x = Math.PI / 2; grid.position.z = box.min.z - 0.003; scene.add(grid);
   const resize = () => {
-    const { width, height } = viewport.getBoundingClientRect();
-    camera.aspect = width / height; camera.updateProjectionMatrix(); renderer.setSize(width, height);
+    const rect = viewport.getBoundingClientRect();
+    const width=Math.max(1,rect.width),height=Math.max(1,rect.height);
+    camera.aspect=width/height;camera.updateProjectionMatrix();renderer.setSize(width,height);
   };
   resizeObserver = new ResizeObserver(resize); resizeObserver.observe(viewport); resize();
   state.ready = true; state.camera = camera; state.controls = controls; state.measured_mm = measured;
