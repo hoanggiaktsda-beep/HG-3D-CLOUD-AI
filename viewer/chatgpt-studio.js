@@ -19,10 +19,13 @@ function job(){
  const known=$('confirmed-measurements').value.trim().slice(0,2000);
  if(!images.length&&instruction.length<12)throw Error('Chọn ảnh hoặc mô tả yêu cầu từ 12 ký tự trở lên.');
  const kind=$('input-type').selectedOptions[0].textContent;
+ const preferred=document.querySelector('input[name="hg-model-priority"]:checked')?.value||'shape';
+ const priorityBrief=preferred==='parts'?'Ưu tiên tách các phần quan sát rõ thành đối tượng 3D độc lập để chỉnh sửa; không bịa cấu tạo khuất, chỉ chia khi có chứng cứ.':'Ưu tiên giữ đúng đường bao, số lượng chỗ ngồi, hình dáng và tỷ lệ quan sát được; không thay thế sản phẩm bằng mẫu tham số bất kỳ.';
  const prompt=[
  'HG 3D CLOUD AI — YÊU CẦU CHATGPT THIẾT KẾ VÀ CHỈNH SỬA MÔ HÌNH',
  'Đóng vai 18 bộ phận chuyên gia: giám đốc kỹ thuật, kiến trúc, nội thất, họa viên, đo lường, hình học, cấu tạo, thị giác, đa ảnh, vật liệu, UV, ánh sáng, môi trường, camera, tự động hóa và kiểm định.',
  'Nguồn: '+kind+'. Tên ảnh (tôi sẽ tự đính kèm ảnh vào ChatGPT): '+(images.map(f=>f.name).join(', ')||'Không có, yêu cầu bằng văn bản.'),
+ 'CHẾ ĐỘ ĐÃ CHỌN TRONG 3D WORKSPACE: '+priorityBrief,
  'NHIỆM VỤ: '+(instruction||'Phân tích ảnh và tạo bản 3D nháp có thể chỉnh sửa.'),
  'BẮT BUỘC NHẬN DIỆN ĐÚNG ẢNH TRƯỚC KHI DỰNG: Nhìn chính ảnh tôi đính kèm và mô tả loại đồ nội thất, dáng tổng thể, bệ/chân, mặt trên, hốc lõm, thành viền, tỉ lệ nhìn thấy và mặt khuất. Phân biệt rõ chi tiết quan sát được với chi tiết suy luận. Không thay ảnh bàn trà khối hộp thấp có hốc lõm bằng mẫu bàn ăn bốn chân. Không sao chép mô hình bàn/tủ mẫu trên website. Nếu không thấy rõ ảnh, nói chưa đọc được ảnh thay vì giả định.',
  'HÌNH HỌC THỂ HIỆN HỐC: Nếu quan sát thấy mặt bàn có hốc/lòng rỗng, hãy chia thành các tấm viền bên và đáy hốc bằng nhiều đối tượng box, để giữa thực sự không bị che kín bởi tấm đặc; nếu không đủ chứng cứ kích thước thì chưa tạo kích thước thật.',
@@ -32,7 +35,7 @@ function job(){
  'JSON SCHEMA: {"schema":"hg-chatgpt-scene-v1","unit":"mm","review_status":"NEEDS_REVIEW","objects":[{"id":"part_01","name":"Tấm mẫu","shape":"box","size_mm":[1000,450,25],"position_mm":[0,0,500],"rotation_deg":[0,0,0],"color":"#86755f","confidence":"inferred"}],"unknown_details":["Kết cấu khuất chưa xác minh"]}',
  'Đối tượng chỉ dùng shape box hoặc cylinder; size_mm theo [rộng,sâu,cao], position_mm là tọa độ tâm; cylinder có X=Y là đường kính. Không sao chép con số ví dụ nếu không có chứng cứ. Đối tượng không đủ số đo phải được nêu trong unknown_details. Trạng thái luôn NEEDS_REVIEW.'
  ].join('\n\n');
- return {schema:'hg-chatgpt-job-v1',mode:'manual_chatgpt_only',kind:$('input-type').value,instruction,confirmed_measurements_mm:known,
+ return {schema:'hg-chatgpt-job-v1',mode:'manual_chatgpt_only',priority:preferred,kind:$('input-type').value,instruction,confirmed_measurements_mm:known,
    images,image_bytes_included:false,prompt,notice:'Ảnh KHÔNG nằm trong gói JSON. Người dùng tự đính kèm trong ChatGPT.'};
 }
 function make(){try{const j=job();$('cgpt-prompt').value=j.prompt;say('Đã tạo yêu cầu. Ảnh vẫn ở thiết bị; đính kèm thủ công trong ChatGPT.');return j;}catch(e){say(e.message,true);return null;}}
